@@ -1,19 +1,24 @@
 import { useState, useEffect } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { checkHealth } from '../api';
 import {
   Home, FlaskConical, Warehouse, LayoutDashboard,
   QrCode, BookOpen, Menu, X, Globe, Sun, Moon,
-  PhoneCall, ShieldCheck, Wheat
+  PhoneCall, ShieldCheck, Wheat, FileText, ChevronDown
 } from 'lucide-react';
 
-const navItems = [
+const primaryNavItems = [
   { path: '/', icon: Home, labelKey: 'nav.home' },
-  { path: '/analyze', icon: FlaskConical, labelKey: 'nav.analyze' },
-  { path: '/silage', icon: Warehouse, labelKey: 'nav.silage' },
-  { path: '/dashboard', icon: LayoutDashboard, labelKey: 'nav.dashboard' },
-  { path: '/qr', icon: QrCode, labelKey: 'nav.qr' },
+  { path: '/analyze', icon: FlaskConical, labelKey: 'nav.test_feed' },
+  { path: '/history', icon: FileText, labelKey: 'nav.reports' },
   { path: '/advisory', icon: BookOpen, labelKey: 'nav.advisory' },
+];
+
+const secondaryNavItems = [
+  { path: '/dashboard', icon: LayoutDashboard, labelKey: 'nav.dashboard' },
+  { path: '/silage', icon: Warehouse, labelKey: 'nav.silage' },
+  { path: '/qr', icon: QrCode, labelKey: 'nav.qr' },
 ];
 
 const languages = [
@@ -28,6 +33,24 @@ export default function Layout() {
   const { t, i18n } = useTranslation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [theme, setTheme] = useState(localStorage.getItem('feedquality_theme') || 'light');
+  const [backendOnline, setBackendOnline] = useState(true);
+
+  // Monitor connectivity
+  useEffect(() => {
+    let mounted = true;
+    const verifyConnection = async () => {
+      const res = await checkHealth();
+      if (mounted) {
+        setBackendOnline(res.status === 'ok');
+      }
+    };
+    verifyConnection();
+    const interval = setInterval(verifyConnection, 25000);
+    return () => {
+      mounted = false;
+      clearInterval(interval);
+    };
+  }, []);
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
@@ -44,14 +67,23 @@ export default function Layout() {
 
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-      {/* Kisan Helpline Top Banner */}
+      {/* Kisan Helpline & Connectivity Banner */}
       <div className="kisan-banner">
         <div className="kisan-banner-left">
           <PhoneCall size={14} />
           <span>{t('nav.helpline')}</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          <span className="kisan-banner-pill">{t('nav.offline_ready')}</span>
+          {backendOnline ? (
+            <span className="kisan-banner-pill pill-online">
+              <span className="pulse-dot" />
+              {t('nav.ai_service_online', 'AI Service Online')}
+            </span>
+          ) : (
+            <span className="kisan-banner-pill pill-offline">
+              {t('nav.low_connectivity', 'Low-Connectivity Mode')}
+            </span>
+          )}
         </div>
       </div>
 
@@ -68,9 +100,9 @@ export default function Layout() {
             </div>
           </NavLink>
 
-          {/* Desktop Nav Links */}
+          {/* Nav Links: Primary (Feed Testing, Reports, Advisory) + Secondary Tools */}
           <nav className="nav-links" style={{ display: mobileMenuOpen ? 'flex' : undefined }}>
-            {navItems.map(({ path, icon: Icon, labelKey }) => (
+            {primaryNavItems.map(({ path, icon: Icon, labelKey }) => (
               <NavLink
                 key={path}
                 to={path}
@@ -82,9 +114,34 @@ export default function Layout() {
                 {t(labelKey)}
               </NavLink>
             ))}
+
+            {/* Visual separator for secondary tools on desktop */}
+            <div
+              className="nav-divider"
+              style={{
+                width: 1,
+                height: 20,
+                background: 'var(--border-subtle)',
+                margin: '0 4px',
+                display: mobileMenuOpen ? 'none' : 'block'
+              }}
+            />
+
+            {secondaryNavItems.map(({ path, icon: Icon, labelKey }) => (
+              <NavLink
+                key={path}
+                to={path}
+                className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+                onClick={() => setMobileMenuOpen(false)}
+                style={{ opacity: 0.9 }}
+              >
+                <Icon size={15} />
+                {t(labelKey)}
+              </NavLink>
+            ))}
           </nav>
 
-          {/* Nav Controls */}
+          {/* Controls: Language & Theme Toggle */}
           <div className="nav-actions">
             <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
               <Globe size={16} style={{ color: 'var(--text-muted)' }} />

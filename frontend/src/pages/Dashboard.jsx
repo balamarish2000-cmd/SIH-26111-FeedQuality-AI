@@ -32,6 +32,8 @@ export default function Dashboard() {
   const { t } = useTranslation();
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [feedFilter, setFeedFilter] = useState('All');
+  const [qualityFilter, setQualityFilter] = useState('All');
 
   useEffect(() => {
     getDashboardStats()
@@ -210,11 +212,38 @@ export default function Dashboard() {
 
       {/* Recent Analyses Audit Table */}
       <div className="card">
-        <div className="card-header">
+        <div className="card-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 'var(--space-md)' }}>
           <span className="card-title">
             <Package size={18} style={{ color: 'var(--color-primary)' }} />
             {t('dashboard.recent')}
           </span>
+          <div style={{ display: 'flex', gap: 'var(--space-sm)', flexWrap: 'wrap' }}>
+            <select
+              value={feedFilter}
+              onChange={e => setFeedFilter(e.target.value)}
+              className="farmer-select"
+              style={{ fontSize: '0.82rem', padding: '6px 12px' }}
+            >
+              <option value="All">{t('history.all_feed_types', 'All Feed Types')}</option>
+              <option value="Corn Silage">Corn Silage</option>
+              <option value="Mixed Forage">Mixed Forage</option>
+              <option value="Total Mixed Ration (TMR)">TMR</option>
+              <option value="Concentrates">Concentrates</option>
+              <option value="Green Fodder">Green Fodder</option>
+            </select>
+            <select
+              value={qualityFilter}
+              onChange={e => setQualityFilter(e.target.value)}
+              className="farmer-select"
+              style={{ fontSize: '0.82rem', padding: '6px 12px' }}
+            >
+              <option value="All">{t('history.all_quality', 'All Qualities')}</option>
+              <option value="Good">Good</option>
+              <option value="Moderate">Moderate</option>
+              <option value="Poor">Poor</option>
+              <option value="Unsafe">Unsafe</option>
+            </select>
+          </div>
         </div>
         <div className="table-responsive">
           <table className="farmer-table">
@@ -230,7 +259,10 @@ export default function Dashboard() {
               </tr>
             </thead>
             <tbody>
-              {stats.recent_analyses.map((rec) => (
+              {stats.recent_analyses
+                .filter(rec => (feedFilter === 'All' || rec.feed_type === feedFilter))
+                .filter(rec => (qualityFilter === 'All' || rec.quality_status === qualityFilter))
+                .map((rec) => (
                 <tr key={rec.id}>
                   <td style={{ fontWeight: 700, fontFamily: 'monospace' }}>{rec.id}</td>
                   <td style={{ color: 'var(--text-secondary)' }}>

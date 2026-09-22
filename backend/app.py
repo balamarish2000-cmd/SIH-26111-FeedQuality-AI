@@ -25,7 +25,11 @@ import pandas as pd
 import numpy as np
 
 # Add the ML directory to path so we can import the trained predictor
-ML_DIR = Path(__file__).parent.parent / "ML" / "New Folder"
+ml_base = Path(__file__).parent.parent / "ML"
+if (ml_base / "pipeline").exists():
+    ML_DIR = ml_base / "pipeline"
+else:
+    ML_DIR = ml_base / "New Folder"
 sys.path.insert(0, str(ML_DIR))
 
 from predict import FeedQualityPredictor
@@ -40,6 +44,9 @@ from image_analyzer import analyze_feed_image
 # ---------------------------------------------------------------------------
 app = Flask(__name__)
 CORS(app)
+
+MAX_UPLOAD_MB = int(os.environ.get("MAX_UPLOAD_SIZE_MB", 5))
+app.config["MAX_CONTENT_LENGTH"] = MAX_UPLOAD_MB * 1024 * 1024
 
 # Load ML models once at startup
 print("Loading ML models...")
@@ -101,6 +108,8 @@ def _sanitize_for_json(obj):
 def health():
     return jsonify({
         "status": "ok",
+        "service": "KisanDoodh FeedQuality AI Platform",
+        "version": "2.4.0",
         "models_loaded": predictor is not None,
         "timestamp": datetime.now(timezone.utc).isoformat(),
     })
@@ -111,14 +120,14 @@ def predict():
     """Run feed quality prediction on sensor readings.
 
     Expects JSON body with sensor reading fields matching FEATURE_COLUMNS.
-    Returns predictions, confidence scores, and full advisory.
+    Returns predictions, confidence scores, and full structured advisory.
     """
     if predictor is None:
-        return jsonify({"error": "ML models not loaded"}), 503
+        return jsonify({"error": "AI prediction models are temporarily unavailable. Please verify backend service."}), 503
 
     data = request.get_json()
     if not data:
-        return jsonify({"error": "No JSON body provided"}), 400
+        return jsonify({"error": "No input data provided for feed analysis."}), 400
 
     # Build DataFrame from input
     try:
@@ -160,10 +169,10 @@ def predict():
                 val = float(val)
             predictions[col] = val
 
-        # Generate advisory
+        # Generate comprehensive 5-part advisory
         advisory = generate_advisory(readings, predictions)
 
-        # Store in history
+        # Store in history with complete report artifacts
         record = {
             "id": f"A-{len(analysis_history):04d}",
             "timestamp": datetime.now(timezone.utc).isoformat(),
@@ -171,8 +180,10 @@ def predict():
             "quality_status": predictions.get("quality_status", "Unknown"),
             "adulteration_type": predictions.get("adulteration_type", "None"),
             "spoilage_flag": predictions.get("spoilage_flag", 0),
+            "quality_confidence": predictions.get("quality_status_confidence", 0),
             "readings": _sanitize_for_json(readings),
             "predictions": _sanitize_for_json(predictions),
+            "advisory": advisory,
         }
         analysis_history.append(record)
 
@@ -184,23 +195,34 @@ def predict():
         })
 
     except Exception as e:
-        return jsonify({"error": str(e)}), 400
+        return jsonify({"error": f"Analysis failed: {str(e)}"}), 400
 
 
 @app.route("/api/predict/image", methods=["POST"])
 def predict_image():
-    """Analyze a feed image and run ML prediction.
+    """Analyze a feed photo and run computer-vision feature extraction + ML prediction.
 
     Expects multipart form with an 'image' file.
     """
     if predictor is None:
-        return jsonify({"error": "ML models not loaded"}), 503
+        return jsonify({"error": "AI prediction models are temporarily unavailable."}), 503
 
     if "image" not in request.files:
-        return jsonify({"error": "No image file provided"}), 400
+        return jsonify({"error": "No image file selected. Please choose or capture a photo."}), 400
 
     image_file = request.files["image"]
+    if not image_file.filename:
+        return jsonify({"error": "No image selected. Please choose a valid image file."}), 400
+
+    # Validate image extension
+    allowed_exts = {".jpg", ".jpeg", ".png", ".webp"}
+    ext = Path(image_file.filename).suffix.lower()
+    if ext not in allowed_exts:
+        return jsonify({"error": f"Unsupported file format ({ext}). Please upload a JPEG, PNG, or WebP photo."}), 400
+
     image_bytes = image_file.read()
+    if len(image_bytes) == 0:
+        return jsonify({"error": "The uploaded photo file is empty. Please select another image."}), 400
 
     try:
         # Step 1: Analyze image → estimated readings
@@ -235,7 +257,11 @@ def predict_image():
             "quality_status": predictions.get("quality_status", "Unknown"),
             "adulteration_type": predictions.get("adulteration_type", "None"),
             "spoilage_flag": predictions.get("spoilage_flag", 0),
+            "quality_confidence": predictions.get("quality_status_confidence", 0),
             "source": "image",
+            "readings": _sanitize_for_json(readings),
+            "predictions": _sanitize_for_json(predictions),
+            "advisory": advisory,
         }
         analysis_history.append(record)
 
@@ -245,6 +271,8 @@ def predict_image():
                 "feed_type_guess": image_analysis["feed_type_guess"],
                 "visual_features": image_analysis["visual_features"],
                 "analysis_notes": image_analysis["analysis_notes"],
+                "is_estimation": True,
+                "disclaimer": "Physical feature estimation via computer vision. For certified legal analysis, use NIR spectroscopic test.",
             },
             "estimated_readings": {k: v for k, v in readings.items()
                                     if not (isinstance(v, float) and math.isnan(v))},
@@ -253,8 +281,10 @@ def predict_image():
             "analysis_id": record["id"],
         })
 
+    except ValueError as ve:
+        return jsonify({"error": f"Image processing error: {str(ve)}"}), 400
     except Exception as e:
-        return jsonify({"error": str(e)}), 400
+        return jsonify({"error": "Unable to complete image analysis. Please ensure good lighting and clear camera focus."}), 500
 
 
 @app.route("/api/qr/generate", methods=["POST"])
@@ -443,12 +473,39 @@ def _storage_alerts(units):
 
 @app.route("/api/history", methods=["GET"])
 def history():
-    """Return analysis history."""
-    limit = request.args.get("limit", 50, type=int)
-    sorted_history = sorted(analysis_history,
-                             key=lambda x: x.get("timestamp", ""),
-                             reverse=True)
-    return jsonify({"history": sorted_history[:limit]})
+    """Return analysis history with optional filters (feed_type, quality_status, search)."""
+    feed_type = request.args.get("feed_type")
+    quality_status = request.args.get("quality_status")
+    search = request.args.get("search", "").strip().lower()
+    limit = request.args.get("limit", 100, type=int)
+
+    items = analysis_history
+    if feed_type and feed_type != "All":
+        items = [x for x in items if x.get("feed_type") == feed_type]
+    if quality_status and quality_status != "All":
+        items = [x for x in items if x.get("quality_status") == quality_status]
+    if search:
+        items = [x for x in items if (
+            search in x.get("id", "").lower() or
+            search in x.get("feed_type", "").lower() or
+            search in x.get("quality_status", "").lower() or
+            search in x.get("adulteration_type", "").lower()
+        )]
+
+    sorted_history = sorted(items, key=lambda x: x.get("timestamp", ""), reverse=True)
+    return jsonify({
+        "total": len(sorted_history),
+        "history": sorted_history[:limit]
+    })
+
+
+@app.route("/api/history/<record_id>", methods=["GET"])
+def history_detail(record_id: str):
+    """Retrieve full analysis report for a single record."""
+    for item in analysis_history:
+        if item.get("id") == record_id:
+            return jsonify({"success": True, "record": item})
+    return jsonify({"error": f"Analysis report '{record_id}' not found."}), 404
 
 
 # ---------------------------------------------------------------------------

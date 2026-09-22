@@ -219,9 +219,15 @@ export default function SilageMonitor() {
   return (
     <div>
       {/* Page Title & Mission Subtitle */}
-      <div className="page-header">
-        <h1>{t('silage.title')}</h1>
-        <p>{t('silage.subtitle')}</p>
+      <div className="page-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 'var(--space-md)' }}>
+        <div>
+          <h1>{t('silage.title')}</h1>
+          <p>{t('silage.subtitle')}</p>
+        </div>
+        <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#fef3c7', border: '1px solid #fde68a', color: '#92400e', padding: '6px 14px', borderRadius: 'var(--radius-full)', fontSize: '0.8rem', fontWeight: 600 }}>
+          <Activity size={14} />
+          <span>{t('silage.simulated_telemetry_badge', 'Simulated IoT Telemetry Stream — Demonstration Mode')}</span>
+        </div>
       </div>
 
       {/* Silage Golden Rule Banner */}

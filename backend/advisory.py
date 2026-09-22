@@ -142,6 +142,12 @@ def generate_advisory(readings: dict, predictions: dict) -> dict:
     else:
         overall = "good"
 
+    # ---- 5-Part Structured Advisory for Farmers ----
+    structured = _build_structured_sections(
+        readings, predictions, ranges, feed_type,
+        advisories, feed_recs, storage_adv, nutrition_summary
+    )
+
     return {
         "overall_status": overall,
         "quality_grade": quality,
@@ -149,7 +155,152 @@ def generate_advisory(readings: dict, predictions: dict) -> dict:
         "feed_recommendations": feed_recs,
         "storage_advisory": storage_adv,
         "nutrition_summary": nutrition_summary,
+        "structured_advisory": structured,
     }
+
+
+def _build_structured_sections(readings, predictions, ranges, feed_type, advisories, feed_recs, storage_adv, nutrition_summary) -> dict:
+    """Build a comprehensive 5-part farmer-friendly AI decision-support report."""
+    quality = predictions.get("quality_status", "Moderate")
+    quality_conf = float(predictions.get("quality_status_confidence", 0.75))
+    adulterant = predictions.get("adulteration_type", "None")
+    adult_conf = float(predictions.get("adulteration_type_confidence", 0.75))
+    spoilage = int(predictions.get("spoilage_flag", 0))
+    spoil_conf = float(predictions.get("spoilage_flag_confidence", 0.75))
+
+    # 1. Quality Interpretation
+    conf_level = "high" if quality_conf >= 0.80 else ("medium" if quality_conf >= 0.60 else "low")
+    quality_explanations = {
+        "Good": "This feed sample complies with standard dairy nutritional criteria. Digestibility, protein balance, and energy density are favorable for cattle metabolism and high milk yield.",
+        "Moderate": "This feed is acceptable but borderline in one or more nutritional parameters. Suitable for maintenance, but high-yield cows may require extra ration balancing.",
+        "Poor": "Nutritional degradation or sub-standard composition detected. Protein or energy content is lower than standard, risking reduced milk yield and poor body condition score.",
+        "Unsafe": "Safety threshold exceeded. Contaminants, toxic adulteration, or spoilage detected that pose direct health hazards to dairy animals. Immediate isolation required."
+    }
+    quality_interp = {
+        "grade": quality,
+        "headline": f"Feed Quality Grade: {quality}",
+        "explanation": quality_explanations.get(quality, quality_explanations["Moderate"]),
+        "confidence_level": conf_level,
+        "confidence_score": round(quality_conf * 100, 1),
+        "confidence_note": (
+            "High confidence prediction based on clear spectral/sensor feature agreement."
+            if conf_level == "high" else
+            "Moderate confidence prediction; recommend monitoring cattle response and storage logs."
+            if conf_level == "medium" else
+            "Low confidence prediction: AI result requires additional physical verification before making major feed ration changes."
+        ),
+        "requires_verification": (conf_level == "low"),
+    }
+
+    # 2. Nutritional Guidance
+    nutri_points = []
+    for key, info in nutrition_summary.items():
+        if info.get("status") == "low":
+            nutri_points.append(f"Low {info.get('label')}: currently {info.get('value')} {info.get('unit')} (ideal: {info.get('ideal_range')[0]}–{info.get('ideal_range')[1]} {info.get('unit')}).")
+        elif info.get("status") == "high":
+            nutri_points.append(f"High {info.get('label')}: currently {info.get('value')} {info.get('unit')} (ideal: {info.get('ideal_range')[0]}–{info.get('ideal_range')[1]} {info.get('unit')}).")
+    if not nutri_points:
+        nutri_points.append("All measured nutritional indicators (Protein, Moisture, Fiber, Energy) fall comfortably within standard NDDB ranges.")
+
+    nutri_guidance = {
+        "status": "Balanced" if len(nutri_points) == 1 and "All measured" in nutri_points[0] else "Attention Required",
+        "highlights": nutri_points,
+        "feeding_ration_tip": (
+            "Feed in standard daily proportions alongside 20–25 kg fresh green fodder and clean ad-lib drinking water."
+            if quality in ("Good", "Moderate") else
+            "Do not feed as sole ration. Compensate with 1–2 kg quality concentrate pellet and bypass protein."
+        ),
+        "feeding_rates": _feeding_rate(feed_type),
+    }
+
+    # 3. Adulteration Warning
+    is_adulterated = (adulterant != "None")
+    adult_warning = {
+        "detected": is_adulterated,
+        "adulterant_name": adulterant,
+        "confidence_score": round(adult_conf * 100, 1),
+        "severity": "critical" if is_adulterated else "good",
+        "warning_message": (
+            f"Adulterant Alert: {adulterant} was detected in this batch. This can cause severe toxicity, acidosis, or digestive tract injury in dairy animals."
+            if is_adulterated else
+            "No chemical adulterants (Urea, Sand/Silica, Excess Salt) detected in this sample."
+        ),
+        "remediation": [
+            "Quarantine and withhold the batch from livestock immediately",
+            "Retain sample bag for batch verification and supplier complaint",
+            "Notify local veterinary officer if animals show distress",
+        ] if is_adulterated else ["Safe from synthetic or inorganic adulteration."],
+    }
+
+    # 4. Storage & Spoilage Guidance
+    is_spoiled = (spoilage == 1)
+    storage_guidance = {
+        "spoilage_detected": is_spoiled,
+        "spoilage_confidence": round(spoil_conf * 100, 1),
+        "severity": "critical" if is_spoiled else ("warning" if storage_adv.get("status") in ("warning", "critical") else "good"),
+        "guidance_message": (
+            "Critical Spoilage Alert: Biological breakdown or fungal proliferation detected. High risk of harmful mycotoxins (Aflatoxin B1)."
+            if is_spoiled else
+            storage_adv.get("message", "Storage parameters are stable. Continue current moisture and temperature management.")
+        ),
+        "storage_tips": [
+            "Store feed sacks on wooden pallets at least 15 cm off damp concrete floors",
+            "Maintain dry, rodent-proof shed ventilation with ambient temperatures below 28°C",
+            "Ensure sealed silage or storage units have airtight covers with no punctures or loose edges",
+            "Practice First-In, First-Out (FIFO) stock management to prevent aging",
+        ],
+    }
+
+    # 5. Recommended Action
+    if quality == "Unsafe" or is_adulterated or is_spoiled:
+        headline = "ACTION REQUIRED: DO NOT FEED — ISOLATE BATCH"
+        primary_action = "STOP feeding this batch immediately. Quarantine the sack or storage unit."
+        steps = [
+            "Immediately stop offering this feed to cattle, calves, or pregnant cows.",
+            "Physically isolate affected bags to prevent accidental herd feeding.",
+            "Document the Batch ID using the certified QR code for supplier replacement claim.",
+            "Consult your local veterinary doctor if cattle have already consumed this feed.",
+        ]
+    elif quality == "Poor":
+        headline = "CAUTION: BLEND OR SUPPLEMENT BEFORE FEEDING"
+        primary_action = "Feed quality is below standard. Do not use as sole feed source."
+        steps = [
+            "Limit this feed to dry stock or non-milking cows; avoid giving to high-yield lactating cows.",
+            "Blend with 50% high-grade concentrate or fresh leguminous green fodder.",
+            "Add 50g commercial mineral mixture per animal daily to offset nutritional deficiency.",
+            "Retest next delivery batch to ensure supplier meets quality specifications.",
+        ]
+    elif quality == "Moderate":
+        headline = "MONITORED FEEDING WITH REGULAR INSPECTION"
+        primary_action = "Acceptable feed quality. Suitable for standard feeding with daily health observation."
+        steps = [
+            "Feed according to standard milk-yield ration chart (approx. 400g concentrate per liter of milk).",
+            "Keep bags sealed in a dry, ventilated shed to prevent moisture absorption.",
+            "Monitor feed intake and rumination times over the next 48 hours.",
+        ]
+    else:
+        headline = "APPROVED: PREMIUM FEED QUALITY — SAFE FOR HERD"
+        primary_action = "Optimal nutritional composition. Continue standard daily feeding schedule."
+        steps = [
+            "Continue standard feeding ration for lactating cows, pregnant cows, and growing calves.",
+            "Maintain clean, dry pallet storage to preserve freshness and vitamin potency.",
+            "Generate certified QR traceability certificate for farm records.",
+        ]
+
+    rec_action = {
+        "headline": headline,
+        "primary_action": primary_action,
+        "action_steps": steps,
+    }
+
+    return {
+        "quality_interpretation": quality_interp,
+        "nutritional_guidance": nutri_guidance,
+        "adulteration_warning": adult_warning,
+        "storage_spoilage_guidance": storage_guidance,
+        "recommended_action": rec_action,
+    }
+
 
 
 # ---------------------------------------------------------------------------

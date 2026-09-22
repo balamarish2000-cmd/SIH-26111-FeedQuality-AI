@@ -1,0 +1,457 @@
+import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
+import { getHistoryFiltered, generateQR } from '../api';
+import {
+  FileText, Search, Filter, RefreshCw, Printer,
+  CheckCircle2, AlertTriangle, XCircle, Info, QrCode,
+  Wheat, Calendar, Clock, ChevronRight, X, ExternalLink,
+  ShieldCheck, ShieldAlert, Sparkles, Download
+} from 'lucide-react';
+
+const FEED_TYPES = [
+  'All',
+  'Cattle Feed Pellet',
+  'Silage',
+  'Feed Mash',
+  'TMR',
+  'Mineral Mixture',
+];
+
+const QUALITY_OPTIONS = [
+  'All',
+  'Good',
+  'Moderate',
+  'Poor',
+  'Unsafe',
+];
+
+export default function HistoryReports() {
+  const { t } = useTranslation();
+  const [history, setHistory] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // Filters
+  const [feedType, setFeedType] = useState('All');
+  const [qualityStatus, setQualityStatus] = useState('All');
+  const [search, setSearch] = useState('');
+
+  // Selected report for modal
+  const [selectedReport, setSelectedReport] = useState(null);
+  const [modalQR, setModalQR] = useState(null);
+  const [generatingQR, setGeneratingQR] = useState(false);
+
+  const fetchHistory = useCallback(async () => {
+    setLoading(true);
+    try {
+      const data = await getHistoryFiltered({
+        feedType,
+        qualityStatus,
+        search,
+        limit: 100,
+      });
+      setHistory(data.history || []);
+      setError(null);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  }, [feedType, qualityStatus, search]);
+
+  useEffect(() => {
+    fetchHistory();
+  }, [fetchHistory]);
+
+  const stats = useMemo(() => {
+    const total = history.length;
+    const good = history.filter(h => h.quality_status === 'Good').length;
+    const moderate = history.filter(h => h.quality_status === 'Moderate').length;
+    const warning = history.filter(h => h.quality_status === 'Poor' || h.quality_status === 'Unsafe').length;
+    const goodRate = total > 0 ? Math.round((good / total) * 100) : 0;
+    return { total, good, moderate, warning, goodRate };
+  }, [history]);
+
+  const handleOpenReport = async (report) => {
+    setSelectedReport(report);
+    setModalQR(null);
+  };
+
+  const handleCreateQR = async (report) => {
+    setGeneratingQR(true);
+    try {
+      const qr = await generateQR(
+        report.advisory || { quality_grade: report.quality_status },
+        report.readings || { feed_type: report.feed_type }
+      );
+      setModalQR(qr);
+    } catch (err) {
+      console.error('Failed to generate QR:', err);
+    } finally {
+      setGeneratingQR(false);
+    }
+  };
+
+  const handlePrint = () => {
+    window.print();
+  };
+
+  const getBadgeClass = (quality) => {
+    switch (quality) {
+      case 'Good': return 'good';
+      case 'Moderate': return 'moderate';
+      case 'Poor': return 'poor';
+      case 'Unsafe': return 'unsafe';
+      default: return 'moderate';
+    }
+  };
+
+  return (
+    <div>
+      {/* Page Header */}
+      <div className="page-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 'var(--space-md)' }}>
+        <div>
+          <h1>{t('history.title', 'Feed Quality Reports & Audit History')}</h1>
+          <p>{t('history.subtitle', 'Traceable batch records, certified nutritional assessments, and historical trends.')}</p>
+        </div>
+        <div style={{ display: 'flex', gap: 'var(--space-xs)' }}>
+          <button
+            className="btn btn-secondary"
+            onClick={fetchHistory}
+            title={t('common.refresh', 'Refresh')}
+          >
+            <RefreshCw size={15} />
+            {t('common.refresh', 'Refresh')}
+          </button>
+          <button
+            className="btn btn-primary"
+            onClick={handlePrint}
+            title={t('history.print_records', 'Print Summary')}
+          >
+            <Printer size={15} />
+            {t('history.print_records', 'Print Records')}
+          </button>
+        </div>
+      </div>
+
+      {/* Summary KPI Strip */}
+      <div className="stats-bar" style={{ marginBottom: 'var(--space-lg)' }}>
+        <div className="stat">
+          <div className="stat-number">{stats.total}</div>
+          <div className="stat-text">{t('history.total_records', 'Total Tests Conducted')}</div>
+        </div>
+        <div className="stat">
+          <div className="stat-number" style={{ color: 'var(--color-good)' }}>{stats.goodRate}%</div>
+          <div className="stat-text">{t('history.safe_ratio', 'Optimal Quality Ratio')}</div>
+        </div>
+        <div className="stat">
+          <div className="stat-number" style={{ color: 'var(--color-moderate)' }}>{stats.moderate}</div>
+          <div className="stat-text">{t('history.moderate_count', 'Moderate / Borderline')}</div>
+        </div>
+        <div className="stat">
+          <div className="stat-number" style={{ color: stats.warning > 0 ? 'var(--color-unsafe)' : 'var(--color-good)' }}>
+            {stats.warning}
+          </div>
+          <div className="stat-text">{t('history.warning_count', 'High Risk / Unsafe')}</div>
+        </div>
+      </div>
+
+      {/* Filters Card */}
+      <div className="card" style={{ marginBottom: 'var(--space-lg)', padding: 'var(--space-md) var(--space-lg)' }}>
+        <div style={{ display: 'flex', gap: 'var(--space-md)', flexWrap: 'wrap', alignItems: 'center' }}>
+          {/* Search */}
+          <div style={{ flex: '1 1 240px', position: 'relative' }}>
+            <Search size={16} style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
+            <input
+              type="text"
+              className="form-input"
+              style={{ paddingLeft: 36 }}
+              placeholder={t('history.search_placeholder', 'Search Batch ID, feed type, or quality...')}
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          </div>
+
+          {/* Feed Type Filter */}
+          <div style={{ flex: '0 1 200px' }}>
+            <select
+              className="form-select"
+              value={feedType}
+              onChange={(e) => setFeedType(e.target.value)}
+              aria-label="Filter by Feed Type"
+            >
+              {FEED_TYPES.map(ft => (
+                <option key={ft} value={ft}>{ft === 'All' ? t('common.all_feed_types', 'All Feed Types') : ft}</option>
+              ))}
+            </select>
+          </div>
+
+          {/* Quality Filter */}
+          <div style={{ flex: '0 1 180px' }}>
+            <select
+              className="form-select"
+              value={qualityStatus}
+              onChange={(e) => setQualityStatus(e.target.value)}
+              aria-label="Filter by Quality Status"
+            >
+              {QUALITY_OPTIONS.map(q => (
+                <option key={q} value={q}>{q === 'All' ? t('common.all_grades', 'All Quality Grades') : q}</option>
+              ))}
+            </select>
+          </div>
+        </div>
+      </div>
+
+      {/* Table / List View */}
+      {loading ? (
+        <div className="loading-spinner" />
+      ) : error ? (
+        <div className="alert alert-warning">
+          <AlertTriangle size={18} /> {error}
+        </div>
+      ) : history.length === 0 ? (
+        <div className="card" style={{ textAlign: 'center', padding: 'var(--space-3xl)' }}>
+          <Wheat size={48} style={{ opacity: 0.3, color: 'var(--color-primary)', margin: '0 auto var(--space-md)' }} />
+          <h3 style={{ color: 'var(--text-primary)', marginBottom: 4 }}>{t('history.empty_title', 'No Analysis Records Found')}</h3>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '0.88rem' }}>
+            {t('history.empty_desc', 'Adjust your filter search or run your first feed test to generate certified records.')}
+          </p>
+        </div>
+      ) : (
+        <div className="card" style={{ padding: 0, overflow: 'hidden' }}>
+          <div className="table-responsive" style={{ margin: 0 }}>
+            <table className="data-table" style={{ width: '100%' }}>
+              <thead>
+                <tr>
+                  <th>{t('history.col_id', 'Batch ID')}</th>
+                  <th>{t('history.col_date', 'Date & Time')}</th>
+                  <th>{t('history.col_feed', 'Feed Type')}</th>
+                  <th>{t('history.col_grade', 'Quality Grade')}</th>
+                  <th>{t('history.col_adulterant', 'Adulteration')}</th>
+                  <th>{t('history.col_spoilage', 'Spoilage')}</th>
+                  <th style={{ textAlign: 'right' }}>{t('history.col_actions', 'Action')}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {history.map((item) => {
+                  const isClean = item.adulteration_type === 'None' || !item.adulteration_type;
+                  const isSpoiled = item.spoilage_flag === 1;
+                  const dateStr = item.timestamp
+                    ? new Date(item.timestamp).toLocaleString([], { dateStyle: 'medium', timeStyle: 'short' })
+                    : 'N/A';
+
+                  return (
+                    <tr
+                      key={item.id}
+                      style={{ cursor: 'pointer', transition: 'background 0.15s ease' }}
+                      onClick={() => handleOpenReport(item)}
+                    >
+                      <td>
+                        <strong style={{ color: 'var(--color-primary)', display: 'flex', alignItems: 'center', gap: 6 }}>
+                          <FileText size={15} />
+                          {item.id}
+                        </strong>
+                      </td>
+                      <td style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>
+                        {dateStr}
+                      </td>
+                      <td>
+                        <span style={{ fontWeight: 600 }}>{item.feed_type}</span>
+                      </td>
+                      <td>
+                        <span className={`badge badge-${getBadgeClass(item.quality_status)}`}>
+                          {item.quality_status}
+                        </span>
+                      </td>
+                      <td>
+                        {isClean ? (
+                          <span style={{ color: 'var(--color-good)', fontSize: '0.82rem', display: 'flex', alignItems: 'center', gap: 4 }}>
+                            <CheckCircle2 size={13} /> {t('common.none', 'Clean')}
+                          </span>
+                        ) : (
+                          <span style={{ color: 'var(--color-unsafe)', fontSize: '0.82rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: 4 }}>
+                            <AlertTriangle size={13} /> {item.adulteration_type}
+                          </span>
+                        )}
+                      </td>
+                      <td>
+                        {isSpoiled ? (
+                          <span style={{ color: 'var(--color-unsafe)', fontSize: '0.82rem', fontWeight: 600 }}>
+                            {t('common.spoiled', 'Spoiled')}
+                          </span>
+                        ) : (
+                          <span style={{ color: 'var(--color-good)', fontSize: '0.82rem' }}>
+                            {t('common.not_spoiled', 'Safe')}
+                          </span>
+                        )}
+                      </td>
+                      <td style={{ textAlign: 'right' }}>
+                        <button
+                          className="btn btn-secondary"
+                          style={{ padding: '4px 10px', fontSize: '0.78rem' }}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleOpenReport(item);
+                          }}
+                        >
+                          {t('history.view_report', 'View Report')}
+                          <ChevronRight size={14} />
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
+
+      {/* Report Inspection Modal */}
+      {selectedReport && (
+        <div className="modal-backdrop" onClick={() => setSelectedReport(null)}>
+          <div className="modal-card" onClick={e => e.stopPropagation()}>
+            <div className="modal-header">
+              <div>
+                <span className="badge" style={{ marginBottom: 4, background: 'var(--color-primary-light)', color: 'var(--color-primary)' }}>
+                  {selectedReport.feed_type}
+                </span>
+                <h2 style={{ fontSize: '1.25rem', margin: 0, color: 'var(--text-primary)' }}>
+                  {t('history.report_for', 'Analysis Report')}: {selectedReport.id}
+                </h2>
+                <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: 2 }}>
+                  <Calendar size={13} style={{ display: 'inline', marginRight: 4 }} />
+                  {selectedReport.timestamp ? new Date(selectedReport.timestamp).toLocaleString() : ''}
+                </div>
+              </div>
+              <button
+                className="btn-icon"
+                onClick={() => setSelectedReport(null)}
+                aria-label="Close"
+              >
+                <X size={18} />
+              </button>
+            </div>
+
+            <div className="modal-body" style={{ maxHeight: '70vh', overflowY: 'auto', padding: 'var(--space-lg)' }}>
+              {/* Quality & Safety Highlight */}
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 'var(--space-md)', marginBottom: 'var(--space-lg)' }}>
+                <div className={`result-card ${getBadgeClass(selectedReport.quality_status)}`}>
+                  <div className="result-label">{t('analyze.quality', 'Quality Grade')}</div>
+                  <div className="result-value">{selectedReport.quality_status}</div>
+                </div>
+
+                <div className={`result-card ${selectedReport.adulteration_type === 'None' || !selectedReport.adulteration_type ? 'good' : 'unsafe'}`}>
+                  <div className="result-label">{t('analyze.adulteration', 'Adulteration')}</div>
+                  <div className="result-value" style={{ fontSize: '1.05rem' }}>
+                    {selectedReport.adulteration_type === 'None' || !selectedReport.adulteration_type ? t('common.none', 'None (Clean)') : selectedReport.adulteration_type}
+                  </div>
+                </div>
+
+                <div className={`result-card ${selectedReport.spoilage_flag === 1 ? 'unsafe' : 'good'}`}>
+                  <div className="result-label">{t('analyze.spoilage', 'Spoilage Risk')}</div>
+                  <div className="result-value">
+                    {selectedReport.spoilage_flag === 1 ? t('common.spoiled', 'Spoiled') : t('common.not_spoiled', 'Fresh / Safe')}
+                  </div>
+                </div>
+              </div>
+
+              {/* Structured 5-Part Advisory (if available) */}
+              {selectedReport.advisory?.structured_advisory && (
+                <div style={{ marginBottom: 'var(--space-lg)' }}>
+                  <h3 style={{ fontSize: '1rem', marginBottom: 'var(--space-sm)', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: 6 }}>
+                    <Sparkles size={16} style={{ color: 'var(--color-primary)' }} />
+                    {t('analyze.ai_recommendation_title', 'AI Agronomic Recommendation')}
+                  </h3>
+
+                  {/* Quality Interpretation */}
+                  <div className="advisory-card good" style={{ marginBottom: 'var(--space-sm)' }}>
+                    <h4 style={{ fontSize: '0.88rem' }}>{selectedReport.advisory.structured_advisory.quality_interpretation?.headline}</h4>
+                    <p style={{ fontSize: '0.84rem' }}>{selectedReport.advisory.structured_advisory.quality_interpretation?.explanation}</p>
+                    <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>
+                      {selectedReport.advisory.structured_advisory.quality_interpretation?.confidence_note}
+                    </div>
+                  </div>
+
+                  {/* Recommended Action */}
+                  <div className="advisory-card warning">
+                    <h4 style={{ fontSize: '0.88rem' }}>{selectedReport.advisory.structured_advisory.recommended_action?.headline}</h4>
+                    <p style={{ fontSize: '0.84rem', fontWeight: 600 }}>{selectedReport.advisory.structured_advisory.recommended_action?.primary_action}</p>
+                    {selectedReport.advisory.structured_advisory.recommended_action?.action_steps && (
+                      <ul style={{ paddingLeft: 'var(--space-lg)', margin: '4px 0 0', fontSize: '0.82rem' }}>
+                        {selectedReport.advisory.structured_advisory.recommended_action.action_steps.map((st, idx) => (
+                          <li key={idx}>{st}</li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {/* Nutritional Breakdown Table */}
+              {selectedReport.readings && (
+                <div style={{ marginBottom: 'var(--space-lg)' }}>
+                  <h4 style={{ fontSize: '0.9rem', marginBottom: 'var(--space-xs)', color: 'var(--text-secondary)' }}>
+                    {t('analyze.nutrition_analysis', 'Measured Nutritional Parameters')}
+                  </h4>
+                  <div className="nutrient-grid">
+                    {['moisture_pct', 'protein_pct', 'fiber_pct', 'energy_mcal_per_kg'].map(key => {
+                      const val = selectedReport.readings[key];
+                      if (val === undefined || val === null) return null;
+                      const labels = {
+                        moisture_pct: 'Moisture (%)',
+                        protein_pct: 'Crude Protein (%)',
+                        fiber_pct: 'Fiber (%)',
+                        energy_mcal_per_kg: 'Energy (Mcal/kg)',
+                      };
+                      return (
+                        <div key={key} className="nutrient-card normal">
+                          <span className="nutrient-label">{labels[key] || key}</span>
+                          <div className="nutrient-val">{Number(val).toFixed(1)}</div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+
+              {/* QR Traceability Certificate */}
+              <div style={{ textAlign: 'center', paddingTop: 'var(--space-md)', borderTop: '1px solid var(--border-subtle)' }}>
+                {modalQR ? (
+                  <div>
+                    <h4 style={{ color: 'var(--text-primary)', marginBottom: 6 }}>
+                      {t('qr.verified_title', 'Cryptographic QR Certificate')}
+                    </h4>
+                    <img src={modalQR.qr_image} alt="Batch QR" style={{ width: 140, height: 140, margin: '0 auto 8px', borderRadius: 8 }} />
+                    <p style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>
+                      Batch Verification ID: {modalQR.batch_id}
+                    </p>
+                  </div>
+                ) : (
+                  <button
+                    className="btn btn-secondary"
+                    onClick={() => handleCreateQR(selectedReport)}
+                    disabled={generatingQR}
+                  >
+                    <QrCode size={16} />
+                    {generatingQR ? t('common.loading', 'Generating...') : t('analyze.generate_qr', 'Generate QR Certificate')}
+                  </button>
+                )}
+              </div>
+            </div>
+
+            <div className="modal-footer" style={{ display: 'flex', justifyContent: 'flex-end', gap: 'var(--space-sm)' }}>
+              <button className="btn btn-secondary" onClick={() => setSelectedReport(null)}>
+                {t('common.close', 'Close')}
+              </button>
+              <button className="btn btn-primary" onClick={handlePrint}>
+                <Printer size={15} />
+                {t('history.print_btn', 'Print Certificate')}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}

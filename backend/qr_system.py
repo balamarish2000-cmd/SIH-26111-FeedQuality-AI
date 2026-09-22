@@ -10,6 +10,7 @@ history and analysis results.
 
 from __future__ import annotations
 
+import os
 import hashlib
 import json
 import time
@@ -23,7 +24,7 @@ import qrcode
 # In-memory store (production: SQLite / Postgres)
 _qr_store: dict[str, dict] = {}
 
-SECRET_KEY = "sih26111-feed-quality-secret"
+SECRET_KEY = os.environ.get("QR_SECRET_KEY", "sih26111-feed-quality-secret")
 
 
 def generate_batch_id() -> str:

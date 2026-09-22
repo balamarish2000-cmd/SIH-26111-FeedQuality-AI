@@ -1509,3 +1509,268 @@ body {
   }
 }
 
+/* ---- Connectivity Status & Pulsing Dot ---- */
+.kisan-banner-pill.pill-online {
+  background: rgba(30, 94, 58, 0.2);
+  color: #a7f3d0;
+  border: 1px solid rgba(74, 222, 128, 0.4);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.kisan-banner-pill.pill-offline {
+  background: rgba(217, 119, 6, 0.2);
+  color: #fde68a;
+  border: 1px solid rgba(251, 191, 36, 0.4);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #4ade80;
+  box-shadow: 0 0 6px #4ade80;
+  animation: pulse-glow 2s infinite ease-in-out;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+/* ---- Interactive Data Tables ---- */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.data-table th {
+  background: var(--bg-card-alt);
+  color: var(--text-secondary);
+  font-weight: 700;
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 12px 16px;
+  border-bottom: 1.5px solid var(--border-subtle);
+  text-align: left;
+}
+
+.data-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  vertical-align: middle;
+}
+
+.data-table tbody tr:hover {
+  background: var(--bg-card-alt);
+}
+
+/* ---- Modal System ---- */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(18, 25, 20, 0.65);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: var(--space-md);
+  animation: fadeIn 0.2s ease-out;
+}
+
+.modal-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  width: 100%;
+  max-width: 680px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: slideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal-header {
+  padding: var(--space-lg);
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  background: var(--bg-card-alt);
+}
+
+.modal-footer {
+  padding: var(--space-md) var(--space-lg);
+  border-top: 1px solid var(--border-subtle);
+  background: var(--bg-card-alt);
+}
+
+.btn-icon {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 6px;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+}
+
+.btn-icon:hover {
+  color: var(--text-primary);
+  background: var(--border-subtle);
+}
+
+/* ---- Progressive Disclosure & Accordions ---- */
+.accordion-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: var(--space-sm) var(--space-md);
+  background: var(--bg-card-alt);
+  border: 1px dashed var(--border-subtle);
+  border-radius: var(--radius-md);
+  color: var(--color-primary);
+  font-weight: 700;
+  font-size: 0.86rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  margin-top: var(--space-sm);
+  margin-bottom: var(--space-sm);
+}
+
+.accordion-toggle:hover {
+  background: var(--color-primary-light);
+  border-color: var(--color-primary);
+}
+
+/* ---- Input Method Selection Cards ---- */
+.input-method-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: var(--space-xs);
+  margin-bottom: var(--space-md);
+}
+
+.input-method-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: var(--space-md) var(--space-sm);
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--border-subtle);
+  background: var(--bg-card);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-align: center;
+}
+
+.input-method-btn:hover {
+  border-color: var(--color-primary);
+  background: var(--bg-card-alt);
+}
+
+.input-method-btn.active {
+  background: var(--color-primary-light);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(30, 94, 58, 0.15);
+}
+
+.input-method-btn .method-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.input-method-btn .method-sub {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+}
+
+/* Demo Mode Box */
+.demo-mode-card {
+  background: linear-gradient(135deg, rgba(217, 119, 6, 0.08) 0%, rgba(30, 94, 58, 0.08) 100%);
+  border: 1.5px solid rgba(217, 119, 6, 0.3);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+
+.demo-pills-row {
+  display: flex;
+  gap: var(--space-xs);
+  flex-wrap: wrap;
+  margin-top: var(--space-xs);
+}
+
+.demo-scenario-btn {
+  padding: 0.45rem 0.9rem;
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1.5px solid transparent;
+  transition: all var(--transition-fast);
+}
+
+.demo-scenario-btn.scenario-good {
+  background: rgba(30, 94, 58, 0.12);
+  color: #1e5e3a;
+  border-color: rgba(30, 94, 58, 0.3);
+}
+
+.demo-scenario-btn.scenario-adulterated {
+  background: rgba(220, 38, 38, 0.12);
+  color: #dc2626;
+  border-color: rgba(220, 38, 38, 0.3);
+}
+
+.demo-scenario-btn.scenario-spoiled {
+  background: rgba(217, 119, 6, 0.12);
+  color: #d97706;
+  border-color: rgba(217, 119, 6, 0.3);
+}
+
+.demo-scenario-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Print Styles */
+@media print {
+  .navbar, .kisan-banner, .footer, .btn, .tab-buttons, .accordion-toggle {
+    display: none !important;
+  }
+  .main-content {
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+  .card, .modal-card {
+    border: 1px solid #ccc !important;
+    box-shadow: none !important;
+  }
+}
+
+
