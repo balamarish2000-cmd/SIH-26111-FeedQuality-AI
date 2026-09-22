@@ -1,0 +1,681 @@
+{
+  "quality_status": {
+    "target": "quality_status",
+    "best_model": "LightGBM/n400_lr05",
+    "best_family": "LightGBM",
+    "leaderboard": [
+      {
+        "model": "LightGBM/n400_lr05",
+        "family": "LightGBM",
+        "val_accuracy": 0.7271317829457364,
+        "val_macro_f1": 0.7715393398519381,
+        "val_balanced_accuracy": 0.7693390499410814,
+        "fit_seconds": 4.9
+      },
+      {
+        "model": "XGBoost/n400_lr05",
+        "family": "XGBoost",
+        "val_accuracy": 0.7284606866002215,
+        "val_macro_f1": 0.7712220640709899,
+        "val_balanced_accuracy": 0.7686275096345541,
+        "fit_seconds": 3.9
+      },
+      {
+        "model": "RandomForest/n500_d16",
+        "family": "RandomForest",
+        "val_accuracy": 0.7244739756367663,
+        "val_macro_f1": 0.7668112334748972,
+        "val_balanced_accuracy": 0.7643614240511093,
+        "fit_seconds": 4.3
+      },
+      {
+        "model": "LightGBM/n600_lr03",
+        "family": "LightGBM",
+        "val_accuracy": 0.7220376522702104,
+        "val_macro_f1": 0.7660865961591437,
+        "val_balanced_accuracy": 0.7624196396981029,
+        "fit_seconds": 12.2
+      },
+      {
+        "model": "RandomForest/n300_dNone",
+        "family": "RandomForest",
+        "val_accuracy": 0.7238095238095238,
+        "val_macro_f1": 0.7645469656333927,
+        "val_balanced_accuracy": 0.759477343491629,
+        "fit_seconds": 3.4
+      },
+      {
+        "model": "XGBoost/n600_lr03",
+        "family": "XGBoost",
+        "val_accuracy": 0.7207087486157253,
+        "val_macro_f1": 0.7643583497548739,
+        "val_balanced_accuracy": 0.7610161580535278,
+        "fit_seconds": 8.7
+      },
+      {
+        "model": "LogisticRegression/default",
+        "family": "LogisticRegression",
+        "val_accuracy": 0.6728682170542636,
+        "val_macro_f1": 0.7178334407160805,
+        "val_balanced_accuracy": 0.7253099667976974,
+        "fit_seconds": 41.6
+      }
+    ],
+    "validation_metrics_of_selected": {
+      "accuracy": 0.7271317829457364,
+      "balanced_accuracy": 0.7693390499410814,
+      "macro_f1": 0.7715393398519381,
+      "weighted_f1": 0.7292125585872613,
+      "classification_report": {
+        "Good": {
+          "precision": 0.7734082397003745,
+          "recall": 0.7348754448398577,
+          "f1-score": 0.7536496350364964,
+          "support": 1686.0
+        },
+        "Moderate": {
+          "precision": 0.5703703703703704,
+          "recall": 0.6142131979695431,
+          "f1-score": 0.5914804469273743,
+          "support": 1379.0
+        },
+        "Poor": {
+          "precision": 0.779559118236473,
+          "recall": 0.7672583826429981,
+          "f1-score": 0.7733598409542743,
+          "support": 1014.0
+        },
+        "Unsafe": {
+          "precision": 0.9744186046511628,
+          "recall": 0.9610091743119266,
+          "f1-score": 0.9676674364896074,
+          "support": 436.0
+        },
+        "accuracy": 0.7271317829457364,
+        "macro avg": {
+          "precision": 0.7744390832395952,
+          "recall": 0.7693390499410814,
+          "f1-score": 0.7715393398519381,
+          "support": 4515.0
+        },
+        "weighted avg": {
+          "precision": 0.7321874840299586,
+          "recall": 0.7271317829457364,
+          "f1-score": 0.7292125585872613,
+          "support": 4515.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          1239,
+          437,
+          10,
+          0
+        ],
+        [
+          339,
+          847,
+          193,
+          0
+        ],
+        [
+          24,
+          201,
+          778,
+          11
+        ],
+        [
+          0,
+          0,
+          17,
+          419
+        ]
+      ],
+      "labels": [
+        "Good",
+        "Moderate",
+        "Poor",
+        "Unsafe"
+      ]
+    },
+    "test_metrics_of_shipped_model": {
+      "accuracy": 0.7140983606557377,
+      "balanced_accuracy": 0.756946864821475,
+      "macro_f1": 0.7593453240773972,
+      "weighted_f1": 0.7162422107878332,
+      "classification_report": {
+        "Good": {
+          "precision": 0.7607476635514019,
+          "recall": 0.7053726169844021,
+          "f1-score": 0.7320143884892086,
+          "support": 1731.0
+        },
+        "Moderate": {
+          "precision": 0.567741935483871,
+          "recall": 0.6149545772187281,
+          "f1-score": 0.5904059040590406,
+          "support": 1431.0
+        },
+        "Poor": {
+          "precision": 0.7551020408163265,
+          "recall": 0.7732497387669801,
+          "f1-score": 0.7640681466184822,
+          "support": 957.0
+        },
+        "Unsafe": {
+          "precision": 0.9681818181818181,
+          "recall": 0.9342105263157895,
+          "f1-score": 0.9508928571428571,
+          "support": 456.0
+        },
+        "accuracy": 0.7140983606557377,
+        "macro avg": {
+          "precision": 0.7629433645083544,
+          "recall": 0.756946864821475,
+          "f1-score": 0.7593453240773972,
+          "support": 4575.0
+        },
+        "weighted avg": {
+          "precision": 0.7198724540845967,
+          "recall": 0.7140983606557377,
+          "f1-score": 0.7162422107878332,
+          "support": 4575.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          1221,
+          488,
+          22,
+          0
+        ],
+        [
+          363,
+          880,
+          188,
+          0
+        ],
+        [
+          21,
+          182,
+          740,
+          14
+        ],
+        [
+          0,
+          0,
+          30,
+          426
+        ]
+      ],
+      "labels": [
+        "Good",
+        "Moderate",
+        "Poor",
+        "Unsafe"
+      ]
+    },
+    "n_train": 20910,
+    "n_validation": 4515,
+    "n_test": 4575,
+    "n_train_plus_validation": 25425
+  },
+  "spoilage_flag": {
+    "target": "spoilage_flag",
+    "best_model": "RandomForest/n300_dNone",
+    "best_family": "RandomForest",
+    "leaderboard": [
+      {
+        "model": "RandomForest/n300_dNone",
+        "family": "RandomForest",
+        "val_accuracy": 0.9997785160575858,
+        "val_macro_f1": 0.9993526864087515,
+        "val_balanced_accuracy": 0.999877720714111,
+        "fit_seconds": 1.6
+      },
+      {
+        "model": "RandomForest/n500_d16",
+        "family": "RandomForest",
+        "val_accuracy": 0.9997785160575858,
+        "val_macro_f1": 0.9993526864087515,
+        "val_balanced_accuracy": 0.999877720714111,
+        "fit_seconds": 2.3
+      },
+      {
+        "model": "XGBoost/n400_lr05",
+        "family": "XGBoost",
+        "val_accuracy": 0.9997785160575858,
+        "val_macro_f1": 0.9993526864087515,
+        "val_balanced_accuracy": 0.999877720714111,
+        "fit_seconds": 0.4
+      },
+      {
+        "model": "XGBoost/n600_lr03",
+        "family": "XGBoost",
+        "val_accuracy": 0.9997785160575858,
+        "val_macro_f1": 0.9993526864087515,
+        "val_balanced_accuracy": 0.999877720714111,
+        "fit_seconds": 0.5
+      },
+      {
+        "model": "LightGBM/n600_lr03",
+        "family": "LightGBM",
+        "val_accuracy": 0.9995570321151717,
+        "val_macro_f1": 0.9987040117939232,
+        "val_balanced_accuracy": 0.9987040117939232,
+        "fit_seconds": 2.0
+      },
+      {
+        "model": "LightGBM/n400_lr05",
+        "family": "LightGBM",
+        "val_accuracy": 0.9995570321151717,
+        "val_macro_f1": 0.9987012800230117,
+        "val_balanced_accuracy": 0.9976525821596245,
+        "fit_seconds": 0.9
+      },
+      {
+        "model": "LogisticRegression/default",
+        "family": "LogisticRegression",
+        "val_accuracy": 0.9249169435215947,
+        "val_macro_f1": 0.8329552616716097,
+        "val_balanced_accuracy": 0.9448787368377543,
+        "fit_seconds": 46.4
+      }
+    ],
+    "validation_metrics_of_selected": {
+      "accuracy": 0.9997785160575858,
+      "balanced_accuracy": 0.999877720714111,
+      "macro_f1": 0.9993526864087515,
+      "weighted_f1": 0.9997786323409417,
+      "classification_report": {
+        "0": {
+          "precision": 1.0,
+          "recall": 0.999755441428222,
+          "f1-score": 0.9998777057600587,
+          "support": 4089.0
+        },
+        "1": {
+          "precision": 0.9976580796252927,
+          "recall": 1.0,
+          "f1-score": 0.9988276670574443,
+          "support": 426.0
+        },
+        "accuracy": 0.9997785160575858,
+        "macro avg": {
+          "precision": 0.9988290398126464,
+          "recall": 0.999877720714111,
+          "f1-score": 0.9993526864087515,
+          "support": 4515.0
+        },
+        "weighted avg": {
+          "precision": 0.9997790347553431,
+          "recall": 0.9997785160575858,
+          "f1-score": 0.9997786323409417,
+          "support": 4515.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          4088,
+          1
+        ],
+        [
+          0,
+          426
+        ]
+      ],
+      "labels": [
+        0.0,
+        1.0
+      ]
+    },
+    "test_metrics_of_shipped_model": {
+      "accuracy": 0.9995628415300546,
+      "balanced_accuracy": 0.9997605937275557,
+      "macro_f1": 0.9986271353671534,
+      "weighted_f1": 0.9995633370059154,
+      "classification_report": {
+        "0": {
+          "precision": 1.0,
+          "recall": 0.9995211874551113,
+          "f1-score": 0.9997605363984674,
+          "support": 4177.0
+        },
+        "1": {
+          "precision": 0.995,
+          "recall": 1.0,
+          "f1-score": 0.9974937343358395,
+          "support": 398.0
+        },
+        "accuracy": 0.9995628415300546,
+        "macro avg": {
+          "precision": 0.9975,
+          "recall": 0.9997605937275557,
+          "f1-score": 0.9986271353671534,
+          "support": 4575.0
+        },
+        "weighted avg": {
+          "precision": 0.9995650273224044,
+          "recall": 0.9995628415300546,
+          "f1-score": 0.9995633370059154,
+          "support": 4575.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          4175,
+          2
+        ],
+        [
+          0,
+          398
+        ]
+      ],
+      "labels": [
+        0.0,
+        1.0
+      ]
+    },
+    "n_train": 20910,
+    "n_validation": 4515,
+    "n_test": 4575,
+    "n_train_plus_validation": 25425
+  },
+  "adulteration_type": {
+    "target": "adulteration_type",
+    "best_model": "XGBoost/n600_lr03",
+    "best_family": "XGBoost",
+    "leaderboard": [
+      {
+        "model": "XGBoost/n600_lr03",
+        "family": "XGBoost",
+        "val_accuracy": 0.9791805094130676,
+        "val_macro_f1": 0.8356237355606876,
+        "val_balanced_accuracy": 0.832748950289572,
+        "fit_seconds": 15.6
+      },
+      {
+        "model": "RandomForest/n300_dNone",
+        "family": "RandomForest",
+        "val_accuracy": 0.9829457364341085,
+        "val_macro_f1": 0.8313821242719678,
+        "val_balanced_accuracy": 0.8332916145181478,
+        "fit_seconds": 2.8
+      },
+      {
+        "model": "RandomForest/n500_d16",
+        "family": "RandomForest",
+        "val_accuracy": 0.9829457364341085,
+        "val_macro_f1": 0.8313821242719678,
+        "val_balanced_accuracy": 0.8332916145181478,
+        "fit_seconds": 4.1
+      },
+      {
+        "model": "XGBoost/n400_lr05",
+        "family": "XGBoost",
+        "val_accuracy": 0.9488372093023256,
+        "val_macro_f1": 0.831282845931065,
+        "val_balanced_accuracy": 0.8313359998910475,
+        "fit_seconds": 6.4
+      },
+      {
+        "model": "LightGBM/n600_lr03",
+        "family": "LightGBM",
+        "val_accuracy": 0.9827242524916944,
+        "val_macro_f1": 0.8310028393541323,
+        "val_balanced_accuracy": 0.833249895702962,
+        "fit_seconds": 17.9
+      },
+      {
+        "model": "LightGBM/n400_lr05",
+        "family": "LightGBM",
+        "val_accuracy": 0.982281284606866,
+        "val_macro_f1": 0.830213709038954,
+        "val_balanced_accuracy": 0.8331664580725908,
+        "fit_seconds": 5.9
+      },
+      {
+        "model": "LogisticRegression/default",
+        "family": "LogisticRegression",
+        "val_accuracy": 0.5107419712070875,
+        "val_macro_f1": 0.6679264788790796,
+        "val_balanced_accuracy": 0.8093396320960126,
+        "fit_seconds": 67.2
+      }
+    ],
+    "validation_metrics_of_selected": {
+      "accuracy": 0.9791805094130676,
+      "balanced_accuracy": 0.832748950289572,
+      "macro_f1": 0.8356237355606876,
+      "weighted_f1": 0.973103931357483,
+      "classification_report": {
+        "Excess Salt": {
+          "precision": 0.1111111111111111,
+          "recall": 0.02631578947368421,
+          "f1-score": 0.0425531914893617,
+          "support": 76.0
+        },
+        "Mineral Imbalance": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 23.0
+        },
+        "Mould/Fungal Contamination": {
+          "precision": 0.9914163090128756,
+          "recall": 1.0,
+          "f1-score": 0.9956896551724138,
+          "support": 231.0
+        },
+        "None": {
+          "precision": 0.9812484579323958,
+          "recall": 0.9954943679599499,
+          "f1-score": 0.9883200795228628,
+          "support": 3995.0
+        },
+        "Sand/Silica Contamination": {
+          "precision": 1.0,
+          "recall": 0.9746835443037974,
+          "f1-score": 0.9871794871794872,
+          "support": 79.0
+        },
+        "Urea Adulteration": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 111.0
+        },
+        "accuracy": 0.9791805094130676,
+        "macro avg": {
+          "precision": 0.8472959796760637,
+          "recall": 0.832748950289572,
+          "f1-score": 0.8356237355606876,
+          "support": 4515.0
+        },
+        "weighted avg": {
+          "precision": 0.9680064676115925,
+          "recall": 0.9791805094130676,
+          "f1-score": 0.973103931357483,
+          "support": 4515.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          2,
+          0,
+          0,
+          74,
+          0,
+          0
+        ],
+        [
+          0,
+          23,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          231,
+          0,
+          0,
+          0
+        ],
+        [
+          16,
+          0,
+          2,
+          3977,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          2,
+          77,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          111
+        ]
+      ],
+      "labels": [
+        "Excess Salt",
+        "Mineral Imbalance",
+        "Mould/Fungal Contamination",
+        "None",
+        "Sand/Silica Contamination",
+        "Urea Adulteration"
+      ]
+    },
+    "test_metrics_of_shipped_model": {
+      "accuracy": 0.9720218579234973,
+      "balanced_accuracy": 0.8277897782803695,
+      "macro_f1": 0.8291370209281652,
+      "weighted_f1": 0.969797500534372,
+      "classification_report": {
+        "Excess Salt": {
+          "precision": 0.019230769230769232,
+          "recall": 0.0136986301369863,
+          "f1-score": 0.016,
+          "support": 73.0
+        },
+        "Mineral Imbalance": {
+          "precision": 1.0,
+          "recall": 0.9705882352941176,
+          "f1-score": 0.9850746268656716,
+          "support": 34.0
+        },
+        "Mould/Fungal Contamination": {
+          "precision": 0.9916317991631799,
+          "recall": 0.9957983193277311,
+          "f1-score": 0.9937106918238994,
+          "support": 238.0
+        },
+        "None": {
+          "precision": 0.9818002951303493,
+          "recall": 0.9866534849233811,
+          "f1-score": 0.9842209072978304,
+          "support": 4046.0
+        },
+        "Sand/Silica Contamination": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 65.0
+        },
+        "Urea Adulteration": {
+          "precision": 0.9916666666666667,
+          "recall": 1.0,
+          "f1-score": 0.99581589958159,
+          "support": 119.0
+        },
+        "accuracy": 0.9720218579234973,
+        "macro avg": {
+          "precision": 0.830721588365161,
+          "recall": 0.8277897782803695,
+          "f1-score": 0.8291370209281652,
+          "support": 4575.0
+        },
+        "weighted avg": {
+          "precision": 0.96760317853233,
+          "recall": 0.9720218579234973,
+          "f1-score": 0.969797500534372,
+          "support": 4575.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          1,
+          0,
+          0,
+          72,
+          0,
+          0
+        ],
+        [
+          0,
+          33,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          237,
+          1,
+          0,
+          0
+        ],
+        [
+          51,
+          0,
+          2,
+          3992,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          65,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          119
+        ]
+      ],
+      "labels": [
+        "Excess Salt",
+        "Mineral Imbalance",
+        "Mould/Fungal Contamination",
+        "None",
+        "Sand/Silica Contamination",
+        "Urea Adulteration"
+      ]
+    },
+    "n_train": 20910,
+    "n_validation": 4515,
+    "n_test": 4575,
+    "n_train_plus_validation": 25425
+  }
+}
