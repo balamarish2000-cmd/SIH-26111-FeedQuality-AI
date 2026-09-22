@@ -336,71 +336,107 @@ def silage_monitor():
     import time
     t = time.time()
 
-    # Simulate 3 silage bunkers
-    bunkers = []
+    # Simulate 3 storage units (Pit/Trench, Silo Bag, Drum/Silo)
+    storage_units = []
     for i in range(3):
         base_ph = 4.0 + 0.3 * i
         base_temp = 22 + 2 * i
         base_moisture = 62 + 3 * i
+        internal_temp = round(base_temp + 1.2 * math.sin(t / 600 + i * 2), 1)
+        ambient_temp = round(30.0 + 2.5 * math.sin(t / 800 + i), 1)
+        temp_diff = round(internal_temp - ambient_temp, 1)
 
-        bunkers.append({
-            "bunker_id": f"BNK-{i+1:02d}",
-            "name": f"Silage Bunker {i+1}",
-            "location": ["North Field", "Main Barn", "Storage Shed"][i],
+        thermal_zone = "optimal" if internal_temp <= 25.0 else ("warning" if internal_temp <= 30.0 else "critical")
+        heating_risk = "low" if internal_temp <= 25.0 else ("moderate" if internal_temp <= 30.0 else "high")
+        fermentation_phase = ["stable_storage", "active_fermentation", "early_curing"][i]
+
+        storage_units.append({
+            "unit_id": f"UNIT-{i+1:02d}",
+            "unit_number": i + 1,
+            "storage_type_key": ["pit_trench", "silo_bag", "drum_silo"][i],
+            "name": f"Storage Unit {i+1}",
+            "location_key": ["north_field", "dairy_shed", "central_yard"][i],
             "ph": round(base_ph + 0.2 * math.sin(t / 300 + i), 2),
-            "temperature_c": round(base_temp + 1.5 * math.sin(t / 600 + i * 2), 1),
+            "temperature_c": internal_temp,
+            "ambient_temperature_c": ambient_temp,
+            "temperature_differential_c": temp_diff,
             "moisture_pct": round(base_moisture + 2 * math.sin(t / 400 + i * 3), 1),
             "co2_ppm": round(800 + 200 * math.sin(t / 500 + i), 0),
-            "fermentation_quality": ["Good", "Good", "Moderate"][i],
+            "fermentation_quality_key": ["good", "good", "moderate"][i],
             "days_since_sealing": [45, 28, 12][i],
-            "spoilage_risk": ["Low", "Low", "Medium"][i],
+            "spoilage_risk_key": ["low", "low", "medium"][i],
             "mould_detected": False,
             "last_reading": datetime.now(timezone.utc).isoformat(),
+            "temperature_analysis": {
+                "core_temp_c": internal_temp,
+                "ambient_temp_c": ambient_temp,
+                "differential_c": temp_diff,
+                "thermal_zone": thermal_zone,
+                "fermentation_phase": fermentation_phase,
+                "heating_risk": heating_risk,
+                "aerobic_stability_hours": max(12.0, round(72.0 - (internal_temp - 20.0) * 3.5, 1)),
+                "max_24h_temp": round(internal_temp + 1.8, 1),
+                "min_24h_temp": round(internal_temp - 1.4, 1),
+                "thermal_stability_score": max(50, min(99, int(100 - (internal_temp - 20.0) * 3.2))),
+            },
             "history": _generate_silage_history(base_ph, base_temp, base_moisture, i),
         })
 
     return jsonify({
-        "bunkers": bunkers,
-        "alerts": _silage_alerts(bunkers),
+        "storage_units": storage_units,
+        "alerts": _storage_alerts(storage_units),
         "timestamp": datetime.now(timezone.utc).isoformat(),
     })
 
 
 def _generate_silage_history(base_ph, base_temp, base_moisture, seed):
-    """Generate 24h of simulated silage readings."""
+    """Generate 24h of simulated silage & temperature readings."""
     history = []
     now = datetime.now(timezone.utc)
     for h in range(24):
-        t = (now - timedelta(hours=23 - h)).isoformat()
+        t_str = (now - timedelta(hours=23 - h)).isoformat()
+        ambient = round(28.0 + 4.5 * math.sin((h - 6) / 24.0 * 2 * math.pi), 1)
+        core = round(base_temp + 1.2 * math.sin(h / 4 + seed), 1)
         history.append({
-            "timestamp": t,
+            "timestamp": t_str,
             "ph": round(base_ph + 0.1 * math.sin(h / 3 + seed), 2),
-            "temperature_c": round(base_temp + 2 * math.sin(h / 4 + seed), 1),
+            "temperature_c": core,
+            "ambient_temperature_c": ambient,
             "moisture_pct": round(base_moisture + 1.5 * math.sin(h / 5 + seed), 1),
         })
     return history
 
 
-def _silage_alerts(bunkers):
+def _storage_alerts(units):
     alerts = []
-    for b in bunkers:
-        if b["ph"] > 4.5:
+    for u in units:
+        if u["ph"] > 4.5:
             alerts.append({
-                "bunker": b["name"],
+                "unit_id": u["unit_id"],
+                "unit_number": u["unit_number"],
                 "type": "warning",
-                "message": f"pH at {b['ph']} — above optimal fermentation range (3.8–4.5)",
+                "metric": "ph",
+                "val": u["ph"],
+                "message_key": "alert_ph_high",
+                "message": f"Unit {u['unit_number']}: pH at {u['ph']} — above optimal fermentation range (3.8–4.5)",
             })
-        if b["temperature_c"] > 28:
+        if u["temperature_c"] > 28:
             alerts.append({
-                "bunker": b["name"],
+                "unit_id": u["unit_id"],
+                "unit_number": u["unit_number"],
                 "type": "warning",
-                "message": f"Temperature at {b['temperature_c']}°C — above recommended (<28°C)",
+                "metric": "temperature",
+                "val": u["temperature_c"],
+                "message_key": "alert_temp_high",
+                "message": f"Unit {u['unit_number']}: Temperature at {u['temperature_c']}°C — above recommended (<28°C)",
             })
     if not alerts:
         alerts.append({
-            "bunker": "All",
+            "unit_number": 0,
             "type": "info",
-            "message": "All silage bunkers within normal parameters",
+            "metric": "all",
+            "message_key": "alert_all_optimal",
+            "message": "All feed and silage storage units within optimal parameters",
         })
     return alerts
 

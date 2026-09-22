@@ -129,7 +129,7 @@ export default function Dashboard() {
         </div>
         <div className="stat">
           <div className="stat-number">3</div>
-          <div className="stat-text">{t('dashboard.active_bunkers')}</div>
+          <div className="stat-text">{t('dashboard.active_storage_units')}</div>
         </div>
         <div className="stat">
           <div className="stat-number" style={{ color: totalAdulterations > 0 ? 'var(--color-unsafe)' : 'var(--color-good)' }}>
