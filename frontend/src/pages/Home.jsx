@@ -61,7 +61,7 @@ export default function Home() {
       <section className="hero">
         <div className="hero-badge">
           <Shield size={15} />
-          {t('home.hero_badge', 'SIH 2024 — Problem Statement 26111: Dairy Cattle Nutrition')}
+          {t('home.hero_badge', 'AI-Powered Cattle Feed & Silage Quality Assurance')}
         </div>
         <h1>{t('home.title', 'Smart Feed Quality Testing')}</h1>
         <p>{t('home.subtitle', 'AI-powered feed and silage quality assessment with actionable farmer guidance.')}</p>
@@ -182,15 +182,15 @@ export default function Home() {
           justifyContent: 'center',
         }}>
           {[
-            'NIR Spectroscopy Models',
-            'LightGBM Multi-Target ML',
-            'Computer Vision Feature Extraction',
-            'ICAR / NDDB Nutritional Standards',
-            'Cryptographic SHA-256 QR Verification',
-            'Low-Connectivity Ready Architecture'
+            { key: 'home.tech_badge_nir', def: 'NIR Spectroscopy Models' },
+            { key: 'home.tech_badge_ml', def: 'LightGBM Multi-Target ML' },
+            { key: 'home.tech_badge_cv', def: 'Computer Vision Feature Extraction' },
+            { key: 'home.tech_badge_standards', def: 'ICAR / NDDB Nutritional Standards' },
+            { key: 'home.tech_badge_qr', def: 'Cryptographic SHA-256 QR Verification' },
+            { key: 'home.tech_badge_offline', def: 'Low-Connectivity Ready Architecture' }
           ].map(tech => (
             <span
-              key={tech}
+              key={tech.key}
               className="badge"
               style={{
                 background: 'var(--bg-card)',
@@ -201,7 +201,7 @@ export default function Home() {
               }}
             >
               <Check size={13} style={{ color: 'var(--color-primary)', marginRight: 4 }} />
-              {tech}
+              {t(tech.key, tech.def)}
             </span>
           ))}
         </div>

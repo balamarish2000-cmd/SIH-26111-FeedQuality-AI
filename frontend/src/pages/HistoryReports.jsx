@@ -8,25 +8,37 @@ import {
   ShieldCheck, ShieldAlert, Sparkles, Download
 } from 'lucide-react';
 
-const FEED_TYPES = [
-  'All',
-  'Cattle Feed Pellet',
-  'Silage',
-  'Feed Mash',
-  'TMR',
-  'Mineral Mixture',
+const FEED_TYPE_FILTERS = [
+  { id: 'All', key: 'all_feed_types', defaultLabel: 'All Feed Types' },
+  { id: 'Cattle Feed Pellet', key: 'cattle_feed_pellet', defaultLabel: 'Cattle Feed Pellet' },
+  { id: 'Silage', key: 'silage', defaultLabel: 'Silage' },
+  { id: 'Feed Mash', key: 'feed_mash', defaultLabel: 'Feed Mash' },
+  { id: 'TMR', key: 'tmr', defaultLabel: 'TMR' },
+  { id: 'Mineral Mixture', key: 'mineral_mixture', defaultLabel: 'Mineral Mixture' },
 ];
 
-const QUALITY_OPTIONS = [
-  'All',
-  'Good',
-  'Moderate',
-  'Poor',
-  'Unsafe',
+const QUALITY_FILTERS = [
+  { id: 'All', key: 'all_grades', defaultLabel: 'All Quality Grades' },
+  { id: 'Good', key: 'good', defaultLabel: 'Good' },
+  { id: 'Moderate', key: 'moderate', defaultLabel: 'Moderate' },
+  { id: 'Poor', key: 'poor', defaultLabel: 'Poor' },
+  { id: 'Unsafe', key: 'unsafe', defaultLabel: 'Unsafe' },
 ];
 
 export default function HistoryReports() {
   const { t } = useTranslation();
+
+  const getFeedLabel = (id) => {
+    const item = FEED_TYPE_FILTERS.find(f => f.id === id);
+    if (!item) return id;
+    return item.id === 'All' ? t('common.all_feed_types', item.defaultLabel) : t('feed_types.' + item.key, item.defaultLabel);
+  };
+
+  const getQualityLabel = (q) => {
+    const item = QUALITY_FILTERS.find(f => f.id === q);
+    if (!item) return q;
+    return item.id === 'All' ? t('common.all_grades', item.defaultLabel) : t('quality_grades.' + item.key, item.defaultLabel);
+  };
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -180,8 +192,8 @@ export default function HistoryReports() {
               onChange={(e) => setFeedType(e.target.value)}
               aria-label="Filter by Feed Type"
             >
-              {FEED_TYPES.map(ft => (
-                <option key={ft} value={ft}>{ft === 'All' ? t('common.all_feed_types', 'All Feed Types') : ft}</option>
+              {FEED_TYPE_FILTERS.map(ft => (
+                <option key={ft.id} value={ft.id}>{getFeedLabel(ft.id)}</option>
               ))}
             </select>
           </div>
@@ -194,8 +206,8 @@ export default function HistoryReports() {
               onChange={(e) => setQualityStatus(e.target.value)}
               aria-label="Filter by Quality Status"
             >
-              {QUALITY_OPTIONS.map(q => (
-                <option key={q} value={q}>{q === 'All' ? t('common.all_grades', 'All Quality Grades') : q}</option>
+              {QUALITY_FILTERS.map(q => (
+                <option key={q.id} value={q.id}>{getQualityLabel(q.id)}</option>
               ))}
             </select>
           </div>
@@ -256,11 +268,11 @@ export default function HistoryReports() {
                         {dateStr}
                       </td>
                       <td>
-                        <span style={{ fontWeight: 600 }}>{item.feed_type}</span>
+                        <span style={{ fontWeight: 600 }}>{getFeedLabel(item.feed_type)}</span>
                       </td>
                       <td>
                         <span className={`badge badge-${getBadgeClass(item.quality_status)}`}>
-                          {item.quality_status}
+                          {getQualityLabel(item.quality_status)}
                         </span>
                       </td>
                       <td>
@@ -270,7 +282,7 @@ export default function HistoryReports() {
                           </span>
                         ) : (
                           <span style={{ color: 'var(--color-unsafe)', fontSize: '0.82rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: 4 }}>
-                            <AlertTriangle size={13} /> {item.adulteration_type}
+                            <AlertTriangle size={13} /> {t('adulterants.' + item.adulteration_type?.toLowerCase().replace(/\s+/g, '_'), item.adulteration_type)}
                           </span>
                         )}
                       </td>
@@ -314,7 +326,7 @@ export default function HistoryReports() {
             <div className="modal-header">
               <div>
                 <span className="badge" style={{ marginBottom: 4, background: 'var(--color-primary-light)', color: 'var(--color-primary)' }}>
-                  {selectedReport.feed_type}
+                  {getFeedLabel(selectedReport.feed_type)}
                 </span>
                 <h2 style={{ fontSize: '1.25rem', margin: 0, color: 'var(--text-primary)' }}>
                   {t('history.report_for', 'Analysis Report')}: {selectedReport.id}
@@ -338,13 +350,13 @@ export default function HistoryReports() {
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 'var(--space-md)', marginBottom: 'var(--space-lg)' }}>
                 <div className={`result-card ${getBadgeClass(selectedReport.quality_status)}`}>
                   <div className="result-label">{t('analyze.quality', 'Quality Grade')}</div>
-                  <div className="result-value">{selectedReport.quality_status}</div>
+                  <div className="result-value">{getQualityLabel(selectedReport.quality_status)}</div>
                 </div>
 
                 <div className={`result-card ${selectedReport.adulteration_type === 'None' || !selectedReport.adulteration_type ? 'good' : 'unsafe'}`}>
                   <div className="result-label">{t('analyze.adulteration', 'Adulteration')}</div>
                   <div className="result-value" style={{ fontSize: '1.05rem' }}>
-                    {selectedReport.adulteration_type === 'None' || !selectedReport.adulteration_type ? t('common.none', 'None (Clean)') : selectedReport.adulteration_type}
+                    {selectedReport.adulteration_type === 'None' || !selectedReport.adulteration_type ? t('common.none', 'None (Clean)') : t('adulterants.' + selectedReport.adulteration_type?.toLowerCase().replace(/\s+/g, '_'), selectedReport.adulteration_type)}
                   </div>
                 </div>
 
@@ -366,17 +378,19 @@ export default function HistoryReports() {
 
                   {/* Quality Interpretation */}
                   <div className="advisory-card good" style={{ marginBottom: 'var(--space-sm)' }}>
-                    <h4 style={{ fontSize: '0.88rem' }}>{selectedReport.advisory.structured_advisory.quality_interpretation?.headline}</h4>
-                    <p style={{ fontSize: '0.84rem' }}>{selectedReport.advisory.structured_advisory.quality_interpretation?.explanation}</p>
-                    <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>
-                      {selectedReport.advisory.structured_advisory.quality_interpretation?.confidence_note}
-                    </div>
+                    <h4 style={{ fontSize: '0.88rem' }}>{t('advisory_action.' + (selectedReport.quality_status?.toLowerCase() || 'good') + '_headline', selectedReport.advisory.structured_advisory.quality_interpretation?.headline)}</h4>
+                    <p style={{ fontSize: '0.84rem' }}>{t('advisory_quality.' + (selectedReport.quality_status?.toLowerCase() || 'moderate'), selectedReport.advisory.structured_advisory.quality_interpretation?.explanation)}</p>
+                    {selectedReport.advisory.structured_advisory.quality_interpretation?.confidence_note && (
+                      <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>
+                        {selectedReport.advisory.structured_advisory.quality_interpretation.confidence_note}
+                      </div>
+                    )}
                   </div>
 
                   {/* Recommended Action */}
                   <div className="advisory-card warning">
-                    <h4 style={{ fontSize: '0.88rem' }}>{selectedReport.advisory.structured_advisory.recommended_action?.headline}</h4>
-                    <p style={{ fontSize: '0.84rem', fontWeight: 600 }}>{selectedReport.advisory.structured_advisory.recommended_action?.primary_action}</p>
+                    <h4 style={{ fontSize: '0.88rem' }}>{t('advisory_action.' + (selectedReport.quality_status?.toLowerCase() || 'good') + '_headline', selectedReport.advisory.structured_advisory.recommended_action?.headline)}</h4>
+                    <p style={{ fontSize: '0.84rem', fontWeight: 600 }}>{t('advisory_action.' + (selectedReport.quality_status?.toLowerCase() || 'good') + '_primary', selectedReport.advisory.structured_advisory.recommended_action?.primary_action)}</p>
                     {selectedReport.advisory.structured_advisory.recommended_action?.action_steps && (
                       <ul style={{ paddingLeft: 'var(--space-lg)', margin: '4px 0 0', fontSize: '0.82rem' }}>
                         {selectedReport.advisory.structured_advisory.recommended_action.action_steps.map((st, idx) => (
@@ -399,10 +413,10 @@ export default function HistoryReports() {
                       const val = selectedReport.readings[key];
                       if (val === undefined || val === null) return null;
                       const labels = {
-                        moisture_pct: 'Moisture (%)',
-                        protein_pct: 'Crude Protein (%)',
-                        fiber_pct: 'Fiber (%)',
-                        energy_mcal_per_kg: 'Energy (Mcal/kg)',
+                        moisture_pct: t('analyze.moisture', 'Moisture (%)'),
+                        protein_pct: t('analyze.protein', 'Crude Protein (%)'),
+                        fiber_pct: t('analyze.fiber', 'Fiber (%)'),
+                        energy_mcal_per_kg: t('analyze.energy', 'Energy (Mcal/kg)'),
                       };
                       return (
                         <div key={key} className="nutrient-card normal">
@@ -424,7 +438,7 @@ export default function HistoryReports() {
                     </h4>
                     <img src={modalQR.qr_image} alt="Batch QR" style={{ width: 140, height: 140, margin: '0 auto 8px', borderRadius: 8 }} />
                     <p style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>
-                      Batch Verification ID: {modalQR.batch_id}
+                      {t('qr.batch_id', 'Batch Verification ID:')} {modalQR.batch_id}
                     </p>
                   </div>
                 ) : (

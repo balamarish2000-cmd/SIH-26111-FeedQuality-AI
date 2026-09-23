@@ -108,8 +108,8 @@ def _sanitize_for_json(obj):
 def health():
     return jsonify({
         "status": "ok",
-        "service": "KisanDoodh FeedQuality AI Platform",
-        "version": "2.4.0",
+        "service": "Feed Guard Platform",
+        "version": "3.0.0",
         "models_loaded": predictor is not None,
         "timestamp": datetime.now(timezone.utc).isoformat(),
     })
@@ -167,10 +167,11 @@ def predict():
                 val = int(val)
             elif isinstance(val, (np.floating,)):
                 val = float(val)
-            predictions[col] = val
+        # Extract language
+        lang = request.args.get("lang") or (data.get("lang") if isinstance(data, dict) else "en") or "en"
 
         # Generate comprehensive 5-part advisory
-        advisory = generate_advisory(readings, predictions)
+        advisory = generate_advisory(readings, predictions, lang=lang)
 
         # Store in history with complete report artifacts
         record = {
@@ -247,7 +248,8 @@ def predict_image():
             predictions[col] = val
 
         # Step 3: Generate advisory
-        advisory = generate_advisory(readings, predictions)
+        img_lang = request.args.get("lang") or request.form.get("lang") or "en"
+        advisory = generate_advisory(readings, predictions, lang=img_lang)
 
         # Store in history
         record = {

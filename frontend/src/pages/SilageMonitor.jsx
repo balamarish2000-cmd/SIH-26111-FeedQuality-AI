@@ -272,11 +272,11 @@ export default function SilageMonitor() {
           <button
             className="btn btn-secondary"
             onClick={fetchData}
-            title="Refresh Telemetry"
+            title={t('common.refresh', 'Refresh Telemetry')}
             style={{ padding: '0.4rem 0.8rem', fontSize: '0.82rem' }}
           >
             <RefreshCw size={13} style={{ marginRight: 4 }} />
-            {t('common.loading') === 'Loading...' ? 'Refresh' : 'ताज़ा करें'}
+            {t('common.refresh', 'Refresh')}
           </button>
         </div>
 
@@ -423,7 +423,7 @@ export default function SilageMonitor() {
                   <span style={{ color: 'var(--text-muted)', margin: '0 4px' }}>/</span>
                   <span style={{ color: 'var(--color-good)' }}>{tempAnalysis.min_24h_temp ?? 20.4}°C</span>
                 </div>
-                <div className="thermal-kpi-sub">24h Fluctuation</div>
+                <div className="thermal-kpi-sub">{t('silage.fluctuation_24h', '24h Fluctuation')}</div>
               </div>
 
               <div className="thermal-kpi-card">

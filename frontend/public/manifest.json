@@ -1,11 +1,11 @@
 {
-  "name": "FeedQuality AI — Smart Feed Testing",
-  "short_name": "FeedQuality AI",
-  "description": "AI-powered rapid feed and silage quality testing for dairy farmers",
+  "name": "Feed Guard — AI-Powered Feed Quality Testing",
+  "short_name": "Feed Guard",
+  "description": "Feed Guard — AI-powered rapid feed and silage quality testing for dairy farmers",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0a0e1a",
-  "theme_color": "#0a0e1a",
+  "background_color": "#1e5e3a",
+  "theme_color": "#1e5e3a",
   "icons": [
     {
       "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧪</text></svg>",

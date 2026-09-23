@@ -1,9 +1,6 @@
-# 🌾 KisanDoodh FeedQuality AI — Smart Feed & Silage Testing System
+# 🛡️ Feed Guard — AI-Powered Feed Quality Testing System
 
-> **Smart India Hackathon (SIH 2024)**  
-> **Problem Statement ID:** 26111  
-> **Problem Statement Title:** Smart AI-Enabled Rapid Feed and Silage Quality Testing System for Dairy Farmers  
-> **Ministry / Department:** Ministry of Fisheries, Animal Husbandry and Dairying  
+> **Intelligent Feed & Silage Quality Assurance for Dairy Farmers**  
 > **Repository:** [balamarish2000-cmd/SIH-26111-FeedQuality-AI](https://github.com/balamarish2000-cmd/SIH-26111-FeedQuality-AI)
 
 ---

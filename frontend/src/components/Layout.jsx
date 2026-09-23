@@ -62,7 +62,9 @@ export default function Layout() {
   };
 
   const handleLanguageChange = (e) => {
-    i18n.changeLanguage(e.target.value);
+    const newLang = e.target.value;
+    i18n.changeLanguage(newLang);
+    localStorage.setItem('feedguard_language', newLang);
   };
 
   return (
@@ -91,8 +93,8 @@ export default function Layout() {
       <header className="navbar">
         <div className="nav-container">
           <NavLink to="/" className="nav-brand">
-            <div className="brand-icon">
-              <Wheat size={24} />
+            <div className="brand-icon" style={{ background: 'var(--color-primary-light)', color: 'var(--color-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '10px' }}>
+              <ShieldCheck size={22} />
             </div>
             <div>
               <div className="brand-title">{t('nav.brand_title')}</div>
@@ -189,11 +191,11 @@ export default function Layout() {
         <div className="footer-inner">
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontWeight: 700, color: 'var(--color-primary)' }}>
             <ShieldCheck size={18} />
-            <span>SIH 2024 Problem Statement 26111 — Ministry of Fisheries, Animal Husbandry & Dairying</span>
+            <span>{t('nav.footer_brand_tag', 'Feed Guard — AI-Powered Cattle Feed & Silage Quality Testing')}</span>
           </div>
           <p>{t('nav.footer_text')}</p>
           <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
-            © 2026 KisanDoodh FeedQuality AI — Designed for Rural Dairy Farmers & Cattle Cooperatives.
+            {t('nav.footer_copy', '© 2026 Feed Guard — Intelligent Quality Assurance for Dairy Farmers & Cattle Cooperatives.')}
           </div>
         </div>
       </footer>

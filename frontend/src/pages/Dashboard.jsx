@@ -51,7 +51,7 @@ export default function Dashboard() {
   };
 
   const qualityChart = {
-    labels: Object.keys(stats.quality_distribution),
+    labels: Object.keys(stats.quality_distribution).map(k => t('quality_grades.' + k.toLowerCase(), k)),
     datasets: [{
       data: Object.values(stats.quality_distribution),
       backgroundColor: Object.keys(stats.quality_distribution).map(k => QUALITY_COLORS[k] || '#717d72'),
@@ -62,9 +62,9 @@ export default function Dashboard() {
   };
 
   const feedTypeChart = {
-    labels: Object.keys(stats.feed_type_distribution),
+    labels: Object.keys(stats.feed_type_distribution).map(k => t('feed_types.' + k.toLowerCase().replace(/\s+/g, '_'), k)),
     datasets: [{
-      label: 'Samples Tested',
+      label: t('dashboard.samples_tested', 'Samples Tested'),
       data: Object.values(stats.feed_type_distribution),
       backgroundColor: ['#1e5e3a', '#d97706', '#c2410c', '#2d6a4f', '#b45309'],
       borderWidth: 0,
@@ -75,7 +75,7 @@ export default function Dashboard() {
   const trendChart = {
     labels: stats.monthly_trend.map(m => m.month),
     datasets: [{
-      label: 'Monthly Tests',
+      label: t('dashboard.monthly_tests', 'Monthly Tests'),
       data: stats.monthly_trend.map(m => m.count),
       borderColor: '#1e5e3a',
       backgroundColor: 'rgba(30, 94, 58, 0.1)',
@@ -200,10 +200,10 @@ export default function Dashboard() {
               borderRadius: 'var(--radius-md)',
             }}>
               <div style={{ fontSize: '0.82rem', fontWeight: 700, color: 'var(--color-unsafe-text)', marginBottom: 4 }}>
-                {type}
+                {t('adulterants.' + type.toLowerCase().replace(/\s+/g, '_'), type)}
               </div>
               <div style={{ fontFamily: 'var(--font-display)', fontSize: '1.6rem', fontWeight: 800, color: 'var(--color-unsafe)' }}>
-                {count} <span style={{ fontSize: '0.75rem', fontWeight: 500 }}>cases</span>
+                {count} <span style={{ fontSize: '0.75rem', fontWeight: 500 }}>{t('dashboard.cases', 'cases')}</span>
               </div>
             </div>
           ))}
@@ -224,12 +224,12 @@ export default function Dashboard() {
               className="farmer-select"
               style={{ fontSize: '0.82rem', padding: '6px 12px' }}
             >
-              <option value="All">{t('history.all_feed_types', 'All Feed Types')}</option>
-              <option value="Corn Silage">Corn Silage</option>
-              <option value="Mixed Forage">Mixed Forage</option>
-              <option value="Total Mixed Ration (TMR)">TMR</option>
-              <option value="Concentrates">Concentrates</option>
-              <option value="Green Fodder">Green Fodder</option>
+              <option value="All">{t('common.all_feed_types', 'All Feed Types')}</option>
+              <option value="Corn Silage">{t('feed_types.silage', 'Corn Silage')}</option>
+              <option value="Mixed Forage">{t('feed_types.feed_mash', 'Mixed Forage')}</option>
+              <option value="Total Mixed Ration (TMR)">{t('feed_types.tmr', 'TMR')}</option>
+              <option value="Concentrates">{t('feed_types.cattle_feed_pellet', 'Concentrates')}</option>
+              <option value="Green Fodder">{t('feed_types.feed_mash', 'Green Fodder')}</option>
             </select>
             <select
               value={qualityFilter}
@@ -237,11 +237,11 @@ export default function Dashboard() {
               className="farmer-select"
               style={{ fontSize: '0.82rem', padding: '6px 12px' }}
             >
-              <option value="All">{t('history.all_quality', 'All Qualities')}</option>
-              <option value="Good">Good</option>
-              <option value="Moderate">Moderate</option>
-              <option value="Poor">Poor</option>
-              <option value="Unsafe">Unsafe</option>
+              <option value="All">{t('common.all_grades', 'All Qualities')}</option>
+              <option value="Good">{t('quality_grades.good', 'Good')}</option>
+              <option value="Moderate">{t('quality_grades.moderate', 'Moderate')}</option>
+              <option value="Poor">{t('quality_grades.poor', 'Poor')}</option>
+              <option value="Unsafe">{t('quality_grades.unsafe', 'Unsafe')}</option>
             </select>
           </div>
         </div>
@@ -268,17 +268,19 @@ export default function Dashboard() {
                   <td style={{ color: 'var(--text-secondary)' }}>
                     {new Date(rec.timestamp).toLocaleDateString([], { month: 'short', day: 'numeric', year: 'numeric' })}
                   </td>
-                  <td>{rec.feed_type}</td>
+                  <td>{t('feed_types.' + rec.feed_type?.toLowerCase().replace(/\s+/g, '_'), rec.feed_type)}</td>
                   <td>
                     <span className={`badge badge-${getBadgeClass(rec.quality_status)}`}>
-                      {rec.quality_status}
+                      {t('quality_grades.' + (rec.quality_status?.toLowerCase() || 'moderate'), rec.quality_status)}
                     </span>
                   </td>
                   <td>
                     {rec.adulteration_type === 'None' ? (
                       <span style={{ color: 'var(--color-good)', fontWeight: 600 }}>{t('common.none')}</span>
                     ) : (
-                      <span style={{ color: 'var(--color-unsafe)', fontWeight: 700 }}>{rec.adulteration_type}</span>
+                      <span style={{ color: 'var(--color-unsafe)', fontWeight: 700 }}>
+                        {t('adulterants.' + rec.adulteration_type?.toLowerCase().replace(/\s+/g, '_'), rec.adulteration_type)}
+                      </span>
                     )}
                   </td>
                   <td>

@@ -125,8 +125,8 @@ export default function QRTraceability() {
                       {[
                         [t('qr.batch_id_label'), verifyResult.batch_id],
                         [t('qr.test_date_label'), new Date(verifyResult.timestamp).toLocaleString()],
-                        [t('qr.feed_type_label'), verifyResult.feed_type],
-                        [t('qr.quality_grade_label'), verifyResult.quality_status],
+                        [t('qr.feed_type_label'), t('feed_types.' + verifyResult.feed_type?.toLowerCase().replace(/\s+/g, '_'), verifyResult.feed_type)],
+                        [t('qr.quality_grade_label'), t('quality_grades.' + (verifyResult.quality_status?.toLowerCase() || 'good'), verifyResult.quality_status)],
                         [t('qr.scan_count_label'), verifyResult.verified_count],
                       ].map(([label, value]) => (
                         <div key={label} style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0', borderBottom: '1px solid rgba(0,0,0,0.05)' }}>
@@ -217,7 +217,7 @@ export default function QRTraceability() {
                 <Package size={18} style={{ color: 'var(--color-wheat)' }} />
                 {t('qr.batches_title')}
               </span>
-              <span className="badge badge-good">{batches.length} Certified</span>
+              <span className="badge badge-good">{batches.length} {t('qr.certified_badge', 'Certified')}</span>
             </div>
 
             {batches.length === 0 ? (
@@ -246,11 +246,11 @@ export default function QRTraceability() {
                         {batch.batch_id}
                       </div>
                       <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: 2 }}>
-                        {batch.feed_type} • {new Date(batch.timestamp).toLocaleDateString([], { month: 'short', day: 'numeric', year: 'numeric' })}
+                        {t('feed_types.' + batch.feed_type?.toLowerCase().replace(/\s+/g, '_'), batch.feed_type)} • {new Date(batch.timestamp).toLocaleDateString([], { month: 'short', day: 'numeric', year: 'numeric' })}
                       </div>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                      <span className="badge badge-good">{batch.quality_status || 'Certified'}</span>
+                      <span className="badge badge-good">{t('quality_grades.' + (batch.quality_status?.toLowerCase() || 'good'), batch.quality_status || t('qr.certified_badge', 'Certified'))}</span>
                       <button
                         className="btn btn-secondary"
                         style={{ padding: '0.35rem 0.65rem', fontSize: '0.75rem' }}
@@ -259,7 +259,7 @@ export default function QRTraceability() {
                           verifyQR(batch.batch_id).then(setVerifyResult).catch(console.error);
                         }}
                       >
-                        Verify
+                        {t('qr.verify_btn', 'Verify')}
                       </button>
                     </div>
                   </div>

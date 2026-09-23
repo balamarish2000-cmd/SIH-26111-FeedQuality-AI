@@ -10,20 +10,21 @@ export async function checkHealth() {
   }
 }
 
-export async function predictFeed(readings) {
-  const res = await fetch(`${API_BASE}/predict`, {
+export async function predictFeed(readings, lang = 'en') {
+  const res = await fetch(`${API_BASE}/predict?lang=${encodeURIComponent(lang)}`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(readings),
+    body: JSON.stringify({ ...readings, lang }),
   });
   if (!res.ok) throw new Error((await res.json()).error || 'Prediction failed');
   return res.json();
 }
 
-export async function predictImage(file) {
+export async function predictImage(file, lang = 'en') {
   const form = new FormData();
   form.append('image', file);
-  const res = await fetch(`${API_BASE}/predict/image`, {
+  form.append('lang', lang);
+  const res = await fetch(`${API_BASE}/predict/image?lang=${encodeURIComponent(lang)}`, {
     method: 'POST',
     body: form,
   });
