@@ -7,6 +7,7 @@ import {
   Wheat, Calendar, Clock, ChevronRight, X, ExternalLink,
   ShieldCheck, ShieldAlert, Sparkles, Download
 } from 'lucide-react';
+import { getAdulterantName, getFeedTypeName } from '../utils/translations';
 
 const FEED_TYPE_FILTERS = [
   { id: 'All', key: 'all_feed_types', defaultLabel: 'All Feed Types' },
@@ -30,7 +31,7 @@ export default function HistoryReports() {
 
   const getFeedLabel = (id) => {
     const item = FEED_TYPE_FILTERS.find(f => f.id === id);
-    if (!item) return id;
+    if (!item) return getFeedTypeName(t, id);
     return item.id === 'All' ? t('common.all_feed_types', item.defaultLabel) : t('feed_types.' + item.key, item.defaultLabel);
   };
 
@@ -282,7 +283,7 @@ export default function HistoryReports() {
                           </span>
                         ) : (
                           <span style={{ color: 'var(--color-unsafe)', fontSize: '0.82rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: 4 }}>
-                            <AlertTriangle size={13} /> {t('adulterants.' + item.adulteration_type?.toLowerCase().replace(/\s+/g, '_'), item.adulteration_type)}
+                            <AlertTriangle size={13} /> {getAdulterantName(t, item.adulteration_type)}
                           </span>
                         )}
                       </td>
@@ -356,7 +357,7 @@ export default function HistoryReports() {
                 <div className={`result-card ${selectedReport.adulteration_type === 'None' || !selectedReport.adulteration_type ? 'good' : 'unsafe'}`}>
                   <div className="result-label">{t('analyze.adulteration', 'Adulteration')}</div>
                   <div className="result-value" style={{ fontSize: '1.05rem' }}>
-                    {selectedReport.adulteration_type === 'None' || !selectedReport.adulteration_type ? t('common.none', 'None (Clean)') : t('adulterants.' + selectedReport.adulteration_type?.toLowerCase().replace(/\s+/g, '_'), selectedReport.adulteration_type)}
+                    {getAdulterantName(t, selectedReport.adulteration_type)}
                   </div>
                 </div>
 

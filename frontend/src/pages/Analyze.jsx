@@ -7,6 +7,7 @@ import {
   ChevronDown, ChevronUp, Sliders, ShieldCheck, ShieldAlert,
   Activity, Check, ArrowRight, Eye, RefreshCw, Zap, Lightbulb
 } from 'lucide-react';
+import { getAdulterantName, getFeedTypeName, getNutrientLabel } from '../utils/translations';
 
 const FEED_TYPE_OPTIONS = [
   { id: 'Cattle Feed Pellet', key: 'cattle_feed_pellet', defaultLabel: 'Cattle Feed Pellet' },
@@ -83,7 +84,7 @@ export default function Analyze() {
 
   const getFeedLabel = (id) => {
     const item = FEED_TYPE_OPTIONS.find(f => f.id === id);
-    return item ? t('feed_types.' + item.key, item.defaultLabel) : id;
+    return item ? t('feed_types.' + item.key, item.defaultLabel) : getFeedTypeName(t, id);
   };
 
   // 4-Step Workflow State
@@ -697,7 +698,7 @@ export default function Analyze() {
                   <div className={`result-card ${predictions.adulteration_type === 'None' ? 'good' : 'unsafe'}`} style={{ padding: 'var(--space-md)' }}>
                     <div className="result-label">{t('analyze.adulteration', 'Adulteration Status')}</div>
                     <div className="result-value" style={{ fontSize: '1.05rem', margin: '4px 0' }}>
-                      {predictions.adulteration_type === 'None' ? t('common.none', 'None (Clean)') : (t('adulterants.' + predictions.adulteration_type?.toLowerCase().replace(/\s+/g, '_'), predictions.adulteration_type))}
+                      {getAdulterantName(t, predictions.adulteration_type)}
                     </div>
                     <div style={{ fontSize: '0.74rem', color: 'var(--text-muted)' }}>
                       {t('confidence.risk_conf', 'Risk Confidence:')} {Math.round((predictions.adulteration_type_confidence || 0) * 100)}%
@@ -733,7 +734,7 @@ export default function Analyze() {
                       return (
                         <div key={key} className={`nutrient-card ${statusClass}`}>
                           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                            <span className="nutrient-label">{info.label}</span>
+                            <span className="nutrient-label">{getNutrientLabel(t, key, info.label)}</span>
                             <span className="badge" style={{ fontSize: '0.68rem', padding: '1px 6px' }}>{statusLabel}</span>
                           </div>
                           <div className="nutrient-val">
