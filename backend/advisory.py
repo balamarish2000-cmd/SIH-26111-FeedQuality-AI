@@ -481,20 +481,27 @@ def _build_structured_sections(readings, predictions, ranges, feed_type, advisor
 
     # 2. Nutritional Guidance
     nutri_points = []
+    nutri_keys = []
     for key, info in nutrition_summary.items():
         if info.get("status") == "low":
             nutri_points.append(f"Low {info.get('label')}: currently {info.get('value')} {info.get('unit')} (ideal: {info.get('ideal_range')[0]}–{info.get('ideal_range')[1]} {info.get('unit')}).")
+            nutri_keys.append({"key": "advisory_nutrition.low_nutrient", "params": {"nutrient": info.get('label'), "value": info.get('value'), "unit": info.get('unit'), "min": info.get('ideal_range')[0], "max": info.get('ideal_range')[1]}})
         elif info.get("status") == "high":
             nutri_points.append(f"High {info.get('label')}: currently {info.get('value')} {info.get('unit')} (ideal: {info.get('ideal_range')[0]}–{info.get('ideal_range')[1]} {info.get('unit')}).")
+            nutri_keys.append({"key": "advisory_nutrition.high_nutrient", "params": {"nutrient": info.get('label'), "value": info.get('value'), "unit": info.get('unit'), "min": info.get('ideal_range')[0], "max": info.get('ideal_range')[1]}})
     if not nutri_points:
         nutri_points.append("All measured nutritional indicators (Protein, Moisture, Fiber, Energy) fall comfortably within standard NDDB ranges.")
+        nutri_keys.append({"key": "advisory_nutrition.all_balanced"})
 
     f_dict = I18N_ADVISORY["feeding_tips"].get(lang, I18N_ADVISORY["feeding_tips"]["en"])
     tip_key = "normal" if quality in ("Good", "Moderate") else "compensate"
 
     nutri_guidance = {
         "status": "Balanced" if len(nutri_points) == 1 and "All measured" in nutri_points[0] else "Attention Required",
+        "title_key": "analyze.nutri_guidance_title",
+        "description_key": f"advisory_feeding.{tip_key}",
         "highlights": nutri_points,
+        "bullet_keys": nutri_keys,
         "feeding_ration_tip": f_dict.get(tip_key, ""),
         "feeding_rates": _feeding_rate(feed_type),
     }
@@ -534,6 +541,8 @@ def _build_structured_sections(readings, predictions, ranges, feed_type, advisor
         "adulterant_name": adulterant,
         "confidence_score": round(adult_conf * 100, 1),
         "severity": "critical" if is_adulterated else "good",
+        "title_key": "advisory_adulteration.detected_headline" if is_adulterated else "advisory_adulteration.clean_headline",
+        "bullet_keys": ["advisory_adulteration.remediation_1", "advisory_adulteration.remediation_2", "advisory_adulteration.remediation_3"] if is_adulterated else ["advisory_adulteration.clean_remedy"],
         "warning_message": (
             f"Adulterant Alert: {adulterant} detected." if is_adulterated else "No chemical adulterants detected in this sample."
         ),
@@ -546,6 +555,14 @@ def _build_structured_sections(readings, predictions, ranges, feed_type, advisor
         "spoilage_detected": is_spoiled,
         "spoilage_confidence": round(spoil_conf * 100, 1),
         "severity": "critical" if is_spoiled else ("warning" if storage_adv.get("status") in ("warning", "critical") else "good"),
+        "title_key": "analyze.storage_spoilage_title",
+        "description_key": "advisory_storage.spoiled" if is_spoiled else "advisory_storage.stable",
+        "bullet_keys": [
+            "advisory_storage.tip_pallets",
+            "advisory_storage.tip_ventilation",
+            "advisory_storage.tip_silage",
+            "advisory_storage.tip_fifo",
+        ],
         "guidance_message": (
             "Critical Spoilage Alert: Biological breakdown or fungal proliferation detected. High risk of harmful mycotoxins (Aflatoxin B1)."
             if is_spoiled else
@@ -563,7 +580,7 @@ def _build_structured_sections(readings, predictions, ranges, feed_type, advisor
     act_dict = I18N_ADVISORY["actions"].get(lang, I18N_ADVISORY["actions"]["en"])
     if quality == "Unsafe" or is_adulterated or is_spoiled:
         chosen_action = act_dict["critical"]
-        status_level = "unsafe"
+        status_level = "critical"
     elif quality == "Poor":
         chosen_action = act_dict["poor"]
         status_level = "poor"
@@ -576,6 +593,9 @@ def _build_structured_sections(readings, predictions, ranges, feed_type, advisor
 
     rec_action = {
         "status_level": status_level,
+        "headline_key": f"advisory_action.{status_level}.headline",
+        "primary_key": f"advisory_action.{status_level}.primary",
+        "bullet_keys": [f"advisory_action.{status_level}.step_{i}" for i in range(len(chosen_action.get("steps", [])))],
         "headline": chosen_action["headline"],
         "primary_action": chosen_action["primary"],
         "action_steps": chosen_action["steps"],

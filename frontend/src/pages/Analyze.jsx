@@ -980,71 +980,156 @@ export default function Analyze() {
 
                 <div className="advisory-list">
                   {/* Part 1: Recommended Action Card */}
-                  {structured.recommended_action && (
-                    <div className={`advisory-card ${predictions.quality_status === 'Good' ? 'good' : predictions.quality_status === 'Moderate' ? 'info' : 'critical'}`}>
-                      <h4>
-                        {predictions.quality_status === 'Good' ? <ShieldCheck size={18} /> : <AlertTriangle size={18} />}
-                        {t('advisory_action.' + (predictions.quality_status?.toLowerCase() || 'good') + '_headline', structured.recommended_action.headline)}
-                      </h4>
-                      <p style={{ fontWeight: 600 }}>{t('advisory_action.' + (predictions.quality_status?.toLowerCase() || 'good') + '_primary', structured.recommended_action.primary_action)}</p>
-                      {structured.recommended_action.action_steps && (
-                        <ul style={{ paddingLeft: 'var(--space-lg)', margin: '6px 0 0' }}>
-                          {structured.recommended_action.action_steps.map((step, idx) => (
-                            <li key={idx} style={{ marginBottom: 4 }}>{step}</li>
-                          ))}
-                        </ul>
-                      )}
-                    </div>
-                  )}
+                  {structured.recommended_action && (() => {
+                    const rawStatus = predictions.quality_status || 'Good';
+                    const statusKey = rawStatus.toLowerCase() === 'unsafe' ? 'critical' : rawStatus.toLowerCase();
+                    const cardClass = rawStatus === 'Good' ? 'good' : rawStatus === 'Moderate' ? 'info' : 'critical';
+                    const headline = t(`advisory_action.${statusKey}.headline`, structured.recommended_action.headline);
+                    const primary = t(`advisory_action.${statusKey}.primary`, structured.recommended_action.primary_action);
+                    const steps = [0, 1, 2, 3].map(i => {
+                      const key = `advisory_action.${statusKey}.step_${i}`;
+                      return i18n.exists(key) ? t(key) : null;
+                    }).filter(Boolean);
+
+                    return (
+                      <div className={`advisory-card ${cardClass}`}>
+                        <h4>
+                          {rawStatus === 'Good' ? <ShieldCheck size={18} /> : <AlertTriangle size={18} />}
+                          {headline}
+                        </h4>
+                        <p style={{ fontWeight: 600 }}>{primary}</p>
+                        {steps.length > 0 ? (
+                          <ul style={{ paddingLeft: 'var(--space-lg)', margin: '6px 0 0' }}>
+                            {steps.map((step, idx) => (
+                              <li key={idx} style={{ marginBottom: 4 }}>{step}</li>
+                            ))}
+                          </ul>
+                        ) : (
+                          structured.recommended_action.action_steps && (
+                            <ul style={{ paddingLeft: 'var(--space-lg)', margin: '6px 0 0' }}>
+                              {structured.recommended_action.action_steps.map((step, idx) => (
+                                <li key={idx} style={{ marginBottom: 4 }}>{step}</li>
+                              ))}
+                            </ul>
+                          )
+                        )}
+                      </div>
+                    );
+                  })()}
 
                   {/* Part 2: Nutritional Guidance */}
-                  {structured.nutritional_guidance && (
-                    <div className="advisory-card info">
-                      <h4>
-                        <Wheat size={18} style={{ color: 'var(--color-info)' }} />
-                        {t('analyze.nutri_guidance_title', 'Nutritional Guidance & Daily Feeding Ration')}
-                      </h4>
-                      <p>{t('advisory_feeding.' + (predictions.quality_status?.toLowerCase() || 'good'), structured.nutritional_guidance.feeding_ration_tip)}</p>
-                      {structured.nutritional_guidance.highlights && (
+                  {structured.nutritional_guidance && (() => {
+                    const rawStatus = predictions.quality_status || 'Good';
+                    const tipKey = (rawStatus === 'Good' || rawStatus === 'Moderate') ? 'normal' : 'compensate';
+                    const feedingTip = t(`advisory_feeding.${tipKey}`, structured.nutritional_guidance.feeding_ration_tip);
+
+                    const highlights = [];
+                    const summary = advisory.nutrition_summary || {};
+                    const entries = Object.entries(summary);
+
+                    if (entries.length > 0) {
+                      entries.forEach(([key, info]) => {
+                        const label = getNutrientLabel(t, key, info.label);
+                        if (info.status === 'low') {
+                          highlights.push(t('advisory_nutrition.low_nutrient', {
+                            nutrient: label,
+                            value: info.value,
+                            unit: info.unit || '%',
+                            min: info.ideal_range?.[0] ?? '',
+                            max: info.ideal_range?.[1] ?? '',
+                            defaultValue: `Low ${label}: currently ${info.value} ${info.unit} (ideal: ${info.ideal_range?.[0]}–${info.ideal_range?.[1]} ${info.unit}).`
+                          }));
+                        } else if (info.status === 'high') {
+                          highlights.push(t('advisory_nutrition.high_nutrient', {
+                            nutrient: label,
+                            value: info.value,
+                            unit: info.unit || '%',
+                            min: info.ideal_range?.[0] ?? '',
+                            max: info.ideal_range?.[1] ?? '',
+                            defaultValue: `High ${label}: currently ${info.value} ${info.unit} (ideal: ${info.ideal_range?.[0]}–${info.ideal_range?.[1]} ${info.unit}).`
+                          }));
+                        }
+                      });
+                    }
+
+                    if (highlights.length === 0) {
+                      highlights.push(t('advisory_nutrition.all_balanced', 'All measured nutritional indicators (Protein, Moisture, Fiber, Energy) fall comfortably within standard NDDB ranges.'));
+                    }
+
+                    return (
+                      <div className="advisory-card info">
+                        <h4>
+                          <Wheat size={18} style={{ color: 'var(--color-info)' }} />
+                          {t('analyze.nutri_guidance_title', 'Nutritional Guidance & Daily Feeding Ration')}
+                        </h4>
+                        <p>{feedingTip}</p>
                         <ul style={{ paddingLeft: 'var(--space-lg)', margin: '4px 0 0' }}>
-                          {structured.nutritional_guidance.highlights.map((hl, idx) => (
+                          {highlights.map((hl, idx) => (
                             <li key={idx}>{hl}</li>
                           ))}
                         </ul>
-                      )}
-                    </div>
-                  )}
+                      </div>
+                    );
+                  })()}
 
                   {/* Part 3: Adulteration Warning (if applicable) */}
-                  {structured.adulteration_warning?.detected && (
-                    <div className="advisory-card critical">
-                      <h4>
-                        <XCircle size={18} style={{ color: 'var(--color-unsafe)' }} />
-                        {structured.adulteration_warning.warning_message}
-                      </h4>
-                      <ul style={{ paddingLeft: 'var(--space-lg)', margin: '4px 0 0' }}>
-                        {structured.adulteration_warning.remediation?.map((rem, idx) => (
-                          <li key={idx}>{rem}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
+                  {structured.adulteration_warning?.detected && (() => {
+                    const adulterantRaw = structured.adulteration_warning.adulterant_name || predictions.adulteration_type || 'Adulterant';
+                    const localizedAdulterant = getAdulterantName(t, adulterantRaw);
+                    const warningHeadline = t('advisory_adulteration.detected_headline', {
+                      adulterant: localizedAdulterant,
+                      defaultValue: `Adulterant Alert: ${localizedAdulterant} detected.`
+                    });
+                    const remediationSteps = [
+                      t('advisory_adulteration.remediation_1', 'Immediately withhold and isolate this batch from all livestock.'),
+                      t('advisory_adulteration.remediation_2', 'Retain sample bag for batch verification and supplier complaint.'),
+                      t('advisory_adulteration.remediation_3', 'Notify local veterinary officer if animals show distress.')
+                    ];
+
+                    return (
+                      <div className="advisory-card critical">
+                        <h4>
+                          <XCircle size={18} style={{ color: 'var(--color-unsafe)' }} />
+                          {warningHeadline}
+                        </h4>
+                        <ul style={{ paddingLeft: 'var(--space-lg)', margin: '4px 0 0' }}>
+                          {remediationSteps.map((rem, idx) => (
+                            <li key={idx}>{rem}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    );
+                  })()}
 
                   {/* Part 4: Storage & Spoilage Tips */}
-                  {structured.storage_spoilage_guidance && (
-                    <div className={`advisory-card ${structured.storage_spoilage_guidance.severity === 'critical' ? 'critical' : 'warning'}`}>
-                      <h4>
-                        <Lightbulb size={18} style={{ color: 'var(--color-wheat)' }} />
-                        {t('analyze.storage_spoilage_title', 'Feed Storage & Spoilage Prevention')}
-                      </h4>
-                      <p>{t('advisory_storage.' + (structured.storage_spoilage_guidance?.severity === 'critical' ? 'critical' : 'normal'), structured.storage_spoilage_guidance.guidance_message)}</p>
-                      <ul style={{ paddingLeft: 'var(--space-lg)', margin: '4px 0 0' }}>
-                        {structured.storage_spoilage_guidance.storage_tips?.map((tip, idx) => (
-                          <li key={idx}>{tip}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
+                  {structured.storage_spoilage_guidance && (() => {
+                    const isSpoiled = structured.storage_spoilage_guidance.severity === 'critical' || structured.storage_spoilage_guidance.spoilage_detected;
+                    const guidanceMessage = isSpoiled
+                      ? t('advisory_storage.spoiled')
+                      : t('advisory_storage.stable');
+
+                    const storageTips = [
+                      t('advisory_storage.tip_pallets', 'Store feed sacks on wooden pallets at least 15 cm off damp concrete floors.'),
+                      t('advisory_storage.tip_ventilation', 'Maintain dry, rodent-proof shed ventilation with ambient temperatures below 28°C.'),
+                      t('advisory_storage.tip_silage', 'Ensure sealed silage or storage units have airtight covers with no punctures or loose edges.'),
+                      t('advisory_storage.tip_fifo', 'Practice First-In, First-Out (FIFO) stock rotation to prevent aging.')
+                    ];
+
+                    return (
+                      <div className={`advisory-card ${isSpoiled ? 'critical' : 'warning'}`}>
+                        <h4>
+                          <Lightbulb size={18} style={{ color: 'var(--color-wheat)' }} />
+                          {t('analyze.storage_spoilage_title', 'Feed Storage & Spoilage Prevention')}
+                        </h4>
+                        <p>{guidanceMessage}</p>
+                        <ul style={{ paddingLeft: 'var(--space-lg)', margin: '4px 0 0' }}>
+                          {storageTips.map((tip, idx) => (
+                            <li key={idx}>{tip}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    );
+                  })()}
                 </div>
               </div>
 

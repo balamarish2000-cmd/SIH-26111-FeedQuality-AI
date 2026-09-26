@@ -495,28 +495,53 @@ export default function HistoryReports() {
                   </h3>
 
                   {/* Quality Interpretation */}
-                  <div className="advisory-card good" style={{ marginBottom: 'var(--space-sm)' }}>
-                    <h4 style={{ fontSize: '0.88rem' }}>{t('advisory_action.' + (selectedReport.quality_status?.toLowerCase() || 'good') + '_headline', selectedReport.advisory.structured_advisory.quality_interpretation?.headline)}</h4>
-                    <p style={{ fontSize: '0.84rem' }}>{t('advisory_quality.' + (selectedReport.quality_status?.toLowerCase() || 'moderate'), selectedReport.advisory.structured_advisory.quality_interpretation?.explanation)}</p>
-                    {selectedReport.advisory.structured_advisory.quality_interpretation?.confidence_note && (
-                      <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>
-                        {selectedReport.advisory.structured_advisory.quality_interpretation.confidence_note}
+                  {(() => {
+                    const rawStatus = selectedReport.quality_status || 'Good';
+                    const statusKey = rawStatus.toLowerCase() === 'unsafe' ? 'critical' : rawStatus.toLowerCase();
+                    const cardClass = rawStatus === 'Good' ? 'good' : rawStatus === 'Moderate' ? 'info' : 'critical';
+                    const headline = t(`advisory_action.${statusKey}.headline`, selectedReport.advisory.structured_advisory.quality_interpretation?.headline);
+                    const explanation = t(`advisory_quality.${rawStatus}`, selectedReport.advisory.structured_advisory.quality_interpretation?.explanation);
+                    return (
+                      <div className={`advisory-card ${cardClass}`} style={{ marginBottom: 'var(--space-sm)' }}>
+                        <h4 style={{ fontSize: '0.88rem' }}>{headline}</h4>
+                        <p style={{ fontSize: '0.84rem' }}>{explanation}</p>
                       </div>
-                    )}
-                  </div>
+                    );
+                  })()}
 
                   {/* Recommended Action */}
-                  <div className="advisory-card warning">
-                    <h4 style={{ fontSize: '0.88rem' }}>{t('advisory_action.' + (selectedReport.quality_status?.toLowerCase() || 'good') + '_headline', selectedReport.advisory.structured_advisory.recommended_action?.headline)}</h4>
-                    <p style={{ fontSize: '0.84rem', fontWeight: 600 }}>{t('advisory_action.' + (selectedReport.quality_status?.toLowerCase() || 'good') + '_primary', selectedReport.advisory.structured_advisory.recommended_action?.primary_action)}</p>
-                    {selectedReport.advisory.structured_advisory.recommended_action?.action_steps && (
-                      <ul style={{ paddingLeft: 'var(--space-lg)', margin: '4px 0 0', fontSize: '0.82rem' }}>
-                        {selectedReport.advisory.structured_advisory.recommended_action.action_steps.map((st, idx) => (
-                          <li key={idx}>{st}</li>
-                        ))}
-                      </ul>
-                    )}
-                  </div>
+                  {(() => {
+                    const rawStatus = selectedReport.quality_status || 'Good';
+                    const statusKey = rawStatus.toLowerCase() === 'unsafe' ? 'critical' : rawStatus.toLowerCase();
+                    const headline = t(`advisory_action.${statusKey}.headline`, selectedReport.advisory.structured_advisory.recommended_action?.headline);
+                    const primary = t(`advisory_action.${statusKey}.primary`, selectedReport.advisory.structured_advisory.recommended_action?.primary_action);
+                    const steps = [0, 1, 2, 3].map(i => {
+                      const key = `advisory_action.${statusKey}.step_${i}`;
+                      return i18n.exists(key) ? t(key) : null;
+                    }).filter(Boolean);
+
+                    return (
+                      <div className="advisory-card warning">
+                        <h4 style={{ fontSize: '0.88rem' }}>{headline}</h4>
+                        <p style={{ fontSize: '0.84rem', fontWeight: 600 }}>{primary}</p>
+                        {steps.length > 0 ? (
+                          <ul style={{ paddingLeft: 'var(--space-lg)', margin: '4px 0 0', fontSize: '0.82rem' }}>
+                            {steps.map((st, idx) => (
+                              <li key={idx}>{st}</li>
+                            ))}
+                          </ul>
+                        ) : (
+                          selectedReport.advisory.structured_advisory.recommended_action?.action_steps && (
+                            <ul style={{ paddingLeft: 'var(--space-lg)', margin: '4px 0 0', fontSize: '0.82rem' }}>
+                              {selectedReport.advisory.structured_advisory.recommended_action.action_steps.map((st, idx) => (
+                                <li key={idx}>{st}</li>
+                              ))}
+                            </ul>
+                          )
+                        )}
+                      </div>
+                    );
+                  })()}
                 </div>
               )}
 

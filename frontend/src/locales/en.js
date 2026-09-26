@@ -1,4 +1,3 @@
-// FEED GUARD — EN Locale
 export default {
   "brand": {
     "name": "FEED GUARD",
@@ -703,11 +702,22 @@ export default {
   },
   "advisory_feeding": {
     "normal": "Feed in standard daily proportions alongside 20–25 kg fresh green fodder and clean ad-lib drinking water.",
-    "compensate": "Do not feed as sole ration. Compensate with 1–2 kg quality concentrate pellet and bypass protein."
+    "compensate": "Do not feed as sole ration. Compensate with 1–2 kg quality concentrate pellet and bypass protein.",
+    "good": "Feed in standard daily proportions alongside 20–25 kg fresh green fodder and clean ad-lib drinking water.",
+    "moderate": "Feed in standard daily proportions alongside 20–25 kg fresh green fodder and clean ad-lib drinking water.",
+    "poor": "Do not feed as sole ration. Compensate with 1–2 kg quality concentrate pellet and bypass protein.",
+    "unsafe": "Do not feed as sole ration. Compensate with 1–2 kg quality concentrate pellet and bypass protein.",
+    "critical": "Do not feed as sole ration. Compensate with 1–2 kg quality concentrate pellet and bypass protein."
   },
   "advisory_storage": {
     "spoiled": "Critical Spoilage Alert: Biological breakdown or fungal proliferation detected. High risk of harmful mycotoxins (Aflatoxin B1).",
-    "stable": "Storage parameters are stable. Continue current moisture and temperature management."
+    "stable": "Storage parameters are stable. Continue current moisture and temperature management.",
+    "critical": "Critical Spoilage Alert: Biological breakdown or fungal proliferation detected. High risk of harmful mycotoxins (Aflatoxin B1).",
+    "normal": "Storage parameters are stable. Continue current moisture and temperature management.",
+    "tip_pallets": "Store feed sacks on wooden pallets at least 15 cm off damp concrete floors.",
+    "tip_ventilation": "Maintain dry, rodent-proof shed ventilation with ambient temperatures below 28°C.",
+    "tip_silage": "Ensure sealed silage or storage units have airtight covers with no punctures or loose edges.",
+    "tip_fifo": "Practice First-In, First-Out (FIFO) stock rotation to prevent aging."
   },
   "advisory_action": {
     "critical": {
@@ -739,6 +749,14 @@ export default {
       "step_0": "Continue standard feeding ration for lactating cows, pregnant cows, and growing calves.",
       "step_1": "Maintain clean, dry pallet storage to preserve freshness and vitamin potency.",
       "step_2": "Generate certified QR traceability certificate for farm records."
+    },
+    "unsafe": {
+      "headline": "ACTION REQUIRED: DO NOT FEED — ISOLATE BATCH",
+      "primary": "STOP feeding this batch immediately. Quarantine the sack or storage unit.",
+      "step_0": "Immediately stop offering this feed to cattle, calves, or pregnant cows.",
+      "step_1": "Physically isolate affected bags to prevent accidental herd feeding.",
+      "step_2": "Document the Batch ID using the certified QR code for supplier replacement claim.",
+      "step_3": "Consult your local veterinary doctor if cattle have already consumed this feed."
     }
   },
   "regions": {
@@ -788,5 +806,20 @@ export default {
     "regional_title": "Regional Agro-Climatic Zone & Language",
     "regional_desc": "Adapts ICAR nutritional benchmarks and interface vocabulary to your region.",
     "save_settings_btn": "Save Settings"
+  },
+  "advisory_nutrition": {
+    "all_balanced": "All measured nutritional indicators (Protein, Moisture, Fiber, Energy) fall comfortably within standard NDDB ranges.",
+    "low_nutrient": "Low {{nutrient}}: currently {{value}} {{unit}} (ideal: {{min}}–{{max}} {{unit}}).",
+    "high_nutrient": "High {{nutrient}}: currently {{value}} {{unit}} (ideal: {{min}}–{{max}} {{unit}}).",
+    "status_balanced": "Balanced",
+    "status_attention": "Attention Required"
+  },
+  "advisory_adulteration": {
+    "detected_headline": "Adulterant Alert: {{adulterant}} detected.",
+    "clean_headline": "No chemical adulterants detected in this sample.",
+    "clean_remedy": "Safe from synthetic or inorganic adulteration.",
+    "remediation_1": "Immediately withhold and isolate this batch from all livestock.",
+    "remediation_2": "Retain sample bag for batch verification and supplier complaint.",
+    "remediation_3": "Notify local veterinary officer if animals show distress."
   }
 };
