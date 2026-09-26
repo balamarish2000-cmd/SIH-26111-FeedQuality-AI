@@ -1,20 +1,22 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { getDashboardStats } from '../api';
+import { useNavigate, Link } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+import { getUserDashboardStats, getUserSilage } from '../utils/userDataManager';
 import { Doughnut, Bar, Line } from 'react-chartjs-2';
 import {
   Chart as ChartJS, CategoryScale, LinearScale, BarElement,
   ArcElement, PointElement, LineElement, Title, Tooltip, Legend, Filler
 } from 'chart.js';
 import {
-  BarChart3, AlertTriangle, TrendingUp, Activity, Package, ShieldAlert,
-  CheckCircle2, Layers, Warehouse
+  AlertTriangle, TrendingUp, Activity, ShieldAlert,
+  CheckCircle2, Layers, Warehouse, PlusCircle, QrCode, FileText,
+  ArrowRight, ShieldCheck, MapPin, Sparkles, ExternalLink
 } from 'lucide-react';
 import {
   getAdulterantName,
   getFeedTypeName,
-  getQualityStatusName,
-  getRegionName
+  getQualityStatusName
 } from '../utils/translations';
 
 ChartJS.register(
@@ -36,28 +38,46 @@ function getBadgeClass(quality) {
 
 export default function Dashboard() {
   const { t } = useTranslation();
+  const { user } = useAuth();
+  const navigate = useNavigate();
+
   const [stats, setStats] = useState(null);
+  const [silageData, setSilageData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [feedFilter, setFeedFilter] = useState('All');
-  const [qualityFilter, setQualityFilter] = useState('All');
 
+  // Load dynamically calculated stats strictly isolated for the active farmer
   useEffect(() => {
-    getDashboardStats()
-      .then(setStats)
-      .catch(console.error)
-      .finally(() => setLoading(false));
-  }, []);
+    if (user?.id) {
+      const userStats = getUserDashboardStats(user.id);
+      const userSilage = getUserSilage(user.id);
+      setStats(userStats);
+      setSilageData(userSilage);
+      setLoading(false);
+    }
+  }, [user]);
 
-  if (loading) return <div className="loading-spinner" />;
-  if (!stats) return <div className="alert alert-warning"><AlertTriangle size={18} /> Failed to load dashboard data</div>;
+  if (loading || !stats) {
+    return (
+      <div style={{ maxWidth: 800, margin: 'var(--space-2xl) auto', textAlign: 'center', padding: 'var(--space-xl)' }}>
+        <div className="loading-spinner" style={{ margin: '0 auto 16px' }} />
+        <p style={{ color: 'var(--text-secondary)' }}>Loading your farm workspace...</p>
+      </div>
+    );
+  }
 
   const chartPlugins = {
     legend: { labels: { color: 'var(--text-secondary)', font: { size: 11, family: 'inherit' } } },
     tooltip: { backgroundColor: '#ffffff', titleColor: '#1c261e', bodyColor: '#48544a', borderColor: '#e8e2d5', borderWidth: 1 },
   };
 
+  const hasTests = stats.total_analyses > 0;
+  const goodCount = stats.quality_distribution['Good'] || 0;
+  const attentionCount = stats.quality_distribution['Moderate'] || 0;
+  const unsafeCount = (stats.quality_distribution['Poor'] || 0) + (stats.quality_distribution['Unsafe'] || 0);
+  const totalAdulterations = Object.values(stats.adulteration_distribution || {}).reduce((a, b) => a + b, 0);
+
   const qualityChart = {
-    labels: Object.keys(stats.quality_distribution).map(k => t('quality_grades.' + k.toLowerCase(), k)),
+    labels: Object.keys(stats.quality_distribution).map(k => getQualityStatusName(t, k)),
     datasets: [{
       data: Object.values(stats.quality_distribution),
       backgroundColor: Object.keys(stats.quality_distribution).map(k => QUALITY_COLORS[k] || '#717d72'),
@@ -98,14 +118,11 @@ export default function Dashboard() {
     plugins: chartPlugins,
     scales: {
       x: { ticks: { color: 'var(--text-muted)', font: { size: 10 } }, grid: { display: false } },
-      y: { ticks: { color: 'var(--text-muted)', font: { size: 10 } }, grid: { color: 'rgba(0,0,0,0.05)' } },
+      y: { ticks: { color: 'var(--text-muted)', font: { size: 10 }, stepSize: 1 }, grid: { color: 'rgba(0,0,0,0.05)' } },
     },
   };
 
-  const lineOptions = {
-    ...barOptions,
-  };
-
+  const lineOptions = { ...barOptions };
   const doughnutOptions = {
     responsive: true,
     maintainAspectRatio: false,
@@ -113,197 +130,450 @@ export default function Dashboard() {
     cutout: '65%',
   };
 
-  const totalAdulterations = Object.values(stats.adulteration_distribution).reduce((a, b) => a + b, 0);
-  const goodRatio = stats.total_analyses > 0
-    ? (((stats.quality_distribution['Good'] || 0) / stats.total_analyses) * 100).toFixed(1)
-    : '0';
+  const latestReport = stats.recent_analyses?.[0];
 
   return (
-    <div>
-      <div className="page-header">
-        <h1>{t('dashboard.title')}</h1>
-        <p>{t('dashboard.subtitle')}</p>
+    <div style={{ maxWidth: 1240, margin: '0 auto' }}>
+      {/* ========================================================
+          1. DASHBOARD WELCOME & FARM DETAILS SECTION
+          ======================================================== */}
+      <div style={{
+        background: 'var(--bg-card, #ffffff)',
+        border: '1px solid var(--border-subtle, #e8e2d5)',
+        borderRadius: 'var(--radius-lg, 16px)',
+        padding: 'clamp(1.25rem, 2.5vw, 1.75rem)',
+        marginBottom: 'var(--space-lg, 1.5rem)',
+        boxShadow: 'var(--shadow-sm)'
+      }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem' }}>
+          <div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap', marginBottom: 4 }}>
+              <span style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 5,
+                background: 'var(--color-primary-light, #eaf5ee)',
+                color: 'var(--color-primary, #1e5e3a)',
+                padding: '3px 10px',
+                borderRadius: 9999,
+                fontSize: '0.74rem',
+                fontWeight: 800,
+                letterSpacing: '0.02em'
+              }}>
+                <ShieldCheck size={14} />
+                FEED GUARD
+              </span>
+
+              <span style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 5,
+                background: 'rgba(22, 163, 74, 0.1)',
+                color: 'var(--color-good, #16a34a)',
+                padding: '3px 10px',
+                borderRadius: 9999,
+                fontSize: '0.74rem',
+                fontWeight: 700
+              }}>
+                <CheckCircle2 size={13} />
+                Account Active
+              </span>
+            </div>
+
+            {/* Display: "Welcome, [Farmer Name]" */}
+            <h1 style={{
+              fontFamily: 'var(--font-display)',
+              fontSize: 'clamp(1.5rem, 2.4vw, 1.95rem)',
+              fontWeight: 800,
+              margin: '6px 0 4px 0',
+              color: 'var(--text-primary)'
+            }}>
+              Welcome, {user?.name || 'Farmer'}
+            </h1>
+
+            {/* Below: "[Farm Name] • [Location]" */}
+            <p style={{
+              fontSize: '0.92rem',
+              color: 'var(--text-secondary)',
+              margin: 0,
+              display: 'flex',
+              alignItems: 'center',
+              gap: 6
+            }}>
+              <MapPin size={14} style={{ color: 'var(--color-primary)' }} />
+              <span>
+                {user?.farm_name || 'Dairy Farm'}
+                {user?.district ? ` • ${user.district}, ${user.state || 'India'}` : ''}
+                {user?.cattle_count ? ` • ${user.cattle_count} Cattle` : ''}
+              </span>
+            </p>
+          </div>
+
+          <div style={{
+            background: 'var(--bg-card-alt, #f8f5ee)',
+            border: '1px solid var(--border-subtle, #e8e2d5)',
+            borderRadius: 'var(--radius-md, 12px)',
+            padding: '10px 14px',
+            textAlign: 'right'
+          }}>
+            <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+              Dairy Operation ID
+            </div>
+            <div style={{ fontSize: '0.92rem', fontWeight: 800, color: 'var(--text-primary)', fontFamily: 'monospace' }}>
+              {user?.id || 'FARMER'}
+            </div>
+            <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', marginTop: 2 }}>
+              {user?.mobile}
+            </div>
+          </div>
+        </div>
+
+        {/* Quick Actions Bar */}
+        <div style={{
+          marginTop: '1.25rem',
+          paddingTop: '1.25rem',
+          borderTop: '1px solid var(--border-subtle, #e8e2d5)',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          flexWrap: 'wrap',
+          gap: '0.75rem'
+        }}>
+          <div style={{ fontSize: '0.78rem', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+            Quick Farmer Actions
+          </div>
+
+          <div style={{ display: 'flex', gap: '0.65rem', flexWrap: 'wrap', alignItems: 'center' }}>
+            {/* Primary Action Button */}
+            <button
+              className="btn btn-primary"
+              onClick={() => navigate('/analyze')}
+              style={{
+                padding: '10px 18px',
+                fontSize: '0.9rem',
+                fontWeight: 800,
+                boxShadow: '0 2px 8px rgba(30, 94, 58, 0.25)',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 8
+              }}
+            >
+              <PlusCircle size={18} />
+              <span>+ New Feed Test</span>
+            </button>
+
+            {/* Secondary Action Buttons */}
+            <button
+              className="btn btn-secondary"
+              onClick={() => navigate('/silage')}
+              style={{ padding: '9px 14px', fontSize: '0.84rem', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: 6 }}
+            >
+              <Warehouse size={16} />
+              <span>+ Silage Test</span>
+            </button>
+
+            <button
+              className="btn btn-secondary"
+              onClick={() => navigate('/history')}
+              style={{ padding: '9px 14px', fontSize: '0.84rem', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: 6 }}
+            >
+              <FileText size={16} />
+              <span>View History</span>
+            </button>
+
+            <button
+              className="btn btn-secondary"
+              onClick={() => navigate('/qr')}
+              style={{ padding: '9px 14px', fontSize: '0.84rem', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: 6 }}
+            >
+              <QrCode size={16} />
+              <span>Scan / Verify QR</span>
+            </button>
+          </div>
+        </div>
       </div>
 
-      {/* 4 Summary Stat Cards */}
-      <div className="stats-bar">
-        <div className="stat">
+      {/* ========================================================
+          2. 5 CLEAN STATISTIC CARDS (Dynamically Calculated)
+          ======================================================== */}
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
+        gap: 'var(--space-md, 1rem)',
+        marginBottom: 'var(--space-lg, 1.5rem)'
+      }}>
+        {/* Total Tests */}
+        <div className="stat" style={{ borderLeft: '4px solid var(--color-primary)' }}>
           <div className="stat-number">{stats.total_analyses}</div>
-          <div className="stat-text">{t('dashboard.total')}</div>
+          <div className="stat-text">Total Tests</div>
         </div>
-        <div className="stat">
-          <div className="stat-number" style={{ color: 'var(--color-good)' }}>{goodRatio}%</div>
-          <div className="stat-text">{t('dashboard.safe_rate')}</div>
+
+        {/* Good Quality */}
+        <div className="stat" style={{ borderLeft: '4px solid var(--color-good)' }}>
+          <div className="stat-number" style={{ color: 'var(--color-good)' }}>{goodCount}</div>
+          <div className="stat-text">Good Quality</div>
         </div>
-        <div className="stat">
-          <div className="stat-number">3</div>
-          <div className="stat-text">{t('dashboard.active_storage_units')}</div>
+
+        {/* Requires Attention */}
+        <div className="stat" style={{ borderLeft: '4px solid var(--color-moderate)' }}>
+          <div className="stat-number" style={{ color: 'var(--color-moderate)' }}>{attentionCount}</div>
+          <div className="stat-text">Requires Attention</div>
         </div>
-        <div className="stat">
+
+        {/* Unsafe / Rejected */}
+        <div className="stat" style={{ borderLeft: '4px solid var(--color-unsafe)' }}>
+          <div className="stat-number" style={{ color: 'var(--color-unsafe)' }}>{unsafeCount}</div>
+          <div className="stat-text">Unsafe / Rejected</div>
+        </div>
+
+        {/* Adulterations Detected */}
+        <div className="stat" style={{ borderLeft: '4px solid #b45309' }}>
           <div className="stat-number" style={{ color: totalAdulterations > 0 ? 'var(--color-unsafe)' : 'var(--color-good)' }}>
             {totalAdulterations}
           </div>
-          <div className="stat-text">{t('dashboard.adulterations_found')}</div>
+          <div className="stat-text">Adulterations Detected</div>
         </div>
       </div>
 
-      {/* 3 Main Visual Charts */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 'var(--space-lg)', marginBottom: 'var(--space-xl)' }}>
-        {/* Quality Distribution Doughnut */}
-        <div className="card">
-          <div className="card-header">
-            <span className="card-title">
-              <Activity size={18} style={{ color: 'var(--color-primary)' }} />
-              {t('dashboard.quality_dist')}
-            </span>
-          </div>
-          <div style={{ height: '240px', position: 'relative' }}>
-            <Doughnut data={qualityChart} options={doughnutOptions} />
-          </div>
-        </div>
-
-        {/* Feed Type Breakdown Bar */}
-        <div className="card">
-          <div className="card-header">
-            <span className="card-title">
-              <Layers size={18} style={{ color: 'var(--color-wheat)' }} />
-              {t('dashboard.feed_types')}
-            </span>
-          </div>
-          <div style={{ height: '240px' }}>
-            <Bar data={feedTypeChart} options={barOptions} />
-          </div>
-        </div>
-
-        {/* Monthly Trend Line */}
-        <div className="card">
-          <div className="card-header">
-            <span className="card-title">
-              <TrendingUp size={18} style={{ color: 'var(--color-good)' }} />
-              {t('dashboard.trend')}
-            </span>
-          </div>
-          <div style={{ height: '240px' }}>
-            <Line data={trendChart} options={lineOptions} />
-          </div>
-        </div>
-      </div>
-
-      {/* Contamination Frequency Cards */}
-      <div className="card" style={{ marginBottom: 'var(--space-xl)' }}>
-        <div className="card-header">
-          <span className="card-title">
-            <ShieldAlert size={18} style={{ color: 'var(--color-unsafe)' }} />
-            {t('dashboard.adulteration_breakdown')}
-          </span>
-        </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 'var(--space-md)' }}>
-          {Object.entries(stats.adulteration_distribution).map(([type, count]) => (
-            <div key={type} style={{
-              padding: 'var(--space-md)',
-              background: 'var(--color-unsafe-bg)',
-              border: '1px solid var(--color-unsafe-border)',
-              borderRadius: 'var(--radius-md)',
+      {/* ========================================================
+          3. MAIN CONTENT: EMPTY STATES OR REAL DATA
+          ======================================================== */}
+      {!hasTests ? (
+        /* PROFESSIONAL EMPTY STATES FOR NEW FARMER ACCOUNT */
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 'var(--space-lg)', marginBottom: 'var(--space-xl)' }}>
+          {/* Feed Analysis Empty State Card */}
+          <div className="card" style={{ padding: 'var(--space-xl)', textAlign: 'center', borderTop: '4px solid var(--color-primary)' }}>
+            <div style={{
+              width: 56,
+              height: 56,
+              borderRadius: '50%',
+              background: 'var(--color-primary-light)',
+              color: 'var(--color-primary)',
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              margin: '0 auto var(--space-md)'
             }}>
-              <div style={{ fontSize: '0.82rem', fontWeight: 700, color: 'var(--color-unsafe-text)', marginBottom: 4 }}>
-                {getAdulterantName(t, type)}
+              <Activity size={28} />
+            </div>
+            <h3 style={{ fontSize: '1.2rem', fontFamily: 'var(--font-display)', margin: '0 0 6px', color: 'var(--text-primary)' }}>
+              No feed analysis yet
+            </h3>
+            <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', maxWidth: 420, margin: '0 auto var(--space-lg)', lineHeight: 1.5 }}>
+              Start your first feed test to see nutritional quality, contamination risk and farmer recommendations.
+            </p>
+            <button
+              className="btn btn-primary"
+              onClick={() => navigate('/analyze')}
+              style={{ padding: '10px 20px', fontSize: '0.92rem', fontWeight: 700 }}
+            >
+              <PlusCircle size={16} />
+              <span>Start Feed Test</span>
+            </button>
+          </div>
+
+          {/* Silage Monitoring Empty State Card */}
+          <div className="card" style={{ padding: 'var(--space-xl)', textAlign: 'center', borderTop: '4px solid #0284c7' }}>
+            <div style={{
+              width: 56,
+              height: 56,
+              borderRadius: '50%',
+              background: 'rgba(2, 132, 199, 0.1)',
+              color: '#0284c7',
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              margin: '0 auto var(--space-md)'
+            }}>
+              <Warehouse size={28} />
+            </div>
+            <h3 style={{ fontSize: '1.2rem', fontFamily: 'var(--font-display)', margin: '0 0 6px', color: 'var(--text-primary)' }}>
+              No silage monitoring data yet
+            </h3>
+            <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', maxWidth: 420, margin: '0 auto var(--space-lg)', lineHeight: 1.5 }}>
+              Connect your sensors or enter measurements to begin monitoring fermentation temperature, moisture, and pH.
+            </p>
+            <button
+              className="btn btn-secondary"
+              onClick={() => navigate('/silage')}
+              style={{ padding: '10px 20px', fontSize: '0.92rem', fontWeight: 700 }}
+            >
+              <Warehouse size={16} />
+              <span>Open Silage Monitor</span>
+            </button>
+          </div>
+        </div>
+      ) : (
+        /* POPULATED DATA: LATEST ADVISORY & SILAGE MONITOR */
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+          gap: 'var(--space-md, 1rem)',
+          marginBottom: 'var(--space-lg, 1.5rem)'
+        }}>
+          {/* Card A: Latest AI Screening Advisory */}
+          <div className="card" style={{ borderTop: '4px solid var(--color-primary)' }}>
+            <div className="card-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                <Sparkles size={18} style={{ color: 'var(--color-primary)' }} />
+                <span className="card-title" style={{ margin: 0, fontSize: '1rem' }}>
+                  Latest AI Screening Advisory
+                </span>
               </div>
-              <div style={{ fontFamily: 'var(--font-display)', fontSize: '1.6rem', fontWeight: 800, color: 'var(--color-unsafe)' }}>
-                {count} <span style={{ fontSize: '0.75rem', fontWeight: 500 }}>{t('dashboard.cases', 'cases')}</span>
+              {latestReport && (
+                <span className={`badge badge-${getBadgeClass(latestReport.quality_status)}`} style={{ fontWeight: 700 }}>
+                  {latestReport.quality_status?.toUpperCase()}
+                </span>
+              )}
+            </div>
+
+            <div style={{
+              background: 'var(--bg-card-alt, #f8f5ee)',
+              borderRadius: 'var(--radius-sm, 8px)',
+              padding: '12px 14px',
+              margin: '10px 0',
+              border: '1px solid var(--border-subtle, #e8e2d5)'
+            }}>
+              <div style={{ fontSize: '0.74rem', color: 'var(--text-muted)', marginBottom: 2 }}>
+                SAMPLE: <strong style={{ color: 'var(--text-primary)', fontFamily: 'monospace' }}>{latestReport?.id}</strong> • {latestReport?.feed_type}
+              </div>
+              <div style={{ fontSize: '0.86rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
+                {latestReport?.advisory?.farmer_advisory || 'Nutritional screening completed. Review recommendations below.'}
               </div>
             </div>
-          ))}
-        </div>
-      </div>
 
-      {/* Recent Analyses Audit Table */}
-      <div className="card">
-        <div className="card-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 'var(--space-md)' }}>
-          <span className="card-title">
-            <Package size={18} style={{ color: 'var(--color-primary)' }} />
-            {t('dashboard.recent')}
-          </span>
-          <div style={{ display: 'flex', gap: 'var(--space-sm)', flexWrap: 'wrap' }}>
-            <select
-              value={feedFilter}
-              onChange={e => setFeedFilter(e.target.value)}
-              className="farmer-select"
-              style={{ fontSize: '0.82rem', padding: '6px 12px' }}
-            >
-              <option value="All">{t('common.all_feed_types', 'All Feed Types')}</option>
-              <option value="Cattle Feed Pellet">{t('feed_types.cattle_feed_pellet', 'Cattle Feed Pellet')}</option>
-              <option value="Silage">{t('feed_types.silage', 'Silage')}</option>
-              <option value="Feed Mash">{t('feed_types.feed_mash', 'Feed Mash')}</option>
-              <option value="TMR">{t('feed_types.tmr', 'TMR')}</option>
-              <option value="Mineral Mixture">{t('feed_types.mineral_mixture', 'Mineral Mixture')}</option>
-            </select>
-            <select
-              value={qualityFilter}
-              onChange={e => setQualityFilter(e.target.value)}
-              className="farmer-select"
-              style={{ fontSize: '0.82rem', padding: '6px 12px' }}
-            >
-              <option value="All">{t('common.all_grades', 'All Qualities')}</option>
-              <option value="Good">{t('quality_grades.good', 'Good')}</option>
-              <option value="Moderate">{t('quality_grades.moderate', 'Moderate')}</option>
-              <option value="Poor">{t('quality_grades.poor', 'Poor')}</option>
-              <option value="Unsafe">{t('quality_grades.unsafe', 'Unsafe')}</option>
-            </select>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid var(--border-subtle)', paddingTop: 10 }}>
+              <span style={{ fontSize: '0.74rem', color: 'var(--text-muted)' }}>
+                Recorded on {new Date(latestReport?.timestamp).toLocaleDateString([], { month: 'short', day: 'numeric', year: 'numeric' })}
+              </span>
+              <Link
+                to={`/report/${latestReport?.id}`}
+                style={{
+                  fontSize: '0.84rem',
+                  fontWeight: 700,
+                  color: 'var(--color-primary)',
+                  textDecoration: 'none',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 4
+                }}
+              >
+                <span>View Full Report</span>
+                <ArrowRight size={14} />
+              </Link>
+            </div>
+          </div>
+
+          {/* Card B: Visual Analytics Charts */}
+          <div className="card" style={{ borderTop: '4px solid #0284c7' }}>
+            <div className="card-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <span className="card-title" style={{ margin: 0, fontSize: '1rem' }}>
+                <Activity size={18} style={{ color: '#0284c7' }} />
+                <span>Quality Distribution</span>
+              </span>
+              <span style={{ fontSize: '0.74rem', color: 'var(--text-muted)' }}>
+                {stats.total_analyses} Tested
+              </span>
+            </div>
+            <div style={{ height: '180px', position: 'relative', marginTop: 10 }}>
+              <Doughnut data={qualityChart} options={doughnutOptions} />
+            </div>
           </div>
         </div>
-        <div className="table-responsive">
-          <table className="farmer-table">
-            <thead>
-              <tr>
-                <th>{t('dashboard.col_id')}</th>
-                <th>{t('dashboard.col_date')}</th>
-                <th>{t('dashboard.col_feed')}</th>
-                <th>{t('dashboard.col_grade')}</th>
-                <th>{t('dashboard.col_adulterant')}</th>
-                <th>{t('dashboard.col_spoilage')}</th>
-                <th>{t('dashboard.col_farmer')}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {stats.recent_analyses
-                .filter(rec => (feedFilter === 'All' || rec.feed_type === feedFilter))
-                .filter(rec => (qualityFilter === 'All' || rec.quality_status === qualityFilter))
-                .map((rec) => (
-                <tr key={rec.id}>
-                  <td style={{ fontWeight: 700, fontFamily: 'monospace' }}>{rec.id}</td>
-                  <td style={{ color: 'var(--text-secondary)' }}>
-                    {new Date(rec.timestamp).toLocaleDateString([], { month: 'short', day: 'numeric', year: 'numeric' })}
-                  </td>
-                  <td>{getFeedTypeName(t, rec.feed_type)}</td>
-                  <td>
-                    <span className={`badge badge-${getBadgeClass(rec.quality_status)}`}>
-                      {getQualityStatusName(t, rec.quality_status)}
-                    </span>
-                  </td>
-                  <td>
-                    {rec.adulteration_type === 'None' || !rec.adulteration_type ? (
-                      <span style={{ color: 'var(--color-good)', fontWeight: 600 }}>{t('common.none')}</span>
-                    ) : (
-                      <span style={{ color: 'var(--color-unsafe)', fontWeight: 700 }}>
-                        {getAdulterantName(t, rec.adulteration_type)}
-                      </span>
-                    )}
-                  </td>
-                  <td>
-                    {rec.spoilage_flag === 1 ? (
-                      <span className="badge badge-unsafe">{t('common.spoiled')}</span>
-                    ) : (
-                      <span className="badge badge-good">{t('common.not_spoiled')}</span>
-                    )}
-                  </td>
-                  <td style={{ color: 'var(--text-secondary)' }}>
-                    {getRegionName(t, rec.region) || rec.farmer_id || t('regions.farm_gate', 'Farm Gate')}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+      )}
+
+      {/* ========================================================
+          4. RECENT ACTIVITY TABLE
+          ======================================================== */}
+      <div className="card" style={{ marginBottom: 'var(--space-2xl, 3rem)' }}>
+        <div className="card-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <span className="card-title" style={{ margin: 0, fontSize: '1.05rem', fontWeight: 800 }}>
+            Recent Activity
+          </span>
+          {hasTests && (
+            <Link to="/history" style={{ fontSize: '0.82rem', color: 'var(--color-primary)', textDecoration: 'none', fontWeight: 700 }}>
+              View All History →
+            </Link>
+          )}
         </div>
+
+        {!hasTests ? (
+          <div style={{ textAlign: 'center', padding: 'var(--space-xl)', color: 'var(--text-muted)' }}>
+            <FileText size={36} style={{ opacity: 0.25, margin: '0 auto 8px' }} />
+            <div style={{ fontSize: '0.9rem', fontWeight: 600 }}>No recent activity.</div>
+            <div style={{ fontSize: '0.8rem', marginTop: 2 }}>
+              Tests you record will appear here with sample quality and risk status.
+            </div>
+          </div>
+        ) : (
+          <div className="table-responsive" style={{ margin: 0 }}>
+            <table className="data-table" style={{ width: '100%' }}>
+              <thead>
+                <tr>
+                  <th>Sample ID</th>
+                  <th>Feed Type</th>
+                  <th>Date</th>
+                  <th>Quality</th>
+                  <th>Risk</th>
+                  <th>Status</th>
+                  <th style={{ textAlign: 'right' }}>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {stats.recent_analyses.map((item) => {
+                  const isClean = item.adulteration_type === 'None' || !item.adulteration_type;
+                  const dateStr = item.timestamp
+                    ? new Date(item.timestamp).toLocaleDateString([], { month: 'short', day: 'numeric', year: 'numeric' })
+                    : 'N/A';
+
+                  return (
+                    <tr key={item.id}>
+                      <td>
+                        <strong style={{ color: 'var(--color-primary)', fontFamily: 'monospace' }}>
+                          {item.id}
+                        </strong>
+                      </td>
+                      <td>
+                        <span style={{ fontWeight: 600 }}>{item.feed_type}</span>
+                      </td>
+                      <td style={{ fontSize: '0.84rem', color: 'var(--text-muted)' }}>
+                        {dateStr}
+                      </td>
+                      <td>
+                        <span className={`badge badge-${getBadgeClass(item.quality_status)}`}>
+                          {item.quality_status}
+                        </span>
+                      </td>
+                      <td>
+                        <span style={{
+                          fontWeight: 700,
+                          fontSize: '0.82rem',
+                          color: item.quality_status === 'Good' ? 'var(--color-good)' : item.quality_status === 'Moderate' ? 'var(--color-moderate)' : 'var(--color-unsafe)'
+                        }}>
+                          {item.quality_status === 'Good' ? 'Low Risk' : item.quality_status === 'Moderate' ? 'Moderate Risk' : 'High Risk'}
+                        </span>
+                      </td>
+                      <td>
+                        <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
+                          Completed
+                        </span>
+                      </td>
+                      <td style={{ textAlign: 'right' }}>
+                        <Link
+                          to={`/report/${item.id}`}
+                          className="btn btn-secondary"
+                          style={{ padding: '4px 10px', fontSize: '0.78rem', textDecoration: 'none' }}
+                        >
+                          View Report
+                        </Link>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
     </div>
   );

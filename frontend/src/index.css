@@ -1758,19 +1758,82 @@ body {
   box-shadow: var(--shadow-sm);
 }
 
-/* Print Styles */
+/* Print Styles for Official Lab Certificates */
 @media print {
-  .navbar, .kisan-banner, .footer, .btn, .tab-buttons, .accordion-toggle {
+  .navbar, .kisan-banner, .footer, .btn, .no-print, .farmer-select, .theme-toggle-btn {
     display: none !important;
+  }
+  body, html {
+    background: #ffffff !important;
+    color: #111827 !important;
+    font-size: 11pt !important;
   }
   .main-content {
     max-width: 100% !important;
     padding: 0 !important;
+    margin: 0 !important;
   }
-  .card, .modal-card {
-    border: 1px solid #ccc !important;
+  .card, .modal-card, .printable-report {
+    border: 1px solid #d1d5db !important;
     box-shadow: none !important;
+    background: #ffffff !important;
+    page-break-inside: avoid;
   }
 }
+
+/* Mobile Bottom Navigation Bar */
+.mobile-bottom-nav {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobile-bottom-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--bg-card);
+    border-top: 1px solid var(--border-color);
+    box-shadow: 0 -4px 16px rgba(0,0,0,0.08);
+    z-index: 1000;
+    justify-content: space-around;
+    padding: 8px 4px;
+  }
+  .mobile-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.68rem;
+    font-weight: 600;
+    gap: 3px;
+    padding: 4px 8px;
+    border-radius: var(--radius-sm);
+    transition: color 0.15s ease;
+  }
+  .mobile-nav-item.active {
+    color: var(--color-primary);
+  }
+  .main-content {
+    padding-bottom: 70px !important;
+  }
+}
+
+/* High Contrast Accessible Status Tags */
+.status-good {
+  color: #15803d !important;
+  font-weight: 800;
+}
+.status-warning {
+  color: #b45309 !important;
+  font-weight: 800;
+}
+.status-unsafe {
+  color: #b91c1c !important;
+  font-weight: 800;
+}
+
 
 

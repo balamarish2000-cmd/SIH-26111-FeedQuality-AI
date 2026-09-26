@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { verifyQR, getQRBatches } from '../api';
+import { useAuth } from '../context/AuthContext';
+import { getUserTests } from '../utils/userDataManager';
 import {
   QrCode, Search, ShieldCheck, CheckCircle2, XCircle,
   Package, Clock, AlertTriangle, Shield, Check, Copy
@@ -8,6 +10,7 @@ import {
 
 export default function QRTraceability() {
   const { t } = useTranslation();
+  const { user } = useAuth();
   const [batchId, setBatchId] = useState('');
   const [verifyResult, setVerifyResult] = useState(null);
   const [verifyError, setVerifyError] = useState(null);
@@ -17,12 +20,22 @@ export default function QRTraceability() {
 
   useEffect(() => {
     loadBatches();
-  }, []);
+  }, [user?.id]);
 
   const loadBatches = async () => {
     try {
-      const data = await getQRBatches();
-      setBatches(data.batches || []);
+      // Load batches belonging to the active farmer
+      const userTests = getUserTests(user?.id);
+      const userBatches = userTests.map(t => ({
+        batch_id: t.id,
+        feed_type: t.feed_type,
+        quality_status: t.quality_status,
+        timestamp: t.timestamp,
+        farmer_name: t.farmer_name || user?.name || 'Verified Farmer',
+        readings: t.readings,
+        advisory: t.advisory
+      }));
+      setBatches(userBatches);
     } catch (err) {
       console.error(err);
     }
@@ -35,10 +48,27 @@ export default function QRTraceability() {
     setVerifyResult(null);
     setVerifyError(null);
     try {
-      const result = await verifyQR(batchId.trim());
-      setVerifyResult(result);
+      // Check user tests first
+      const userTests = getUserTests(user?.id);
+      const matched = userTests.find(x => x.id === batchId.trim());
+      if (matched) {
+        setVerifyResult({
+          valid: true,
+          batch_id: matched.id,
+          feed_type: matched.feed_type,
+          quality_status: matched.quality_status,
+          timestamp: matched.timestamp,
+          farmer_name: matched.farmer_name || user?.name || 'Verified Farmer',
+          readings: matched.readings,
+          advisory: matched.advisory,
+          status: 'Verified Batch Record'
+        });
+      } else {
+        const result = await verifyQR(batchId.trim());
+        setVerifyResult(result);
+      }
     } catch (err) {
-      setVerifyError(err.message);
+      setVerifyError(err.message || 'Verification record not found.');
     } finally {
       setLoading(false);
     }
@@ -52,9 +82,44 @@ export default function QRTraceability() {
 
   return (
     <div>
-      <div className="page-header">
-        <h1>{t('qr.title')}</h1>
-        <p>{t('qr.subtitle')}</p>
+      <div className="page-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 'var(--space-md)' }}>
+        <div>
+          <h1>{t('qr.title')}</h1>
+          <p>{t('qr.subtitle')}</p>
+        </div>
+        <div style={{
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: 6,
+          background: 'rgba(2, 132, 199, 0.1)',
+          border: '1px solid rgba(2, 132, 199, 0.25)',
+          color: '#0284c7',
+          padding: '4px 12px',
+          borderRadius: 9999,
+          fontSize: '0.78rem',
+          fontWeight: 800
+        }}>
+          <QrCode size={14} />
+          <span>BATCH TRACEABILITY REPORT</span>
+        </div>
+      </div>
+
+      {/* Visual Workflow Pipeline Banner */}
+      <div className="card" style={{ padding: '12px 18px', marginBottom: 'var(--space-lg)', background: 'var(--bg-card-alt)' }}>
+        <div style={{ fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em', color: 'var(--text-muted)', marginBottom: 6 }}>
+          Traceability Verification Workflow
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.8rem', color: 'var(--text-secondary)', flexWrap: 'wrap' }}>
+          <span className="badge" style={{ background: 'var(--color-primary-light)', color: 'var(--color-primary)', fontWeight: 700 }}>Scan / Generate QR</span>
+          <span>→</span>
+          <span className="badge" style={{ background: 'var(--bg-card)', border: '1px solid var(--border-subtle)' }}>Batch ID</span>
+          <span>→</span>
+          <span className="badge" style={{ background: 'var(--bg-card)', border: '1px solid var(--border-subtle)' }}>Feed Information</span>
+          <span>→</span>
+          <span className="badge" style={{ background: 'var(--bg-card)', border: '1px solid var(--border-subtle)' }}>Analysis Result</span>
+          <span>→</span>
+          <span className="badge" style={{ background: 'rgba(22, 163, 74, 0.12)', color: 'var(--color-good)', fontWeight: 700 }}>Traceability Record</span>
+        </div>
       </div>
 
       <div className="two-col">
@@ -217,7 +282,7 @@ export default function QRTraceability() {
                 <Package size={18} style={{ color: 'var(--color-wheat)' }} />
                 {t('qr.batches_title')}
               </span>
-              <span className="badge badge-good">{batches.length} {t('qr.certified_badge', 'Certified')}</span>
+              <span className="badge badge-good">{batches.length} Verified Batches</span>
             </div>
 
             {batches.length === 0 ? (

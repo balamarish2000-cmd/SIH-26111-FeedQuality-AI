@@ -1,13 +1,16 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { getHistoryFiltered, generateQR } from '../api';
+import { generateQR } from '../api';
+import { useAuth } from '../context/AuthContext';
+import { getUserTests } from '../utils/userDataManager';
 import {
   FileText, Search, Filter, RefreshCw, Printer,
   CheckCircle2, AlertTriangle, XCircle, Info, QrCode,
   Wheat, Calendar, Clock, ChevronRight, X, ExternalLink,
-  ShieldCheck, ShieldAlert, Sparkles, Download
+  ShieldCheck, ShieldAlert, Sparkles, Download, ArrowRight
 } from 'lucide-react';
-import { getAdulterantName, getFeedTypeName } from '../utils/translations';
+import { getAdulterantName, getFeedTypeName, getQualityStatusName } from '../utils/translations';
 
 const FEED_TYPE_FILTERS = [
   { id: 'All', key: 'all_feed_types', defaultLabel: 'All Feed Types' },
@@ -26,8 +29,25 @@ const QUALITY_FILTERS = [
   { id: 'Unsafe', key: 'unsafe', defaultLabel: 'Unsafe' },
 ];
 
+const RISK_FILTERS = [
+  { id: 'All', label: 'All Risk Levels' },
+  { id: 'Low', label: 'Low Risk' },
+  { id: 'Medium', label: 'Medium Risk' },
+  { id: 'High', label: 'High Risk' },
+];
+
+const INPUT_METHOD_FILTERS = [
+  { id: 'All', label: 'All Input Methods' },
+  { id: 'REAL SENSOR INPUT', label: 'Sensor / NIR' },
+  { id: 'IMAGE INPUT', label: 'Camera / Photo' },
+  { id: 'USER ENTERED', label: 'Manual Entry' },
+  { id: 'SIMULATED DATA', label: 'Demo Test' },
+];
+
 export default function HistoryReports() {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const { user } = useAuth();
 
   const getFeedLabel = (id) => {
     const item = FEED_TYPE_FILTERS.find(f => f.id === id);
@@ -40,6 +60,7 @@ export default function HistoryReports() {
     if (!item) return q;
     return item.id === 'All' ? t('common.all_grades', item.defaultLabel) : t('quality_grades.' + item.key, item.defaultLabel);
   };
+
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -47,6 +68,8 @@ export default function HistoryReports() {
   // Filters
   const [feedType, setFeedType] = useState('All');
   const [qualityStatus, setQualityStatus] = useState('All');
+  const [riskFilter, setRiskFilter] = useState('All');
+  const [inputMethodFilter, setInputMethodFilter] = useState('All');
   const [search, setSearch] = useState('');
 
   // Selected report for modal
@@ -54,23 +77,46 @@ export default function HistoryReports() {
   const [modalQR, setModalQR] = useState(null);
   const [generatingQR, setGeneratingQR] = useState(false);
 
-  const fetchHistory = useCallback(async () => {
+  const fetchHistory = useCallback(() => {
     setLoading(true);
     try {
-      const data = await getHistoryFiltered({
-        feedType,
-        qualityStatus,
-        search,
-        limit: 100,
-      });
-      setHistory(data.history || []);
+      // Isolate tests strictly to the authenticated farmer
+      const userTests = getUserTests(user?.id);
+      let filtered = [...userTests];
+
+      if (feedType !== 'All') {
+        filtered = filtered.filter(item => item.feed_type === feedType);
+      }
+      if (qualityStatus !== 'All') {
+        filtered = filtered.filter(item => item.quality_status === qualityStatus);
+      }
+      if (riskFilter !== 'All') {
+        filtered = filtered.filter(item => {
+          const itemRisk = item.quality_status === 'Good' ? 'Low' : item.quality_status === 'Moderate' ? 'Medium' : 'High';
+          return itemRisk === riskFilter;
+        });
+      }
+      if (inputMethodFilter !== 'All') {
+        filtered = filtered.filter(item => (item.input_method || 'USER ENTERED') === inputMethodFilter);
+      }
+      if (search.trim()) {
+        const q = search.toLowerCase();
+        filtered = filtered.filter(item =>
+          (item.id && item.id.toLowerCase().includes(q)) ||
+          (item.feed_type && item.feed_type.toLowerCase().includes(q)) ||
+          (item.quality_status && item.quality_status.toLowerCase().includes(q)) ||
+          (item.input_method && item.input_method.toLowerCase().includes(q))
+        );
+      }
+
+      setHistory(filtered);
       setError(null);
     } catch (err) {
-      setError(err.message);
+      setError(err.message || 'Unable to load test history.');
     } finally {
       setLoading(false);
     }
-  }, [feedType, qualityStatus, search]);
+  }, [user?.id, feedType, qualityStatus, riskFilter, inputMethodFilter, search]);
 
   useEffect(() => {
     fetchHistory();
@@ -125,7 +171,7 @@ export default function HistoryReports() {
       <div className="page-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 'var(--space-md)' }}>
         <div>
           <h1>{t('history.title', 'Feed Quality Reports & Audit History')}</h1>
-          <p>{t('history.subtitle', 'Traceable batch records, certified nutritional assessments, and historical trends.')}</p>
+          <p>{t('history.subtitle', 'Traceable batch records, preliminary nutritional assessments, and historical trends.')}</p>
         </div>
         <div style={{ display: 'flex', gap: 'var(--space-xs)' }}>
           <button
@@ -171,22 +217,22 @@ export default function HistoryReports() {
 
       {/* Filters Card */}
       <div className="card" style={{ marginBottom: 'var(--space-lg)', padding: 'var(--space-md) var(--space-lg)' }}>
-        <div style={{ display: 'flex', gap: 'var(--space-md)', flexWrap: 'wrap', alignItems: 'center' }}>
+        <div style={{ display: 'flex', gap: 'var(--space-sm)', flexWrap: 'wrap', alignItems: 'center' }}>
           {/* Search */}
-          <div style={{ flex: '1 1 240px', position: 'relative' }}>
+          <div style={{ flex: '1 1 200px', position: 'relative' }}>
             <Search size={16} style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
             <input
               type="text"
               className="form-input"
               style={{ paddingLeft: 36 }}
-              placeholder={t('history.search_placeholder', 'Search Batch ID, feed type, or quality...')}
+              placeholder={t('history.search_placeholder', 'Search Sample ID, feed type, or quality...')}
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />
           </div>
 
           {/* Feed Type Filter */}
-          <div style={{ flex: '0 1 200px' }}>
+          <div style={{ flex: '0 1 170px' }}>
             <select
               className="form-select"
               value={feedType}
@@ -200,7 +246,7 @@ export default function HistoryReports() {
           </div>
 
           {/* Quality Filter */}
-          <div style={{ flex: '0 1 180px' }}>
+          <div style={{ flex: '0 1 150px' }}>
             <select
               className="form-select"
               value={qualityStatus}
@@ -209,6 +255,34 @@ export default function HistoryReports() {
             >
               {QUALITY_FILTERS.map(q => (
                 <option key={q.id} value={q.id}>{getQualityLabel(q.id)}</option>
+              ))}
+            </select>
+          </div>
+
+          {/* Risk Filter */}
+          <div style={{ flex: '0 1 140px' }}>
+            <select
+              className="form-select"
+              value={riskFilter}
+              onChange={(e) => setRiskFilter(e.target.value)}
+              aria-label="Filter by Risk Level"
+            >
+              {RISK_FILTERS.map(rf => (
+                <option key={rf.id} value={rf.id}>{rf.label}</option>
+              ))}
+            </select>
+          </div>
+
+          {/* Input Method Filter */}
+          <div style={{ flex: '0 1 150px' }}>
+            <select
+              className="form-select"
+              value={inputMethodFilter}
+              onChange={(e) => setInputMethodFilter(e.target.value)}
+              aria-label="Filter by Input Method"
+            >
+              {INPUT_METHOD_FILTERS.map(im => (
+                <option key={im.id} value={im.id}>{im.label}</option>
               ))}
             </select>
           </div>
@@ -224,11 +298,20 @@ export default function HistoryReports() {
         </div>
       ) : history.length === 0 ? (
         <div className="card" style={{ textAlign: 'center', padding: 'var(--space-3xl)' }}>
-          <Wheat size={48} style={{ opacity: 0.3, color: 'var(--color-primary)', margin: '0 auto var(--space-md)' }} />
-          <h3 style={{ color: 'var(--text-primary)', marginBottom: 4 }}>{t('history.empty_title', 'No Analysis Records Found')}</h3>
-          <p style={{ color: 'var(--text-secondary)', fontSize: '0.88rem' }}>
-            {t('history.empty_desc', 'Adjust your filter search or run your first feed test to generate certified records.')}
+          <Wheat size={54} style={{ opacity: 0.3, color: 'var(--color-primary)', margin: '0 auto var(--space-md)' }} />
+          <h3 style={{ color: 'var(--text-primary)', marginBottom: 6, fontSize: '1.25rem', fontWeight: 700 }}>
+            No feed tests recorded yet.
+          </h3>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '0.88rem', maxWidth: 440, margin: '0 auto var(--space-lg)', lineHeight: 1.5 }}>
+            Start your first feed test to assess nutritional parameters, check contamination risks, and view farmer recommendations.
           </p>
+          <button
+            className="btn btn-primary"
+            onClick={() => navigate('/analyze')}
+            style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '0.65rem 1.4rem' }}
+          >
+            + Start Your First Feed Test
+          </button>
         </div>
       ) : (
         <div className="card" style={{ padding: 0, overflow: 'hidden' }}>
@@ -236,22 +319,22 @@ export default function HistoryReports() {
             <table className="data-table" style={{ width: '100%' }}>
               <thead>
                 <tr>
-                  <th>{t('history.col_id', 'Batch ID')}</th>
-                  <th>{t('history.col_date', 'Date & Time')}</th>
-                  <th>{t('history.col_feed', 'Feed Type')}</th>
-                  <th>{t('history.col_grade', 'Quality Grade')}</th>
-                  <th>{t('history.col_adulterant', 'Adulteration')}</th>
-                  <th>{t('history.col_spoilage', 'Spoilage')}</th>
-                  <th style={{ textAlign: 'right' }}>{t('history.col_actions', 'Action')}</th>
+                  <th>Sample ID</th>
+                  <th>Date</th>
+                  <th>Feed Type</th>
+                  <th>Quality</th>
+                  <th>Risk</th>
+                  <th>Input</th>
+                  <th style={{ textAlign: 'right' }}>Actions</th>
                 </tr>
               </thead>
               <tbody>
                 {history.map((item) => {
-                  const isClean = item.adulteration_type === 'None' || !item.adulteration_type;
-                  const isSpoiled = item.spoilage_flag === 1;
                   const dateStr = item.timestamp
-                    ? new Date(item.timestamp).toLocaleString([], { dateStyle: 'medium', timeStyle: 'short' })
+                    ? new Date(item.timestamp).toLocaleDateString([], { month: 'short', day: 'numeric', year: 'numeric' })
                     : 'N/A';
+                  const itemRisk = item.quality_status === 'Good' ? 'Low' : item.quality_status === 'Moderate' ? 'Medium' : 'High';
+                  const riskColor = itemRisk === 'Low' ? 'var(--color-good)' : itemRisk === 'Medium' ? 'var(--color-moderate)' : 'var(--color-unsafe)';
 
                   return (
                     <tr
@@ -260,7 +343,7 @@ export default function HistoryReports() {
                       onClick={() => handleOpenReport(item)}
                     >
                       <td>
-                        <strong style={{ color: 'var(--color-primary)', display: 'flex', alignItems: 'center', gap: 6 }}>
+                        <strong style={{ color: 'var(--color-primary)', display: 'flex', alignItems: 'center', gap: 6, fontFamily: 'monospace' }}>
                           <FileText size={15} />
                           {item.id}
                         </strong>
@@ -277,39 +360,57 @@ export default function HistoryReports() {
                         </span>
                       </td>
                       <td>
-                        {isClean ? (
-                          <span style={{ color: 'var(--color-good)', fontSize: '0.82rem', display: 'flex', alignItems: 'center', gap: 4 }}>
-                            <CheckCircle2 size={13} /> {t('common.none', 'Clean')}
-                          </span>
-                        ) : (
-                          <span style={{ color: 'var(--color-unsafe)', fontSize: '0.82rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: 4 }}>
-                            <AlertTriangle size={13} /> {getAdulterantName(t, item.adulteration_type)}
-                          </span>
-                        )}
+                        <span style={{ color: riskColor, fontWeight: 700, fontSize: '0.82rem' }}>
+                          {itemRisk} Risk
+                        </span>
                       </td>
                       <td>
-                        {isSpoiled ? (
-                          <span style={{ color: 'var(--color-unsafe)', fontSize: '0.82rem', fontWeight: 600 }}>
-                            {t('common.spoiled', 'Spoiled')}
-                          </span>
-                        ) : (
-                          <span style={{ color: 'var(--color-good)', fontSize: '0.82rem' }}>
-                            {t('common.not_spoiled', 'Safe')}
-                          </span>
-                        )}
+                        <span className="badge" style={{
+                          fontSize: '0.72rem',
+                          background: (item.input_method || '').includes('SIMULATED') ? '#fef3c7' : 'var(--bg-card-alt)',
+                          color: (item.input_method || '').includes('SIMULATED') ? '#92400e' : 'var(--text-secondary)',
+                          border: '1px solid var(--border-subtle)'
+                        }}>
+                          {item.input_method || 'USER ENTERED'}
+                        </span>
                       </td>
                       <td style={{ textAlign: 'right' }}>
-                        <button
-                          className="btn btn-secondary"
-                          style={{ padding: '4px 10px', fontSize: '0.78rem' }}
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleOpenReport(item);
-                          }}
-                        >
-                          {t('history.view_report', 'View Report')}
-                          <ChevronRight size={14} />
-                        </button>
+                        <div style={{ display: 'inline-flex', gap: 6 }}>
+                          <button
+                            className="btn btn-secondary"
+                            style={{ padding: '4px 8px', fontSize: '0.76rem' }}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleOpenReport(item);
+                            }}
+                            title="View Report"
+                          >
+                            View
+                          </button>
+                          <button
+                            className="btn btn-secondary"
+                            style={{ padding: '4px 8px', fontSize: '0.76rem' }}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              navigate(`/report/${item.id}`);
+                            }}
+                            title="Download Report"
+                          >
+                            <Download size={13} />
+                          </button>
+                          <button
+                            className="btn btn-primary"
+                            style={{ padding: '4px 8px', fontSize: '0.76rem' }}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleOpenReport(item);
+                              handleCreateQR(item);
+                            }}
+                            title="View QR"
+                          >
+                            <QrCode size={13} />
+                          </button>
+                        </div>
                       </td>
                     </tr>
                   );

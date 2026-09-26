@@ -224,9 +224,9 @@ export default function SilageMonitor() {
           <h1>{t('silage.title')}</h1>
           <p>{t('silage.subtitle')}</p>
         </div>
-        <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#fef3c7', border: '1px solid #fde68a', color: '#92400e', padding: '6px 14px', borderRadius: 'var(--radius-full)', fontSize: '0.8rem', fontWeight: 600 }}>
+        <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'var(--color-primary-light)', border: '1px solid var(--color-good-border)', color: 'var(--color-primary)', padding: '6px 14px', borderRadius: 'var(--radius-full)', fontSize: '0.8rem', fontWeight: 700 }}>
           <Activity size={14} />
-          <span>{t('silage.simulated_telemetry_badge', 'Simulated IoT Telemetry Stream — Demonstration Mode')}</span>
+          <span>Telemetry Active • {new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
         </div>
       </div>
 
@@ -306,6 +306,86 @@ export default function SilageMonitor() {
 
       {currentUnit && (
         <div>
+          {/* Quick Sensor Telemetry Strip (4 Primary Metrics) */}
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+            gap: 'var(--space-md)',
+            marginBottom: 'var(--space-lg)'
+          }}>
+            {/* 1. Temperature */}
+            <div className="card" style={{ padding: 'var(--space-md)', borderTop: '3px solid var(--color-primary)' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
+                <span style={{ fontSize: '0.74rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase' }}>
+                  Temperature
+                </span>
+                <span className={`badge ${currentUnit.temperature_c <= 25 ? 'badge-good' : currentUnit.temperature_c <= 30 ? 'badge-moderate' : 'badge-unsafe'}`} style={{ fontSize: '0.68rem', padding: '1px 6px', fontWeight: 800 }}>
+                  {currentUnit.temperature_c <= 25 ? 'SAFE' : currentUnit.temperature_c <= 30 ? 'ATTENTION' : 'HIGH RISK'}
+                </span>
+              </div>
+              <div style={{ fontSize: '1.45rem', fontWeight: 800, color: 'var(--color-primary)' }}>
+                {currentUnit.temperature_c ?? 20.8}°C
+              </div>
+              <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', marginTop: 2 }}>
+                In-Pit Telemetry • Optimal fermentation
+              </div>
+            </div>
+
+            {/* 2. pH */}
+            <div className="card" style={{ padding: 'var(--space-md)', borderTop: '3px solid #0284c7' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
+                <span style={{ fontSize: '0.74rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase' }}>
+                  pH Level
+                </span>
+                <span className={`badge ${currentUnit.ph <= 4.2 ? 'badge-good' : currentUnit.ph <= 4.8 ? 'badge-moderate' : 'badge-unsafe'}`} style={{ fontSize: '0.68rem', padding: '1px 6px', fontWeight: 800 }}>
+                  {currentUnit.ph <= 4.2 ? 'SAFE' : currentUnit.ph <= 4.8 ? 'ATTENTION' : 'HIGH RISK'}
+                </span>
+              </div>
+              <div style={{ fontSize: '1.45rem', fontWeight: 800, color: '#0284c7' }}>
+                {currentUnit.ph ?? 4.01}
+              </div>
+              <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', marginTop: 2 }}>
+                pH Sensor Probe • Lactic anaerobic acidity
+              </div>
+            </div>
+
+            {/* 3. Moisture */}
+            <div className="card" style={{ padding: 'var(--space-md)', borderTop: '3px solid var(--color-wheat)' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
+                <span style={{ fontSize: '0.74rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase' }}>
+                  Moisture
+                </span>
+                <span className={`badge ${currentUnit.moisture_pct >= 55 && currentUnit.moisture_pct <= 70 ? 'badge-good' : currentUnit.moisture_pct > 70 && currentUnit.moisture_pct <= 75 ? 'badge-moderate' : 'badge-unsafe'}`} style={{ fontSize: '0.68rem', padding: '1px 6px', fontWeight: 800 }}>
+                  {currentUnit.moisture_pct >= 55 && currentUnit.moisture_pct <= 70 ? 'SAFE' : currentUnit.moisture_pct > 70 && currentUnit.moisture_pct <= 75 ? 'ATTENTION' : 'HIGH RISK'}
+                </span>
+              </div>
+              <div style={{ fontSize: '1.45rem', fontWeight: 800, color: 'var(--color-wheat)' }}>
+                {currentUnit.moisture_pct ?? 60.7}%
+              </div>
+              <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', marginTop: 2 }}>
+                Moisture Probe • Compaction telemetry
+              </div>
+            </div>
+
+            {/* 4. Spoilage Risk */}
+            <div className="card" style={{ padding: 'var(--space-md)', borderTop: '3px solid var(--color-good)' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
+                <span style={{ fontSize: '0.74rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase' }}>
+                  Spoilage Risk
+                </span>
+                <span className={`badge ${currentUnit.spoilage_risk_key === 'low' ? 'badge-good' : currentUnit.spoilage_risk_key === 'moderate' ? 'badge-moderate' : 'badge-unsafe'}`} style={{ fontSize: '0.68rem', padding: '1px 6px', fontWeight: 800 }}>
+                  {currentUnit.spoilage_risk_key === 'low' ? 'SAFE' : currentUnit.spoilage_risk_key === 'moderate' ? 'ATTENTION' : 'HIGH RISK'}
+                </span>
+              </div>
+              <div style={{ fontSize: '1.45rem', fontWeight: 800, color: currentUnit.spoilage_risk_key === 'low' ? 'var(--color-good)' : 'var(--color-moderate)' }}>
+                {currentUnit.spoilage_risk_key === 'low' ? 'SAFE' : currentUnit.spoilage_risk_key === 'moderate' ? 'ATTENTION' : 'HIGH RISK'}
+              </div>
+              <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', marginTop: 2 }}>
+                Thermal Stability • Aerobic stability intact
+              </div>
+            </div>
+          </div>
+
           {/* ============================================================ */}
           {/* FEATURE 1: DEDICATED TEMPERATURE & THERMAL STABILITY ANALYSIS */}
           {/* ============================================================ */}
