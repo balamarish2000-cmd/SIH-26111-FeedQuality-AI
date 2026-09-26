@@ -102,7 +102,7 @@ export default function Layout() {
           </span>
           <span style={{ opacity: 0.65, fontSize: '0.75rem' }}>|</span>
           <span style={{ fontSize: '0.76rem', opacity: 0.9 }}>
-            AI-Powered Feed & Silage Quality Testing
+            {t('brand.subtitle')}
           </span>
         </div>
 
@@ -110,12 +110,12 @@ export default function Layout() {
           {backendOnline ? (
             <span className="kisan-banner-pill pill-online">
               <span className="pulse-dot" />
-              <span>AI Engine Online</span>
+              <span>{t('nav.ai_service_online')}</span>
             </span>
           ) : (
             <span className="kisan-banner-pill pill-offline">
               <WifiOff size={12} />
-              <span>Offline Mode (Field Ready)</span>
+              <span>{t('nav.low_connectivity')}</span>
             </span>
           )}
         </div>
@@ -237,13 +237,13 @@ export default function Layout() {
                   zIndex: 1000
                 }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8, paddingBottom: 6, borderBottom: '1px solid var(--border-subtle)' }}>
-                    <span style={{ fontWeight: 700, fontSize: '0.86rem' }}>Notifications</span>
-                    <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>{notifications.length} total</span>
+                    <span style={{ fontWeight: 700, fontSize: '0.86rem' }}>{t('dashboard.notifications')}</span>
+                    <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>{notifications.length} {t('common.total')}</span>
                   </div>
 
                   {notifications.length === 0 ? (
                     <div style={{ textAlign: 'center', padding: '16px 8px', color: 'var(--text-muted)', fontSize: '0.82rem' }}>
-                      No new notifications.
+                      {t('dashboard.no_notifications')}
                     </div>
                   ) : (
                     <div style={{ maxHeight: 240, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: 6 }}>
@@ -323,10 +323,10 @@ export default function Layout() {
                 >
                   <div style={{ padding: '8px 10px', borderBottom: '1px solid var(--border-color)', marginBottom: 4 }}>
                     <div style={{ fontWeight: 800, fontSize: '0.86rem', color: 'var(--text-primary)' }}>
-                      {user?.name || 'Farmer'}
+                      {user?.name || t('profile.farmer_fallback')}
                     </div>
                     <div style={{ fontSize: '0.72rem', color: 'var(--color-primary)', fontWeight: 600 }}>
-                      {user?.role || 'Dairy Farmer'}
+                      {user?.role || t('auth.role_dairy_farmer')}
                     </div>
                     <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', marginTop: 2 }}>
                       {user?.farm_name || user?.mobile}
@@ -348,7 +348,7 @@ export default function Layout() {
                     }}
                   >
                     <User size={15} style={{ color: 'var(--color-primary)' }} />
-                    <span>Farmer Profile</span>
+                    <span>{t('nav.profile')}</span>
                   </Link>
 
                   <Link
@@ -366,7 +366,7 @@ export default function Layout() {
                     }}
                   >
                     <Building2 size={15} style={{ color: 'var(--color-wheat)' }} />
-                    <span>Farm Details</span>
+                    <span>{t('profile.farm_details')}</span>
                   </Link>
 
                   <Link
@@ -384,7 +384,7 @@ export default function Layout() {
                     }}
                   >
                     <FileText size={15} style={{ color: 'var(--color-info)' }} />
-                    <span>Sample History</span>
+                    <span>{t('nav.history')}</span>
                   </Link>
 
                   <div style={{ height: 1, background: 'var(--border-color)', margin: '4px 0' }} />
@@ -409,7 +409,7 @@ export default function Layout() {
                     }}
                   >
                     <LogOut size={15} />
-                    <span>Logout</span>
+                    <span>{t('nav.logout')}</span>
                   </button>
                 </div>
               )}
@@ -437,23 +437,23 @@ export default function Layout() {
       <div className="mobile-bottom-nav">
         <NavLink to="/dashboard" className={({ isActive }) => `mobile-nav-item ${isActive ? 'active' : ''}`}>
           <LayoutDashboard size={18} />
-          <span>Dashboard</span>
+          <span>{t('nav.dashboard')}</span>
         </NavLink>
         <NavLink to="/analyze" className={({ isActive }) => `mobile-nav-item ${isActive ? 'active' : ''}`}>
           <FlaskConical size={18} />
-          <span>Analyze</span>
+          <span>{t('nav.analyze')}</span>
         </NavLink>
         <NavLink to="/silage" className={({ isActive }) => `mobile-nav-item ${isActive ? 'active' : ''}`}>
           <Warehouse size={18} />
-          <span>Silage</span>
+          <span>{t('nav.silage')}</span>
         </NavLink>
         <NavLink to="/history" className={({ isActive }) => `mobile-nav-item ${isActive ? 'active' : ''}`}>
           <FileText size={18} />
-          <span>History</span>
+          <span>{t('nav.history')}</span>
         </NavLink>
         <NavLink to="/profile" className={({ isActive }) => `mobile-nav-item ${isActive ? 'active' : ''}`}>
           <User size={18} />
-          <span>Profile</span>
+          <span>{t('nav.profile')}</span>
         </NavLink>
       </div>
 
@@ -464,23 +464,23 @@ export default function Layout() {
             <ShieldCheck size={20} />
             <span>FEED GUARD</span>
             <span style={{ fontSize: '0.8rem', fontWeight: 500, color: 'var(--text-muted)' }}>
-              — AI-Powered Feed & Silage Quality Testing for Dairy Farmers
+              — {t('brand.subtitle')}
             </span>
           </div>
 
           <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap', margin: '8px 0', fontSize: '0.82rem' }}>
-            <Link to="/analyze" style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}>Feed Analysis</Link>
-            <Link to="/silage" style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}>Silage Monitoring</Link>
-            <Link to="/advisory" style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}>Farmer Advisory</Link>
-            <Link to="/history" style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}>Sample History</Link>
-            <Link to="/qr" style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}>QR Reports</Link>
+            <Link to="/analyze" style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}>{t('nav.analyze')}</Link>
+            <Link to="/silage" style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}>{t('nav.silage')}</Link>
+            <Link to="/advisory" style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}>{t('nav.advisory')}</Link>
+            <Link to="/history" style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}>{t('nav.history')}</Link>
+            <Link to="/qr" style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}>{t('nav.qr')}</Link>
           </div>
 
           <p style={{ margin: '4px 0', fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
-            Developed for Smart India Hackathon 2026 • Screening technology compliant with ICAR & NDDB cattle nutritional standards.
+            {t('common.sih_credit')}
           </p>
           <div style={{ fontSize: '0.74rem', color: 'var(--text-muted)' }}>
-            © 2026 FEED GUARD. Test. Detect. Protect.
+            © 2026 FEED GUARD. {t('brand.tagline')}
           </div>
         </div>
       </footer>

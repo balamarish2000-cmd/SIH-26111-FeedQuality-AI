@@ -65,11 +65,11 @@ export default function Profile() {
     setPasswordSuccess('');
 
     if (passwordForm.newPassword.length < 6) {
-      setPasswordError('New password must be at least 6 characters long.');
+      setPasswordError(t('auth.err_password_short'));
       return;
     }
     if (passwordForm.newPassword !== passwordForm.confirmPassword) {
-      setPasswordError('Confirm password does not match.');
+      setPasswordError(t('auth.err_password_match'));
       return;
     }
 
@@ -77,13 +77,13 @@ export default function Profile() {
     try {
       const res = await resetPassword(user?.mobile || user?.email, passwordForm.newPassword);
       if (res.success) {
-        setPasswordSuccess('Password updated successfully.');
+        setPasswordSuccess(t('auth.password_updated_success'));
         setPasswordForm({ newPassword: '', confirmPassword: '' });
       } else {
-        setPasswordError(res.error || 'Failed to update password.');
+        setPasswordError(res.error || t('auth.auth_error'));
       }
     } catch (err) {
-      setPasswordError(err.message || 'Error updating password.');
+      setPasswordError(err.message || t('auth.auth_error'));
     } finally {
       setPasswordLoading(false);
     }
@@ -101,10 +101,10 @@ export default function Profile() {
         <div>
           <h1 style={{ display: 'flex', alignItems: 'center', gap: 10, margin: 0 }}>
             <User size={26} style={{ color: 'var(--color-primary)' }} />
-            Farmer Profile & Settings
+            {t('auth.profile_title')}
           </h1>
           <p style={{ margin: '4px 0 0', color: 'var(--text-secondary)' }}>
-            Manage your registered dairy farm profile, credentials, and localization preferences.
+            {t('auth.profile_subtitle')}
           </p>
         </div>
 
@@ -121,7 +121,7 @@ export default function Profile() {
           fontWeight: 700
         }}>
           <ShieldCheck size={14} />
-          <span>Account Verified</span>
+          <span>{t('profile.account_verified')}</span>
         </div>
       </div>
 
@@ -150,18 +150,18 @@ export default function Profile() {
             </div>
             <div>
               <h2 style={{ fontSize: '1.25rem', margin: '0 0 4px', color: 'var(--text-primary)' }}>
-                {user?.name || 'Registered Farmer'}
+                {user?.name || t('profile.registered_farmer')}
               </h2>
               <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-                <span><strong>Farm:</strong> {user?.farm_name || 'Family Dairy Farm'}</span>
+                <span><strong>{t('auth.farm_name')}:</strong> {user?.farm_name || t('profile.family_farm')}</span>
                 <span>•</span>
-                <span><strong>Location:</strong> {[user?.village, user?.district, user?.state].filter(Boolean).join(', ') || 'India'}</span>
+                <span><strong>{t('silage.location')}:</strong> {[user?.village, user?.district, user?.state].filter(Boolean).join(', ') || ''}</span>
               </div>
             </div>
           </div>
           <div style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>
-            <div>Mobile: <strong>{user?.mobile || 'Not set'}</strong></div>
-            {user?.email && <div>Email: <strong>{user.email}</strong></div>}
+            <div>{t('auth.mobile')}: <strong>{user?.mobile || t('profile.not_set')}</strong></div>
+            {user?.email && <div>{t('auth.email')}: <strong>{user.email}</strong></div>}
           </div>
         </div>
       </div>
@@ -194,7 +194,7 @@ export default function Profile() {
           }}
         >
           <User size={15} />
-          <span>Profile Details</span>
+          <span>{t('profile.tab_details')}</span>
         </button>
 
         <button
@@ -216,7 +216,7 @@ export default function Profile() {
           }}
         >
           <Building2 size={15} />
-          <span>Farm Operations</span>
+          <span>{t('profile.tab_farm')}</span>
         </button>
 
         <button
@@ -238,7 +238,7 @@ export default function Profile() {
           }}
         >
           <KeyRound size={15} />
-          <span>Change Password</span>
+          <span>{t('profile.tab_security')}</span>
         </button>
 
         <button
@@ -260,7 +260,7 @@ export default function Profile() {
           }}
         >
           <Sliders size={15} />
-          <span>Settings</span>
+          <span>{t('profile.tab_settings')}</span>
         </button>
       </div>
 
@@ -268,7 +268,7 @@ export default function Profile() {
         {savedSuccess && (
           <div className="alert alert-good" style={{ marginBottom: 'var(--space-lg)' }}>
             <CheckCircle2 size={18} />
-            <span>Profile updated successfully!</span>
+            <span>{t('auth.profile_saved')}</span>
           </div>
         )}
 
@@ -277,10 +277,10 @@ export default function Profile() {
           <form onSubmit={handleProfileSubmit}>
             <div style={{ marginBottom: '1.25rem' }}>
               <h3 style={{ fontSize: '1rem', color: 'var(--text-primary)', margin: '0 0 4px 0' }}>
-                Farmer Identity & Contact
+                {t('profile.identity_title')}
               </h3>
               <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-                Keep your producer identity and contact information up to date.
+                {t('profile.identity_desc')}
               </p>
             </div>
 
@@ -288,7 +288,7 @@ export default function Profile() {
               <div className="form-group">
                 <label className="form-label" style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                   <User size={14} style={{ color: 'var(--color-primary)' }} />
-                  Full Name
+                  {t('auth.full_name')}
                 </label>
                 <input
                   type="text"
@@ -303,7 +303,7 @@ export default function Profile() {
               <div className="form-group">
                 <label className="form-label" style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                   <Phone size={14} style={{ color: 'var(--color-primary)' }} />
-                  Mobile Number
+                  {t('auth.mobile')}
                 </label>
                 <input
                   type="tel"
@@ -317,7 +317,7 @@ export default function Profile() {
               <div className="form-group">
                 <label className="form-label" style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                   <Mail size={14} style={{ color: 'var(--color-primary)' }} />
-                  Email Address (Optional)
+                  {t('auth.email')}
                 </label>
                 <input
                   type="email"
@@ -337,7 +337,7 @@ export default function Profile() {
                 style={{ color: 'var(--color-unsafe)', borderColor: 'rgba(220, 38, 38, 0.3)', display: 'inline-flex', alignItems: 'center', gap: 6 }}
               >
                 <LogOut size={16} />
-                <span>Logout</span>
+                <span>{t('nav.logout')}</span>
               </button>
 
               <button
@@ -347,7 +347,7 @@ export default function Profile() {
                 style={{ minWidth: 160, justifyContent: 'center' }}
               >
                 <Save size={16} />
-                <span>{loading ? 'Saving...' : 'Save Profile'}</span>
+                <span>{loading ? t('profile.saving') : t('profile.save_btn')}</span>
               </button>
             </div>
           </form>
@@ -358,10 +358,10 @@ export default function Profile() {
           <form onSubmit={handleProfileSubmit}>
             <div style={{ marginBottom: '1.25rem' }}>
               <h3 style={{ fontSize: '1rem', color: 'var(--text-primary)', margin: '0 0 4px 0' }}>
-                Dairy Farm Location & Operations
+                {t('profile.farm_heading')}
               </h3>
               <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-                Farm location and herd metrics used to contextualize feed recommendations.
+                {t('profile.farm_desc')}
               </p>
             </div>
 
@@ -369,7 +369,7 @@ export default function Profile() {
               <div className="form-group">
                 <label className="form-label" style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                   <Building2 size={14} style={{ color: 'var(--color-primary)' }} />
-                  Farm / Dairy Name
+                  {t('auth.farm_name')}
                 </label>
                 <input
                   type="text"
@@ -383,7 +383,7 @@ export default function Profile() {
               <div className="form-group">
                 <label className="form-label" style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                   <MapPin size={14} style={{ color: 'var(--color-primary)' }} />
-                  Village / Town
+                  {t('auth.village')}
                 </label>
                 <input
                   type="text"
@@ -397,7 +397,7 @@ export default function Profile() {
               <div className="form-group">
                 <label className="form-label" style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                   <Layers size={14} style={{ color: 'var(--color-primary)' }} />
-                  Number of Cattle / Herd Size
+                  {t('auth.cattle_count')}
                 </label>
                 <input
                   type="number"
@@ -418,7 +418,7 @@ export default function Profile() {
                 style={{ minWidth: 160, justifyContent: 'center' }}
               >
                 <Save size={16} />
-                <span>{loading ? 'Saving...' : 'Save Farm Details'}</span>
+                <span>{loading ? t('profile.saving') : t('profile.save_farm_btn')}</span>
               </button>
             </div>
           </form>
@@ -429,10 +429,10 @@ export default function Profile() {
           <form onSubmit={handlePasswordSubmit}>
             <div style={{ marginBottom: '1.25rem' }}>
               <h3 style={{ fontSize: '1rem', color: 'var(--text-primary)', margin: '0 0 4px 0' }}>
-                Change Account Password
+                {t('profile.change_pwd_title')}
               </h3>
               <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-                Update your account password for secure access to Feed Guard.
+                {t('profile.change_pwd_desc')}
               </p>
             </div>
 
@@ -452,7 +452,7 @@ export default function Profile() {
 
             <div style={{ maxWidth: 400, display: 'flex', flexDirection: 'column', gap: 'var(--space-md)', marginBottom: 'var(--space-lg)' }}>
               <div className="form-group">
-                <label className="form-label">New Password (min 6 characters)</label>
+                <label className="form-label">{t('profile.new_password_label')}</label>
                 <input
                   type="password"
                   className="farmer-input"
@@ -464,7 +464,7 @@ export default function Profile() {
               </div>
 
               <div className="form-group">
-                <label className="form-label">Confirm New Password</label>
+                <label className="form-label">{t('profile.confirm_new_password_label')}</label>
                 <input
                   type="password"
                   className="farmer-input"
@@ -484,7 +484,7 @@ export default function Profile() {
                 style={{ minWidth: 180, justifyContent: 'center' }}
               >
                 <KeyRound size={16} />
-                <span>{passwordLoading ? 'Updating...' : 'Update Password'}</span>
+                <span>{passwordLoading ? t('profile.updating_pwd') : t('profile.update_pwd_btn')}</span>
               </button>
             </div>
           </form>
@@ -495,10 +495,10 @@ export default function Profile() {
           <form onSubmit={handleProfileSubmit}>
             <div style={{ marginBottom: '1.25rem' }}>
               <h3 style={{ fontSize: '1rem', color: 'var(--text-primary)', margin: '0 0 4px 0' }}>
-                Regional Agro-Climatic Zone & Language
+                {t('profile.regional_title')}
               </h3>
               <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-                Adapts ICAR nutritional benchmarks and interface vocabulary to your region.
+                {t('profile.regional_desc')}
               </p>
             </div>
 
@@ -506,7 +506,7 @@ export default function Profile() {
               <div className="form-group">
                 <label className="form-label" style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                   <MapPin size={14} style={{ color: 'var(--color-primary)' }} />
-                  State
+                  {t('auth.state')}
                 </label>
                 <select
                   className="farmer-select"
@@ -518,7 +518,7 @@ export default function Profile() {
               </div>
 
               <div className="form-group">
-                <label className="form-label">District</label>
+                <label className="form-label">{t('auth.district')}</label>
                 <input
                   type="text"
                   className="farmer-input"
@@ -531,7 +531,7 @@ export default function Profile() {
               <div className="form-group">
                 <label className="form-label" style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                   <Globe size={14} style={{ color: 'var(--color-primary)' }} />
-                  Interface Language
+                  {t('auth.preferred_language')}
                 </label>
                 <select
                   className="farmer-select"
@@ -553,7 +553,7 @@ export default function Profile() {
                 style={{ minWidth: 160, justifyContent: 'center' }}
               >
                 <Save size={16} />
-                <span>{loading ? 'Saving...' : 'Save Settings'}</span>
+                <span>{loading ? t('profile.saving') : t('profile.save_settings_btn')}</span>
               </button>
             </div>
           </form>

@@ -226,7 +226,7 @@ export default function SilageMonitor() {
         </div>
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'var(--color-primary-light)', border: '1px solid var(--color-good-border)', color: 'var(--color-primary)', padding: '6px 14px', borderRadius: 'var(--radius-full)', fontSize: '0.8rem', fontWeight: 700 }}>
           <Activity size={14} />
-          <span>Telemetry Active • {new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+          <span>{t('analyze.simulated_tag')} • {new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
         </div>
       </div>
 
@@ -317,17 +317,17 @@ export default function SilageMonitor() {
             <div className="card" style={{ padding: 'var(--space-md)', borderTop: '3px solid var(--color-primary)' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
                 <span style={{ fontSize: '0.74rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase' }}>
-                  Temperature
+                  {t('analyze.temperature')}
                 </span>
                 <span className={`badge ${currentUnit.temperature_c <= 25 ? 'badge-good' : currentUnit.temperature_c <= 30 ? 'badge-moderate' : 'badge-unsafe'}`} style={{ fontSize: '0.68rem', padding: '1px 6px', fontWeight: 800 }}>
-                  {currentUnit.temperature_c <= 25 ? 'SAFE' : currentUnit.temperature_c <= 30 ? 'ATTENTION' : 'HIGH RISK'}
+                  {currentUnit.temperature_c <= 25 ? t('risk.safe') : currentUnit.temperature_c <= 30 ? t('risk.attention') : t('risk.high_risk')}
                 </span>
               </div>
               <div style={{ fontSize: '1.45rem', fontWeight: 800, color: 'var(--color-primary)' }}>
                 {currentUnit.temperature_c ?? 20.8}°C
               </div>
               <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', marginTop: 2 }}>
-                In-Pit Telemetry • Optimal fermentation
+                {t(`silage.zone_${tempAnalysis.thermal_zone || 'optimal'}`)}
               </div>
             </div>
 
@@ -335,17 +335,17 @@ export default function SilageMonitor() {
             <div className="card" style={{ padding: 'var(--space-md)', borderTop: '3px solid #0284c7' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
                 <span style={{ fontSize: '0.74rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase' }}>
-                  pH Level
+                  {t('analyze.ph')}
                 </span>
                 <span className={`badge ${currentUnit.ph <= 4.2 ? 'badge-good' : currentUnit.ph <= 4.8 ? 'badge-moderate' : 'badge-unsafe'}`} style={{ fontSize: '0.68rem', padding: '1px 6px', fontWeight: 800 }}>
-                  {currentUnit.ph <= 4.2 ? 'SAFE' : currentUnit.ph <= 4.8 ? 'ATTENTION' : 'HIGH RISK'}
+                  {currentUnit.ph <= 4.2 ? t('risk.safe') : currentUnit.ph <= 4.8 ? t('risk.attention') : t('risk.high_risk')}
                 </span>
               </div>
               <div style={{ fontSize: '1.45rem', fontWeight: 800, color: '#0284c7' }}>
                 {currentUnit.ph ?? 4.01}
               </div>
               <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', marginTop: 2 }}>
-                pH Sensor Probe • Lactic anaerobic acidity
+                {t('silage.ph_gauge')}
               </div>
             </div>
 
@@ -353,17 +353,17 @@ export default function SilageMonitor() {
             <div className="card" style={{ padding: 'var(--space-md)', borderTop: '3px solid var(--color-wheat)' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
                 <span style={{ fontSize: '0.74rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase' }}>
-                  Moisture
+                  {t('analyze.moisture')}
                 </span>
                 <span className={`badge ${currentUnit.moisture_pct >= 55 && currentUnit.moisture_pct <= 70 ? 'badge-good' : currentUnit.moisture_pct > 70 && currentUnit.moisture_pct <= 75 ? 'badge-moderate' : 'badge-unsafe'}`} style={{ fontSize: '0.68rem', padding: '1px 6px', fontWeight: 800 }}>
-                  {currentUnit.moisture_pct >= 55 && currentUnit.moisture_pct <= 70 ? 'SAFE' : currentUnit.moisture_pct > 70 && currentUnit.moisture_pct <= 75 ? 'ATTENTION' : 'HIGH RISK'}
+                  {currentUnit.moisture_pct >= 55 && currentUnit.moisture_pct <= 70 ? t('risk.safe') : currentUnit.moisture_pct > 70 && currentUnit.moisture_pct <= 75 ? t('risk.attention') : t('risk.high_risk')}
                 </span>
               </div>
               <div style={{ fontSize: '1.45rem', fontWeight: 800, color: 'var(--color-wheat)' }}>
                 {currentUnit.moisture_pct ?? 60.7}%
               </div>
               <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', marginTop: 2 }}>
-                Moisture Probe • Compaction telemetry
+                {t('silage.moisture_gauge')}
               </div>
             </div>
 
@@ -371,17 +371,17 @@ export default function SilageMonitor() {
             <div className="card" style={{ padding: 'var(--space-md)', borderTop: '3px solid var(--color-good)' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
                 <span style={{ fontSize: '0.74rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase' }}>
-                  Spoilage Risk
+                  {t('dashboard.spoilage_risk')}
                 </span>
                 <span className={`badge ${currentUnit.spoilage_risk_key === 'low' ? 'badge-good' : currentUnit.spoilage_risk_key === 'moderate' ? 'badge-moderate' : 'badge-unsafe'}`} style={{ fontSize: '0.68rem', padding: '1px 6px', fontWeight: 800 }}>
-                  {currentUnit.spoilage_risk_key === 'low' ? 'SAFE' : currentUnit.spoilage_risk_key === 'moderate' ? 'ATTENTION' : 'HIGH RISK'}
+                  {currentUnit.spoilage_risk_key === 'low' ? t('risk.safe') : currentUnit.spoilage_risk_key === 'moderate' ? t('risk.attention') : t('risk.high_risk')}
                 </span>
               </div>
               <div style={{ fontSize: '1.45rem', fontWeight: 800, color: currentUnit.spoilage_risk_key === 'low' ? 'var(--color-good)' : 'var(--color-moderate)' }}>
-                {currentUnit.spoilage_risk_key === 'low' ? 'SAFE' : currentUnit.spoilage_risk_key === 'moderate' ? 'ATTENTION' : 'HIGH RISK'}
+                {currentUnit.spoilage_risk_key === 'low' ? t('risk.safe') : currentUnit.spoilage_risk_key === 'moderate' ? t('risk.attention') : t('risk.high_risk')}
               </div>
               <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', marginTop: 2 }}>
-                Thermal Stability • Aerobic stability intact
+                {t('silage.stability_score')}
               </div>
             </div>
           </div>

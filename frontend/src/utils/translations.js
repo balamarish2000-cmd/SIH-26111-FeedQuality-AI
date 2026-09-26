@@ -109,3 +109,16 @@ export function getNutrientLabel(t, key, fallbackLabel) {
   }
   return fallbackLabel || key;
 }
+
+/**
+ * Translate risk levels (Low Risk, Moderate Risk, High Risk, Critical Risk).
+ */
+export function getRiskLevelName(t, rawRisk) {
+  if (!rawRisk) return t('risk_levels.low', 'Low Risk');
+  const lower = String(rawRisk).toLowerCase().trim();
+  if (lower.includes('low') || lower === 'good' || lower === 'safe') return t('risk_levels.low', 'Low Risk');
+  if (lower.includes('mod') || lower.includes('med') || lower.includes('caution') || lower.includes('attention')) return t('risk_levels.medium', 'Moderate Risk');
+  if (lower.includes('crit')) return t('risk_levels.critical', 'Critical Risk');
+  if (lower.includes('high') || lower.includes('poor') || lower.includes('unsafe')) return t('risk_levels.high', 'High Risk');
+  return t('risk_levels.' + lower, rawRisk);
+}

@@ -10,7 +10,7 @@ import {
   Wheat, Calendar, Clock, ChevronRight, X, ExternalLink,
   ShieldCheck, ShieldAlert, Sparkles, Download, ArrowRight
 } from 'lucide-react';
-import { getAdulterantName, getFeedTypeName, getQualityStatusName } from '../utils/translations';
+import { getAdulterantName, getFeedTypeName, getQualityStatusName, getRiskLevelName } from '../utils/translations';
 
 const FEED_TYPE_FILTERS = [
   { id: 'All', key: 'all_feed_types', defaultLabel: 'All Feed Types' },
@@ -30,18 +30,18 @@ const QUALITY_FILTERS = [
 ];
 
 const RISK_FILTERS = [
-  { id: 'All', label: 'All Risk Levels' },
-  { id: 'Low', label: 'Low Risk' },
-  { id: 'Medium', label: 'Medium Risk' },
-  { id: 'High', label: 'High Risk' },
+  { id: 'All', key: 'all_risk_levels', defaultLabel: 'All Risk Levels' },
+  { id: 'Low', key: 'low', defaultLabel: 'Low Risk' },
+  { id: 'Medium', key: 'medium', defaultLabel: 'Moderate Risk' },
+  { id: 'High', key: 'high', defaultLabel: 'High Risk' },
 ];
 
 const INPUT_METHOD_FILTERS = [
-  { id: 'All', label: 'All Input Methods' },
-  { id: 'REAL SENSOR INPUT', label: 'Sensor / NIR' },
-  { id: 'IMAGE INPUT', label: 'Camera / Photo' },
-  { id: 'USER ENTERED', label: 'Manual Entry' },
-  { id: 'SIMULATED DATA', label: 'Demo Test' },
+  { id: 'All', key: 'all_input_methods', defaultLabel: 'All Input Methods' },
+  { id: 'REAL SENSOR INPUT', key: 'sensor_tag', defaultLabel: 'NIR / Sensor Input' },
+  { id: 'IMAGE INPUT', key: 'visual_tag', defaultLabel: 'Visual Screening' },
+  { id: 'USER ENTERED', key: 'manual_tag', defaultLabel: 'Farmer Entered Data' },
+  { id: 'SIMULATED DATA', key: 'simulated_tag', defaultLabel: 'Simulated Sensor Data' },
 ];
 
 export default function HistoryReports() {
@@ -57,8 +57,20 @@ export default function HistoryReports() {
 
   const getQualityLabel = (q) => {
     const item = QUALITY_FILTERS.find(f => f.id === q);
-    if (!item) return q;
+    if (!item) return getQualityStatusName(t, q);
     return item.id === 'All' ? t('common.all_grades', item.defaultLabel) : t('quality_grades.' + item.key, item.defaultLabel);
+  };
+
+  const getRiskFilterLabel = (id) => {
+    const item = RISK_FILTERS.find(r => r.id === id);
+    if (!item) return getRiskLevelName(t, id);
+    return item.id === 'All' ? t('history.all_risk_levels', item.defaultLabel) : t('risk_levels.' + item.key, item.defaultLabel);
+  };
+
+  const getInputMethodFilterLabel = (id) => {
+    const item = INPUT_METHOD_FILTERS.find(im => im.id === id);
+    if (!item) return id;
+    return item.id === 'All' ? t('history.all_input_methods', item.defaultLabel) : t('analyze.' + item.key, item.defaultLabel);
   };
 
   const [history, setHistory] = useState([]);
@@ -268,7 +280,7 @@ export default function HistoryReports() {
               aria-label="Filter by Risk Level"
             >
               {RISK_FILTERS.map(rf => (
-                <option key={rf.id} value={rf.id}>{rf.label}</option>
+                <option key={rf.id} value={rf.id}>{getRiskFilterLabel(rf.id)}</option>
               ))}
             </select>
           </div>
@@ -282,7 +294,7 @@ export default function HistoryReports() {
               aria-label="Filter by Input Method"
             >
               {INPUT_METHOD_FILTERS.map(im => (
-                <option key={im.id} value={im.id}>{im.label}</option>
+                <option key={im.id} value={im.id}>{getInputMethodFilterLabel(im.id)}</option>
               ))}
             </select>
           </div>
@@ -300,17 +312,17 @@ export default function HistoryReports() {
         <div className="card" style={{ textAlign: 'center', padding: 'var(--space-3xl)' }}>
           <Wheat size={54} style={{ opacity: 0.3, color: 'var(--color-primary)', margin: '0 auto var(--space-md)' }} />
           <h3 style={{ color: 'var(--text-primary)', marginBottom: 6, fontSize: '1.25rem', fontWeight: 700 }}>
-            No feed tests recorded yet.
+            {t('dashboard.no_records_yet')}
           </h3>
           <p style={{ color: 'var(--text-secondary)', fontSize: '0.88rem', maxWidth: 440, margin: '0 auto var(--space-lg)', lineHeight: 1.5 }}>
-            Start your first feed test to assess nutritional parameters, check contamination risks, and view farmer recommendations.
+            {t('dashboard.empty_state_desc')}
           </p>
           <button
             className="btn btn-primary"
             onClick={() => navigate('/analyze')}
             style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '0.65rem 1.4rem' }}
           >
-            + Start Your First Feed Test
+            + {t('dashboard.start_feed_test')}
           </button>
         </div>
       ) : (
@@ -319,13 +331,13 @@ export default function HistoryReports() {
             <table className="data-table" style={{ width: '100%' }}>
               <thead>
                 <tr>
-                  <th>Sample ID</th>
-                  <th>Date</th>
-                  <th>Feed Type</th>
-                  <th>Quality</th>
-                  <th>Risk</th>
-                  <th>Input</th>
-                  <th style={{ textAlign: 'right' }}>Actions</th>
+                  <th>{t('dashboard.col_id')}</th>
+                  <th>{t('dashboard.col_date')}</th>
+                  <th>{t('dashboard.col_feed')}</th>
+                  <th>{t('dashboard.col_grade')}</th>
+                  <th>{t('analyze.risk_level')}</th>
+                  <th>{t('analyze.pipeline_input')}</th>
+                  <th style={{ textAlign: 'right' }}>{t('history.col_actions')}</th>
                 </tr>
               </thead>
               <tbody>
@@ -361,7 +373,7 @@ export default function HistoryReports() {
                       </td>
                       <td>
                         <span style={{ color: riskColor, fontWeight: 700, fontSize: '0.82rem' }}>
-                          {itemRisk} Risk
+                          {getRiskLevelName(t, item.quality_status)}
                         </span>
                       </td>
                       <td>
@@ -371,7 +383,11 @@ export default function HistoryReports() {
                           color: (item.input_method || '').includes('SIMULATED') ? '#92400e' : 'var(--text-secondary)',
                           border: '1px solid var(--border-subtle)'
                         }}>
-                          {item.input_method || 'USER ENTERED'}
+                          {item.input_method === 'REAL SENSOR INPUT' ? t('analyze.sensor_tag') :
+                           item.input_method === 'IMAGE INPUT' ? t('analyze.visual_tag') :
+                           item.input_method === 'USER ENTERED' ? t('analyze.manual_tag') :
+                           item.input_method === 'SIMULATED DATA' ? t('analyze.simulated_tag') :
+                           item.input_method}
                         </span>
                       </td>
                       <td style={{ textAlign: 'right' }}>
@@ -383,9 +399,9 @@ export default function HistoryReports() {
                               e.stopPropagation();
                               handleOpenReport(item);
                             }}
-                            title="View Report"
+                            title={t('dashboard.action_view')}
                           >
-                            View
+                            {t('dashboard.action_view')}
                           </button>
                           <button
                             className="btn btn-secondary"
@@ -394,7 +410,7 @@ export default function HistoryReports() {
                               e.stopPropagation();
                               navigate(`/report/${item.id}`);
                             }}
-                            title="Download Report"
+                            title={t('report.btn_download_pdf')}
                           >
                             <Download size={13} />
                           </button>
@@ -406,7 +422,7 @@ export default function HistoryReports() {
                               handleOpenReport(item);
                               handleCreateQR(item);
                             }}
-                            title="View QR"
+                            title={t('history.view_qr')}
                           >
                             <QrCode size={13} />
                           </button>

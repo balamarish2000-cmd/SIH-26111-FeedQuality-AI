@@ -28,11 +28,11 @@ export default function Login() {
     setLocalError('');
 
     if (!identifier.trim()) {
-      setLocalError('Please enter your mobile number or email address.');
+      setLocalError(t('auth.err_enter_identifier', 'Please enter your mobile number or email address.'));
       return;
     }
     if (!password) {
-      setLocalError('Please enter your password.');
+      setLocalError(t('auth.err_enter_password', 'Please enter your password.'));
       return;
     }
 
@@ -103,7 +103,7 @@ export default function Login() {
                 FEED GUARD
               </div>
               <div style={{ fontSize: '0.8rem', color: '#d1fae5', fontWeight: 500 }}>
-                AI-Powered Feed & Silage Quality Testing for Dairy Farmers
+                {t('brand.subtitle', 'AI-Powered Feed & Silage Quality Testing for Dairy Farmers')}
               </div>
             </div>
           </div>
@@ -117,7 +117,7 @@ export default function Login() {
             margin: '0 0 1.25rem 0',
             color: '#ffffff'
           }}>
-            Rapid on-farm feed screening & spoilage detection in minutes.
+            {t('auth.welcome_login_headline', 'Rapid on-farm feed screening & spoilage detection in minutes.')}
           </h2>
 
           <p style={{
@@ -127,7 +127,7 @@ export default function Login() {
             maxWidth: 520,
             margin: '0 0 2.25rem 0'
           }}>
-            Helping dairy farmers assess feed quality, identify potential contamination, and make better feeding and storage decisions using AI, sensors, and computer vision.
+            {t('auth.welcome_login_desc', 'Helping dairy farmers assess feed quality, identify potential contamination, and make better feeding and storage decisions using AI, sensors, and computer vision.')}
           </p>
 
           {/* 4 Professional Feature Cards */}
@@ -140,10 +140,10 @@ export default function Login() {
             }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: '#a7f3d0', fontWeight: 700, fontSize: '0.88rem', marginBottom: 4 }}>
                 <FlaskConical size={16} />
-                <span>AI Feed Screening</span>
+                <span>{t('auth.feature_feed_title', 'AI Feed Screening')}</span>
               </div>
               <div style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.8)', lineHeight: 1.45 }}>
-                Nutritional quality and adulteration risk assessment
+                {t('auth.feature_feed_desc', 'Nutritional quality and adulteration risk assessment')}
               </div>
             </div>
 
@@ -155,10 +155,10 @@ export default function Login() {
             }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: '#fef08a', fontWeight: 700, fontSize: '0.88rem', marginBottom: 4 }}>
                 <Warehouse size={16} />
-                <span>Silage Monitoring</span>
+                <span>{t('auth.feature_silage_title', 'Silage Monitoring')}</span>
               </div>
               <div style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.8)', lineHeight: 1.45 }}>
-                Temperature, pH, moisture and spoilage monitoring
+                {t('auth.feature_silage_desc', 'Temperature, pH, moisture and spoilage monitoring')}
               </div>
             </div>
 
@@ -170,10 +170,10 @@ export default function Login() {
             }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: '#93c5fd', fontWeight: 700, fontSize: '0.88rem', marginBottom: 4 }}>
                 <WifiOff size={16} />
-                <span>Offline-Ready</span>
+                <span>{t('auth.feature_offline_title', 'Offline-Ready')}</span>
               </div>
               <div style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.8)', lineHeight: 1.45 }}>
-                Continue testing and store results when connectivity is unavailable
+                {t('auth.feature_offline_desc', 'Continue testing and store results when connectivity is unavailable')}
               </div>
             </div>
 
@@ -185,10 +185,10 @@ export default function Login() {
             }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: '#fbcfe8', fontWeight: 700, fontSize: '0.88rem', marginBottom: 4 }}>
                 <Activity size={16} />
-                <span>Farmer Advisory</span>
+                <span>{t('auth.feature_advisory_title', 'Farmer Advisory')}</span>
               </div>
               <div style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.8)', lineHeight: 1.45 }}>
-                Clear, actionable feeding and storage recommendations
+                {t('auth.feature_advisory_desc', 'Clear, actionable feeding and storage recommendations')}
               </div>
             </div>
           </div>
@@ -196,7 +196,7 @@ export default function Login() {
 
         {/* Subtle Footer Note */}
         <div style={{ position: 'relative', zIndex: 2, marginTop: '2.5rem', fontSize: '0.78rem', color: 'rgba(255,255,255,0.65)' }}>
-          Developed for Smart India Hackathon 2026
+          {t('common.sih_credit', 'Developed for Smart India Hackathon 2026')}
         </div>
       </div>
 
@@ -267,10 +267,10 @@ export default function Login() {
               margin: '0 0 6px 0',
               color: 'var(--text-primary)'
             }}>
-              Farmer Login
+              {t('auth.login_title', 'Farmer Login')}
             </h1>
             <p style={{ margin: 0, fontSize: '0.88rem', color: 'var(--text-secondary)' }}>
-              Sign in to access your Feed Guard workspace.
+              {t('auth.login_tagline', 'Sign in to access your Feed Guard workspace.')}
             </p>
           </div>
 
@@ -295,7 +295,7 @@ export default function Login() {
             <div className="form-group" style={{ marginBottom: '1.1rem' }}>
               <label className="form-label" style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: '0.85rem' }}>
                 <Phone size={14} style={{ color: 'var(--color-primary)' }} />
-                Mobile Number or Email Address
+                {t('auth.identifier_label', 'Mobile Number or Email Address')}
               </label>
               <input
                 id="login-identifier"
@@ -303,7 +303,7 @@ export default function Login() {
                 className="farmer-input"
                 value={identifier}
                 onChange={(e) => setIdentifier(e.target.value)}
-                placeholder="e.g. 9823045678 or farmer@kisanmail.in"
+                placeholder={t('auth.identifier_placeholder', 'e.g. 9823045678 or farmer@kisanmail.in')}
                 required
                 autoComplete="username"
               />
@@ -313,13 +313,13 @@ export default function Login() {
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
                 <label htmlFor="login-password" className="form-label" style={{ display: 'flex', alignItems: 'center', gap: 6, margin: 0, fontSize: '0.85rem' }}>
                   <Lock size={14} style={{ color: 'var(--color-primary)' }} />
-                  Password
+                  {t('auth.password', 'Password')}
                 </label>
                 <Link
                   to="/forgot-password"
                   style={{ fontSize: '0.8rem', color: 'var(--color-primary)', textDecoration: 'none', fontWeight: 600 }}
                 >
-                  Forgot Password?
+                  {t('auth.forgot_password', 'Forgot Password?')}
                 </Link>
               </div>
 
@@ -331,7 +331,7 @@ export default function Login() {
                   style={{ paddingRight: 42 }}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Enter your password"
+                  placeholder={t('auth.password_placeholder', 'Enter your password')}
                   required
                   autoComplete="current-password"
                 />
@@ -351,8 +351,8 @@ export default function Login() {
                     alignItems: 'center',
                     padding: 4
                   }}
-                  title={showPassword ? 'Hide password' : 'Show password'}
-                  aria-label="Toggle password visibility"
+                  title={showPassword ? t('auth.hide_password', 'Hide password') : t('auth.show_password', 'Show password')}
+                  aria-label={showPassword ? t('auth.hide_password', 'Hide password') : t('auth.show_password', 'Show password')}
                 >
                   {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                 </button>
@@ -369,7 +369,7 @@ export default function Login() {
                 style={{ width: 16, height: 16, cursor: 'pointer', accentColor: 'var(--color-primary)' }}
               />
               <label htmlFor="rememberMe" style={{ fontSize: '0.84rem', color: 'var(--text-secondary)', cursor: 'pointer', margin: 0 }}>
-                Remember Me
+                {t('auth.remember_me', 'Remember Me')}
               </label>
             </div>
 
@@ -387,9 +387,9 @@ export default function Login() {
               }}
               disabled={loading}
             >
-              {loading ? 'Signing in...' : (
+              {loading ? t('auth.signing_in', 'Signing in...') : (
                 <>
-                  <span>Farmer Login</span>
+                  <span>{t('auth.login_btn', 'Farmer Login')}</span>
                   <ArrowRight size={17} />
                 </>
               )}
@@ -404,9 +404,9 @@ export default function Login() {
             textAlign: 'center'
           }}>
             <p style={{ margin: 0, fontSize: '0.88rem', color: 'var(--text-secondary)' }}>
-              New dairy farmer?{' '}
+              {t('auth.dont_have_account', 'New dairy farmer? Create an account')}{' '}
               <Link to="/signup" style={{ color: 'var(--color-primary)', fontWeight: 700, textDecoration: 'none' }}>
-                Create Farmer Account
+                {t('auth.signup_btn', 'Create Farmer Account')}
               </Link>
             </p>
           </div>

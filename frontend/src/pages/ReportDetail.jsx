@@ -106,13 +106,13 @@ export default function ReportDetail() {
       <div style={{ maxWidth: 600, margin: 'var(--space-2xl) auto', padding: '0 var(--space-md)' }}>
         <div className="card" style={{ textAlign: 'center', padding: 'var(--space-2xl)' }}>
           <AlertTriangle size={40} style={{ color: 'var(--color-moderate)', margin: '0 auto 12px' }} />
-          <h2 style={{ margin: '0 0 8px' }}>Report Not Found</h2>
+          <h2 style={{ margin: '0 0 8px' }}>{t('history.no_records_found')}</h2>
           <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-lg)' }}>
-            We could not locate an analysis report matching ID "{reportId}".
+            {t('dashboard.no_records_yet')}
           </p>
           <button className="btn btn-primary" onClick={() => navigate('/history')}>
             <ArrowLeft size={16} />
-            Back to Sample History
+            {t('nav.history')}
           </button>
         </div>
       </div>
@@ -133,21 +133,21 @@ export default function ReportDetail() {
       <div className="no-print" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 'var(--space-lg)', flexWrap: 'wrap', gap: 'var(--space-md)' }}>
         <button className="btn btn-secondary" onClick={() => navigate(-1)}>
           <ArrowLeft size={16} />
-          {t('common.back_to_dashboard', 'Back')}
+          {t('common.back_to_dashboard')}
         </button>
 
         <div style={{ display: 'flex', gap: 'var(--space-sm)', flexWrap: 'wrap' }}>
           <button className="btn btn-secondary" onClick={handleCopyLink}>
             {copied ? <Check size={16} style={{ color: 'var(--color-good)' }} /> : <Copy size={16} />}
-            {copied ? t('qr.copied', 'Copied!') : t('qr.copy_link', 'Copy Link')}
+            {copied ? t('qr.copied') : t('qr.copy_link')}
           </button>
           <button className="btn btn-secondary" onClick={handleWhatsAppShare}>
             <Share2 size={16} />
-            {t('qr.share_whatsapp', 'WhatsApp')}
+            {t('qr.share_whatsapp')}
           </button>
           <button className="btn btn-primary" onClick={handlePrint}>
             <Printer size={16} />
-            {t('report.btn_download_pdf', 'Download PDF / Print')}
+            {t('report.btn_download_pdf')}
           </button>
         </div>
       </div>

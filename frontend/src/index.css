@@ -1835,5 +1835,123 @@ body {
   font-weight: 800;
 }
 
+/* ========================================================
+   RTL LANGUAGE SUPPORT (URDU)
+   ======================================================== */
+html[dir="rtl"],
+body.rtl {
+  direction: rtl;
+  text-align: right;
+  font-family: system-ui, -apple-system, 'Segoe UI', 'Noto Nastaliq Urdu', 'Urdu Typesetting', Tahoma, sans-serif;
+}
 
+html[dir="rtl"] .navbar .nav-container,
+html[dir="rtl"] .kisan-banner,
+html[dir="rtl"] .footer-inner,
+html[dir="rtl"] .page-header,
+html[dir="rtl"] .card-header,
+html[dir="rtl"] .input-method-btn,
+html[dir="rtl"] .stat,
+html[dir="rtl"] .temp-header,
+html[dir="rtl"] .temp-differential-grid,
+html[dir="rtl"] .login-left-pane {
+  direction: rtl;
+  text-align: right;
+}
 
+html[dir="rtl"] .stat {
+  border-left: none !important;
+  border-right: 4px solid var(--color-primary);
+  text-align: right;
+}
+
+html[dir="rtl"] .form-label,
+html[dir="rtl"] .form-group label {
+  text-align: right;
+  justify-content: flex-start;
+}
+
+html[dir="rtl"] .farmer-input,
+html[dir="rtl"] .farmer-select,
+html[dir="rtl"] .form-input,
+html[dir="rtl"] .form-select {
+  text-align: right;
+  direction: rtl;
+}
+
+/* Adjust password inputs with toggle eye icon in RTL */
+html[dir="rtl"] input[style*="paddingRight"] {
+  padding-right: 14px !important;
+  padding-left: 42px !important;
+}
+
+html[dir="rtl"] button[aria-label*="password"],
+html[dir="rtl"] button[aria-label*="Password"],
+html[dir="rtl"] button[title*="password"],
+html[dir="rtl"] button[title*="Password"] {
+  right: auto !important;
+  left: 12px !important;
+}
+
+/* Adjust search input with left icon in RTL */
+html[dir="rtl"] input[style*="paddingLeft"] {
+  padding-left: 14px !important;
+  padding-right: 38px !important;
+}
+
+html[dir="rtl"] .form-group svg[style*="left: 12px"],
+html[dir="rtl"] div[style*="left: 12px"] {
+  left: auto !important;
+  right: 12px !important;
+}
+
+/* Tables in RTL */
+html[dir="rtl"] .data-table th,
+html[dir="rtl"] .data-table td,
+html[dir="rtl"] .farmer-table th,
+html[dir="rtl"] .farmer-table td {
+  text-align: right;
+}
+
+html[dir="rtl"] .data-table th:last-child,
+html[dir="rtl"] .data-table td:last-child,
+html[dir="rtl"] .farmer-table th:last-child,
+html[dir="rtl"] .farmer-table td:last-child {
+  text-align: left;
+}
+
+/* Modal, cards & alerts in RTL */
+html[dir="rtl"] .modal-header {
+  flex-direction: row-reverse;
+}
+
+html[dir="rtl"] .advisory-card {
+  border-left: none !important;
+  border-right: 4px solid var(--color-primary);
+  text-align: right;
+}
+
+html[dir="rtl"] .advisory-card.good {
+  border-right-color: var(--color-good) !important;
+}
+
+html[dir="rtl"] .advisory-card.warning,
+html[dir="rtl"] .advisory-card.critical {
+  border-right-color: var(--color-unsafe) !important;
+}
+
+html[dir="rtl"] .problem-banner {
+  border-left: none !important;
+  border-right: 4px solid var(--color-primary);
+  text-align: right;
+}
+
+html[dir="rtl"] .mobile-bottom-nav {
+  direction: rtl;
+}
+
+html[dir="rtl"] ul,
+html[dir="rtl"] ol {
+  padding-left: 0;
+  padding-right: var(--space-lg, 1.25rem);
+}

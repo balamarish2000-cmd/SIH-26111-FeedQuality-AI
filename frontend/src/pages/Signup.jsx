@@ -47,36 +47,36 @@ export default function Signup() {
 
     // Field validations
     if (!form.name.trim()) {
-      setLocalError('Full Name is required.');
+      setLocalError(t('auth.err_name_required', 'Full Name is required.'));
       return;
     }
     const cleanMobile = form.mobile.replace(/[^0-9]/g, '');
     if (cleanMobile.length < 10) {
-      setLocalError('Please enter a valid 10-digit mobile number.');
+      setLocalError(t('auth.err_mobile_invalid', 'Please enter a valid 10-digit mobile number.'));
       return;
     }
     if (form.email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) {
-      setLocalError('Please enter a valid email address.');
+      setLocalError(t('auth.err_email_invalid', 'Please enter a valid email address.'));
       return;
     }
     if (!form.farm_name.trim()) {
-      setLocalError('Farm or Dairy Name is required.');
+      setLocalError(t('auth.err_farm_required', 'Farm or Dairy Name is required.'));
       return;
     }
     if (!form.district.trim()) {
-      setLocalError('District is required.');
+      setLocalError(t('auth.err_district_required', 'District is required.'));
       return;
     }
     if (!form.state) {
-      setLocalError('State is required.');
+      setLocalError(t('auth.err_state_required', 'State is required.'));
       return;
     }
     if (form.password.length < 6) {
-      setLocalError('Password must be at least 6 characters long.');
+      setLocalError(t('auth.err_password_short', 'Password must be at least 6 characters long.'));
       return;
     }
     if (form.password !== form.confirmPassword) {
-      setLocalError('Passwords do not match. Please verify.');
+      setLocalError(t('auth.err_password_match', 'Passwords do not match. Please verify.'));
       return;
     }
 
@@ -87,7 +87,7 @@ export default function Signup() {
         state: {
           registered: true,
           registeredMobile: form.mobile.trim(),
-          message: 'Account created successfully. Please sign in with your credentials.'
+          message: t('auth.account_created_success', 'Account created successfully. Please sign in with your credentials.')
         },
         replace: true
       });
@@ -113,10 +113,10 @@ export default function Signup() {
             <ShieldCheck size={28} />
           </div>
           <h1 style={{ fontSize: '1.5rem', margin: '0 0 6px', color: 'var(--text-primary)', fontFamily: 'var(--font-display)', fontWeight: 800 }}>
-            Create Farmer Account
+            {t('auth.signup_title', 'Create Farmer Account')}
           </h1>
           <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', margin: 0 }}>
-            Register your dairy operation to screen feed quality, monitor silage, and track batch safety.
+            {t('auth.signup_tagline', 'Register your dairy operation to screen feed quality, monitor silage, and track batch safety.')}
           </p>
         </div>
 
@@ -134,7 +134,7 @@ export default function Signup() {
             <div className="form-group">
               <label className="form-label" style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                 <User size={14} style={{ color: 'var(--color-primary)' }} />
-                Full Name *
+                {t('auth.full_name', 'Full Name')} *
               </label>
               <input
                 type="text"
@@ -149,7 +149,7 @@ export default function Signup() {
             <div className="form-group">
               <label className="form-label" style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                 <Phone size={14} style={{ color: 'var(--color-primary)' }} />
-                Mobile Number *
+                {t('auth.mobile', 'Mobile Number')} *
               </label>
               <input
                 type="tel"
@@ -167,7 +167,7 @@ export default function Signup() {
             <div className="form-group">
               <label className="form-label" style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                 <Mail size={14} style={{ color: 'var(--color-primary)' }} />
-                Email Address (Optional)
+                {t('auth.email', 'Email Address (Optional)')}
               </label>
               <input
                 type="email"
@@ -181,7 +181,7 @@ export default function Signup() {
             <div className="form-group">
               <label className="form-label" style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                 <Building2 size={14} style={{ color: 'var(--color-primary)' }} />
-                Farm / Dairy Name *
+                {t('auth.farm_name', 'Farm / Dairy Name')} *
               </label>
               <input
                 type="text"
@@ -199,7 +199,7 @@ export default function Signup() {
             <div className="form-group">
               <label className="form-label" style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                 <MapPin size={14} style={{ color: 'var(--color-primary)' }} />
-                Village / Town
+                {t('auth.village', 'Village / Town')}
               </label>
               <input
                 type="text"
@@ -211,7 +211,7 @@ export default function Signup() {
             </div>
 
             <div className="form-group">
-              <label className="form-label">District *</label>
+              <label className="form-label">{t('auth.district', 'District')} *</label>
               <input
                 type="text"
                 className="farmer-input"
@@ -226,7 +226,7 @@ export default function Signup() {
           {/* Row 4: State & Cattle Count */}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 'var(--space-md)', marginBottom: 'var(--space-md)' }}>
             <div className="form-group">
-              <label className="form-label">State *</label>
+              <label className="form-label">{t('auth.state', 'State')} *</label>
               <select
                 className="farmer-select"
                 value={form.state}
@@ -240,7 +240,7 @@ export default function Signup() {
             <div className="form-group">
               <label className="form-label" style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                 <Layers size={14} style={{ color: 'var(--color-primary)' }} />
-                Estimated Cattle Count
+                {t('auth.cattle_count', 'Estimated Cattle Count')}
               </label>
               <input
                 type="number"
@@ -257,7 +257,7 @@ export default function Signup() {
             <div className="form-group">
               <label className="form-label" style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                 <Lock size={14} style={{ color: 'var(--color-primary)' }} />
-                Password * (min 6 chars)
+                {t('auth.password', 'Password')} * (min 6 chars)
               </label>
               <div style={{ position: 'relative' }}>
                 <input
@@ -282,7 +282,7 @@ export default function Signup() {
                     cursor: 'pointer',
                     color: 'var(--text-muted)'
                   }}
-                  aria-label="Toggle password view"
+                  aria-label={showPassword ? t('auth.hide_password', 'Hide password') : t('auth.show_password', 'Show password')}
                 >
                   {showPassword ? <EyeOff size={15} /> : <Eye size={15} />}
                 </button>
@@ -292,7 +292,7 @@ export default function Signup() {
             <div className="form-group">
               <label className="form-label" style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                 <Lock size={14} style={{ color: 'var(--color-primary)' }} />
-                Confirm Password *
+                {t('auth.confirm_password', 'Confirm Password')} *
               </label>
               <div style={{ position: 'relative' }}>
                 <input
@@ -317,7 +317,7 @@ export default function Signup() {
                     cursor: 'pointer',
                     color: 'var(--text-muted)'
                   }}
-                  aria-label="Toggle confirm password view"
+                  aria-label={showConfirmPassword ? t('auth.hide_password', 'Hide password') : t('auth.show_password', 'Show password')}
                 >
                   {showConfirmPassword ? <EyeOff size={15} /> : <Eye size={15} />}
                 </button>
@@ -332,9 +332,9 @@ export default function Signup() {
             style={{ width: '100%', justifyContent: 'center', padding: '13px', fontSize: '0.98rem', fontWeight: 700 }}
             disabled={loading}
           >
-            {loading ? 'Registering Account...' : (
+            {loading ? t('auth.registering', 'Registering Account...') : (
               <>
-                <span>Create Farmer Account</span>
+                <span>{t('auth.signup_btn', 'Create Farmer Account')}</span>
                 <ArrowRight size={17} />
               </>
             )}
@@ -344,9 +344,9 @@ export default function Signup() {
         {/* Existing Account Footer Link */}
         <div style={{ marginTop: 'var(--space-lg)', paddingTop: 'var(--space-md)', borderTop: '1px solid var(--border-subtle)', textAlign: 'center' }}>
           <p style={{ margin: 0, fontSize: '0.88rem', color: 'var(--text-secondary)' }}>
-            Already registered?{' '}
+            {t('auth.already_account', 'Already registered? Login here')}{' '}
             <Link to="/login" style={{ color: 'var(--color-primary)', fontWeight: 700, textDecoration: 'none' }}>
-              Farmer Sign In
+              {t('auth.login_btn', 'Farmer Login')}
             </Link>
           </p>
         </div>

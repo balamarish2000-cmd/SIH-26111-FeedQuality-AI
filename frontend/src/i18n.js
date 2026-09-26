@@ -17,10 +17,28 @@ i18n
     },
   });
 
+function applyDirection(lng) {
+  const isRTL = lng === 'ur';
+  try {
+    document.documentElement.lang = lng;
+    document.documentElement.dir = isRTL ? 'rtl' : 'ltr';
+    document.documentElement.setAttribute('dir', isRTL ? 'rtl' : 'ltr');
+    if (document.body) {
+      if (isRTL) {
+        document.body.classList.add('rtl');
+      } else {
+        document.body.classList.remove('rtl');
+      }
+    }
+  } catch (e) {
+    console.error('Failed to apply direction:', e);
+  }
+}
+
 i18n.on('languageChanged', (lng) => {
   try {
     localStorage.setItem('feedguard_language', lng);
-    document.documentElement.lang = lng;
+    applyDirection(lng);
     const title = i18n.t('brand.name', 'FEED GUARD');
     const sub = i18n.t('brand.subtitle', 'AI-Powered Feed & Silage Quality Testing for Dairy Farmers');
     document.title = `${title} — ${sub}`;
@@ -31,10 +49,11 @@ i18n.on('languageChanged', (lng) => {
 
 // Set initial document title and language attribute
 try {
-  document.documentElement.lang = savedLang;
+  applyDirection(savedLang);
   const title = i18n.t('brand.name', 'FEED GUARD');
   const sub = i18n.t('brand.subtitle', 'AI-Powered Feed & Silage Quality Testing for Dairy Farmers');
   document.title = `${title} — ${sub}`;
 } catch (e) {}
 
 export default i18n;
+

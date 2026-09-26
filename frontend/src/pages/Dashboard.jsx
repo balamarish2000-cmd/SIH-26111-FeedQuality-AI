@@ -16,7 +16,8 @@ import {
 import {
   getAdulterantName,
   getFeedTypeName,
-  getQualityStatusName
+  getQualityStatusName,
+  getRiskLevelName
 } from '../utils/translations';
 
 ChartJS.register(
@@ -60,7 +61,7 @@ export default function Dashboard() {
     return (
       <div style={{ maxWidth: 800, margin: 'var(--space-2xl) auto', textAlign: 'center', padding: 'var(--space-xl)' }}>
         <div className="loading-spinner" style={{ margin: '0 auto 16px' }} />
-        <p style={{ color: 'var(--text-secondary)' }}>Loading your farm workspace...</p>
+        <p style={{ color: 'var(--text-secondary)' }}>{t('common.loading')}</p>
       </div>
     );
   }
@@ -176,7 +177,7 @@ export default function Dashboard() {
                 fontWeight: 700
               }}>
                 <CheckCircle2 size={13} />
-                Account Active
+                {t('dashboard.account_active')}
               </span>
             </div>
 
@@ -188,7 +189,7 @@ export default function Dashboard() {
               margin: '6px 0 4px 0',
               color: 'var(--text-primary)'
             }}>
-              Welcome, {user?.name || 'Farmer'}
+              {t('dashboard.welcome_farmer')}, {user?.name || t('profile.farmer_fallback')}
             </h1>
 
             {/* Below: "[Farm Name] • [Location]" */}
@@ -202,9 +203,9 @@ export default function Dashboard() {
             }}>
               <MapPin size={14} style={{ color: 'var(--color-primary)' }} />
               <span>
-                {user?.farm_name || 'Dairy Farm'}
-                {user?.district ? ` • ${user.district}, ${user.state || 'India'}` : ''}
-                {user?.cattle_count ? ` • ${user.cattle_count} Cattle` : ''}
+                {user?.farm_name || t('profile.farm_details')}
+                {user?.district ? ` • ${user.district}, ${user.state || ''}` : ''}
+                {user?.cattle_count ? ` • ${user.cattle_count} ${t('common.cattle')}` : ''}
               </span>
             </p>
           </div>
@@ -217,7 +218,7 @@ export default function Dashboard() {
             textAlign: 'right'
           }}>
             <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
-              Dairy Operation ID
+              {t('dashboard.operation_id')}
             </div>
             <div style={{ fontSize: '0.92rem', fontWeight: 800, color: 'var(--text-primary)', fontFamily: 'monospace' }}>
               {user?.id || 'FARMER'}
@@ -240,7 +241,7 @@ export default function Dashboard() {
           gap: '0.75rem'
         }}>
           <div style={{ fontSize: '0.78rem', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-            Quick Farmer Actions
+            {t('dashboard.quick_actions')}
           </div>
 
           <div style={{ display: 'flex', gap: '0.65rem', flexWrap: 'wrap', alignItems: 'center' }}>
@@ -259,7 +260,7 @@ export default function Dashboard() {
               }}
             >
               <PlusCircle size={18} />
-              <span>+ New Feed Test</span>
+              <span>{t('dashboard.new_feed_test')}</span>
             </button>
 
             {/* Secondary Action Buttons */}
@@ -269,7 +270,7 @@ export default function Dashboard() {
               style={{ padding: '9px 14px', fontSize: '0.84rem', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: 6 }}
             >
               <Warehouse size={16} />
-              <span>+ Silage Test</span>
+              <span>{t('dashboard.new_silage_test')}</span>
             </button>
 
             <button
@@ -278,7 +279,7 @@ export default function Dashboard() {
               style={{ padding: '9px 14px', fontSize: '0.84rem', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: 6 }}
             >
               <FileText size={16} />
-              <span>View History</span>
+              <span>{t('dashboard.view_history')}</span>
             </button>
 
             <button
@@ -287,7 +288,7 @@ export default function Dashboard() {
               style={{ padding: '9px 14px', fontSize: '0.84rem', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: 6 }}
             >
               <QrCode size={16} />
-              <span>Scan / Verify QR</span>
+              <span>{t('dashboard.scan_qr')}</span>
             </button>
           </div>
         </div>
@@ -305,25 +306,25 @@ export default function Dashboard() {
         {/* Total Tests */}
         <div className="stat" style={{ borderLeft: '4px solid var(--color-primary)' }}>
           <div className="stat-number">{stats.total_analyses}</div>
-          <div className="stat-text">Total Tests</div>
+          <div className="stat-text">{t('dashboard.total_tests')}</div>
         </div>
 
         {/* Good Quality */}
         <div className="stat" style={{ borderLeft: '4px solid var(--color-good)' }}>
           <div className="stat-number" style={{ color: 'var(--color-good)' }}>{goodCount}</div>
-          <div className="stat-text">Good Quality</div>
+          <div className="stat-text">{t('dashboard.good_samples')}</div>
         </div>
 
         {/* Requires Attention */}
         <div className="stat" style={{ borderLeft: '4px solid var(--color-moderate)' }}>
           <div className="stat-number" style={{ color: 'var(--color-moderate)' }}>{attentionCount}</div>
-          <div className="stat-text">Requires Attention</div>
+          <div className="stat-text">{t('dashboard.attention_samples')}</div>
         </div>
 
         {/* Unsafe / Rejected */}
         <div className="stat" style={{ borderLeft: '4px solid var(--color-unsafe)' }}>
           <div className="stat-number" style={{ color: 'var(--color-unsafe)' }}>{unsafeCount}</div>
-          <div className="stat-text">Unsafe / Rejected</div>
+          <div className="stat-text">{t('dashboard.unsafe_samples')}</div>
         </div>
 
         {/* Adulterations Detected */}
@@ -331,7 +332,7 @@ export default function Dashboard() {
           <div className="stat-number" style={{ color: totalAdulterations > 0 ? 'var(--color-unsafe)' : 'var(--color-good)' }}>
             {totalAdulterations}
           </div>
-          <div className="stat-text">Adulterations Detected</div>
+          <div className="stat-text">{t('dashboard.adulterations_found')}</div>
         </div>
       </div>
 
@@ -357,10 +358,10 @@ export default function Dashboard() {
               <Activity size={28} />
             </div>
             <h3 style={{ fontSize: '1.2rem', fontFamily: 'var(--font-display)', margin: '0 0 6px', color: 'var(--text-primary)' }}>
-              No feed analysis yet
+              {t('dashboard.no_records_yet')}
             </h3>
             <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', maxWidth: 420, margin: '0 auto var(--space-lg)', lineHeight: 1.5 }}>
-              Start your first feed test to see nutritional quality, contamination risk and farmer recommendations.
+              {t('dashboard.empty_state_desc')}
             </p>
             <button
               className="btn btn-primary"
@@ -368,7 +369,7 @@ export default function Dashboard() {
               style={{ padding: '10px 20px', fontSize: '0.92rem', fontWeight: 700 }}
             >
               <PlusCircle size={16} />
-              <span>Start Feed Test</span>
+              <span>{t('dashboard.start_feed_test')}</span>
             </button>
           </div>
 
@@ -388,10 +389,10 @@ export default function Dashboard() {
               <Warehouse size={28} />
             </div>
             <h3 style={{ fontSize: '1.2rem', fontFamily: 'var(--font-display)', margin: '0 0 6px', color: 'var(--text-primary)' }}>
-              No silage monitoring data yet
+              {t('dashboard.no_silage_yet')}
             </h3>
             <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', maxWidth: 420, margin: '0 auto var(--space-lg)', lineHeight: 1.5 }}>
-              Connect your sensors or enter measurements to begin monitoring fermentation temperature, moisture, and pH.
+              {t('dashboard.silage_empty_desc')}
             </p>
             <button
               className="btn btn-secondary"
@@ -399,7 +400,7 @@ export default function Dashboard() {
               style={{ padding: '10px 20px', fontSize: '0.92rem', fontWeight: 700 }}
             >
               <Warehouse size={16} />
-              <span>Open Silage Monitor</span>
+              <span>{t('dashboard.open_silage')}</span>
             </button>
           </div>
         </div>
@@ -417,12 +418,12 @@ export default function Dashboard() {
               <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                 <Sparkles size={18} style={{ color: 'var(--color-primary)' }} />
                 <span className="card-title" style={{ margin: 0, fontSize: '1rem' }}>
-                  Latest AI Screening Advisory
+                  {t('dashboard.recent_advisory')}
                 </span>
               </div>
               {latestReport && (
                 <span className={`badge badge-${getBadgeClass(latestReport.quality_status)}`} style={{ fontWeight: 700 }}>
-                  {latestReport.quality_status?.toUpperCase()}
+                  {getQualityStatusName(t, latestReport.quality_status)}
                 </span>
               )}
             </div>
@@ -435,16 +436,16 @@ export default function Dashboard() {
               border: '1px solid var(--border-subtle, #e8e2d5)'
             }}>
               <div style={{ fontSize: '0.74rem', color: 'var(--text-muted)', marginBottom: 2 }}>
-                SAMPLE: <strong style={{ color: 'var(--text-primary)', fontFamily: 'monospace' }}>{latestReport?.id}</strong> • {latestReport?.feed_type}
+                {t('dashboard.col_id')}: <strong style={{ color: 'var(--text-primary)', fontFamily: 'monospace' }}>{latestReport?.id}</strong> • {getFeedTypeName(t, latestReport?.feed_type)}
               </div>
               <div style={{ fontSize: '0.86rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
-                {latestReport?.advisory?.farmer_advisory || 'Nutritional screening completed. Review recommendations below.'}
+                {latestReport?.advisory?.farmer_advisory || t('dashboard.empty_state_desc')}
               </div>
             </div>
 
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid var(--border-subtle)', paddingTop: 10 }}>
               <span style={{ fontSize: '0.74rem', color: 'var(--text-muted)' }}>
-                Recorded on {new Date(latestReport?.timestamp).toLocaleDateString([], { month: 'short', day: 'numeric', year: 'numeric' })}
+                {t('common.recorded_on')} {new Date(latestReport?.timestamp).toLocaleDateString([], { month: 'short', day: 'numeric', year: 'numeric' })}
               </span>
               <Link
                 to={`/report/${latestReport?.id}`}
@@ -458,7 +459,7 @@ export default function Dashboard() {
                   gap: 4
                 }}
               >
-                <span>View Full Report</span>
+                <span>{t('dashboard.action_view')}</span>
                 <ArrowRight size={14} />
               </Link>
             </div>
@@ -469,10 +470,10 @@ export default function Dashboard() {
             <div className="card-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <span className="card-title" style={{ margin: 0, fontSize: '1rem' }}>
                 <Activity size={18} style={{ color: '#0284c7' }} />
-                <span>Quality Distribution</span>
+                <span>{t('dashboard.quality_dist')}</span>
               </span>
               <span style={{ fontSize: '0.74rem', color: 'var(--text-muted)' }}>
-                {stats.total_analyses} Tested
+                {stats.total_analyses} {t('dashboard.samples_tested')}
               </span>
             </div>
             <div style={{ height: '180px', position: 'relative', marginTop: 10 }}>
@@ -488,11 +489,11 @@ export default function Dashboard() {
       <div className="card" style={{ marginBottom: 'var(--space-2xl, 3rem)' }}>
         <div className="card-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <span className="card-title" style={{ margin: 0, fontSize: '1.05rem', fontWeight: 800 }}>
-            Recent Activity
+            {t('dashboard.recent')}
           </span>
           {hasTests && (
             <Link to="/history" style={{ fontSize: '0.82rem', color: 'var(--color-primary)', textDecoration: 'none', fontWeight: 700 }}>
-              View All History →
+              {t('dashboard.view_history')} →
             </Link>
           )}
         </div>
@@ -500,9 +501,9 @@ export default function Dashboard() {
         {!hasTests ? (
           <div style={{ textAlign: 'center', padding: 'var(--space-xl)', color: 'var(--text-muted)' }}>
             <FileText size={36} style={{ opacity: 0.25, margin: '0 auto 8px' }} />
-            <div style={{ fontSize: '0.9rem', fontWeight: 600 }}>No recent activity.</div>
+            <div style={{ fontSize: '0.9rem', fontWeight: 600 }}>{t('dashboard.no_records_yet')}</div>
             <div style={{ fontSize: '0.8rem', marginTop: 2 }}>
-              Tests you record will appear here with sample quality and risk status.
+              {t('dashboard.empty_state_desc')}
             </div>
           </div>
         ) : (
@@ -510,18 +511,17 @@ export default function Dashboard() {
             <table className="data-table" style={{ width: '100%' }}>
               <thead>
                 <tr>
-                  <th>Sample ID</th>
-                  <th>Feed Type</th>
-                  <th>Date</th>
-                  <th>Quality</th>
-                  <th>Risk</th>
-                  <th>Status</th>
-                  <th style={{ textAlign: 'right' }}>Action</th>
+                  <th>{t('dashboard.col_id')}</th>
+                  <th>{t('dashboard.col_feed')}</th>
+                  <th>{t('dashboard.col_date')}</th>
+                  <th>{t('dashboard.col_grade')}</th>
+                  <th>{t('analyze.risk_level')}</th>
+                  <th>{t('report.quality_status')}</th>
+                  <th style={{ textAlign: 'right' }}>{t('history.col_actions')}</th>
                 </tr>
               </thead>
               <tbody>
                 {stats.recent_analyses.map((item) => {
-                  const isClean = item.adulteration_type === 'None' || !item.adulteration_type;
                   const dateStr = item.timestamp
                     ? new Date(item.timestamp).toLocaleDateString([], { month: 'short', day: 'numeric', year: 'numeric' })
                     : 'N/A';
@@ -534,14 +534,14 @@ export default function Dashboard() {
                         </strong>
                       </td>
                       <td>
-                        <span style={{ fontWeight: 600 }}>{item.feed_type}</span>
+                        <span style={{ fontWeight: 600 }}>{getFeedTypeName(t, item.feed_type)}</span>
                       </td>
                       <td style={{ fontSize: '0.84rem', color: 'var(--text-muted)' }}>
                         {dateStr}
                       </td>
                       <td>
                         <span className={`badge badge-${getBadgeClass(item.quality_status)}`}>
-                          {item.quality_status}
+                          {getQualityStatusName(t, item.quality_status)}
                         </span>
                       </td>
                       <td>
@@ -550,12 +550,12 @@ export default function Dashboard() {
                           fontSize: '0.82rem',
                           color: item.quality_status === 'Good' ? 'var(--color-good)' : item.quality_status === 'Moderate' ? 'var(--color-moderate)' : 'var(--color-unsafe)'
                         }}>
-                          {item.quality_status === 'Good' ? 'Low Risk' : item.quality_status === 'Moderate' ? 'Moderate Risk' : 'High Risk'}
+                          {getRiskLevelName(t, item.quality_status)}
                         </span>
                       </td>
                       <td>
                         <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
-                          Completed
+                          {t('common.completed')}
                         </span>
                       </td>
                       <td style={{ textAlign: 'right' }}>
@@ -564,7 +564,7 @@ export default function Dashboard() {
                           className="btn btn-secondary"
                           style={{ padding: '4px 10px', fontSize: '0.78rem', textDecoration: 'none' }}
                         >
-                          View Report
+                          {t('dashboard.action_view')}
                         </Link>
                       </td>
                     </tr>

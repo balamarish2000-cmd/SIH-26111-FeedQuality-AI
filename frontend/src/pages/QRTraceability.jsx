@@ -100,25 +100,25 @@ export default function QRTraceability() {
           fontWeight: 800
         }}>
           <QrCode size={14} />
-          <span>BATCH TRACEABILITY REPORT</span>
+          <span>{t('qr.batch_report_badge')}</span>
         </div>
       </div>
 
       {/* Visual Workflow Pipeline Banner */}
       <div className="card" style={{ padding: '12px 18px', marginBottom: 'var(--space-lg)', background: 'var(--bg-card-alt)' }}>
         <div style={{ fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em', color: 'var(--text-muted)', marginBottom: 6 }}>
-          Traceability Verification Workflow
+          {t('qr.workflow_title')}
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.8rem', color: 'var(--text-secondary)', flexWrap: 'wrap' }}>
-          <span className="badge" style={{ background: 'var(--color-primary-light)', color: 'var(--color-primary)', fontWeight: 700 }}>Scan / Generate QR</span>
+          <span className="badge" style={{ background: 'var(--color-primary-light)', color: 'var(--color-primary)', fontWeight: 700 }}>{t('qr.step_scan')}</span>
           <span>→</span>
-          <span className="badge" style={{ background: 'var(--bg-card)', border: '1px solid var(--border-subtle)' }}>Batch ID</span>
+          <span className="badge" style={{ background: 'var(--bg-card)', border: '1px solid var(--border-subtle)' }}>{t('analyze.batch_id')}</span>
           <span>→</span>
-          <span className="badge" style={{ background: 'var(--bg-card)', border: '1px solid var(--border-subtle)' }}>Feed Information</span>
+          <span className="badge" style={{ background: 'var(--bg-card)', border: '1px solid var(--border-subtle)' }}>{t('qr.step_info')}</span>
           <span>→</span>
-          <span className="badge" style={{ background: 'var(--bg-card)', border: '1px solid var(--border-subtle)' }}>Analysis Result</span>
+          <span className="badge" style={{ background: 'var(--bg-card)', border: '1px solid var(--border-subtle)' }}>{t('qr.step_result')}</span>
           <span>→</span>
-          <span className="badge" style={{ background: 'rgba(22, 163, 74, 0.12)', color: 'var(--color-good)', fontWeight: 700 }}>Traceability Record</span>
+          <span className="badge" style={{ background: 'rgba(22, 163, 74, 0.12)', color: 'var(--color-good)', fontWeight: 700 }}>{t('qr.step_traceability')}</span>
         </div>
       </div>
 
@@ -282,7 +282,7 @@ export default function QRTraceability() {
                 <Package size={18} style={{ color: 'var(--color-wheat)' }} />
                 {t('qr.batches_title')}
               </span>
-              <span className="badge badge-good">{batches.length} Verified Batches</span>
+              <span className="badge badge-good">{batches.length} {t('qr.verified_batches_count')}</span>
             </div>
 
             {batches.length === 0 ? (
@@ -315,7 +315,7 @@ export default function QRTraceability() {
                       </div>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                      <span className="badge badge-good">{t('quality_grades.' + (batch.quality_status?.toLowerCase() || 'good'), batch.quality_status || t('qr.certified_badge', 'Certified'))}</span>
+                      <span className="badge badge-good">{t('quality_grades.' + (batch.quality_status?.toLowerCase() || 'good'), batch.quality_status || t('qr.verified_badge', 'Verified'))}</span>
                       <button
                         className="btn btn-secondary"
                         style={{ padding: '0.35rem 0.65rem', fontSize: '0.75rem' }}
