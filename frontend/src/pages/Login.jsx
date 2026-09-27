@@ -431,7 +431,7 @@ export default function Login() {
                   gap: 5
                 }}
               >
-                <span>{t('auth.explore_sample_analysis', 'Explore Sample Analysis')}</span>
+                <span>{t('auth.explore_without_login', 'Explore without login')}</span>
                 <ArrowRight size={13} />
               </Link>
             </div>
