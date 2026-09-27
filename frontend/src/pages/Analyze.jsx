@@ -1175,7 +1175,7 @@ export default function Analyze() {
                       <div className="advisory-card info">
                         <h4>
                           <Wheat size={18} style={{ color: 'var(--color-info)' }} />
-                          {t('dashboard.feeding_recommendation', 'Feeding Recommendation')}
+                          {t('dashboard.feeding_rec', 'Feeding Recommendation')}
                         </h4>
                         <p>{feedingTip}</p>
                         <ul style={{ paddingLeft: 'var(--space-lg)', margin: '4px 0 0' }}>
@@ -1205,7 +1205,7 @@ export default function Analyze() {
                       <div className={`advisory-card ${isSpoiled ? 'critical' : 'warning'}`}>
                         <h4>
                           <Lightbulb size={18} style={{ color: 'var(--color-wheat)' }} />
-                          {t('dashboard.storage_recommendation', 'Storage Recommendation')}
+                          {t('dashboard.storage_rec', 'Storage Recommendation')}
                         </h4>
                         <p>{guidanceMessage}</p>
                         <ul style={{ paddingLeft: 'var(--space-lg)', margin: '4px 0 0' }}>

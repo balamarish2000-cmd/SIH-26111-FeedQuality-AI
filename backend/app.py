@@ -167,7 +167,6 @@ def predict():
                 val = int(val)
             elif isinstance(val, (np.floating,)):
                 val = float(val)
-            predictions[col] = val
         # Extract language
         lang = request.args.get("lang") or (data.get("lang") if isinstance(data, dict) else "en") or "en"
 

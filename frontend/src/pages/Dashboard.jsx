@@ -469,7 +469,7 @@ export default function Dashboard() {
                 {/* Feeding Recommendation */}
                 <div>
                   <strong style={{ fontSize: '0.75rem', color: 'var(--text-primary)', textTransform: 'uppercase', letterSpacing: '0.03em' }}>
-                    {t('dashboard.feeding_recommendation', 'Feeding Recommendation')}:
+                    {t('dashboard.feeding_rec', 'Feeding Recommendation')}:
                   </strong>
                   <div style={{ fontSize: '0.84rem', color: 'var(--text-secondary)', marginTop: 2, lineHeight: 1.45 }}>
                     {latestReport?.advisory?.feeding_recommendation || latestReport?.advisory?.structured_advisory?.nutritional_guidance?.feeding_ration_tip || t('dashboard.empty_state_desc')}
@@ -479,7 +479,7 @@ export default function Dashboard() {
                 {/* Storage Recommendation */}
                 <div>
                   <strong style={{ fontSize: '0.75rem', color: 'var(--text-primary)', textTransform: 'uppercase', letterSpacing: '0.03em' }}>
-                    {t('dashboard.storage_recommendation', 'Storage Recommendation')}:
+                    {t('dashboard.storage_rec', 'Storage Recommendation')}:
                   </strong>
                   <div style={{ fontSize: '0.84rem', color: 'var(--text-secondary)', marginTop: 2, lineHeight: 1.45 }}>
                     {latestReport?.advisory?.storage_recommendation || t('advisory_storage.stable', 'Store feed sacks on elevated wooden pallets in a cool, well-ventilated dry space.')}
@@ -506,7 +506,7 @@ export default function Dashboard() {
                 {/* Recommended Action */}
                 <div>
                   <strong style={{ fontSize: '0.75rem', color: 'var(--text-primary)', textTransform: 'uppercase', letterSpacing: '0.03em' }}>
-                    {t('dashboard.recommended_action', 'Recommended Action')}:
+                    {t('dashboard.rec_action', 'Recommended Action')}:
                   </strong>
                   <div style={{ fontSize: '0.84rem', color: 'var(--text-secondary)', marginTop: 2, lineHeight: 1.45 }}>
                     {latestReport?.advisory?.farmer_advisory || t('analyze.action_good', 'Feed directly according to recommended lactation ration schedules.')}
