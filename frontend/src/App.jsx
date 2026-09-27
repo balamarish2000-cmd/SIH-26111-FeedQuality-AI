@@ -32,6 +32,11 @@ function PublicRoute({ children }) {
   return children;
 }
 
+function RootRoute() {
+  const { isAuthenticated } = useAuth();
+  return isAuthenticated ? <Navigate to="/dashboard" replace /> : <Home />;
+}
+
 function AppRoutes() {
   return (
     <Routes>
@@ -61,27 +66,67 @@ function AppRoutes() {
         }
       />
 
-      {/* Protected Dashboard & Field Operations Application */}
-      <Route
-        path="/"
-        element={
-          <ProtectedRoute>
-            <Layout />
-          </ProtectedRoute>
-        }
-      >
-        <Route index element={<Dashboard />} />
+      {/* Main Application Shell with Public Exploration & Protected Farmer Routes */}
+      <Route path="/" element={<Layout />}>
+        {/* Landing & Public Exploration */}
+        <Route index element={<RootRoute />} />
         <Route path="home" element={<Home />} />
-        <Route path="dashboard" element={<Dashboard />} />
         <Route path="analyze" element={<Analyze />} />
-        <Route path="history" element={<HistoryReports />} />
-        <Route path="reports" element={<HistoryReports />} />
-        <Route path="report/:reportId" element={<ReportDetail />} />
-        <Route path="advisory" element={<AdvisoryHub />} />
         <Route path="silage" element={<SilageMonitor />} />
-        <Route path="qr" element={<QRTraceability />} />
-        <Route path="profile" element={<Profile />} />
-        <Route path="*" element={<Navigate to="/dashboard" replace />} />
+        <Route path="advisory" element={<AdvisoryHub />} />
+
+        {/* Authenticated Farmer Workspace */}
+        <Route
+          path="dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="history"
+          element={
+            <ProtectedRoute>
+              <HistoryReports />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="reports"
+          element={
+            <ProtectedRoute>
+              <HistoryReports />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="report/:reportId"
+          element={
+            <ProtectedRoute>
+              <ReportDetail />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="qr"
+          element={
+            <ProtectedRoute>
+              <QRTraceability />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="profile"
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Fallback */}
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Route>
     </Routes>
   );

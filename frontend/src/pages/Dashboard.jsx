@@ -46,6 +46,14 @@ export default function Dashboard() {
   const [silageData, setSilageData] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  // Time-based professional greeting for farmer
+  const getGreeting = () => {
+    const hour = new Date().getHours();
+    if (hour < 12) return t('dashboard.greeting_morning', 'Good morning');
+    if (hour < 17) return t('dashboard.greeting_afternoon', 'Good afternoon');
+    return t('dashboard.greeting_evening', 'Good evening');
+  };
+
   // Load dynamically calculated stats strictly isolated for the active farmer
   useEffect(() => {
     if (user?.id) {
@@ -181,7 +189,7 @@ export default function Dashboard() {
               </span>
             </div>
 
-            {/* Display: "Welcome, [Farmer Name]" */}
+            {/* Display: "Good morning, [Farmer Name]" */}
             <h1 style={{
               fontFamily: 'var(--font-display)',
               fontSize: 'clamp(1.5rem, 2.4vw, 1.95rem)',
@@ -189,7 +197,7 @@ export default function Dashboard() {
               margin: '6px 0 4px 0',
               color: 'var(--text-primary)'
             }}>
-              {t('dashboard.welcome_farmer')}, {user?.name || t('profile.farmer_fallback')}
+              {getGreeting()}, {user?.name || t('profile.farmer_fallback')}
             </h1>
 
             {/* Below: "[Farm Name] • [Location]" */}
@@ -204,7 +212,9 @@ export default function Dashboard() {
               <MapPin size={14} style={{ color: 'var(--color-primary)' }} />
               <span>
                 {user?.farm_name || t('profile.farm_details')}
-                {user?.district ? ` • ${user.district}, ${user.state || ''}` : ''}
+                {[user?.village, user?.district, user?.state].filter(Boolean).length > 0
+                  ? ` • ${[user?.village, user?.district, user?.state].filter(Boolean).join(', ')}`
+                  : ''}
                 {user?.cattle_count ? ` • ${user.cattle_count} ${t('common.cattle')}` : ''}
               </span>
             </p>
@@ -406,69 +416,237 @@ export default function Dashboard() {
         </div>
       ) : (
         /* POPULATED DATA: LATEST ADVISORY & SILAGE MONITOR */
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-          gap: 'var(--space-md, 1rem)',
-          marginBottom: 'var(--space-lg, 1.5rem)'
-        }}>
-          {/* Card A: Latest AI Screening Advisory */}
-          <div className="card" style={{ borderTop: '4px solid var(--color-primary)' }}>
-            <div className="card-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                <Sparkles size={18} style={{ color: 'var(--color-primary)' }} />
-                <span className="card-title" style={{ margin: 0, fontSize: '1rem' }}>
-                  {t('dashboard.recent_advisory')}
-                </span>
+        <>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+            gap: 'var(--space-md, 1rem)',
+            marginBottom: 'var(--space-lg, 1.5rem)'
+          }}>
+            {/* Card A: Latest Farmer Advisory (Section 15) */}
+            <div className="card" style={{ borderTop: '4px solid var(--color-primary)' }}>
+              <div className="card-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                  <Sparkles size={18} style={{ color: 'var(--color-primary)' }} />
+                  <span className="card-title" style={{ margin: 0, fontSize: '1rem', fontWeight: 800 }}>
+                    {t('dashboard.latest_advisory_card', 'Latest Farmer Advisory')}
+                  </span>
+                </div>
+                {latestReport && (
+                  <span className={`badge badge-${getBadgeClass(latestReport.quality_status)}`} style={{ fontWeight: 700 }}>
+                    {getQualityStatusName(t, latestReport.quality_status)}
+                  </span>
+                )}
               </div>
-              {latestReport && (
-                <span className={`badge badge-${getBadgeClass(latestReport.quality_status)}`} style={{ fontWeight: 700 }}>
-                  {getQualityStatusName(t, latestReport.quality_status)}
+
+              <div style={{
+                background: 'var(--bg-card-alt, #f8f5ee)',
+                borderRadius: 'var(--radius-sm, 8px)',
+                padding: '12px 14px',
+                margin: '10px 0',
+                border: '1px solid var(--border-subtle, #e8e2d5)',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 8
+              }}>
+                <div style={{ fontSize: '0.74rem', color: 'var(--text-muted)' }}>
+                  {t('dashboard.col_id')}: <strong style={{ color: 'var(--text-primary)', fontFamily: 'monospace' }}>{latestReport?.id}</strong> • {getFeedTypeName(t, latestReport?.feed_type)}
+                </div>
+
+                {/* Feeding Recommendation */}
+                <div>
+                  <strong style={{ fontSize: '0.75rem', color: 'var(--text-primary)', textTransform: 'uppercase', letterSpacing: '0.03em' }}>
+                    {t('dashboard.feeding_rec', 'Feeding Recommendation')}:
+                  </strong>
+                  <div style={{ fontSize: '0.84rem', color: 'var(--text-secondary)', marginTop: 2, lineHeight: 1.45 }}>
+                    {latestReport?.advisory?.feeding_recommendation || latestReport?.advisory?.structured_advisory?.nutritional_guidance?.feeding_ration_tip || t('dashboard.empty_state_desc')}
+                  </div>
+                </div>
+
+                {/* Storage Recommendation */}
+                <div>
+                  <strong style={{ fontSize: '0.75rem', color: 'var(--text-primary)', textTransform: 'uppercase', letterSpacing: '0.03em' }}>
+                    {t('dashboard.storage_rec', 'Storage Recommendation')}:
+                  </strong>
+                  <div style={{ fontSize: '0.84rem', color: 'var(--text-secondary)', marginTop: 2, lineHeight: 1.45 }}>
+                    {latestReport?.advisory?.storage_recommendation || t('advisory_storage.stable', 'Store feed sacks on elevated wooden pallets in a cool, well-ventilated dry space.')}
+                  </div>
+                </div>
+
+                {/* Risk Alert */}
+                <div>
+                  <strong style={{ fontSize: '0.75rem', color: 'var(--text-primary)', textTransform: 'uppercase', letterSpacing: '0.03em' }}>
+                    {t('dashboard.risk_alert', 'Risk Alert')}:
+                  </strong>
+                  <div style={{
+                    fontSize: '0.84rem',
+                    color: latestReport?.adulteration_type && latestReport.adulteration_type !== 'None' ? 'var(--color-unsafe)' : 'var(--color-good)',
+                    fontWeight: 600,
+                    marginTop: 2
+                  }}>
+                    {latestReport?.adulteration_type && latestReport.adulteration_type !== 'None'
+                      ? `${t('analyze.adulteration_flagged')}: ${getAdulterantName(t, latestReport.adulteration_type)}`
+                      : t('dashboard.no_risk_alert', 'All measured safety indicators within standard limits.')}
+                  </div>
+                </div>
+
+                {/* Recommended Action */}
+                <div>
+                  <strong style={{ fontSize: '0.75rem', color: 'var(--text-primary)', textTransform: 'uppercase', letterSpacing: '0.03em' }}>
+                    {t('dashboard.rec_action', 'Recommended Action')}:
+                  </strong>
+                  <div style={{ fontSize: '0.84rem', color: 'var(--text-secondary)', marginTop: 2, lineHeight: 1.45 }}>
+                    {latestReport?.advisory?.farmer_advisory || t('analyze.action_good', 'Feed directly according to recommended lactation ration schedules.')}
+                  </div>
+                </div>
+              </div>
+
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid var(--border-subtle)', paddingTop: 10 }}>
+                <span style={{ fontSize: '0.74rem', color: 'var(--text-muted)' }}>
+                  {t('common.recorded_on')} {new Date(latestReport?.timestamp).toLocaleDateString([], { month: 'short', day: 'numeric', year: 'numeric' })}
                 </span>
-              )}
+                <Link
+                  to={`/report/${latestReport?.id}`}
+                  style={{
+                    fontSize: '0.84rem',
+                    fontWeight: 700,
+                    color: 'var(--color-primary)',
+                    textDecoration: 'none',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: 4
+                  }}
+                >
+                  <span>{t('dashboard.action_view')}</span>
+                  <ArrowRight size={14} />
+                </Link>
+              </div>
             </div>
 
-            <div style={{
-              background: 'var(--bg-card-alt, #f8f5ee)',
-              borderRadius: 'var(--radius-sm, 8px)',
-              padding: '12px 14px',
-              margin: '10px 0',
-              border: '1px solid var(--border-subtle, #e8e2d5)'
-            }}>
-              <div style={{ fontSize: '0.74rem', color: 'var(--text-muted)', marginBottom: 2 }}>
-                {t('dashboard.col_id')}: <strong style={{ color: 'var(--text-primary)', fontFamily: 'monospace' }}>{latestReport?.id}</strong> • {getFeedTypeName(t, latestReport?.feed_type)}
+            {/* Card B: Silage Monitoring Card (Section 16) */}
+            <div className="card" style={{ borderTop: '4px solid #0284c7' }}>
+              <div className="card-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 6 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                  <Warehouse size={18} style={{ color: '#0284c7' }} />
+                  <span className="card-title" style={{ margin: 0, fontSize: '1rem', fontWeight: 800 }}>
+                    {t('dashboard.silage_card_title', 'Silage Monitoring')}
+                  </span>
+                </div>
+                <span className="badge" style={{
+                  background: '#fef3c7',
+                  color: '#92400e',
+                  border: '1px solid #fcd34d',
+                  fontSize: '0.72rem',
+                  fontWeight: 800,
+                  letterSpacing: '0.04em'
+                }}>
+                  {t('dashboard.simulated_sensor_data', 'SIMULATED DATA')}
+                </span>
               </div>
-              <div style={{ fontSize: '0.86rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
-                {latestReport?.advisory?.farmer_advisory || t('dashboard.empty_state_desc')}
-              </div>
-            </div>
 
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid var(--border-subtle)', paddingTop: 10 }}>
-              <span style={{ fontSize: '0.74rem', color: 'var(--text-muted)' }}>
-                {t('common.recorded_on')} {new Date(latestReport?.timestamp).toLocaleDateString([], { month: 'short', day: 'numeric', year: 'numeric' })}
-              </span>
-              <Link
-                to={`/report/${latestReport?.id}`}
-                style={{
-                  fontSize: '0.84rem',
-                  fontWeight: 700,
-                  color: 'var(--color-primary)',
-                  textDecoration: 'none',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: 4
-                }}
-              >
-                <span>{t('dashboard.action_view')}</span>
-                <ArrowRight size={14} />
-              </Link>
+              {/* 4-Metric Grid for Silage */}
+              <div style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(2, 1fr)',
+                gap: 10,
+                margin: '12px 0'
+              }}>
+                <div style={{
+                  background: 'var(--bg-card-alt, #f8f5ee)',
+                  border: '1px solid var(--border-subtle, #e8e2d5)',
+                  borderRadius: 'var(--radius-sm, 8px)',
+                  padding: '10px 12px'
+                }}>
+                  <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 600 }}>
+                    {t('dashboard.silage_temp', 'Silage Temperature')}
+                  </div>
+                  <div style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--text-primary)', margin: '4px 0 2px' }}>
+                    {silageData?.temperature ?? '24.2'} °C
+                  </div>
+                  <div style={{ fontSize: '0.7rem', color: 'var(--color-good)' }}>
+                    ✓ Optimal (&lt; 28°C)
+                  </div>
+                </div>
+
+                <div style={{
+                  background: 'var(--bg-card-alt, #f8f5ee)',
+                  border: '1px solid var(--border-subtle, #e8e2d5)',
+                  borderRadius: 'var(--radius-sm, 8px)',
+                  padding: '10px 12px'
+                }}>
+                  <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 600 }}>
+                    {t('dashboard.silage_ph', 'pH')}
+                  </div>
+                  <div style={{ fontSize: '1.2rem', fontWeight: 800, color: '#0284c7', margin: '4px 0 2px' }}>
+                    {silageData?.ph ?? '3.95'}
+                  </div>
+                  <div style={{ fontSize: '0.7rem', color: 'var(--color-good)' }}>
+                    ✓ Lactic Acid Stable (&lt; 4.2)
+                  </div>
+                </div>
+
+                <div style={{
+                  background: 'var(--bg-card-alt, #f8f5ee)',
+                  border: '1px solid var(--border-subtle, #e8e2d5)',
+                  borderRadius: 'var(--radius-sm, 8px)',
+                  padding: '10px 12px'
+                }}>
+                  <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 600 }}>
+                    {t('dashboard.silage_moisture', 'Moisture')}
+                  </div>
+                  <div style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--text-primary)', margin: '4px 0 2px' }}>
+                    {silageData?.moisture ?? '63.5'} %
+                  </div>
+                  <div style={{ fontSize: '0.7rem', color: 'var(--color-good)' }}>
+                    ✓ In Range (60 - 70%)
+                  </div>
+                </div>
+
+                <div style={{
+                  background: 'var(--bg-card-alt, #f8f5ee)',
+                  border: '1px solid var(--border-subtle, #e8e2d5)',
+                  borderRadius: 'var(--radius-sm, 8px)',
+                  padding: '10px 12px'
+                }}>
+                  <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 600 }}>
+                    {t('dashboard.silage_spoilage_risk', 'Spoilage Risk')}
+                  </div>
+                  <div style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--color-good)', margin: '4px 0 2px' }}>
+                    {silageData?.spoilage_risk ?? t('common.not_spoiled', 'Fresh / Safe')}
+                  </div>
+                  <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>
+                    Anaerobic fermentation active
+                  </div>
+                </div>
+              </div>
+
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid var(--border-subtle)', paddingTop: 10 }}>
+                <span style={{ fontSize: '0.74rem', color: 'var(--text-muted)' }}>
+                  {t('silage.sensors_ready', 'Silo Pit Sensor Network')}
+                </span>
+                <Link
+                  to="/silage"
+                  style={{
+                    fontSize: '0.84rem',
+                    fontWeight: 700,
+                    color: 'var(--color-primary)',
+                    textDecoration: 'none',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: 4
+                  }}
+                >
+                  <span>{t('dashboard.open_silage', 'Open Silage Monitor')}</span>
+                  <ArrowRight size={14} />
+                </Link>
+              </div>
             </div>
           </div>
 
-          {/* Card B: Visual Analytics Charts */}
-          <div className="card" style={{ borderTop: '4px solid #0284c7' }}>
+          {/* Card C: Visual Analytics Charts */}
+          <div className="card" style={{ marginBottom: 'var(--space-lg, 1.5rem)', borderTop: '4px solid #0284c7' }}>
             <div className="card-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <span className="card-title" style={{ margin: 0, fontSize: '1rem' }}>
+              <span className="card-title" style={{ margin: 0, fontSize: '1rem', fontWeight: 800 }}>
                 <Activity size={18} style={{ color: '#0284c7' }} />
                 <span>{t('dashboard.quality_dist')}</span>
               </span>
@@ -480,7 +658,7 @@ export default function Dashboard() {
               <Doughnut data={qualityChart} options={doughnutOptions} />
             </div>
           </div>
-        </div>
+        </>
       )}
 
       {/* ========================================================

@@ -384,10 +384,10 @@ export default function HistoryReports() {
                           border: '1px solid var(--border-subtle)'
                         }}>
                           {item.input_method === 'REAL SENSOR INPUT' ? t('analyze.sensor_tag') :
-                           item.input_method === 'IMAGE INPUT' ? t('analyze.visual_tag') :
-                           item.input_method === 'USER ENTERED' ? t('analyze.manual_tag') :
-                           item.input_method === 'SIMULATED DATA' ? t('analyze.simulated_tag') :
-                           item.input_method}
+                            item.input_method === 'IMAGE INPUT' ? t('analyze.visual_tag') :
+                              item.input_method === 'USER ENTERED' ? t('analyze.manual_tag') :
+                                item.input_method === 'SIMULATED DATA' ? t('analyze.simulated_tag') :
+                                  item.input_method}
                         </span>
                       </td>
                       <td style={{ textAlign: 'right' }}>

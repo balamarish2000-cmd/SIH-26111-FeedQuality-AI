@@ -28,7 +28,8 @@ export default {
     "brand_subtitle": "AI-Powered Feed Quality Testing",
     "offline_ready": "Field Ready / Offline Capable",
     "theme_toggle": "Theme",
-    "footer_text": "Feed Guard — Intelligent Quality Assurance for Dairy Farmers & Cattle Cooperatives."
+    "footer_text": "Feed Guard — Intelligent Quality Assurance for Dairy Farmers & Cattle Cooperatives.",
+    "overview": "Overview"
   },
   "auth": {
     "login_title": "Farmer Login",
@@ -59,17 +60,17 @@ export default {
     "profile_saved": "Profile updated successfully!",
     "guest_mode": "Continue as Demo Farmer",
     "auth_error": "Authentication failed. Please verify credentials.",
-    "welcome_login_headline": "Rapid on-farm feed screening & spoilage detection in minutes.",
-    "welcome_login_desc": "Helping dairy farmers assess feed quality, identify potential contamination, and make better feeding and storage decisions using AI, sensors, and computer vision.",
+    "welcome_login_headline": "Smarter feed decisions for healthier dairy farming.",
+    "welcome_login_desc": "AI-assisted feed quality screening, silage monitoring, farmer advisory and offline-ready workflow for dairy farming.",
     "feature_feed_title": "AI Feed Screening",
-    "feature_feed_desc": "Nutritional quality and adulteration risk assessment",
+    "feature_feed_desc": "Assess feed quality and adulteration risk.",
     "feature_silage_title": "Silage Monitoring",
-    "feature_silage_desc": "Temperature, pH, moisture and spoilage monitoring",
-    "feature_offline_title": "Offline-Ready",
-    "feature_offline_desc": "Continue testing and store results when connectivity is unavailable",
+    "feature_silage_desc": "Monitor temperature, pH, moisture and spoilage indicators.",
+    "feature_offline_title": "Offline Ready",
+    "feature_offline_desc": "Store results locally and synchronize when connectivity returns.",
     "feature_advisory_title": "Farmer Advisory",
-    "feature_advisory_desc": "Clear, actionable feeding and storage recommendations",
-    "login_tagline": "Sign in to access your Feed Guard workspace.",
+    "feature_advisory_desc": "Receive simple feeding and storage recommendations.",
+    "login_tagline": "Access your feed analysis, silage monitoring, reports and farmer advisory.",
     "identifier_label": "Mobile Number or Email Address",
     "identifier_placeholder": "e.g. 9823045678 or farmer@kisanmail.in",
     "password_placeholder": "Enter your password",
@@ -100,7 +101,12 @@ export default {
     "updating_password": "Updating Password...",
     "update_password_btn": "Update Password",
     "back_to_login": "Back to Farmer Login",
-    "role_dairy_farmer": "Dairy Farmer"
+    "role_dairy_farmer": "Dairy Farmer",
+    "explore_without_login": "Explore without login",
+    "trust_message": "Your farmer records are securely associated with your account.",
+    "login_required": "Login Required",
+    "login_required_desc": "Login required to save this result and access persistent farmer records.",
+    "continue_exploring": "Continue Exploring"
   },
   "dashboard": {
     "welcome": "Welcome to Feed Guard",
@@ -159,7 +165,22 @@ export default {
     "silage_empty_desc": "Connect your sensors or enter measurements to begin monitoring fermentation temperature, moisture, and pH.",
     "open_silage": "Open Silage Monitor",
     "no_notifications": "No new notifications.",
-    "notifications": "Notifications"
+    "notifications": "Notifications",
+    "no_feed_tests_yet": "No feed tests yet",
+    "no_feed_tests_desc": "Start your first feed analysis to see quality results, risk assessment and feeding recommendations.",
+    "greeting_morning": "Good morning",
+    "greeting_afternoon": "Good afternoon",
+    "greeting_evening": "Good evening",
+    "silage_card_title": "Silage Fermentation Monitor",
+    "simulated_sensor_data": "SIMULATED SENSOR DATA",
+    "live_sensor_data": "LIVE SENSOR DATA",
+    "latest_farmer_advisory": "Latest Farmer Advisory",
+    "feeding_recommendation": "Feeding Recommendation",
+    "storage_recommendation": "Storage Recommendation",
+    "risk_alert": "Risk Alert",
+    "recommended_action": "Recommended Action",
+    "save_result_btn": "Save Result",
+    "saved_to_records": "Test saved to your farmer records."
   },
   "analyze": {
     "title": "Rapid AI Feed Quality & Safety Screening",
@@ -677,7 +698,10 @@ export default {
     "tech_title": "Built with Open Agritech Standards",
     "value_heading": "The Farmer Decision-Support Journey",
     "stats_speed": "Farm-Gate Testing Speed",
-    "stats_disclaimer": "Evaluated on ICAR/NDDB dairy cattle nutrition benchmarks and verified spectroscopy datasets."
+    "stats_disclaimer": "Evaluated on ICAR/NDDB dairy cattle nutrition benchmarks and verified spectroscopy datasets.",
+    "cta_explore": "Explore Feed Guard",
+    "cta_login": "Farmer Login",
+    "no_account_notice": "No account required to explore the platform. Login is required to save tests and access farmer records."
   },
   "advisory": {
     "title": "Dairy Cattle Nutrition & Feed Advisory Hub",

@@ -39,6 +39,8 @@ export default function Login() {
     const res = await login(identifier.trim(), password, rememberMe);
     if (res.success) {
       navigate('/dashboard', { replace: true });
+    } else {
+      setLocalError(t('auth.err_invalid_credentials', 'Invalid mobile number or password.'));
     }
   };
 
@@ -117,7 +119,7 @@ export default function Login() {
             margin: '0 0 1.25rem 0',
             color: '#ffffff'
           }}>
-            {t('auth.welcome_login_headline', 'Rapid on-farm feed screening & spoilage detection in minutes.')}
+            {t('auth.welcome_login_headline', 'Smarter feed decisions for healthier dairy farming.')}
           </h2>
 
           <p style={{
@@ -143,7 +145,7 @@ export default function Login() {
                 <span>{t('auth.feature_feed_title', 'AI Feed Screening')}</span>
               </div>
               <div style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.8)', lineHeight: 1.45 }}>
-                {t('auth.feature_feed_desc', 'Nutritional quality and adulteration risk assessment')}
+                {t('auth.feature_feed_desc', 'Assess feed quality and adulteration risk.')}
               </div>
             </div>
 
@@ -158,22 +160,7 @@ export default function Login() {
                 <span>{t('auth.feature_silage_title', 'Silage Monitoring')}</span>
               </div>
               <div style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.8)', lineHeight: 1.45 }}>
-                {t('auth.feature_silage_desc', 'Temperature, pH, moisture and spoilage monitoring')}
-              </div>
-            </div>
-
-            <div style={{
-              background: 'rgba(255,255,255,0.08)',
-              border: '1px solid rgba(255,255,255,0.14)',
-              borderRadius: 12,
-              padding: '14px 16px'
-            }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: '#93c5fd', fontWeight: 700, fontSize: '0.88rem', marginBottom: 4 }}>
-                <WifiOff size={16} />
-                <span>{t('auth.feature_offline_title', 'Offline-Ready')}</span>
-              </div>
-              <div style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.8)', lineHeight: 1.45 }}>
-                {t('auth.feature_offline_desc', 'Continue testing and store results when connectivity is unavailable')}
+                {t('auth.feature_silage_desc', 'Monitor temperature, pH, moisture and spoilage indicators.')}
               </div>
             </div>
 
@@ -188,7 +175,22 @@ export default function Login() {
                 <span>{t('auth.feature_advisory_title', 'Farmer Advisory')}</span>
               </div>
               <div style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.8)', lineHeight: 1.45 }}>
-                {t('auth.feature_advisory_desc', 'Clear, actionable feeding and storage recommendations')}
+                {t('auth.feature_advisory_desc', 'Receive simple feeding and storage recommendations.')}
+              </div>
+            </div>
+
+            <div style={{
+              background: 'rgba(255,255,255,0.08)',
+              border: '1px solid rgba(255,255,255,0.14)',
+              borderRadius: 12,
+              padding: '14px 16px'
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: '#93c5fd', fontWeight: 700, fontSize: '0.88rem', marginBottom: 4 }}>
+                <WifiOff size={16} />
+                <span>{t('auth.feature_offline_title', 'Offline-Ready')}</span>
+              </div>
+              <div style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.8)', lineHeight: 1.45 }}>
+                {t('auth.feature_offline_desc', 'Store results locally and synchronize when connectivity returns.')}
               </div>
             </div>
           </div>
@@ -269,8 +271,8 @@ export default function Login() {
             }}>
               {t('auth.login_title', 'Farmer Login')}
             </h1>
-            <p style={{ margin: 0, fontSize: '0.88rem', color: 'var(--text-secondary)' }}>
-              {t('auth.login_tagline', 'Sign in to access your Feed Guard workspace.')}
+            <p style={{ margin: 0, fontSize: '0.88rem', color: 'var(--text-secondary)', lineHeight: 1.4 }}>
+              {t('auth.login_tagline', 'Access your feed analysis, silage monitoring, reports and farmer advisory.')}
             </p>
           </div>
 
@@ -396,18 +398,48 @@ export default function Login() {
             </button>
           </form>
 
-          {/* Create Farmer Account Link */}
+          {/* Create Farmer Account & Explore Without Login */}
           <div style={{
-            marginTop: '1.75rem',
+            marginTop: '1.5rem',
             paddingTop: '1.25rem',
             borderTop: '1px solid var(--border-subtle, #e8e2d5)',
             textAlign: 'center'
           }}>
-            <p style={{ margin: 0, fontSize: '0.88rem', color: 'var(--text-secondary)' }}>
+            <p style={{ margin: '0 0 12px 0', fontSize: '0.88rem', color: 'var(--text-secondary)' }}>
               {t('auth.dont_have_account', 'New dairy farmer? Create an account')}{' '}
               <Link to="/signup" style={{ color: 'var(--color-primary)', fontWeight: 700, textDecoration: 'none' }}>
                 {t('auth.signup_btn', 'Create Farmer Account')}
               </Link>
+            </p>
+
+            <div>
+              <Link
+                to="/analyze"
+                style={{
+                  fontSize: '0.84rem',
+                  color: 'var(--color-primary)',
+                  fontWeight: 600,
+                  textDecoration: 'none',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 5
+                }}
+              >
+                <span>{t('auth.explore_without_login', 'Explore Feed Guard without login')}</span>
+                <ArrowRight size={13} />
+              </Link>
+            </div>
+          </div>
+
+          {/* Trust Statement */}
+          <div style={{
+            marginTop: '1.25rem',
+            paddingTop: '0.85rem',
+            borderTop: '1px solid var(--border-subtle, #e8e2d5)',
+            textAlign: 'center'
+          }}>
+            <p style={{ margin: 0, fontSize: '0.78rem', color: 'var(--text-muted)', lineHeight: 1.45 }}>
+              {t('auth.trust_message', 'Your farmer records are securely associated with your account.')}
             </p>
           </div>
         </div>

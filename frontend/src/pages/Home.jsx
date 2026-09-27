@@ -4,7 +4,7 @@ import {
   Zap, Camera, MessageSquare, QrCode, Warehouse, WifiOff,
   Shield, ArrowRight, FlaskConical, AlertTriangle,
   CheckCircle2, Wheat, HeartHandshake, FileText, Activity,
-  Sparkles, Check, ArrowDown
+  Sparkles, Check, ArrowDown, User
 } from 'lucide-react';
 
 export default function Home() {
@@ -71,18 +71,29 @@ export default function Home() {
             onClick={() => navigate('/analyze')}
           >
             <FlaskConical size={20} />
-            {t('home.cta', 'TEST FEED')}
+            {t('home.cta_explore', 'Explore Feed Guard')}
             <ArrowRight size={18} />
           </button>
           <button
             className="btn btn-secondary btn-lg"
-            onClick={() => navigate('/history')}
-            style={{ background: 'rgba(255,255,255,0.15)', color: '#ffffff', borderColor: 'rgba(255,255,255,0.3)' }}
+            onClick={() => navigate('/login')}
+            style={{ background: 'rgba(255,255,255,0.18)', color: '#ffffff', borderColor: 'rgba(255,255,255,0.35)' }}
           >
-            <FileText size={18} />
-            {t('home.secondary_cta', 'VIEW REPORTS')}
+            <User size={18} />
+            {t('home.cta_login', 'Farmer Login')}
           </button>
         </div>
+        <p style={{
+          fontSize: '0.84rem',
+          color: 'rgba(255,255,255,0.9)',
+          marginTop: 'var(--space-sm)',
+          marginBottom: 0,
+          lineHeight: 1.45,
+          maxWidth: 640,
+          marginInline: 'auto'
+        }}>
+          {t('home.no_account_notice', 'No account required to explore the platform. Login is required to save tests and access farmer records.')}
+        </p>
       </section>
 
       {/* Problem Alert Banner */}

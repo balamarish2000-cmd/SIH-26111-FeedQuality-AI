@@ -10,19 +10,10 @@ import {
 import {
   FlaskConical, Warehouse, LayoutDashboard,
   QrCode, BookOpen, Menu, X, Globe, Sun, Moon,
-  ShieldCheck, FileText, User, LogOut,
+  ShieldCheck, FileText, User, LogOut, LogIn, Settings,
   ChevronDown, Bell, CheckCircle2,
   Building2, WifiOff
 } from 'lucide-react';
-
-const mainNavItems = [
-  { path: '/dashboard', icon: LayoutDashboard, labelKey: 'nav.dashboard' },
-  { path: '/analyze', icon: FlaskConical, labelKey: 'nav.analyze' },
-  { path: '/silage', icon: Warehouse, labelKey: 'nav.silage' },
-  { path: '/history', icon: FileText, labelKey: 'nav.history' },
-  { path: '/qr', icon: QrCode, labelKey: 'nav.qr' },
-  { path: '/advisory', icon: BookOpen, labelKey: 'nav.advisory' },
-];
 
 export default function Layout() {
   const { t, i18n } = useTranslation();
@@ -35,6 +26,26 @@ export default function Layout() {
   const [theme, setTheme] = useState(localStorage.getItem('feedquality_theme') || 'light');
   const [backendOnline, setBackendOnline] = useState(true);
   const [notifications, setNotifications] = useState([]);
+
+  // Authenticated farmer navigation
+  const authenticatedNavItems = [
+    { path: '/dashboard', icon: LayoutDashboard, labelKey: 'nav.dashboard' },
+    { path: '/analyze', icon: FlaskConical, labelKey: 'nav.analyze' },
+    { path: '/silage', icon: Warehouse, labelKey: 'nav.silage' },
+    { path: '/history', icon: FileText, labelKey: 'nav.history' },
+    { path: '/qr', icon: QrCode, labelKey: 'nav.qr' },
+    { path: '/advisory', icon: BookOpen, labelKey: 'nav.advisory' },
+  ];
+
+  // Unauthenticated explorer navigation
+  const publicNavItems = [
+    { path: '/home', icon: ShieldCheck, labelKey: 'nav.overview' },
+    { path: '/analyze', icon: FlaskConical, labelKey: 'nav.analyze' },
+    { path: '/silage', icon: Warehouse, labelKey: 'nav.silage' },
+    { path: '/advisory', icon: BookOpen, labelKey: 'nav.advisory' },
+  ];
+
+  const currentNavItems = user ? authenticatedNavItems : publicNavItems;
 
   // Check backend health & notifications
   useEffect(() => {
@@ -125,7 +136,7 @@ export default function Layout() {
       <header className="navbar">
         <div className="nav-container">
           {/* Brand Identity */}
-          <NavLink to="/dashboard" className="nav-brand" style={{ textDecoration: 'none' }}>
+          <NavLink to={user ? "/dashboard" : "/"} className="nav-brand" style={{ textDecoration: 'none' }}>
             <div className="brand-icon" style={{
               background: 'var(--color-primary-light, #eaf5ee)',
               color: 'var(--color-primary, #1e5e3a)',
@@ -150,7 +161,7 @@ export default function Layout() {
 
           {/* Desktop Nav Links */}
           <nav className="nav-links" style={{ display: mobileMenuOpen ? 'flex' : undefined }}>
-            {mainNavItems.map(({ path, icon: Icon, labelKey }) => (
+            {currentNavItems.map(({ path, icon: Icon, labelKey }) => (
               <NavLink
                 key={path}
                 to={path}
@@ -199,73 +210,75 @@ export default function Layout() {
               </select>
             </div>
 
-            {/* Notification Bell Icon */}
-            <div style={{ position: 'relative' }}>
-              <button
-                className="theme-btn"
-                onClick={handleToggleNotifications}
-                title="Notifications"
-                aria-label="Notifications"
-                style={{ position: 'relative' }}
-              >
-                <Bell size={16} />
-                {unreadCount > 0 && (
-                  <span style={{
-                    position: 'absolute',
-                    top: 2,
-                    right: 2,
-                    width: 8,
-                    height: 8,
-                    borderRadius: '50%',
-                    background: 'var(--color-unsafe, #dc2626)'
-                  }} />
-                )}
-              </button>
-
-              {/* Notifications Dropdown */}
-              {notificationsOpen && (
-                <div style={{
-                  position: 'absolute',
-                  top: '120%',
-                  right: 0,
-                  width: 300,
-                  background: 'var(--bg-card, #ffffff)',
-                  border: '1px solid var(--border-color, #e8e2d5)',
-                  borderRadius: 12,
-                  boxShadow: 'var(--shadow-lg)',
-                  padding: '12px',
-                  zIndex: 1000
-                }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8, paddingBottom: 6, borderBottom: '1px solid var(--border-subtle)' }}>
-                    <span style={{ fontWeight: 700, fontSize: '0.86rem' }}>{t('dashboard.notifications')}</span>
-                    <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>{notifications.length} {t('common.total')}</span>
-                  </div>
-
-                  {notifications.length === 0 ? (
-                    <div style={{ textAlign: 'center', padding: '16px 8px', color: 'var(--text-muted)', fontSize: '0.82rem' }}>
-                      {t('dashboard.no_notifications')}
-                    </div>
-                  ) : (
-                    <div style={{ maxHeight: 240, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: 6 }}>
-                      {notifications.map((n) => (
-                        <div key={n.id} style={{
-                          padding: '8px',
-                          borderRadius: 6,
-                          background: n.read ? 'transparent' : 'var(--color-primary-light, #eaf5ee)',
-                          fontSize: '0.78rem'
-                        }}>
-                          <div style={{ fontWeight: 700, color: 'var(--text-primary)' }}>{n.title}</div>
-                          <div style={{ color: 'var(--text-secondary)', marginTop: 2 }}>{n.message}</div>
-                          <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', marginTop: 3 }}>
-                            {new Date(n.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
+            {/* Notification Bell Icon - Authenticated Only */}
+            {user && (
+              <div style={{ position: 'relative' }}>
+                <button
+                  className="theme-btn"
+                  onClick={handleToggleNotifications}
+                  title="Notifications"
+                  aria-label="Notifications"
+                  style={{ position: 'relative' }}
+                >
+                  <Bell size={16} />
+                  {unreadCount > 0 && (
+                    <span style={{
+                      position: 'absolute',
+                      top: 2,
+                      right: 2,
+                      width: 8,
+                      height: 8,
+                      borderRadius: '50%',
+                      background: 'var(--color-unsafe, #dc2626)'
+                    }} />
                   )}
-                </div>
-              )}
-            </div>
+                </button>
+
+                {/* Notifications Dropdown */}
+                {notificationsOpen && (
+                  <div style={{
+                    position: 'absolute',
+                    top: '120%',
+                    right: 0,
+                    width: 300,
+                    background: 'var(--bg-card, #ffffff)',
+                    border: '1px solid var(--border-color, #e8e2d5)',
+                    borderRadius: 12,
+                    boxShadow: 'var(--shadow-lg)',
+                    padding: '12px',
+                    zIndex: 1000
+                  }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8, paddingBottom: 6, borderBottom: '1px solid var(--border-subtle)' }}>
+                      <span style={{ fontWeight: 700, fontSize: '0.86rem' }}>{t('dashboard.notifications')}</span>
+                      <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>{notifications.length} {t('common.total')}</span>
+                    </div>
+
+                    {notifications.length === 0 ? (
+                      <div style={{ textAlign: 'center', padding: '16px 8px', color: 'var(--text-muted)', fontSize: '0.82rem' }}>
+                        {t('dashboard.no_notifications')}
+                      </div>
+                    ) : (
+                      <div style={{ maxHeight: 240, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: 6 }}>
+                        {notifications.map((n) => (
+                          <div key={n.id} style={{
+                            padding: '8px',
+                            borderRadius: 6,
+                            background: n.read ? 'transparent' : 'var(--color-primary-light, #eaf5ee)',
+                            fontSize: '0.78rem'
+                          }}>
+                            <div style={{ fontWeight: 700, color: 'var(--text-primary)' }}>{n.title}</div>
+                            <div style={{ color: 'var(--text-secondary)', marginTop: 2 }}>{n.message}</div>
+                            <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', marginTop: 3 }}>
+                              {new Date(n.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+            )}
 
             {/* Light / Dark Mode Toggle */}
             <button
@@ -277,143 +290,167 @@ export default function Layout() {
               {theme === 'light' ? <Moon size={16} /> : <Sun size={16} />}
             </button>
 
-            {/* Farmer User Avatar / Profile Dropdown */}
-            <div style={{ position: 'relative' }}>
-              <button
-                className="btn btn-secondary"
-                style={{ padding: '6px 12px', fontSize: '0.82rem', display: 'flex', alignItems: 'center', gap: 7, borderRadius: 'var(--radius-full)' }}
-                onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}
-                aria-expanded={profileDropdownOpen}
-                aria-label="Farmer profile menu"
-              >
-                <div style={{
-                  width: 22,
-                  height: 22,
-                  borderRadius: '50%',
-                  background: 'var(--color-primary, #1e5e3a)',
-                  color: '#ffffff',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: '0.72rem',
-                  fontWeight: 800
-                }}>
-                  {user?.name?.charAt(0) || 'F'}
-                </div>
-                <span style={{ maxWidth: 120, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', fontWeight: 600 }}>
-                  {user?.name || 'Farmer'}
-                </span>
-                <ChevronDown size={14} />
-              </button>
-
-              {profileDropdownOpen && (
-                <div
-                  style={{
-                    position: 'absolute',
-                    top: '120%',
-                    right: 0,
-                    width: 230,
-                    background: 'var(--bg-card, #ffffff)',
-                    border: '1px solid var(--border-color, #e8e2d5)',
-                    borderRadius: 'var(--radius-md, 12px)',
-                    boxShadow: 'var(--shadow-lg)',
-                    padding: '8px',
-                    zIndex: 1000
-                  }}
+            {/* Authenticated Farmer Profile Menu OR Unauthenticated Login Action */}
+            {user ? (
+              <div style={{ position: 'relative' }}>
+                <button
+                  className="btn btn-secondary"
+                  style={{ padding: '6px 12px', fontSize: '0.82rem', display: 'flex', alignItems: 'center', gap: 7, borderRadius: 'var(--radius-full)' }}
+                  onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}
+                  aria-expanded={profileDropdownOpen}
+                  aria-label="Farmer profile menu"
                 >
-                  <div style={{ padding: '8px 10px', borderBottom: '1px solid var(--border-color)', marginBottom: 4 }}>
-                    <div style={{ fontWeight: 800, fontSize: '0.86rem', color: 'var(--text-primary)' }}>
-                      {user?.name || t('profile.farmer_fallback')}
-                    </div>
-                    <div style={{ fontSize: '0.72rem', color: 'var(--color-primary)', fontWeight: 600 }}>
-                      {user?.role || t('auth.role_dairy_farmer')}
-                    </div>
-                    <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', marginTop: 2 }}>
-                      {user?.farm_name || user?.mobile}
-                    </div>
+                  <div style={{
+                    width: 22,
+                    height: 22,
+                    borderRadius: '50%',
+                    background: 'var(--color-primary, #1e5e3a)',
+                    color: '#ffffff',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: '0.72rem',
+                    fontWeight: 800
+                  }}>
+                    {user?.name?.charAt(0) || 'F'}
                   </div>
+                  <span style={{ maxWidth: 120, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', fontWeight: 600 }}>
+                    {user?.name || 'Farmer'}
+                  </span>
+                  <ChevronDown size={14} />
+                </button>
 
-                  <Link
-                    to="/profile"
-                    onClick={() => setProfileDropdownOpen(false)}
+                {profileDropdownOpen && (
+                  <div
                     style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: 8,
-                      padding: '8px 10px',
-                      fontSize: '0.84rem',
-                      color: 'var(--text-primary)',
-                      textDecoration: 'none',
-                      borderRadius: 'var(--radius-sm)'
+                      position: 'absolute',
+                      top: '120%',
+                      right: 0,
+                      width: 230,
+                      background: 'var(--bg-card, #ffffff)',
+                      border: '1px solid var(--border-color, #e8e2d5)',
+                      borderRadius: 'var(--radius-md, 12px)',
+                      boxShadow: 'var(--shadow-lg)',
+                      padding: '8px',
+                      zIndex: 1000
                     }}
                   >
-                    <User size={15} style={{ color: 'var(--color-primary)' }} />
-                    <span>{t('nav.profile')}</span>
-                  </Link>
+                    <div style={{ padding: '8px 10px', borderBottom: '1px solid var(--border-color)', marginBottom: 4 }}>
+                      <div style={{ fontWeight: 800, fontSize: '0.86rem', color: 'var(--text-primary)' }}>
+                        {user?.name || t('profile.farmer_fallback')}
+                      </div>
+                      <div style={{ fontSize: '0.72rem', color: 'var(--color-primary)', fontWeight: 600 }}>
+                        {user?.role || t('auth.role_dairy_farmer')}
+                      </div>
+                      <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', marginTop: 2 }}>
+                        {user?.farm_name || user?.mobile}
+                      </div>
+                    </div>
 
-                  <Link
-                    to="/profile"
-                    onClick={() => setProfileDropdownOpen(false)}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: 8,
-                      padding: '8px 10px',
-                      fontSize: '0.84rem',
-                      color: 'var(--text-primary)',
-                      textDecoration: 'none',
-                      borderRadius: 'var(--radius-sm)'
-                    }}
-                  >
-                    <Building2 size={15} style={{ color: 'var(--color-wheat)' }} />
-                    <span>{t('profile.farm_details')}</span>
-                  </Link>
+                    {/* Farmer Profile */}
+                    <Link
+                      to="/profile"
+                      onClick={() => setProfileDropdownOpen(false)}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: 8,
+                        padding: '8px 10px',
+                        fontSize: '0.84rem',
+                        color: 'var(--text-primary)',
+                        textDecoration: 'none',
+                        borderRadius: 'var(--radius-sm)'
+                      }}
+                    >
+                      <User size={15} style={{ color: 'var(--color-primary)' }} />
+                      <span>{t('nav.profile')}</span>
+                    </Link>
 
-                  <Link
-                    to="/history"
-                    onClick={() => setProfileDropdownOpen(false)}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: 8,
-                      padding: '8px 10px',
-                      fontSize: '0.84rem',
-                      color: 'var(--text-primary)',
-                      textDecoration: 'none',
-                      borderRadius: 'var(--radius-sm)'
-                    }}
-                  >
-                    <FileText size={15} style={{ color: 'var(--color-info)' }} />
-                    <span>{t('nav.history')}</span>
-                  </Link>
+                    {/* Sample History */}
+                    <Link
+                      to="/history"
+                      onClick={() => setProfileDropdownOpen(false)}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: 8,
+                        padding: '8px 10px',
+                        fontSize: '0.84rem',
+                        color: 'var(--text-primary)',
+                        textDecoration: 'none',
+                        borderRadius: 'var(--radius-sm)'
+                      }}
+                    >
+                      <FileText size={15} style={{ color: 'var(--color-info)' }} />
+                      <span>{t('nav.history')}</span>
+                    </Link>
 
-                  <div style={{ height: 1, background: 'var(--border-color)', margin: '4px 0' }} />
+                    {/* Settings */}
+                    <Link
+                      to="/profile"
+                      onClick={() => setProfileDropdownOpen(false)}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: 8,
+                        padding: '8px 10px',
+                        fontSize: '0.84rem',
+                        color: 'var(--text-primary)',
+                        textDecoration: 'none',
+                        borderRadius: 'var(--radius-sm)'
+                      }}
+                    >
+                      <Settings size={15} style={{ color: 'var(--color-wheat)' }} />
+                      <span>{t('nav.settings', 'Settings')}</span>
+                    </Link>
 
-                  {/* Guaranteed Working Logout Button */}
-                  <button
-                    onClick={handleLogout}
-                    style={{
-                      width: '100%',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: 8,
-                      padding: '8px 10px',
-                      fontSize: '0.84rem',
-                      color: 'var(--color-unsafe, #dc2626)',
-                      background: 'none',
-                      border: 'none',
-                      cursor: 'pointer',
-                      borderRadius: 'var(--radius-sm)',
-                      textAlign: 'left',
-                      fontWeight: 700
-                    }}
-                  >
-                    <LogOut size={15} />
-                    <span>{t('nav.logout')}</span>
-                  </button>
-                </div>
-              )}
-            </div>
+                    <div style={{ height: 1, background: 'var(--border-color)', margin: '4px 0' }} />
+
+                    {/* Guaranteed Working Logout Button */}
+                    <button
+                      onClick={handleLogout}
+                      style={{
+                        width: '100%',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: 8,
+                        padding: '8px 10px',
+                        fontSize: '0.84rem',
+                        color: 'var(--color-unsafe, #dc2626)',
+                        background: 'none',
+                        border: 'none',
+                        cursor: 'pointer',
+                        borderRadius: 'var(--radius-sm)',
+                        textAlign: 'left',
+                        fontWeight: 700
+                      }}
+                    >
+                      <LogOut size={15} />
+                      <span>{t('nav.logout')}</span>
+                    </button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <Link
+                to="/login"
+                className="btn btn-primary"
+                style={{
+                  padding: '6px 14px',
+                  fontSize: '0.82rem',
+                  fontWeight: 700,
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 6,
+                  borderRadius: 'var(--radius-full)',
+                  textDecoration: 'none',
+                  boxShadow: '0 2px 8px rgba(30, 94, 58, 0.2)'
+                }}
+              >
+                <User size={14} />
+                <span>{t('auth.login_title', 'Farmer Login')}</span>
+              </Link>
+            )}
 
             {/* Mobile Hamburger Button */}
             <button
@@ -435,26 +472,53 @@ export default function Layout() {
 
       {/* Mobile Bottom Navigation Bar */}
       <div className="mobile-bottom-nav">
-        <NavLink to="/dashboard" className={({ isActive }) => `mobile-nav-item ${isActive ? 'active' : ''}`}>
-          <LayoutDashboard size={18} />
-          <span>{t('nav.dashboard')}</span>
-        </NavLink>
-        <NavLink to="/analyze" className={({ isActive }) => `mobile-nav-item ${isActive ? 'active' : ''}`}>
-          <FlaskConical size={18} />
-          <span>{t('nav.analyze')}</span>
-        </NavLink>
-        <NavLink to="/silage" className={({ isActive }) => `mobile-nav-item ${isActive ? 'active' : ''}`}>
-          <Warehouse size={18} />
-          <span>{t('nav.silage')}</span>
-        </NavLink>
-        <NavLink to="/history" className={({ isActive }) => `mobile-nav-item ${isActive ? 'active' : ''}`}>
-          <FileText size={18} />
-          <span>{t('nav.history')}</span>
-        </NavLink>
-        <NavLink to="/profile" className={({ isActive }) => `mobile-nav-item ${isActive ? 'active' : ''}`}>
-          <User size={18} />
-          <span>{t('nav.profile')}</span>
-        </NavLink>
+        {user ? (
+          <>
+            <NavLink to="/dashboard" className={({ isActive }) => `mobile-nav-item ${isActive ? 'active' : ''}`}>
+              <LayoutDashboard size={18} />
+              <span>{t('nav.dashboard')}</span>
+            </NavLink>
+            <NavLink to="/analyze" className={({ isActive }) => `mobile-nav-item ${isActive ? 'active' : ''}`}>
+              <FlaskConical size={18} />
+              <span>{t('nav.analyze')}</span>
+            </NavLink>
+            <NavLink to="/silage" className={({ isActive }) => `mobile-nav-item ${isActive ? 'active' : ''}`}>
+              <Warehouse size={18} />
+              <span>{t('nav.silage')}</span>
+            </NavLink>
+            <NavLink to="/history" className={({ isActive }) => `mobile-nav-item ${isActive ? 'active' : ''}`}>
+              <FileText size={18} />
+              <span>{t('nav.history')}</span>
+            </NavLink>
+            <NavLink to="/profile" className={({ isActive }) => `mobile-nav-item ${isActive ? 'active' : ''}`}>
+              <User size={18} />
+              <span>{t('nav.profile')}</span>
+            </NavLink>
+          </>
+        ) : (
+          <>
+            <NavLink to="/home" className={({ isActive }) => `mobile-nav-item ${isActive ? 'active' : ''}`}>
+              <ShieldCheck size={18} />
+              <span>{t('nav.overview')}</span>
+            </NavLink>
+            <NavLink to="/analyze" className={({ isActive }) => `mobile-nav-item ${isActive ? 'active' : ''}`}>
+              <FlaskConical size={18} />
+              <span>{t('nav.analyze')}</span>
+            </NavLink>
+            <NavLink to="/silage" className={({ isActive }) => `mobile-nav-item ${isActive ? 'active' : ''}`}>
+              <Warehouse size={18} />
+              <span>{t('nav.silage')}</span>
+            </NavLink>
+            <NavLink to="/advisory" className={({ isActive }) => `mobile-nav-item ${isActive ? 'active' : ''}`}>
+              <BookOpen size={18} />
+              <span>{t('nav.advisory')}</span>
+            </NavLink>
+            <NavLink to="/login" className={({ isActive }) => `mobile-nav-item ${isActive ? 'active' : ''}`}>
+              <LogIn size={18} />
+              <span>{t('auth.login_btn', 'Login')}</span>
+            </NavLink>
+          </>
+        )}
       </div>
 
       {/* Professional Footer */}

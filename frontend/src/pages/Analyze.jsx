@@ -9,7 +9,7 @@ import {
   XCircle, Info, QrCode, Wheat, Sparkles, Layers,
   ChevronDown, ChevronUp, Sliders, ShieldCheck, ShieldAlert,
   Activity, Check, ArrowRight, Eye, RefreshCw, Zap, Lightbulb,
-  FileText, Printer, ExternalLink, Download
+  FileText, Printer, ExternalLink, Download, Lock, Bookmark, User
 } from 'lucide-react';
 import { getAdulterantName, getFeedTypeName, getNutrientLabel, getQualityStatusName, getRiskLevelName } from '../utils/translations';
 
@@ -106,6 +106,8 @@ export default function Analyze() {
   const [imagePreview, setImagePreview] = useState(null);
   const [qrData, setQrData] = useState(null);
   const [generatingQR, setGeneratingQR] = useState(false);
+  const [showAuthModal, setShowAuthModal] = useState(false);
+  const [savedToast, setSavedToast] = useState(false);
   const fileInputRef = useRef(null);
 
   const handleFeedTypeChange = (type) => {
@@ -181,32 +183,35 @@ export default function Analyze() {
       setLoadingStep(4);
       setResult(data);
 
-      // Save to user-isolated test history with clearly labeled sample ID
-      try {
-        const inputMethodLabel = inputMethod === 'sensor' ? 'REAL SENSOR INPUT' :
-                                 inputMethod === 'image' ? 'IMAGE INPUT' :
-                                 inputMethod === 'manual' ? 'USER ENTERED' : 'SIMULATED DATA';
+      // Save to user-isolated test history ONLY if farmer is logged in
+      if (user?.id) {
+        try {
+          const inputMethodLabel = inputMethod === 'sensor' ? 'REAL SENSOR INPUT' :
+                                   inputMethod === 'image' ? 'IMAGE INPUT' :
+                                   inputMethod === 'manual' ? 'USER ENTERED' : 'SIMULATED DATA';
 
-        const sampleId = data.analysis_id || `FG-${String(Date.now()).slice(-4)}`;
-        const newRecord = {
-          id: sampleId,
-          timestamp: new Date().toISOString(),
-          feed_type: inputMethod === 'image' ? (data.image_analysis?.feed_type_guess || selectedFeedType) : selectedFeedType,
-          input_method: inputMethodLabel,
-          quality_status: data.predictions?.quality_status || 'Good',
-          adulteration_type: data.predictions?.adulteration_type || 'None',
-          spoilage_flag: data.predictions?.spoilage_flag || 0,
-          quality_confidence: data.predictions?.quality_status_confidence || 0.92,
-          readings: inputMethod === 'image' ? (data.estimated_readings || form) : form,
-          predictions: data.predictions,
-          advisory: data.advisory,
-          farmer_name: user?.name || 'Verified Farmer',
-          farm_name: user?.farm_name || '',
-          location: [user?.district, user?.state].filter(Boolean).join(', ') || ''
-        };
-        saveUserTest(user?.id, newRecord);
-      } catch (e) {
-        console.error('Failed saving to user history:', e);
+          const sampleId = data.analysis_id || `FG-${String(Date.now()).slice(-4)}`;
+          const newRecord = {
+            id: sampleId,
+            timestamp: new Date().toISOString(),
+            feed_type: inputMethod === 'image' ? (data.image_analysis?.feed_type_guess || selectedFeedType) : selectedFeedType,
+            input_method: inputMethodLabel,
+            quality_status: data.predictions?.quality_status || 'Good',
+            adulteration_type: data.predictions?.adulteration_type || 'None',
+            spoilage_flag: data.predictions?.spoilage_flag || 0,
+            quality_confidence: data.predictions?.quality_status_confidence || 0.92,
+            readings: inputMethod === 'image' ? (data.estimated_readings || form) : form,
+            predictions: data.predictions,
+            advisory: data.advisory,
+            farmer_name: user?.name || 'Verified Farmer',
+            farm_name: user?.farm_name || '',
+            location: [user?.district, user?.state].filter(Boolean).join(', ') || ''
+          };
+          saveUserTest(user.id, newRecord);
+          setSavedToast(true);
+        } catch (e) {
+          console.error('Failed saving to user history:', e);
+        }
       }
     } catch (err) {
       clearInterval(stepInterval);
@@ -215,6 +220,57 @@ export default function Analyze() {
       clearInterval(stepInterval);
       setLoading(false);
     }
+  };
+
+  const handleSaveResult = () => {
+    if (!user?.id) {
+      setShowAuthModal(true);
+      return;
+    }
+    if (!result) return;
+    try {
+      const inputMethodLabel = inputMethod === 'sensor' ? 'REAL SENSOR INPUT' :
+                               inputMethod === 'image' ? 'IMAGE INPUT' :
+                               inputMethod === 'manual' ? 'USER ENTERED' : 'SIMULATED DATA';
+      const sampleId = result.analysis_id || `FG-${String(Date.now()).slice(-4)}`;
+      const newRecord = {
+        id: sampleId,
+        timestamp: new Date().toISOString(),
+        feed_type: inputMethod === 'image' ? (result.image_analysis?.feed_type_guess || selectedFeedType) : selectedFeedType,
+        input_method: inputMethodLabel,
+        quality_status: result.predictions?.quality_status || 'Good',
+        adulteration_type: result.predictions?.adulteration_type || 'None',
+        spoilage_flag: result.predictions?.spoilage_flag || 0,
+        quality_confidence: result.predictions?.quality_status_confidence || 0.92,
+        readings: inputMethod === 'image' ? (result.estimated_readings || form) : form,
+        predictions: result.predictions,
+        advisory: result.advisory,
+        farmer_name: user?.name || 'Verified Farmer',
+        farm_name: user?.farm_name || '',
+        location: [user?.district, user?.state].filter(Boolean).join(', ') || ''
+      };
+      saveUserTest(user.id, newRecord);
+      setSavedToast(true);
+      setTimeout(() => setSavedToast(false), 3000);
+    } catch (e) {
+      console.error('Failed saving test to farmer account:', e);
+    }
+  };
+
+  const handleViewCertificate = () => {
+    if (!user?.id) {
+      setShowAuthModal(true);
+      return;
+    }
+    navigate(`/report/${result.analysis_id || 'A-0001'}`);
+  };
+
+  const handleDownloadPDF = () => {
+    if (!user?.id) {
+      setShowAuthModal(true);
+      return;
+    }
+    navigate(`/report/${result.analysis_id || 'A-0001'}`);
   };
 
   const handleGenerateQR = async () => {
@@ -1133,26 +1189,36 @@ export default function Analyze() {
                 </div>
               </div>
 
-              {/* ACTION BUTTONS: VIEW CERTIFICATE, DOWNLOAD PDF, QR */}
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: 'var(--space-sm)', marginBottom: 'var(--space-lg)' }}>
+              {/* ACTION BUTTONS: SAVE RESULT, VIEW CERTIFICATE, DOWNLOAD PDF, QR */}
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: 'var(--space-sm)', marginBottom: 'var(--space-lg)' }}>
+                <button
+                  type="button"
+                  className="btn btn-harvest"
+                  onClick={handleSaveResult}
+                  style={{ justifyContent: 'center' }}
+                >
+                  <Bookmark size={16} />
+                  <span>{savedToast ? t('auth.result_saved', 'Result Saved!') : t('auth.save_result', 'Save Result')}</span>
+                </button>
+
                 <button
                   type="button"
                   className="btn btn-primary"
-                  onClick={() => navigate(`/report/${result.analysis_id || 'A-0001'}`)}
+                  onClick={handleViewCertificate}
                   style={{ justifyContent: 'center' }}
                 >
                   <FileText size={16} />
-                  {t('report.btn_print', 'View Certificate')}
+                  <span>{t('report.btn_print', 'View Certificate')}</span>
                 </button>
 
                 <button
                   type="button"
                   className="btn btn-secondary"
-                  onClick={() => navigate(`/report/${result.analysis_id || 'A-0001'}`)}
+                  onClick={handleDownloadPDF}
                   style={{ justifyContent: 'center' }}
                 >
                   <Download size={16} />
-                  {t('report.btn_download_pdf', 'Download PDF')}
+                  <span>{t('report.btn_download_pdf', 'Download PDF')}</span>
                 </button>
 
                 <button
@@ -1163,7 +1229,7 @@ export default function Analyze() {
                   style={{ justifyContent: 'center' }}
                 >
                   <QrCode size={16} />
-                  {generatingQR ? t('common.loading') : t('analyze.generate_qr')}
+                  <span>{generatingQR ? t('common.loading') : t('analyze.generate_qr')}</span>
                 </button>
               </div>
 
@@ -1214,6 +1280,89 @@ export default function Analyze() {
           )}
         </div>
       </div>
+
+      {/* Authentication Boundary Modal */}
+      {showAuthModal && (
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: 'rgba(0, 0, 0, 0.55)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: 9999,
+          padding: '1rem',
+          backdropFilter: 'blur(3px)'
+        }}>
+          <div style={{
+            background: 'var(--bg-card, #ffffff)',
+            borderRadius: 'var(--radius-lg, 16px)',
+            border: '1px solid var(--border-subtle, #e8e2d5)',
+            boxShadow: '0 20px 40px rgba(0, 0, 0, 0.2)',
+            maxWidth: 460,
+            width: '100%',
+            padding: '2rem',
+            textAlign: 'center'
+          }}>
+            <div style={{
+              width: 54,
+              height: 54,
+              borderRadius: '50%',
+              background: 'var(--color-primary-light, #eaf5ee)',
+              color: 'var(--color-primary, #1e5e3a)',
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              marginBottom: '1rem'
+            }}>
+              <Lock size={26} />
+            </div>
+
+            <h3 style={{
+              fontFamily: 'var(--font-display)',
+              fontSize: '1.25rem',
+              fontWeight: 800,
+              color: 'var(--text-primary)',
+              margin: '0 0 8px 0'
+            }}>
+              {t('auth.login_required', 'Login required to save this result.')}
+            </h3>
+
+            <p style={{
+              fontSize: '0.88rem',
+              color: 'var(--text-secondary)',
+              lineHeight: 1.55,
+              margin: '0 0 1.5rem 0'
+            }}>
+              {t('auth.login_required_desc', 'Login to your farmer account to save test records, track quality history, and generate official certificates.')}
+            </p>
+
+            <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={() => navigate('/login')}
+                style={{ padding: '10px 22px', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: 6 }}
+              >
+                <User size={16} />
+                <span>{t('auth.login_btn', 'Login')}</span>
+              </button>
+
+              <button
+                type="button"
+                className="btn btn-secondary"
+                onClick={() => setShowAuthModal(false)}
+                style={{ padding: '10px 18px', fontWeight: 600 }}
+              >
+                <span>{t('auth.continue_exploring', 'Continue Exploring')}</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
