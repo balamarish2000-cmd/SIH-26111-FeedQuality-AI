@@ -160,14 +160,31 @@ export default function Analyze() {
         // Range validation
         const m = parseFloat(form.moisture_pct);
         const p = parseFloat(form.protein_pct);
+        const f = parseFloat(form.fiber_pct);
+        const eVal = parseFloat(form.energy_mcal_per_kg);
+        const temp = parseFloat(form.storage_temperature_c);
+        const phVal = form.ph ? parseFloat(form.ph) : null;
         const u = parseFloat(form.urea_pct);
+
         if (isNaN(m) || m < 0 || m > 95) {
           throw new Error('Please enter a valid Moisture percentage between 0% and 95%.');
         }
         if (isNaN(p) || p < 0 || p > 60) {
           throw new Error('Please enter a valid Crude Protein percentage between 0% and 60%.');
         }
-        if (isNaN(u) || u < 0 || u > 30) {
+        if (!isNaN(f) && (f < 0 || f > 50)) {
+          throw new Error('Please enter a valid Fiber percentage between 0% and 50%.');
+        }
+        if (!isNaN(eVal) && (eVal < 0 || eVal > 10)) {
+          throw new Error('Please enter a valid Energy value between 0 and 10 Mcal/kg.');
+        }
+        if (!isNaN(temp) && (temp < -10 || temp > 65)) {
+          throw new Error('Please enter a valid Temperature between -10°C and 65°C.');
+        }
+        if (phVal !== null && (isNaN(phVal) || phVal < 1 || phVal > 14)) {
+          throw new Error('Please enter a valid pH value between 1.0 and 14.0.');
+        }
+        if (!isNaN(u) && (u < 0 || u > 30)) {
           throw new Error('Please enter a valid Urea percentage between 0% and 30%.');
         }
 
@@ -183,12 +200,12 @@ export default function Analyze() {
       setLoadingStep(4);
       setResult(data);
 
-      // Save to user-isolated test history ONLY if farmer is logged in
-      if (user?.id) {
+      // Save to user-isolated test history ONLY if farmer is logged in AND it's NOT sample analysis
+      const isSample = inputMethod === 'sample' || inputMethod === 'demo';
+      if (user?.id && !isSample) {
         try {
           const inputMethodLabel = inputMethod === 'sensor' ? 'REAL SENSOR INPUT' :
-                                   inputMethod === 'image' ? 'IMAGE INPUT' :
-                                   inputMethod === 'manual' ? 'USER ENTERED' : 'SIMULATED DATA';
+                                   inputMethod === 'image' ? 'IMAGE INPUT' : 'USER ENTERED';
 
           const sampleId = data.analysis_id || `FG-${String(Date.now()).slice(-4)}`;
           const newRecord = {
@@ -196,6 +213,7 @@ export default function Analyze() {
             timestamp: new Date().toISOString(),
             feed_type: inputMethod === 'image' ? (data.image_analysis?.feed_type_guess || selectedFeedType) : selectedFeedType,
             input_method: inputMethodLabel,
+            is_sample: false,
             quality_status: data.predictions?.quality_status || 'Good',
             adulteration_type: data.predictions?.adulteration_type || 'None',
             spoilage_flag: data.predictions?.spoilage_flag || 0,
@@ -229,15 +247,17 @@ export default function Analyze() {
     }
     if (!result) return;
     try {
-      const inputMethodLabel = inputMethod === 'sensor' ? 'REAL SENSOR INPUT' :
-                               inputMethod === 'image' ? 'IMAGE INPUT' :
-                               inputMethod === 'manual' ? 'USER ENTERED' : 'SIMULATED DATA';
-      const sampleId = result.analysis_id || `FG-${String(Date.now()).slice(-4)}`;
+      const isSample = inputMethod === 'sample' || inputMethod === 'demo';
+      const inputMethodLabel = isSample ? 'Sample Analysis' :
+                               inputMethod === 'sensor' ? 'REAL SENSOR INPUT' :
+                               inputMethod === 'image' ? 'IMAGE INPUT' : 'USER ENTERED';
+      const sampleId = isSample ? `SMP-${String(Date.now()).slice(-4)}` : (result.analysis_id || `FG-${String(Date.now()).slice(-4)}`);
       const newRecord = {
         id: sampleId,
         timestamp: new Date().toISOString(),
         feed_type: inputMethod === 'image' ? (result.image_analysis?.feed_type_guess || selectedFeedType) : selectedFeedType,
         input_method: inputMethodLabel,
+        is_sample: isSample,
         quality_status: result.predictions?.quality_status || 'Good',
         adulteration_type: result.predictions?.adulteration_type || 'None',
         spoilage_flag: result.predictions?.spoilage_flag || 0,
@@ -359,7 +379,7 @@ export default function Analyze() {
                   onClick={() => setInputMethod('sensor')}
                 >
                   <FlaskConical size={20} />
-                  <span className="method-title">{t('analyze.method_sensor', 'Sensor / NIR Data')}</span>
+                  <span className="method-title">{t('analyze.method_sensor', 'NIR / Sensor Input')}</span>
                   <span className="method-sub">{t('analyze.method_sensor_sub', 'Spectroscopy Probe')}</span>
                 </button>
 
@@ -369,8 +389,8 @@ export default function Analyze() {
                   onClick={() => setInputMethod('image')}
                 >
                   <Camera size={20} />
-                  <span className="method-title">{t('analyze.method_camera', 'Camera / Photo')}</span>
-                  <span className="method-sub">{t('analyze.method_camera_sub', 'Computer Vision')}</span>
+                  <span className="method-title">{t('analyze.method_camera', 'Visual Screening')}</span>
+                  <span className="method-sub">{t('analyze.method_camera_sub', 'Camera & Computer Vision')}</span>
                 </button>
 
                 <button
@@ -379,38 +399,73 @@ export default function Analyze() {
                   onClick={() => setInputMethod('manual')}
                 >
                   <Sliders size={20} />
-                  <span className="method-title">{t('analyze.method_manual', 'Manual Values')}</span>
-                  <span className="method-sub">{t('analyze.method_manual_sub', 'Farmer Measurement')}</span>
+                  <span className="method-title">{t('analyze.method_manual', 'Manual Entry')}</span>
+                  <span className="method-sub">{t('analyze.method_manual_sub', 'Measured Laboratory / Farm Values')}</span>
                 </button>
 
                 <button
                   type="button"
-                  className={`input-method-btn ${inputMethod === 'demo' ? 'active' : ''}`}
-                  onClick={() => setInputMethod('demo')}
+                  className={`input-method-btn ${inputMethod === 'sample' || inputMethod === 'demo' ? 'active' : ''}`}
+                  onClick={() => setInputMethod('sample')}
                 >
-                  <Zap size={20} style={{ color: '#d97706' }} />
-                  <span className="method-title" style={{ color: '#d97706' }}>{t('analyze.demo_test_title')}</span>
-                  <span className="method-sub">{t('analyze.demo_test_desc')}</span>
+                  <Zap size={20} style={{ color: 'var(--color-primary)' }} />
+                  <span className="method-title">{t('analyze.method_sample', 'Sample Analysis')}</span>
+                  <span className="method-sub">{t('analyze.method_sample_sub', 'Use prepared sample data to evaluate the complete workflow.')}</span>
                 </button>
               </div>
             </div>
 
-            {/* CONTROLLED DEMO TEST CARD */}
-            {inputMethod === 'demo' && (
-              <div className="demo-mode-card" style={{ background: '#fffbeb', border: '1px solid #fde68a', borderRadius: 'var(--radius-md)', padding: 'var(--space-md)' }}>
+            {/* SENSOR DISCONNECTED STATUS BANNER */}
+            {inputMethod === 'sensor' && (
+              <div style={{ background: '#fef3c7', border: '1px solid #fcd34d', borderRadius: 'var(--radius-md)', padding: 'var(--space-md)', marginBottom: 'var(--space-md)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
+                  <AlertTriangle size={18} style={{ color: '#d97706' }} />
+                  <strong style={{ fontSize: '0.95rem', color: '#92400e' }}>
+                    {t('analyze.sensor_not_connected', 'Sensor not connected')}
+                  </strong>
+                </div>
+                <p style={{ margin: '0 0 12px', fontSize: '0.84rem', color: '#78350f', lineHeight: 1.5 }}>
+                  {t('analyze.sensor_not_connected_desc', 'No NIR spectroscopy probe or portable sensor hardware detected on local communication ports.')}
+                </p>
+                <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                  <button
+                    type="button"
+                    className="btn btn-secondary"
+                    onClick={() => setInputMethod('manual')}
+                    style={{ fontSize: '0.82rem', padding: '6px 14px' }}
+                  >
+                    <Sliders size={14} />
+                    <span>{t('analyze.use_manual_entry', 'Use Manual Entry')}</span>
+                  </button>
+                  <button
+                    type="button"
+                    className="btn btn-primary"
+                    onClick={() => setInputMethod('sample')}
+                    style={{ fontSize: '0.82rem', padding: '6px 14px' }}
+                  >
+                    <Zap size={14} />
+                    <span>{t('analyze.explore_sample_analysis', 'Explore Sample Analysis')}</span>
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* CONTROLLED SAMPLE ANALYSIS EVALUATION CARD */}
+            {(inputMethod === 'sample' || inputMethod === 'demo') && (
+              <div style={{ background: 'var(--color-primary-light, #eaf5ee)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-md)', padding: 'var(--space-md)', marginBottom: 'var(--space-md)' }}>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 6, flexWrap: 'wrap', gap: 6 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                    <Sparkles size={16} style={{ color: '#d97706' }} />
-                    <strong style={{ fontSize: '0.9rem', color: '#92400e' }}>
-                      {t('analyze.demo_test_title')}
+                    <Sparkles size={16} style={{ color: 'var(--color-primary)' }} />
+                    <strong style={{ fontSize: '0.9rem', color: 'var(--color-primary)' }}>
+                      {t('analyze.method_sample', 'Sample Analysis')}
                     </strong>
                   </div>
                   <span className="badge" style={{ background: '#fef3c7', color: '#92400e', border: '1px solid #fcd34d', fontSize: '0.72rem', fontWeight: 800, letterSpacing: '0.04em' }}>
-                    {t('analyze.simulated_data')}
+                    {t('analyze.sample_data_badge', 'SAMPLE DATA — FOR EVALUATION')}
                   </span>
                 </div>
-                <p style={{ fontSize: '0.82rem', color: '#78350f', margin: '0 0 var(--space-sm)', lineHeight: 1.4 }}>
-                  {t('analyze.demo_banner_desc')}
+                <p style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', margin: '0 0 var(--space-sm)', lineHeight: 1.4 }}>
+                  {t('analyze.method_sample_sub', 'Use prepared sample data to evaluate the complete workflow.')}
                 </p>
                 <div className="demo-pills-row" style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
                   {DEMO_SCENARIOS.map(sc => (
@@ -505,7 +560,7 @@ export default function Analyze() {
                       className="form-input"
                       type="number"
                       step="0.1"
-                      placeholder="e.g. 9.5"
+                      placeholder="e.g. 12.5"
                       value={form.moisture_pct}
                       onChange={e => handleInput('moisture_pct', e.target.value)}
                     />
@@ -517,7 +572,7 @@ export default function Analyze() {
                       className="form-input"
                       type="number"
                       step="0.1"
-                      placeholder="e.g. 17.0"
+                      placeholder="e.g. 16.2"
                       value={form.protein_pct}
                       onChange={e => handleInput('protein_pct', e.target.value)}
                     />
@@ -529,7 +584,7 @@ export default function Analyze() {
                       className="form-input"
                       type="number"
                       step="0.1"
-                      placeholder="e.g. 11.0"
+                      placeholder="e.g. 18.4"
                       value={form.fiber_pct}
                       onChange={e => handleInput('fiber_pct', e.target.value)}
                     />
@@ -541,25 +596,35 @@ export default function Analyze() {
                       className="form-input"
                       type="number"
                       step="0.1"
-                      placeholder="e.g. 3.0"
+                      placeholder="e.g. 2.8"
                       value={form.energy_mcal_per_kg}
                       onChange={e => handleInput('energy_mcal_per_kg', e.target.value)}
                     />
                   </div>
 
-                  {selectedFeedType === 'Silage' && (
-                    <div className="form-group">
-                      <label className="form-label">{t('analyze.ph', 'Fermentation pH')}</label>
-                      <input
-                        className="form-input"
-                        type="number"
-                        step="0.01"
-                        placeholder="e.g. 4.1"
-                        value={form.ph}
-                        onChange={e => handleInput('ph', e.target.value)}
-                      />
-                    </div>
-                  )}
+                  <div className="form-group">
+                    <label className="form-label">{t('analyze.temperature', 'Temperature (°C)')}</label>
+                    <input
+                      className="form-input"
+                      type="number"
+                      step="0.5"
+                      placeholder="e.g. 26.0"
+                      value={form.storage_temperature_c}
+                      onChange={e => handleInput('storage_temperature_c', e.target.value)}
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <label className="form-label">{selectedFeedType === 'Silage' ? t('analyze.ph', 'Fermentation pH') : t('analyze.ph', 'pH')}</label>
+                    <input
+                      className="form-input"
+                      type="number"
+                      step="0.05"
+                      placeholder={selectedFeedType === 'Silage' ? 'e.g. 4.1' : 'e.g. 6.2'}
+                      value={form.ph}
+                      onChange={e => handleInput('ph', e.target.value)}
+                    />
+                  </div>
                 </div>
 
                 {/* PROGRESSIVE DISCLOSURE: ADVANCED MEASUREMENTS ACCORDION */}
@@ -626,16 +691,6 @@ export default function Analyze() {
                         step="0.1"
                         value={form.mould_index_pct}
                         onChange={e => handleInput('mould_index_pct', e.target.value)}
-                      />
-                    </div>
-                    <div className="form-group">
-                      <label className="form-label">{t('analyze.temperature', 'Storage Temp (°C)')}</label>
-                      <input
-                        className="form-input"
-                        type="number"
-                        step="0.1"
-                        value={form.storage_temperature_c}
-                        onChange={e => handleInput('storage_temperature_c', e.target.value)}
                       />
                     </div>
                     <div className="form-group">
@@ -816,10 +871,10 @@ export default function Analyze() {
               <div className="card" style={{ marginBottom: 'var(--space-lg)', position: 'relative', overflow: 'hidden', borderTop: '4px solid ' + (predictions.quality_status === 'Good' ? 'var(--color-good)' : predictions.quality_status === 'Moderate' ? 'var(--color-moderate)' : 'var(--color-unsafe)') }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 'var(--space-sm)', marginBottom: 'var(--space-md)' }}>
                   <div>
-                    <div style={{ fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--text-muted)', marginBottom: 2 }}>
-                      {inputMethod === 'demo' ? t('analyze.simulated_result') : t('analyze.screening_result')}
+                    <div style={{ fontSize: '0.78rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--color-primary)', marginBottom: 4 }}>
+                      {t('analyze.feed_quality_result', 'FEED QUALITY RESULT')}
                     </div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap', marginBottom: 4 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap', marginBottom: 6 }}>
                       <span style={{ fontSize: '0.82rem', color: 'var(--text-secondary)' }}>
                         {t('dashboard.col_id')}: <strong style={{ color: 'var(--text-primary)', fontFamily: 'monospace' }}>{result.analysis_id || 'FG-0001'}</strong>
                       </span>
@@ -827,23 +882,52 @@ export default function Analyze() {
                         • {new Date().toLocaleDateString([], { month: 'short', day: 'numeric', year: 'numeric' })}
                       </span>
                       <span className="badge" style={{
-                        background: inputMethod === 'demo' ? '#fef3c7' : 'var(--color-primary-light)',
-                        color: inputMethod === 'demo' ? '#92400e' : 'var(--color-primary)',
+                        background: (inputMethod === 'demo' || inputMethod === 'sample') ? '#fef3c7' : 'var(--color-primary-light)',
+                        color: (inputMethod === 'demo' || inputMethod === 'sample') ? '#92400e' : 'var(--color-primary)',
                         fontWeight: 800,
                         fontSize: '0.72rem',
                         letterSpacing: '0.03em'
                       }}>
-                        {inputMethod === 'sensor' ? t('analyze.sensor_tag') :
-                         inputMethod === 'image' ? t('analyze.visual_tag') :
-                         inputMethod === 'manual' ? t('analyze.manual_tag') : t('analyze.simulated_tag')}
+                        {(inputMethod === 'demo' || inputMethod === 'sample')
+                          ? t('analyze.sample_data_eval', 'Sample Data — for evaluation')
+                          : inputMethod === 'sensor' ? t('analyze.sensor_tag')
+                          : inputMethod === 'image' ? t('analyze.visual_tag')
+                          : t('analyze.manual_tag')}
                       </span>
                     </div>
-                    <h2 style={{ fontSize: '1.75rem', margin: '6px 0 2px', fontFamily: 'var(--font-display)', color: 'var(--text-primary)' }}>
-                      {getQualityStatusName(t, predictions.quality_status)}
-                    </h2>
-                    <span className="badge" style={{ background: 'var(--color-primary-light)', color: 'var(--color-primary)', fontSize: '0.78rem', marginTop: 4 }}>
-                      {getFeedLabel(selectedFeedType)}
-                    </span>
+
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 16, flexWrap: 'wrap', marginTop: 4 }}>
+                      <div>
+                        <div style={{ fontSize: '0.7rem', textTransform: 'uppercase', color: 'var(--text-muted)', fontWeight: 700 }}>
+                          {t('analyze.overall_quality', 'Overall Quality')}
+                        </div>
+                        <h2 style={{ fontSize: '1.75rem', margin: '2px 0 0', fontFamily: 'var(--font-display)', color: predictions.quality_status === 'Good' ? 'var(--color-good)' : predictions.quality_status === 'Moderate' ? 'var(--color-moderate)' : 'var(--color-unsafe)' }}>
+                          {getQualityStatusName(t, predictions.quality_status)}
+                        </h2>
+                      </div>
+
+                      <div style={{ height: 36, width: 1, background: 'var(--border-subtle)', margin: '0 4px' }} />
+
+                      <div>
+                        <div style={{ fontSize: '0.7rem', textTransform: 'uppercase', color: 'var(--text-muted)', fontWeight: 700 }}>
+                          {t('analyze.risk_level', 'Risk Level')}
+                        </div>
+                        <div style={{
+                          fontSize: '1.4rem',
+                          fontWeight: 800,
+                          margin: '2px 0 0',
+                          color: predictions.quality_status === 'Good' ? 'var(--color-good)' : predictions.quality_status === 'Moderate' ? 'var(--color-moderate)' : 'var(--color-unsafe)'
+                        }}>
+                          {getRiskLevelName(t, predictions.quality_status)}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div style={{ marginTop: 8 }}>
+                      <span className="badge" style={{ background: 'var(--color-primary-light)', color: 'var(--color-primary)', fontSize: '0.78rem' }}>
+                        {getFeedLabel(selectedFeedType)}
+                      </span>
+                    </div>
                   </div>
 
                   {/* AI CONFIDENCE BADGE */}
@@ -867,10 +951,10 @@ export default function Analyze() {
                   </div>
                 </div>
 
-                {/* 4-METRIC STRIP: Moisture, Protein, pH, Risk */}
+                {/* 6-METRIC MEASURED PARAMETERS GRID */}
                 <div style={{
                   display: 'grid',
-                  gridTemplateColumns: 'repeat(4, 1fr)',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(110px, 1fr))',
                   gap: 8,
                   background: 'var(--bg-card-alt)',
                   borderRadius: 'var(--radius-sm)',
@@ -879,109 +963,69 @@ export default function Analyze() {
                   border: '1px solid var(--border-subtle)'
                 }}>
                   <div style={{ textAlign: 'center' }}>
-                    <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>{t('analyze.moisture')}</div>
-                    <div style={{ fontSize: '1.05rem', fontWeight: 800, color: 'var(--text-primary)' }}>
+                    <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>{t('analyze.moisture')}</div>
+                    <div style={{ fontSize: '1rem', fontWeight: 800, color: 'var(--text-primary)' }}>
                       {form.moisture_pct || (result.estimated_readings?.moisture_pct ?? '12.5')}%
                     </div>
                   </div>
                   <div style={{ textAlign: 'center' }}>
-                    <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>{t('analyze.protein')}</div>
-                    <div style={{ fontSize: '1.05rem', fontWeight: 800, color: 'var(--color-primary)' }}>
+                    <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>{t('analyze.protein')}</div>
+                    <div style={{ fontSize: '1rem', fontWeight: 800, color: 'var(--text-primary)' }}>
                       {form.protein_pct || (result.estimated_readings?.protein_pct ?? '16.2')}%
                     </div>
                   </div>
                   <div style={{ textAlign: 'center' }}>
-                    <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>{t('analyze.ph')}</div>
-                    <div style={{ fontSize: '1.05rem', fontWeight: 800, color: '#0284c7' }}>
-                      {form.ph || (selectedFeedType === 'Silage' ? '4.1' : '6.4')}
+                    <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>{t('analyze.fiber')}</div>
+                    <div style={{ fontSize: '1rem', fontWeight: 800, color: 'var(--text-primary)' }}>
+                      {form.fiber_pct || (result.estimated_readings?.fiber_pct ?? '18.4')}%
                     </div>
                   </div>
                   <div style={{ textAlign: 'center' }}>
-                    <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>{t('analyze.risk_level')}</div>
-                    <div style={{
-                      fontSize: '1.05rem',
-                      fontWeight: 800,
-                      color: predictions.quality_status === 'Good' ? 'var(--color-good)' : predictions.quality_status === 'Moderate' ? 'var(--color-moderate)' : 'var(--color-unsafe)'
-                    }}>
-                      {getRiskLevelName(t, predictions.quality_status)}
+                    <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>{t('analyze.energy')}</div>
+                    <div style={{ fontSize: '1rem', fontWeight: 800, color: 'var(--text-primary)' }}>
+                      {form.energy_mcal_per_kg || (result.estimated_readings?.energy_mcal_per_kg ?? '2.8')} <span style={{ fontSize: '0.68rem' }}>Mcal</span>
+                    </div>
+                  </div>
+                  <div style={{ textAlign: 'center' }}>
+                    <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>{t('analyze.temperature')}</div>
+                    <div style={{ fontSize: '1rem', fontWeight: 800, color: 'var(--text-primary)' }}>
+                      {form.storage_temperature_c || (result.estimated_readings?.storage_temperature_c ?? '26.0')}°C
+                    </div>
+                  </div>
+                  <div style={{ textAlign: 'center' }}>
+                    <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>{t('analyze.ph')}</div>
+                    <div style={{ fontSize: '1rem', fontWeight: 800, color: '#0284c7' }}>
+                      {form.ph || (selectedFeedType === 'Silage' ? '4.1' : '6.2')}
                     </div>
                   </div>
                 </div>
 
-                {/* AI SCREENING CHECKLIST */}
-                <div style={{
-                  background: 'var(--bg-card)',
-                  border: '1px solid var(--border-subtle)',
-                  borderRadius: 'var(--radius-sm)',
-                  padding: '10px 14px',
-                  marginBottom: 'var(--space-md)'
-                }}>
-                  <div style={{ fontSize: '0.74rem', fontWeight: 800, textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: 6 }}>
-                    {t('analyze.checklist_title')}
-                  </div>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: 5, fontSize: '0.82rem' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: predictions.spoilage_flag === 0 || predictions.spoilage_flag === '0' ? 'var(--color-good)' : 'var(--color-unsafe)' }}>
-                      {predictions.spoilage_flag === 0 || predictions.spoilage_flag === '0' ? <CheckCircle2 size={15} /> : <AlertTriangle size={15} />}
-                      <span>{predictions.spoilage_flag === 0 || predictions.spoilage_flag === '0' ? t('analyze.check_spoilage_safe') : t('analyze.check_spoilage_unsafe')}</span>
-                    </div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: predictions.quality_status === 'Good' || predictions.quality_status === 'Moderate' ? 'var(--color-good)' : 'var(--color-unsafe)' }}>
-                      <CheckCircle2 size={15} />
-                      <span>{predictions.quality_status === 'Good' ? t('analyze.check_nutrition_good') : t('analyze.check_nutrition_deviant')}</span>
-                    </div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: 'var(--color-moderate)' }}>
-                      <Info size={15} />
-                      <span>{t('analyze.check_preliminary')}</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* EXPLAINABLE BREAKDOWN: WHAT DETECTED / WHY IT MATTERS / ACTION */}
-                <div style={{
-                  background: 'var(--bg-card-alt)',
-                  borderRadius: 'var(--radius-sm)',
-                  padding: '10px 14px',
-                  marginBottom: 'var(--space-md)',
-                  fontSize: '0.82rem',
-                  lineHeight: 1.5
-                }}>
-                  <div style={{ marginBottom: 6 }}>
-                    <strong style={{ color: 'var(--text-primary)' }}>{t('analyze.what_detected')} </strong>
-                    <span style={{ color: 'var(--text-secondary)' }}>
-                      {predictions.adulteration_type !== 'None' ? `${t('analyze.adulteration_flagged')}: ${getAdulterantName(t, predictions.adulteration_type)}.` : t('analyze.adulteration_clean')}
-                    </span>
-                  </div>
-                  <div style={{ marginBottom: 6 }}>
-                    <strong style={{ color: 'var(--text-primary)' }}>{t('analyze.why_matters')} </strong>
-                    <span style={{ color: 'var(--text-secondary)' }}>
-                      {predictions.quality_status === 'Good' ? t('analyze.why_matters_good') : t('analyze.why_matters_bad')}
-                    </span>
-                  </div>
-                  <div>
-                    <strong style={{ color: 'var(--text-primary)' }}>{t('analyze.rec_action')} </strong>
-                    <span style={{ color: 'var(--text-secondary)' }}>
-                      {predictions.quality_status === 'Good' ? t('analyze.action_good') : t('analyze.action_bad')}
-                    </span>
-                  </div>
-                </div>
-
-                {/* 2-Column Risk Summary: Adulteration & Spoilage */}
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-md)' }}>
-                  {/* Adulteration Card */}
+                {/* 2-COLUMN ASSESSMENTS: ADULTERATION & SPOILAGE */}
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 'var(--space-md)' }}>
+                  {/* ADULTERATION ASSESSMENT */}
                   <div className={`result-card ${predictions.adulteration_type === 'None' ? 'good' : 'unsafe'}`} style={{ padding: 'var(--space-md)' }}>
-                    <div className="result-label">{t('analyze.adulteration', 'Adulteration Status')}</div>
+                    <div className="result-label" style={{ fontWeight: 800, letterSpacing: '0.04em' }}>
+                      {t('analyze.adulteration_assessment', 'ADULTERATION ASSESSMENT')}
+                    </div>
                     <div className="result-value" style={{ fontSize: '1.05rem', margin: '4px 0' }}>
-                      {getAdulterantName(t, predictions.adulteration_type)}
+                      {predictions.adulteration_type === 'None'
+                        ? t('analyze.not_detected', 'Not Detected')
+                        : `${t('analyze.detected', 'Detected')}: ${getAdulterantName(t, predictions.adulteration_type)}`}
                     </div>
                     <div style={{ fontSize: '0.74rem', color: 'var(--text-muted)' }}>
                       {t('confidence.risk_conf', 'Risk Confidence:')} {Math.round((predictions.adulteration_type_confidence || 0) * 100)}%
                     </div>
                   </div>
 
-                  {/* Spoilage Card */}
+                  {/* SPOILAGE / CONTAMINATION ASSESSMENT */}
                   <div className={`result-card ${predictions.spoilage_flag === 0 || predictions.spoilage_flag === '0' ? 'good' : 'unsafe'}`} style={{ padding: 'var(--space-md)' }}>
-                    <div className="result-label">{t('analyze.spoilage', 'Biological Spoilage')}</div>
+                    <div className="result-label" style={{ fontWeight: 800, letterSpacing: '0.04em' }}>
+                      {t('analyze.spoilage_assessment', 'SPOILAGE / CONTAMINATION ASSESSMENT')}
+                    </div>
                     <div className="result-value" style={{ fontSize: '1.05rem', margin: '4px 0' }}>
-                      {predictions.spoilage_flag === 0 || predictions.spoilage_flag === '0' ? t('common.not_spoiled', 'Fresh / Safe') : t('common.spoiled', 'Spoiled / Toxic')}
+                      {predictions.spoilage_flag === 0 || predictions.spoilage_flag === '0'
+                        ? t('analyze.fresh_safe', 'Fresh / Safe')
+                        : t('analyze.spoilage_detected', 'Spoiled / Contaminated')}
                     </div>
                     <div style={{ fontSize: '0.74rem', color: 'var(--text-muted)' }}>
                       {t('confidence.detection_conf', 'Detection Confidence:')} {Math.round((predictions.spoilage_flag_confidence || 0) * 100)}%
@@ -1022,12 +1066,12 @@ export default function Analyze() {
                 </div>
               )}
 
-              {/* 5-PART AI ADVISORY & RECOMMENDED ACTIONS */}
+              {/* 5-PART FARMER ADVISORY */}
               <div className="card" style={{ marginBottom: 'var(--space-lg)' }}>
-                <div className="card-header">
+                <div className="card-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <span className="card-title">
                     <Sparkles size={18} style={{ color: 'var(--color-primary)' }} />
-                    {t('analyze.advisory_title', 'AI Agronomic Recommendations')}
+                    {t('analyze.farmer_advisory', 'Farmer Advisory')}
                   </span>
                   <span className={`badge badge-${getQualityBadgeClass(predictions.quality_status)}`}>
                     {t('quality_grades.' + (predictions.quality_status?.toLowerCase() || 'moderate'), predictions.quality_status)}
@@ -1035,7 +1079,22 @@ export default function Analyze() {
                 </div>
 
                 <div className="advisory-list">
-                  {/* Part 1: Recommended Action Card */}
+                  {/* 1. What does this result mean? */}
+                  <div className="advisory-card info">
+                    <h4>
+                      <Info size={18} style={{ color: 'var(--color-primary)' }} />
+                      {t('analyze.what_result_means', 'What does this result mean?')}
+                    </h4>
+                    <p style={{ margin: '4px 0 0', lineHeight: 1.5, fontSize: '0.88rem' }}>
+                      {predictions.quality_status === 'Good'
+                        ? t('analyze.why_matters_good', 'Feed sample exhibits high nutritional integrity with zero toxic contaminants or foreign fillers detected.')
+                        : predictions.quality_status === 'Moderate'
+                          ? t('analyze.why_matters_bad', 'Nutritional parameters show moderate deviation from NDDB benchmark standards. Monitoring and adjustment recommended.')
+                          : t('analyze.check_spoilage_unsafe', 'Biological degradation or adulteration detected. Unsafe for direct livestock feeding.')}
+                    </p>
+                  </div>
+
+                  {/* 2. Recommended Action */}
                   {structured.recommended_action && (() => {
                     const rawStatus = predictions.quality_status || 'Good';
                     const statusKey = rawStatus.toLowerCase() === 'unsafe' ? 'critical' : rawStatus.toLowerCase();
@@ -1051,7 +1110,7 @@ export default function Analyze() {
                       <div className={`advisory-card ${cardClass}`}>
                         <h4>
                           {rawStatus === 'Good' ? <ShieldCheck size={18} /> : <AlertTriangle size={18} />}
-                          {headline}
+                          {t('analyze.rec_action', 'Recommended Action')}: {headline}
                         </h4>
                         <p style={{ fontWeight: 600 }}>{primary}</p>
                         {steps.length > 0 ? (
@@ -1073,7 +1132,7 @@ export default function Analyze() {
                     );
                   })()}
 
-                  {/* Part 2: Nutritional Guidance */}
+                  {/* 3. Feeding Recommendation */}
                   {structured.nutritional_guidance && (() => {
                     const rawStatus = predictions.quality_status || 'Good';
                     const tipKey = (rawStatus === 'Good' || rawStatus === 'Moderate') ? 'normal' : 'compensate';
@@ -1116,7 +1175,7 @@ export default function Analyze() {
                       <div className="advisory-card info">
                         <h4>
                           <Wheat size={18} style={{ color: 'var(--color-info)' }} />
-                          {t('analyze.nutri_guidance_title', 'Nutritional Guidance & Daily Feeding Ration')}
+                          {t('dashboard.feeding_recommendation', 'Feeding Recommendation')}
                         </h4>
                         <p>{feedingTip}</p>
                         <ul style={{ paddingLeft: 'var(--space-lg)', margin: '4px 0 0' }}>
@@ -1128,36 +1187,7 @@ export default function Analyze() {
                     );
                   })()}
 
-                  {/* Part 3: Adulteration Warning (if applicable) */}
-                  {structured.adulteration_warning?.detected && (() => {
-                    const adulterantRaw = structured.adulteration_warning.adulterant_name || predictions.adulteration_type || 'Adulterant';
-                    const localizedAdulterant = getAdulterantName(t, adulterantRaw);
-                    const warningHeadline = t('advisory_adulteration.detected_headline', {
-                      adulterant: localizedAdulterant,
-                      defaultValue: `Adulterant Alert: ${localizedAdulterant} detected.`
-                    });
-                    const remediationSteps = [
-                      t('advisory_adulteration.remediation_1', 'Immediately withhold and isolate this batch from all livestock.'),
-                      t('advisory_adulteration.remediation_2', 'Retain sample bag for batch verification and supplier complaint.'),
-                      t('advisory_adulteration.remediation_3', 'Notify local veterinary officer if animals show distress.')
-                    ];
-
-                    return (
-                      <div className="advisory-card critical">
-                        <h4>
-                          <XCircle size={18} style={{ color: 'var(--color-unsafe)' }} />
-                          {warningHeadline}
-                        </h4>
-                        <ul style={{ paddingLeft: 'var(--space-lg)', margin: '4px 0 0' }}>
-                          {remediationSteps.map((rem, idx) => (
-                            <li key={idx}>{rem}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    );
-                  })()}
-
-                  {/* Part 4: Storage & Spoilage Tips */}
+                  {/* 4. Storage Recommendation */}
                   {structured.storage_spoilage_guidance && (() => {
                     const isSpoiled = structured.storage_spoilage_guidance.severity === 'critical' || structured.storage_spoilage_guidance.spoilage_detected;
                     const guidanceMessage = isSpoiled
@@ -1175,7 +1205,7 @@ export default function Analyze() {
                       <div className={`advisory-card ${isSpoiled ? 'critical' : 'warning'}`}>
                         <h4>
                           <Lightbulb size={18} style={{ color: 'var(--color-wheat)' }} />
-                          {t('analyze.storage_spoilage_title', 'Feed Storage & Spoilage Prevention')}
+                          {t('dashboard.storage_recommendation', 'Storage Recommendation')}
                         </h4>
                         <p>{guidanceMessage}</p>
                         <ul style={{ paddingLeft: 'var(--space-lg)', margin: '4px 0 0' }}>
@@ -1183,6 +1213,55 @@ export default function Analyze() {
                             <li key={idx}>{tip}</li>
                           ))}
                         </ul>
+                      </div>
+                    );
+                  })()}
+
+                  {/* 5. Risk Alert */}
+                  {(() => {
+                    const hasAdulteration = predictions.adulteration_type && predictions.adulteration_type !== 'None';
+                    const isSpoiled = predictions.spoilage_flag !== 0 && predictions.spoilage_flag !== '0';
+                    const adulterantRaw = structured.adulteration_warning?.adulterant_name || predictions.adulteration_type;
+                    const localizedAdulterant = getAdulterantName(t, adulterantRaw);
+
+                    if (hasAdulteration || isSpoiled) {
+                      const warningHeadline = hasAdulteration
+                        ? t('advisory_adulteration.detected_headline', {
+                            adulterant: localizedAdulterant,
+                            defaultValue: `Adulterant Alert: ${localizedAdulterant} detected.`
+                          })
+                        : t('analyze.spoilage_detected', 'Biological Spoilage / Contamination detected.');
+
+                      const remediationSteps = [
+                        t('advisory_adulteration.remediation_1', 'Immediately withhold and isolate this batch from all livestock.'),
+                        t('advisory_adulteration.remediation_2', 'Retain sample bag for batch verification and supplier complaint.'),
+                        t('advisory_adulteration.remediation_3', 'Notify local veterinary officer if animals show distress.')
+                      ];
+
+                      return (
+                        <div className="advisory-card critical">
+                          <h4>
+                            <XCircle size={18} style={{ color: 'var(--color-unsafe)' }} />
+                            {t('dashboard.risk_alert', 'Risk Alert')}: {warningHeadline}
+                          </h4>
+                          <ul style={{ paddingLeft: 'var(--space-lg)', margin: '4px 0 0' }}>
+                            {remediationSteps.map((rem, idx) => (
+                              <li key={idx}>{rem}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      );
+                    }
+
+                    return (
+                      <div className="advisory-card good">
+                        <h4>
+                          <CheckCircle2 size={18} style={{ color: 'var(--color-good)' }} />
+                          {t('dashboard.risk_alert', 'Risk Alert')}: {t('dashboard.no_risk_alert', 'All measured safety indicators within standard limits.')}
+                        </h4>
+                        <p style={{ margin: '4px 0 0', fontSize: '0.86rem' }}>
+                          {t('advisory_adulteration.safe_summary', 'No synthetic nitrogen spike (urea), mineral dust adulteration, or toxic mycotoxins detected in this batch.')}
+                        </p>
                       </div>
                     );
                   })()}
@@ -1198,7 +1277,7 @@ export default function Analyze() {
                   style={{ justifyContent: 'center' }}
                 >
                   <Bookmark size={16} />
-                  <span>{savedToast ? t('auth.result_saved', 'Result Saved!') : t('auth.save_result', 'Save Result')}</span>
+                  <span>{savedToast ? t('auth.result_saved', 'Result Saved!') : t('analyze.save_to_my_history', 'Save to My History')}</span>
                 </button>
 
                 <button

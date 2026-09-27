@@ -226,7 +226,7 @@ export default function SilageMonitor() {
         </div>
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'var(--color-primary-light)', border: '1px solid var(--color-good-border)', color: 'var(--color-primary)', padding: '6px 14px', borderRadius: 'var(--radius-full)', fontSize: '0.8rem', fontWeight: 700 }}>
           <Activity size={14} />
-          <span>{t('analyze.simulated_tag')} • {new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+          <span>{t('analyze.sample_data_eval', 'Sample Data — for evaluation')} • {new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
         </div>
       </div>
 

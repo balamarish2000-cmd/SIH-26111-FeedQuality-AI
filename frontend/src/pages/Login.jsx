@@ -40,7 +40,13 @@ export default function Login() {
     if (res.success) {
       navigate('/dashboard', { replace: true });
     } else {
-      setLocalError(t('auth.err_invalid_credentials', 'Invalid mobile number or password.'));
+      if (res.errorCode === 'account_not_found') {
+        setLocalError(t('auth.err_account_not_found', 'Account not found. Please check your details or create an account.'));
+      } else if (res.errorCode === 'wrong_password') {
+        setLocalError(t('auth.err_wrong_password', 'Incorrect password. Please try again.'));
+      } else {
+        setLocalError(res.error || t('auth.err_invalid_credentials', 'Invalid mobile number or password.'));
+      }
     }
   };
 
@@ -197,8 +203,8 @@ export default function Login() {
         </div>
 
         {/* Subtle Footer Note */}
-        <div style={{ position: 'relative', zIndex: 2, marginTop: '2.5rem', fontSize: '0.78rem', color: 'rgba(255,255,255,0.65)' }}>
-          {t('common.sih_credit', 'Developed for Smart India Hackathon 2026')}
+        <div style={{ position: 'relative', zIndex: 2, marginTop: '2.5rem', fontSize: '0.78rem', color: 'rgba(255,255,255,0.75)' }}>
+          {t('brand.product_footer', 'Feed Guard — AI-assisted feed and silage quality assessment for dairy farming.')}
         </div>
       </div>
 
@@ -425,7 +431,7 @@ export default function Login() {
                   gap: 5
                 }}
               >
-                <span>{t('auth.explore_without_login', 'Explore Feed Guard without login')}</span>
+                <span>{t('auth.explore_sample_analysis', 'Explore Sample Analysis')}</span>
                 <ArrowRight size={13} />
               </Link>
             </div>

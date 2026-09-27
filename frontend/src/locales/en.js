@@ -2,7 +2,8 @@ export default {
   "brand": {
     "name": "FEED GUARD",
     "subtitle": "AI-Powered Feed & Silage Quality Testing for Dairy Farmers",
-    "tagline": "Test. Detect. Protect."
+    "tagline": "Test. Detect. Protect.",
+    "product_footer": "Feed Guard — AI-assisted feed and silage quality assessment for dairy farming."
   },
   "nav": {
     "home": "Dashboard",
@@ -106,7 +107,10 @@ export default {
     "trust_message": "Your farmer records are securely associated with your account.",
     "login_required": "Login Required",
     "login_required_desc": "Login required to save this result and access persistent farmer records.",
-    "continue_exploring": "Continue Exploring"
+    "continue_exploring": "Continue Exploring",
+    "err_wrong_password": "Incorrect password. Please try again.",
+    "err_account_not_found": "Account not found. Please check your details or create an account.",
+    "explore_sample_analysis": "Explore Sample Analysis"
   },
   "dashboard": {
     "welcome": "Welcome to Feed Guard",
@@ -156,7 +160,7 @@ export default {
     "open_iot_telemetry": "Open IoT Telemetry",
     "pit_silo_sample": "Unit: Pit Silo 1 • 45 Days Sealed",
     "account_active": "Account Active",
-    "welcome_farmer": "Welcome",
+    "welcome_farmer": "Welcome, {{name}}",
     "operation_id": "Dairy Operation ID",
     "no_records_yet": "No analysis records yet.",
     "empty_state_desc": "Start your first feed test to see quality results and farmer recommendations.",
@@ -180,7 +184,10 @@ export default {
     "risk_alert": "Risk Alert",
     "recommended_action": "Recommended Action",
     "save_result_btn": "Save Result",
-    "saved_to_records": "Test saved to your farmer records."
+    "saved_to_records": "Test saved to your farmer records.",
+    "no_tests_yet": "No tests yet.",
+    "start_first_feed_test": "Start Your First Feed Test",
+    "explore_sample_analysis": "Explore Sample Analysis"
   },
   "analyze": {
     "title": "Rapid AI Feed Quality & Safety Screening",
@@ -232,7 +239,7 @@ export default {
     "action_save": "Save to Farm History",
     "action_pdf": "Download PDF Report",
     "action_qr": "Share Report via QR",
-    "scenario_good": "GOOD QUALITY",
+    "scenario_good": "Good Quality Feed",
     "scenario_adulterated": "Urea-Spiked Protein Mash",
     "scenario_spoiled": "Damp Mouldy Forage (Aflatoxin High)",
     "sample_preview_ready": "✓ SAMPLE PREVIEW READY",
@@ -274,7 +281,7 @@ export default {
     "step4_desc": "Comprehensive multi-target quality diagnosis and farmer recommendations",
     "method_sensor": "NIR / Sensor Input",
     "method_camera": "Visual Screening",
-    "method_manual": "Farmer Entered Data",
+    "method_manual": "Manual Entry",
     "method_demo": "DEMO TEST",
     "demo_banner_title": "Controlled Demonstration Mode Active",
     "demo_banner_desc": "Instant realistic pre-loaded scenarios designed for live demonstrations and testing.",
@@ -310,8 +317,8 @@ export default {
     "step1_label": "Select Feed Type",
     "step2_label": "Choose Input Method",
     "method_sensor_sub": "Spectroscopy Probe",
-    "method_camera_sub": "Computer Vision",
-    "method_manual_sub": "Manual Entry",
+    "method_camera_sub": "Camera & Computer Vision",
+    "method_manual_sub": "Measured Laboratory / Farm Values",
     "method_demo_title": "DEMO MODE",
     "method_demo_sub": "Simulated Sensor Data",
     "demo_mode_title": "Live Demonstration Scenarios",
@@ -321,11 +328,11 @@ export default {
     "simulated_data": "SIMULATED DATA",
     "demo_test_title": "Demo Test",
     "demo_test_desc": "Demo Test uses simulated sensor data for demonstration. Select a scenario below to run through the screening pipeline:",
-    "scenario_good_desc": "Clean balanced cattle feed pellet, optimal crude protein, safe for high lactation cows",
-    "scenario_attention": "ATTENTION REQUIRED",
-    "scenario_attention_desc": "Borderline elevated moisture and suboptimal protein requiring ration adjustment",
-    "scenario_unsafe": "POOR / UNSAFE",
-    "scenario_unsafe_desc": "Mineral mixture spiked with synthetic urea (9.5%) or damp mouldy mash with dangerous aflatoxin",
+    "scenario_good_desc": "Status: Good / Low Risk",
+    "scenario_attention": "Feed Requiring Attention",
+    "scenario_attention_desc": "Status: Moderate Risk",
+    "scenario_unsafe": "Poor / Unsafe Feed",
+    "scenario_unsafe_desc": "Status: High Risk",
     "loading_title": "Analyzing Feed Sample...",
     "loading_subtitle": "Portable multi-target ML screening & risk classifier pipeline",
     "step_read_sensor": "1. Reading sensor telemetry data",
@@ -355,7 +362,31 @@ export default {
     "simulated_tag": "SIMULATED SENSOR DATA",
     "visual_tag": "VISUAL SCREENING",
     "sensor_tag": "NIR / SENSOR INPUT",
-    "manual_tag": "FARMER ENTERED DATA"
+    "manual_tag": "FARMER ENTERED DATA",
+    "method_sample": "Sample Analysis",
+    "method_sample_sub": "Use prepared sample data to evaluate the complete workflow.",
+    "sample_data_badge": "SAMPLE DATA — FOR EVALUATION",
+    "sensor_not_connected": "Sensor not connected",
+    "sensor_not_connected_desc": "No NIR spectroscopy probe or portable sensor hardware detected on local communication ports.",
+    "use_manual_entry": "Use Manual Entry",
+    "explore_sample_analysis": "Explore Sample Analysis",
+    "feed_quality_result": "FEED QUALITY RESULT",
+    "adulteration_assessment": "ADULTERATION ASSESSMENT",
+    "spoilage_assessment": "SPOILAGE / CONTAMINATION ASSESSMENT",
+    "farmer_advisory_heading": "Farmer Advisory",
+    "what_result_means": "What does this result mean?",
+    "save_to_history": "Save to My History",
+    "sample_analysis_label": "Sample Analysis",
+    "overall_quality": "Overall Quality",
+    "farmer_advisory": "Farmer Advisory",
+    "sample_data_eval": "Sample Data — for evaluation",
+    "sample_analysis_title": "Sample Analysis",
+    "sample_analysis_subtitle": "Use prepared sample data to evaluate the complete workflow.",
+    "detected": "Detected",
+    "not_detected": "Not Detected",
+    "fresh_safe": "Fresh / Safe",
+    "spoilage_detected": "Spoiled / Contaminated",
+    "save_to_my_history": "Save to My History"
   },
   "quality_grades": {
     "good": "Good ✓",
@@ -488,7 +519,11 @@ export default {
     "temp_sub": "In-Pit Telemetry • Optimal fermentation",
     "ph_sub": "pH Sensor Probe • Lactic anaerobic acidity",
     "moisture_sub": "Moisture Probe • Compaction telemetry",
-    "spoilage_sub": "Thermal Stability • Aerobic stability intact"
+    "spoilage_sub": "Thermal Stability • Aerobic stability intact",
+    "sample_data_badge": "Sample Data — for evaluation",
+    "live_sensor_data": "Live Sensor Data",
+    "stored_data": "Stored Data",
+    "sample_data_eval": "Sample Data — for evaluation"
   },
   "history": {
     "title": "Sample History",
@@ -548,7 +583,10 @@ export default {
     "col_spoilage": "Spoilage",
     "view_qr": "View QR",
     "all_risk_levels": "All Risk Levels",
-    "all_input_methods": "All Input Methods"
+    "all_input_methods": "All Input Methods",
+    "col_data_type": "Data Type",
+    "real_farmer_test": "Real Farmer Test",
+    "sample_analysis": "Sample Analysis"
   },
   "qr": {
     "title": "QR Reports",
@@ -734,8 +772,8 @@ export default {
     "critical": "Do not feed as sole ration. Compensate with 1–2 kg quality concentrate pellet and bypass protein."
   },
   "advisory_storage": {
-    "spoiled": "Critical Spoilage Alert: Biological breakdown or fungal proliferation detected. High risk of harmful mycotoxins (Aflatoxin B1).",
-    "stable": "Storage parameters are stable. Continue current moisture and temperature management.",
+    "spoiled": "Critical spoilage risk: isolate batch and inspect storage moisture and ventilation immediately.",
+    "stable": "Store feed sacks on elevated wooden pallets in a cool, well-ventilated dry space.",
     "critical": "Critical Spoilage Alert: Biological breakdown or fungal proliferation detected. High risk of harmful mycotoxins (Aflatoxin B1).",
     "normal": "Storage parameters are stable. Continue current moisture and temperature management.",
     "tip_pallets": "Store feed sacks on wooden pallets at least 15 cm off damp concrete floors.",
@@ -745,11 +783,11 @@ export default {
   },
   "advisory_action": {
     "critical": {
-      "headline": "ACTION REQUIRED: DO NOT FEED — ISOLATE BATCH",
-      "primary": "STOP feeding this batch immediately. Quarantine the sack or storage unit.",
-      "step_0": "Immediately stop offering this feed to cattle, calves, or pregnant cows.",
-      "step_1": "Physically isolate affected bags to prevent accidental herd feeding.",
-      "step_2": "Document the Batch ID using the certified QR code for supplier replacement claim.",
+      "headline": "Immediate Feed Quarantine",
+      "primary": "Do not feed this batch to any dairy cattle or calves.",
+      "step_0": "Immediately isolate and tag this batch to prevent accidental feeding.",
+      "step_1": "Retain a sealed sample bag for laboratory verification.",
+      "step_2": "Notify your feed supplier and local veterinary officer.",
       "step_3": "Consult your local veterinary doctor if cattle have already consumed this feed."
     },
     "poor": {
@@ -761,18 +799,19 @@ export default {
       "step_3": "Retest next delivery batch to ensure supplier meets quality specifications."
     },
     "moderate": {
-      "headline": "MONITORED FEEDING WITH REGULAR INSPECTION",
-      "primary": "Acceptable feed quality. Suitable for standard feeding with daily health observation.",
-      "step_0": "Feed according to standard milk-yield ration chart (approx. 400g concentrate per liter of milk).",
-      "step_1": "Keep bags sealed in a dry, ventilated shed to prevent moisture absorption.",
-      "step_2": "Monitor feed intake and rumination times over the next 48 hours."
+      "headline": "Ration Balancing Required",
+      "primary": "Adjust concentrate proportions and supplement with mineral mixture.",
+      "step_0": "Do not feed as sole concentrate source.",
+      "step_1": "Add 50–100g approved mineral mixture per cow daily.",
+      "step_2": "Re-inspect batch after 7 days of storage."
     },
     "good": {
-      "headline": "APPROVED: PREMIUM FEED QUALITY — SAFE FOR HERD",
-      "primary": "Optimal nutritional composition. Continue standard daily feeding schedule.",
-      "step_0": "Continue standard feeding ration for lactating cows, pregnant cows, and growing calves.",
-      "step_1": "Maintain clean, dry pallet storage to preserve freshness and vitamin potency.",
-      "step_2": "Generate certified QR traceability certificate for farm records."
+      "headline": "Standard Feeding Protocol",
+      "primary": "Feed directly according to standard daily ration balance.",
+      "step_0": "Maintain clean, ad-lib drinking water access.",
+      "step_1": "Combine with 15–20 kg green fodder for optimal rumen digestion.",
+      "step_2": "Store bags off concrete floors in a dry, ventilated shed.",
+      "step_3": "Monitor milk yield and butterfat percentage regularly."
     },
     "unsafe": {
       "headline": "ACTION REQUIRED: DO NOT FEED — ISOLATE BATCH",

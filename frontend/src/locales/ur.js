@@ -2,7 +2,8 @@ export default {
   "brand": {
     "name": "FEED GUARD",
     "subtitle": "ڈیری کسانوں کے لیے مصنوعی ذہانت سے لیس چارہ اور سائلیج کوالٹی ٹیسٹنگ سسٹم",
-    "tagline": "جانچیں. شناخت کریں. محفوظ رکھیں."
+    "tagline": "جانچیں. شناخت کریں. محفوظ رکھیں.",
+    "product_footer": "فیڈ گارڈ — ڈیری کسانوں کے لیے AI کی مدد سے چارے اور سائیلج کے معیار کی جانچ کا نظام۔"
   },
   "nav": {
     "home": "ڈیش بورڈ",
@@ -106,7 +107,10 @@ export default {
     "trust_message": "آپ کے کسان ریکارڈ آپ کے اکاؤنٹ کے ساتھ محفوظ طریقے سے منسلک ہیں۔",
     "login_required": "لاگ ان ضروری ہے",
     "login_required_desc": "اس نتیجے کو محفوظ کرنے اور کسان کے ریکارڈ دیکھنے کے لیے لاگ ان ضروری ہے۔",
-    "continue_exploring": "دریافت جاری رکھیں"
+    "continue_exploring": "دریافت جاری رکھیں",
+    "err_wrong_password": "غلط پاس ورڈ۔ براہ کرم دوبارہ کوشش کریں۔",
+    "err_account_not_found": "اکاؤنٹ نہیں ملا۔ براہ کرم تفصیلات چیک کریں یا نیا اکاؤنٹ بنائیں۔",
+    "explore_sample_analysis": "نمونہ تجزیہ دیکھیں"
   },
   "dashboard": {
     "welcome": "Feed Guard میں خوش آمدید",
@@ -156,7 +160,7 @@ export default {
     "open_iot_telemetry": "IoT لائیو ریڈنگز کھولیں",
     "pit_silo_sample": "یونٹ: پٹ سائلو 1 • 45 دن سے ہوا بند سیل",
     "account_active": "اکاؤنٹ فعال ہے",
-    "welcome_farmer": "خوش آمدید",
+    "welcome_farmer": "خوش آمدید، {{name}}",
     "operation_id": "ڈیری آپریشن شناختی نمبر",
     "no_records_yet": "ابھی تک کوئی تجزیاتی ریکارڈ موجود نہیں ہے۔",
     "empty_state_desc": "معیار کے نتائج اور کسان کی تجاویز دیکھنے کے لیے اپنا پہلا فیڈ ٹیسٹ شروع کریں۔",
@@ -180,7 +184,10 @@ export default {
     "risk_alert": "خطرہ الرٹ",
     "recommended_action": "تجویز کردہ کارروائی",
     "save_result_btn": "نتیجہ محفوظ کریں",
-    "saved_to_records": "ٹیسٹ آپ کے کسان ریکارڈ میں محفوظ کر لیا گیا ہے۔"
+    "saved_to_records": "ٹیسٹ آپ کے کسان ریکارڈ میں محفوظ کر لیا گیا ہے۔",
+    "no_tests_yet": "ابھی تک کوئی ٹیسٹ نہیں ہوا ہے۔",
+    "start_first_feed_test": "اپنا پہلا فیڈ ٹیسٹ شروع کریں",
+    "explore_sample_analysis": "نمونہ تجزیہ دیکھیں"
   },
   "analyze": {
     "title": "AI تیز رفتار فیڈ کوالٹی اور سیفٹی اسکریننگ",
@@ -232,7 +239,7 @@ export default {
     "action_save": "فارم ہسٹری میں محفوظ کریں",
     "action_pdf": "PDF رپورٹ ڈاؤن لوڈ کریں",
     "action_qr": "QR کے ذریعے شیئر کریں",
-    "scenario_good": "بہترین معیار",
+    "scenario_good": "Good Quality Feed",
     "scenario_adulterated": "یوریا ملاوٹی پروٹین خوراک",
     "scenario_spoiled": "نم پھپھوندی زدہ خوراک (زیادہ افلاٹوکسن)",
     "sample_preview_ready": "✓ نمونہ تصویر تیار ہے",
@@ -272,9 +279,9 @@ export default {
     "step3_desc": "غذائی اقدار فراہم کریں",
     "step4_title": "4. AI کوالٹی نتائج",
     "step4_desc": "مکمل نتائج اور کسان سفارشات",
-    "method_sensor": "این آئی آر / سینسر ان پٹ",
-    "method_camera": "بصری اسکریننگ (تصویر)",
-    "method_manual": "کسان کا درج کردہ ڈیٹا",
+    "method_sensor": "NIR / Sensor Input",
+    "method_camera": "Visual Screening",
+    "method_manual": "Manual Entry",
     "method_demo": "ڈیمو ٹیسٹ",
     "demo_banner_title": "ڈیمو موڈ فعال ہے",
     "demo_banner_desc": "براہ راست مظاہرے اور جانچ کے لیے تیار کردہ نمونے۔",
@@ -309,9 +316,9 @@ export default {
     "select_image_error": "براہ کرم پہلے چارے کی تصویر منتخب کریں یا کیمرے سے لیں۔",
     "step1_label": "خوراک کی قسم منتخب کریں",
     "step2_label": "جانچ کا طریقہ منتخب کریں",
-    "method_sensor_sub": "اسپیکٹروسکوپی پروب",
-    "method_camera_sub": "کمپیوٹر ویژن",
-    "method_manual_sub": "دستی اندراج",
+    "method_sensor_sub": "Spectroscopy Probe",
+    "method_camera_sub": "Camera & Computer Vision",
+    "method_manual_sub": "Measured Laboratory / Farm Values",
     "method_demo_title": "ڈیمو موڈ",
     "method_demo_sub": "مصنوعی سینسر ڈیٹا",
     "demo_mode_title": "لائیو مظاہرے کے منظر نامے",
@@ -321,11 +328,11 @@ export default {
     "simulated_data": "مصنوعی ڈیٹا",
     "demo_test_title": "ڈیمو ٹیسٹ",
     "demo_test_desc": "ڈیمو ٹیسٹ مظاہرے کے لیے مصنوعی سینسر ڈیٹا استعمال کرتا ہے۔ جانچ کے لیے نیچے دیے گئے حالات منتخب کریں:",
-    "scenario_good_desc": "متوازن جانوروں کے چارے کے پیلٹس، بہترین پروٹین، دودھ دینے والی گایوں کے لیے محفوظ",
-    "scenario_attention": "توجہ طلب",
-    "scenario_attention_desc": "زیادہ نمی اور کم پروٹین، خوراک میں توازن کی ضرورت",
-    "scenario_unsafe": "خراب / غیر محفوظ",
-    "scenario_unsafe_desc": "یوریا کی ملاوٹ (9.5%) یا پھپھوندی والی زہریلی خوراک",
+    "scenario_good_desc": "Status: Good / Low Risk",
+    "scenario_attention": "Feed Requiring Attention",
+    "scenario_attention_desc": "Status: Moderate Risk",
+    "scenario_unsafe": "Poor / Unsafe Feed",
+    "scenario_unsafe_desc": "Status: High Risk",
     "loading_title": "چارے کے نمونے کا تجزیہ ہو رہا ہے...",
     "loading_subtitle": "ملٹی ٹارگٹ ایم ایل اسکریننگ اور خطرے کی درجہ بندی کا عمل",
     "step_read_sensor": "1. سینسر ٹیلی میٹری ڈیٹا پڑھا جا رہا ہے",
@@ -355,7 +362,31 @@ export default {
     "simulated_tag": "مصنوعی سینسر ڈیٹا",
     "visual_tag": "بصری اسکریننگ",
     "sensor_tag": "این آئی آر / سینسر ان پٹ",
-    "manual_tag": "کسان کا درج کردہ ڈیٹا"
+    "manual_tag": "کسان کا درج کردہ ڈیٹا",
+    "method_sample": "Sample Analysis",
+    "method_sample_sub": "Use prepared sample data to evaluate the complete workflow.",
+    "sample_data_badge": "نمونہ ڈیٹا — برائے جانچ",
+    "sensor_not_connected": "سینسر منسلک نہیں ہے",
+    "sensor_not_connected_desc": "کمیونیکیشن پورٹ پر کوئی NIR سپیکٹروسکوپی پروب یا سینسر نہیں ملا۔",
+    "use_manual_entry": "دستی اندراج استعمال کریں",
+    "explore_sample_analysis": "نمونہ تجزیہ کا مشاہدہ کریں",
+    "feed_quality_result": "چارے کے معیار کا نتیجہ",
+    "adulteration_assessment": "ملاوٹ کا جائزہ",
+    "spoilage_assessment": "خرابی / آلودگی کا جائزہ",
+    "farmer_advisory_heading": "کسان ایڈوائزری",
+    "what_result_means": "اس نتیجے کا کیا مطلب ہے؟",
+    "save_to_history": "میری ہسٹری میں محفوظ کریں",
+    "sample_analysis_label": "نمونہ تجزیہ",
+    "overall_quality": "مجموعی معیار",
+    "farmer_advisory": "کسان رہنمائی",
+    "sample_data_eval": "نمونہ ڈیٹا — برائے جائزہ",
+    "sample_analysis_title": "نمونہ تجزیہ",
+    "sample_analysis_subtitle": "مکمل ورک فلو کا جائزہ لینے کے لیے تیار کردہ نمونہ ڈیٹا استعمال کریں۔",
+    "detected": "پایا گیا",
+    "not_detected": "نہیں پایا گیا",
+    "fresh_safe": "تازہ / محفوظ",
+    "spoilage_detected": "خراب / آلودہ",
+    "save_to_my_history": "میری ہسٹری میں محفوظ کریں"
   },
   "quality_grades": {
     "good": "بہترین ✓",
@@ -488,7 +519,11 @@ export default {
     "temp_sub": "گڑھے کی ٹیلی میٹری • بہترین خمیر",
     "ph_sub": "پی ایچ پروب • لیکٹک تیزابیت",
     "moisture_sub": "نمی پروب • کمپیکشن ٹیلی میٹری",
-    "spoilage_sub": "تھرمل استحکام • محفوظ اسٹوریج"
+    "spoilage_sub": "تھرمل استحکام • محفوظ اسٹوریج",
+    "sample_data_badge": "نمونہ ڈیٹا — برائے جانچ",
+    "live_sensor_data": "Live Sensor Data",
+    "stored_data": "Stored Data",
+    "sample_data_eval": "نمونہ ڈیٹا — برائے جائزہ"
   },
   "history": {
     "title": "ٹیسٹ ہسٹری",
@@ -548,7 +583,10 @@ export default {
     "col_spoilage": "خرابی",
     "view_qr": "کیو آر دیکھیں",
     "all_risk_levels": "تمام خطرے کی سطحیں",
-    "all_input_methods": "تمام ان پٹ طریقے"
+    "all_input_methods": "تمام ان پٹ طریقے",
+    "col_data_type": "ڈیٹا کی قسم",
+    "real_farmer_test": "اصلی کسان ٹیسٹ",
+    "sample_analysis": "نمونہ تجزیہ"
   },
   "qr": {
     "title": "کیو آر رپورٹس",
@@ -729,8 +767,8 @@ export default {
     "unsafe": "خطرناک ملاوٹ یا زہریلے مادے پائے گئے ہیں! جانوروں کو کھلانا فوری طور پر بند کریں اور ڈاکٹر سے رجوع کریں۔"
   },
   "advisory_feeding": {
-    "normal": "روزانہ 20–25 کلو تازہ سبز چارہ اور 4 کلو خشک بھوسے کے ساتھ متوازن مقدار میں دیں۔",
-    "compensate": "اسے واحد خوراک کے طور پر نہ دیں۔ دودھ کی پیداوار برقرار رکھنے کے لیے 1–2 کلو اعلیٰ معیار کا ونڈا اضافی دیں۔",
+    "normal": "Feed in standard daily proportions alongside 20–25 kg fresh green fodder and clean ad-lib drinking water.",
+    "compensate": "Do not feed as sole ration. Compensate with 1–2 kg quality concentrate pellet and bypass protein.",
     "lactating": "دودھیل گائے کو 15–20 کلو سبز چارہ، 4 کلو خشک بھوسہ اور ہر 2.5 لیٹر دودھ کے پیچھے 1 کلو ونڈا دیں۔",
     "dry": "خشک گائے کو اچھے خشک چارے کے ساتھ 1.5–2 کلو ونڈا اور 50 گرام منرل مکسچر دیں۔",
     "good": "روزانہ 20–25 کلو تازہ سبز چارہ اور 4 کلو خشک بھوسے کے ساتھ متوازن مقدار میں دیں۔",
@@ -740,24 +778,24 @@ export default {
     "critical": "اسے واحد خوراک کے طور پر نہ دیں۔ دودھ کی پیداوار برقرار رکھنے کے لیے 1–2 کلو اعلیٰ معیار کا ونڈا اضافی دیں۔"
   },
   "advisory_storage": {
-    "spoiled": "شدید خرابی الرٹ: پھپھوندی یا حیاتیاتی بگاڑ پایا گیا ہے۔ متاثرہ چارے کو فوری طور پر الگ کریں اور اسٹوریج کی نمی کم کریں۔",
-    "stable": "اسٹوریج کے پیرامیٹرز مستحکم ہیں۔ پھپھوندی سے بچاؤ کے لیے موجودہ نمی اور درجہ حرارت کا کنٹرول جاری رکھیں۔",
+    "spoiled": "سڑنے کا شدید خطرہ: فوری طور پر الگ کریں اور نمی کی جانچ کریں۔",
+    "stable": "چارے کی بوریوں کو خشک اور ہوادار جگہ پر لکڑی کے تختوں پر رکھیں۔",
     "dry_feed": "بوریوں کو فرش سے 15 سینٹی میٹر اونچے لکڑی کے تختوں پر ٹھنڈی اور خشک جگہ پر رکھیں۔",
     "silage": "سائلیج کے گڑھے کو ہوا بند رکھیں۔ درجہ حرارت 28°C سے زیادہ ہو تو فوری جانچ کریں۔",
     "critical": "شدید خرابی الرٹ: پھپھوندی یا حیاتیاتی بگاڑ پایا گیا ہے۔ متاثرہ چارے کو فوری طور پر الگ کریں اور اسٹوریج کی نمی کم کریں۔",
     "normal": "اسٹوریج کے پیرامیٹرز مستحکم ہیں۔ پھپھوندی سے بچاؤ کے لیے موجودہ نمی اور درجہ حرارت کا کنٹرول جاری رکھیں۔",
-    "tip_pallets": "چارے کی بوریوں کو نم فرش سے کم از کم 15 سینٹی میٹر اونچے لکڑی کے تختوں پر رکھیں۔",
-    "tip_ventilation": "درجہ حرارت 28°C سے نیچے رکھتے ہوئے خشک، چوہوں سے محفوظ اور ہوادار اسٹوریج برقرار رکھیں۔",
-    "tip_silage": "سائلیج کے گڑھے کو بغیر کسی سوراخ کے ہوا بند کور کے ساتھ مضبوطی سے ڈھانپ کر رکھیں۔",
-    "tip_fifo": "چارہ پرانا ہو کر خراب ہونے سے بچانے کے لیے 'پہلے آنے والا پہلے استعمال کریں' (FIFO) پر عمل کریں۔"
+    "tip_pallets": "Store feed sacks on wooden pallets at least 15 cm off damp concrete floors.",
+    "tip_ventilation": "Maintain dry, rodent-proof shed ventilation with ambient temperatures below 28°C.",
+    "tip_silage": "Ensure sealed silage or storage units have airtight covers with no punctures or loose edges.",
+    "tip_fifo": "Practice First-In, First-Out (FIFO) stock rotation to prevent aging."
   },
   "advisory_action": {
     "critical": {
-      "headline": "ACTION REQUIRED: DO NOT FEED — ISOLATE BATCH",
-      "primary": "STOP feeding this batch immediately. Quarantine the sack or storage unit.",
-      "step_0": "Immediately stop offering this feed to cattle, calves, or pregnant cows.",
-      "step_1": "Physically isolate affected bags to prevent accidental herd feeding.",
-      "step_2": "Document the Batch ID using the certified QR code for supplier replacement claim.",
+      "headline": "Immediate Feed Quarantine",
+      "primary": "Do not feed this batch to any dairy cattle or calves.",
+      "step_0": "Immediately isolate and tag this batch to prevent accidental feeding.",
+      "step_1": "Retain a sealed sample bag for laboratory verification.",
+      "step_2": "Notify your feed supplier and local veterinary officer.",
       "step_3": "Consult your local veterinary doctor if cattle have already consumed this feed."
     },
     "poor": {
@@ -769,18 +807,19 @@ export default {
       "step_3": "Retest next delivery batch to ensure supplier meets quality specifications."
     },
     "moderate": {
-      "headline": "MONITORED FEEDING WITH REGULAR INSPECTION",
-      "primary": "Acceptable feed quality. Suitable for standard feeding with daily health observation.",
-      "step_0": "Feed according to standard milk-yield ration chart (approx. 400g concentrate per liter of milk).",
-      "step_1": "Keep bags sealed in a dry, ventilated shed to prevent moisture absorption.",
-      "step_2": "Monitor feed intake and rumination times over the next 48 hours."
+      "headline": "Ration Balancing Required",
+      "primary": "Adjust concentrate proportions and supplement with mineral mixture.",
+      "step_0": "Do not feed as sole concentrate source.",
+      "step_1": "Add 50–100g approved mineral mixture per cow daily.",
+      "step_2": "Re-inspect batch after 7 days of storage."
     },
     "good": {
-      "headline": "APPROVED: PREMIUM FEED QUALITY — SAFE FOR HERD",
-      "primary": "Optimal nutritional composition. Continue standard daily feeding schedule.",
-      "step_0": "Continue standard feeding ration for lactating cows, pregnant cows, and growing calves.",
-      "step_1": "Maintain clean, dry pallet storage to preserve freshness and vitamin potency.",
-      "step_2": "Generate certified QR traceability certificate for farm records."
+      "headline": "Standard Feeding Protocol",
+      "primary": "Feed directly according to standard daily ration balance.",
+      "step_0": "Maintain clean, ad-lib drinking water access.",
+      "step_1": "Combine with 15–20 kg green fodder for optimal rumen digestion.",
+      "step_2": "Store bags off concrete floors in a dry, ventilated shed.",
+      "step_3": "Monitor milk yield and butterfat percentage regularly."
     },
     "good_headline": "اعلیٰ معیار — دودھیل جانوروں کے لیے محفوظ",
     "moderate_headline": "درمیانہ معیار — غذائی توازن کی ضرورت",
@@ -844,18 +883,18 @@ export default {
     "save_settings_btn": "ترتیبات محفوظ کریں"
   },
   "advisory_nutrition": {
-    "all_balanced": "تمام ناپے گئے غذائی اشارے (پروٹین، نمی، فائبر، توانائی) معیاری NDDB حدود کے اندر ہیں۔",
-    "low_nutrient": "کم {{nutrient}}: فی الحال {{value}} {{unit}} (مثالی: {{min}}–{{max}} {{unit}}).",
-    "high_nutrient": "زیادہ {{nutrient}}: فی الحال {{value}} {{unit}} (مثالی: {{min}}–{{max}} {{unit}}).",
+    "all_balanced": "تمام غذائی اجزاء (پروٹین، نمی، ریشہ، توانائی) NDDB معیار کے مطابق محفوظ ہیں۔",
+    "low_nutrient": "Low {{nutrient}}: currently {{value}} {{unit}} (ideal: {{min}}–{{max}} {{unit}}).",
+    "high_nutrient": "High {{nutrient}}: currently {{value}} {{unit}} (ideal: {{min}}–{{max}} {{unit}}).",
     "status_balanced": "متوازن",
     "status_attention": "توجہ طلب"
   },
   "advisory_adulteration": {
-    "detected_headline": "ملاوٹ الرٹ: {{adulterant}} کا پتہ چلا ہے۔",
+    "detected_headline": "Adulterant Alert: {{adulterant}} detected.",
     "clean_headline": "اس نمونے میں کوئی کیمیائی ملاوٹ نہیں پائی گئی۔",
     "clean_remedy": "مصنوعی یا غیر نامیاتی ملاوٹ سے مکمل طور پر محفوظ۔",
-    "remediation_1": "مویشیوں کو یہ چارہ کھلانا فوری طور پر بند کریں اور الگ رکھیں۔",
-    "remediation_2": "شکایت اور تصدیق کے لیے نمونے کا بیگ محفوظ رکھیں۔",
-    "remediation_3": "اگر جانوروں میں بیماری کے آثار دکھائی دیں تو فوری ڈاکٹر سے رابطہ کریں۔"
+    "remediation_1": "Immediately withhold and isolate this batch from all livestock.",
+    "remediation_2": "Retain sample bag for batch verification and supplier complaint.",
+    "remediation_3": "Notify local veterinary officer if animals show distress."
   }
 };

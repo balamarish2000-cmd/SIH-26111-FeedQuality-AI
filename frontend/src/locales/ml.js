@@ -2,7 +2,8 @@ export default {
   "brand": {
     "name": "FEED GUARD",
     "subtitle": "ക്ഷീരകർഷകർക്കായി AI അധിഷ്ഠിത കാലിത്തീറ്റ & സൈലേജ് ഗുണനിലവാര പരിശോധന",
-    "tagline": "പരിശോധിക്കുക. കണ്ടെത്തുക. സംരക്ഷിക്കുക."
+    "tagline": "പരിശോധിക്കുക. കണ്ടെത്തുക. സംരക്ഷിക്കുക.",
+    "product_footer": "ഫീഡ് ഗാർഡ് — ക്ഷീരകർഷകർക്കായുള്ള AI-അധിഷ്ഠിത തീറ്റ, സൈലേജ് ഗുണനിലവാര നിർണ്ണയ സംവിധാനം."
   },
   "nav": {
     "home": "ഡാഷ്‌ബോർഡ്",
@@ -106,7 +107,10 @@ export default {
     "trust_message": "നിങ്ങളുടെ കർഷക രേഖകൾ നിങ്ങളുടെ അക്കൗണ്ടുമായി സുരക്ഷിതമായി ബന്ധിപ്പിച്ചിരിക്കുന്നു.",
     "login_required": "ലോഗിൻ ആവശ്യമാണ്",
     "login_required_desc": "ഈ ഫലം സംരക്ഷിക്കുന്നതിനും കർഷക രേഖകൾ ലഭ്യമാക്കുന്നതിനും ലോഗിൻ ആവശ്യമാണ്.",
-    "continue_exploring": "പര്യവേക്ഷണം തുടരുക"
+    "continue_exploring": "പര്യവേക്ഷണം തുടരുക",
+    "err_wrong_password": "തെറ്റായ പാസ്‌വേഡ്. ദയവായി വീണ്ടും ശ്രമിക്കുക.",
+    "err_account_not_found": "അക്കൗണ്ട് കണ്ടെത്തിയില്ല. ദയവായി വിവരങ്ങൾ പരിശോധിക്കുക അല്ലെങ്കിൽ പുതിയ അക്കൗണ്ട് ഉണ്ടാക്കുക.",
+    "explore_sample_analysis": "മാതൃകാ വിശകലനം കാണുക"
   },
   "dashboard": {
     "welcome": "Feed Guard-ലേക്ക് സ്വാഗതം",
@@ -156,7 +160,7 @@ export default {
     "open_iot_telemetry": "IoT തത്സമയ റീഡിംഗുകൾ തുറക്കുക",
     "pit_silo_sample": "യൂണിറ്റ്: പിറ്റ് സൈലോ 1 • 45 ദിവസമായി സീൽ ചെയ്തത്",
     "account_active": "അക്കൗണ്ട് സജീവമാണ്",
-    "welcome_farmer": "സ്വാഗതം",
+    "welcome_farmer": "സ്വാഗതം, {{name}}",
     "operation_id": "ഡയറി ഓപ്പറേഷൻ ഐഡി",
     "no_records_yet": "ഇതുവരെ പരിശോധനാ രേഖകൾ ഒന്നുമില്ല.",
     "empty_state_desc": "ഗുണനിലവാര ഫലങ്ങളും കർഷക നിർദ്ദേശങ്ങളും കാണാൻ നിങ്ങളുടെ ആദ്യ തീറ്റ പരിശോധന ആരംഭിക്കുക.",
@@ -180,7 +184,10 @@ export default {
     "risk_alert": "അപകട മുന്നറിയിപ്പ്",
     "recommended_action": "ശുപാർശ ചെയ്യുന്ന നടപടി",
     "save_result_btn": "ഫലം സംരക്ഷിക്കുക",
-    "saved_to_records": "പരിശോധന നിങ്ങളുടെ കർഷക രേഖകളിൽ സംരക്ഷിച്ചു."
+    "saved_to_records": "പരിശോധന നിങ്ങളുടെ കർഷക രേഖകളിൽ സംരക്ഷിച്ചു.",
+    "no_tests_yet": "ഇതുവരെ പരിശോധനകളൊന്നും നടത്തിയിട്ടില്ല.",
+    "start_first_feed_test": "നിങ്ങളുടെ ആദ്യ തീറ്റ പരിശോധന ആരംഭിക്കുക",
+    "explore_sample_analysis": "മാതൃകാ വിശകലനം കാണുക"
   },
   "analyze": {
     "title": "AI ത്വരിത തീറ്റ ഗുണനിലവാര സുരക്ഷാ പരിശോധന",
@@ -232,7 +239,7 @@ export default {
     "action_save": "ചരിത്രത്തിലേക്ക് സേവ് ചെയ്യുക",
     "action_pdf": "PDF റിപ്പോർട്ട് ഡൗൺലോഡ് ചെയ്യുക",
     "action_qr": "QR വഴി പങ്കിടുക",
-    "scenario_good": "മികച്ച ഗുണനിലവാരം",
+    "scenario_good": "Good Quality Feed",
     "scenario_adulterated": "യൂറിയ കലർത്തിയ പ്രോട്ടീൻ തീറ്റ",
     "scenario_spoiled": "ഈർപ്പവും പൂപ്പലും ബാധിച്ച തീറ്റ",
     "sample_preview_ready": "✓ സാമ്പിൾ ചിത്രം തയ്യാറാണ്",
@@ -272,9 +279,9 @@ export default {
     "step3_desc": "പോഷകാംശങ്ങളും ഭൗതിക അളവുകളും നൽകുക",
     "step4_title": "4. AI ഗുണനിലവാര ഫലങ്ങൾ",
     "step4_desc": "സമഗ്രമായ പരിശോധനാ ഫലവും കർഷക നിർദ്ദേശങ്ങളും",
-    "method_sensor": "NIR / സെൻസർ ഇൻപുട്ട്",
-    "method_camera": "വിഷ്വൽ സ്ക്രീനിംഗ് (ഫോട്ടോ)",
-    "method_manual": "കർഷകൻ നൽകിയ വിവരങ്ങൾ",
+    "method_sensor": "NIR / Sensor Input",
+    "method_camera": "Visual Screening",
+    "method_manual": "Manual Entry",
     "method_demo": "ഡെമോ ടെസ്റ്റ്",
     "demo_banner_title": "ഡെമോ മോഡ് സജീവം",
     "demo_banner_desc": "തത്സമയ പ്രദർശനങ്ങൾക്കായി തയ്യാറാക്കിയ സാമ്പിൾ സാഹചര്യങ്ങൾ.",
@@ -309,9 +316,9 @@ export default {
     "select_image_error": "ദയവായി ആദ്യം തീറ്റയുടെ ഫോട്ടോ തിരഞ്ഞെടുക്കുക അല്ലെങ്കിൽ ക്യാമറയിൽ എടുക്കുക.",
     "step1_label": "തീറ്റയിനം തിരഞ്ഞെടുക്കുക",
     "step2_label": "പരിശോധനാ രീതി തിരഞ്ഞെടുക്കുക",
-    "method_sensor_sub": "സ്പെക്ട്രോസ്കോപ്പി പ്രോബ്",
-    "method_camera_sub": "കമ്പ്യൂട്ടർ വിഷൻ",
-    "method_manual_sub": "മാനുവൽ എൻട്രി",
+    "method_sensor_sub": "Spectroscopy Probe",
+    "method_camera_sub": "Camera & Computer Vision",
+    "method_manual_sub": "Measured Laboratory / Farm Values",
     "method_demo_title": "ഡെമോ മോഡ്",
     "method_demo_sub": "സിമുലേറ്റഡ് സെൻസർ ഡാറ്റ",
     "demo_mode_title": "തത്സമയ പ്രദർശന സാഹചര്യങ്ങൾ",
@@ -321,11 +328,11 @@ export default {
     "simulated_data": "സിമുലേറ്റഡ് ഡാറ്റ",
     "demo_test_title": "ഡെമോ ടെസ്റ്റ്",
     "demo_test_desc": "ഡെമോ ടെസ്റ്റ് പ്രകടനത്തിനായി സിമുലേറ്റഡ് സെൻസർ ഡാറ്റ ഉപയോഗിക്കുന്നു. പരിശോധിക്കാൻ താഴെയുള്ള അവസ്ഥ തിരഞ്ഞെടുക്കുക:",
-    "scenario_good_desc": "സന്തുലിത തീറ്റ പെല്ലറ്റുകൾ, മികച്ച പ്രോട്ടീൻ, കറവപ്പശുക്കൾക്ക് സുരക്ഷിതം",
-    "scenario_attention": "ശ്രദ്ധ ആവശ്യമാണ്",
-    "scenario_attention_desc": "അധിക ഈർപ്പവും കുറഞ്ഞ പ്രോട്ടീനും, ക്രമീകരണം ആവശ്യമാണ്",
-    "scenario_unsafe": "മോശം / സുരക്ഷിതമല്ല",
-    "scenario_unsafe_desc": "യൂറിയ മായം (9.5%) അല്ലെങ്കിൽ അപകടകരമായ അഫ്ലാടോക്സിൻ ഫംഗസ് ബാധ",
+    "scenario_good_desc": "Status: Good / Low Risk",
+    "scenario_attention": "Feed Requiring Attention",
+    "scenario_attention_desc": "Status: Moderate Risk",
+    "scenario_unsafe": "Poor / Unsafe Feed",
+    "scenario_unsafe_desc": "Status: High Risk",
     "loading_title": "തീറ്റ സാമ്പിൾ പരിശോധിക്കുന്നു...",
     "loading_subtitle": "മൾട്ടി-ടാർഗെറ്റ് എംഎൽ സ്ക്രീനിംഗും റിസ്ക് വർഗ്ഗീകരണ പ്രക്രിയയും",
     "step_read_sensor": "1. സെൻസർ വിവരങ്ങൾ ശേഖരിക്കുന്നു",
@@ -355,7 +362,31 @@ export default {
     "simulated_tag": "സിമുലേറ്റഡ് സെൻസർ ഡാറ്റ",
     "visual_tag": "വിഷ്വൽ സ്ക്രീനിംഗ്",
     "sensor_tag": "NIR / സെൻസർ ഇൻപുട്ട്",
-    "manual_tag": "കർഷകൻ നൽകിയ വിവരങ്ങൾ"
+    "manual_tag": "കർഷകൻ നൽകിയ വിവരങ്ങൾ",
+    "method_sample": "Sample Analysis",
+    "method_sample_sub": "Use prepared sample data to evaluate the complete workflow.",
+    "sample_data_badge": "മാതൃകാ വിവരങ്ങൾ — പരിശോധനയ്ക്കായി",
+    "sensor_not_connected": "സെൻസർ ബന്ധിപ്പിച്ചിട്ടില്ല",
+    "sensor_not_connected_desc": "കമ്മ്യൂണിക്കേഷൻ പോർട്ടുകളിൽ NIR സ്പെക്ട്രോസ്കോപ്പി പ്രോബ് അല്ലെങ്കിൽ സെൻസർ കണ്ടെത്തിയില്ല.",
+    "use_manual_entry": "മാനുവൽ എൻട്രി ഉപയോഗിക്കുക",
+    "explore_sample_analysis": "മാതൃകാ വിശകലനം പര്യവേക്ഷണം ചെയ്യുക",
+    "feed_quality_result": "തീറ്റ ഗുണനിലവാര ഫലം",
+    "adulteration_assessment": "മായം ചേര്‍ക്കല്‍ പരിശോധന",
+    "spoilage_assessment": "കേടാകൽ / മലിനീകരണ പരിശോധന",
+    "farmer_advisory_heading": "കർഷക ഉപദേശകൻ",
+    "what_result_means": "ഈ ഫലത്തിന്റെ അർത്ഥമെന്താണ്?",
+    "save_to_history": "ചരിത്രത്തിൽ സൂക്ഷിക്കുക",
+    "sample_analysis_label": "മാതൃകാ വിശകലനം",
+    "overall_quality": "മൊത്തത്തിലുള്ള ഗുണനിലവാരം",
+    "farmer_advisory": "കർഷക നിർദ്ദേശം",
+    "sample_data_eval": "മാതൃകാ ഡാറ്റ — വിലയിരുത്തലിനായി",
+    "sample_analysis_title": "മാതൃകാ വിശകലനം",
+    "sample_analysis_subtitle": "പൂർണ്ണ വർക്ക്‌ഫ്ലോ വിലയിരുത്താൻ തയ്യാറാക്കിയ സാമ്പിൾ ഡാറ്റ ഉപയോഗിക്കുക.",
+    "detected": "കണ്ടെത്തി",
+    "not_detected": "കണ്ടെത്തിയില്ല",
+    "fresh_safe": "ശുദ്ധം / സുരക്ഷിതം",
+    "spoilage_detected": "കേടായത് / മലിനമായത്",
+    "save_to_my_history": "എന്റെ ചരിത്രത്തിലേക്ക് സേവ് ചെയ്യുക"
   },
   "quality_grades": {
     "good": "മികച്ചത് ✓",
@@ -488,7 +519,11 @@ export default {
     "temp_sub": "കുഴിയിലെ താപനില • മികച്ച ഫെർമെന്റേഷൻ",
     "ph_sub": "pH പ്രോബ് • ലാക്റ്റിക് അസിഡിറ്റി",
     "moisture_sub": "ഈർപ്പ പ്രോബ് • ഒതുക്കൽ നില",
-    "spoilage_sub": "താപ സ്ഥിരത • സുരക്ഷിത സംഭരണം"
+    "spoilage_sub": "താപ സ്ഥിരത • സുരക്ഷിത സംഭരണം",
+    "sample_data_badge": "മാതൃകാ വിവരങ്ങൾ — പരിശോധനയ്ക്കായി",
+    "live_sensor_data": "Live Sensor Data",
+    "stored_data": "Stored Data",
+    "sample_data_eval": "മാതൃകാ ഡാറ്റ — വിലയിരുത്തലിനായി"
   },
   "history": {
     "title": "സാമ്പിൾ ഹിസ്റ്ററി",
@@ -548,7 +583,10 @@ export default {
     "col_spoilage": "കേടുപാടുകൾ",
     "view_qr": "ക്യുആർ കാണുക",
     "all_risk_levels": "എല്ലാ റിസ്ക് നിലകളും",
-    "all_input_methods": "എല്ലാ ഇൻപുട്ട് രീതികളും"
+    "all_input_methods": "എല്ലാ ഇൻപുട്ട് രീതികളും",
+    "col_data_type": "ഡാറ്റ തരം",
+    "real_farmer_test": "യഥാർത്ഥ കർഷക പരിശോധന",
+    "sample_analysis": "മാതൃകാ വിശകലനം"
   },
   "qr": {
     "title": "QR റിപ്പോർട്ടുകൾ",
@@ -729,8 +767,8 @@ export default {
     "unsafe": "അപകടകരമായ മായമോ വിഷാംശമോ കണ്ടെത്തി! കന്നുകാലികൾക്ക് നൽകുന്നത് ഉടൻ നിർത്തി ഡോക്ടറുടെ സഹായം തേടുക."
   },
   "advisory_feeding": {
-    "normal": "ദിവസവും 20–25 കിലോ പച്ചപ്പുല്ലും 4 കിലോ ഉണക്കപ്പുല്ലും ചേർത്ത് കൃത്യമായ അളവിൽ നൽകുക.",
-    "compensate": "ഇത് മാത്രമായി നൽകരുത്. പാൽ ഉൽപ്പാദനം നിലനിർത്താൻ 1–2 കിലോ മികച്ച കാലിത്തീറ്റ അധികമായി നൽകുക.",
+    "normal": "Feed in standard daily proportions alongside 20–25 kg fresh green fodder and clean ad-lib drinking water.",
+    "compensate": "Do not feed as sole ration. Compensate with 1–2 kg quality concentrate pellet and bypass protein.",
     "lactating": "കറവപ്പശുവിന് 15–20 കിലോ പച്ചപ്പുല്ല്, 4 കിലോ ഉണക്കപ്പുല്ല്, കറക്കുന്ന ഓരോ 2.5 ലിറ്റർ പാലിനും 1 കിലോ കാലിത്തീറ്റ വീതം നൽകുക.",
     "dry": "കറവയില്ലാത്ത പശുക്കൾക്ക് നല്ല ഉണക്കപ്പുല്ലിനൊപ്പം 1.5–2 കിലോ തീറ്റയും 50 ഗ്രാം മിനറൽ മിശ്രിതവും നൽകുക.",
     "good": "ദിവസവും 20–25 കിലോ പച്ചപ്പുല്ലും 4 കിലോ ഉണക്കപ്പുല്ലും ചേർത്ത് കൃത്യമായ അളവിൽ നൽകുക.",
@@ -740,24 +778,24 @@ export default {
     "critical": "ഇത് മാത്രമായി നൽകരുത്. പാൽ ഉൽപ്പാദനം നിലനിർത്താൻ 1–2 കിലോ മികച്ച കാലിത്തീറ്റ അധികമായി നൽകുക."
   },
   "advisory_storage": {
-    "spoiled": "ഗുരുതരമായ കേടുപാട് മുന്നറിയിപ്പ്: പൂപ്പലോ ചീഞ്ഞളിയലോ കണ്ടെത്തി. കേടായ തീറ്റ ഉടൻ മാറ്റി ഈർപ്പം കുറയ്ക്കുക.",
-    "stable": "സംഭരണ അവസ്ഥ തൃപ്തികരമാണ്. പൂപ്പൽ വരാതിരിക്കാൻ നിലവിലെ ഈർപ്പവും താപനിലയും നിലനിർത്തുക.",
+    "spoiled": "ഗുരുതരമായ കേടുപാട് സാധ്യത: ബാച്ച് ഉടനടി മാറ്റി സൂക്ഷിക്കുക.",
+    "stable": "തീറ്റച്ചാക്കുകൾ തറയിൽ തട്ടാതെ പലകകളിൽ ഈർപ്പമില്ലാത്ത സ്ഥലത്ത് സൂക്ഷിക്കുക.",
     "dry_feed": "തീറ്റച്ചാക്കുകൾ തറയിൽ നിന്ന് 15 സെ.മീ ഉയരത്തിൽ തടിപ്പലകകളിൽ തണുപ്പുള്ള സ്ഥലത്ത് സൂക്ഷിക്കുക.",
     "silage": "സൈലേജ് കുഴി വായു കടക്കാതെ മൂടി സൂക്ഷിക്കുക. താപനില 28°C ൽ കൂടുതലായാൽ ഉടൻ പരിശോധിക്കുക.",
     "critical": "ഗുരുതരമായ കേടുപാട് മുന്നറിയിപ്പ്: പൂപ്പലോ ചീഞ്ഞളിയലോ കണ്ടെത്തി. കേടായ തീറ്റ ഉടൻ മാറ്റി ഈർപ്പം കുറയ്ക്കുക.",
     "normal": "സംഭരണ അവസ്ഥ തൃപ്തികരമാണ്. പൂപ്പൽ വരാതിരിക്കാൻ നിലവിലെ ഈർപ്പവും താപനിലയും നിലനിർത്തുക.",
-    "tip_pallets": "തീറ്റച്ചാക്കുകൾ ഈർപ്പമുള്ള തറയിൽ നിന്ന് കുറഞ്ഞത് 15 സെ.മീ ഉയരത്തിൽ തടിപ്പലകകളിൽ സൂക്ഷിക്കുക.",
-    "tip_ventilation": "അന്തരീക്ഷ താപനില 28°C ൽ താഴെ നിലനിർത്തി എലി ശല്യമില്ലാത്ത വായുസഞ്ചാരമുള്ള ഷെഡ് ഉറപ്പാക്കുക.",
-    "tip_silage": "സൈലേജ് കുഴിയോ സംഭരണ കേന്ദ്രങ്ങളോ വായു കടക്കാത്ത രീതിയിൽ ഭദ്രമായി മൂടിയിട്ടുണ്ടെന്ന് ഉറപ്പാക്കുക.",
-    "tip_fifo": "തീറ്റ പഴകി നശിക്കാതിരിക്കാൻ 'ആദ്യം വന്നത് ആദ്യം ഉപയോഗിക്കുക' (FIFO) രീതി പിന്തുടരുക."
+    "tip_pallets": "Store feed sacks on wooden pallets at least 15 cm off damp concrete floors.",
+    "tip_ventilation": "Maintain dry, rodent-proof shed ventilation with ambient temperatures below 28°C.",
+    "tip_silage": "Ensure sealed silage or storage units have airtight covers with no punctures or loose edges.",
+    "tip_fifo": "Practice First-In, First-Out (FIFO) stock rotation to prevent aging."
   },
   "advisory_action": {
     "critical": {
-      "headline": "ACTION REQUIRED: DO NOT FEED — ISOLATE BATCH",
-      "primary": "STOP feeding this batch immediately. Quarantine the sack or storage unit.",
-      "step_0": "Immediately stop offering this feed to cattle, calves, or pregnant cows.",
-      "step_1": "Physically isolate affected bags to prevent accidental herd feeding.",
-      "step_2": "Document the Batch ID using the certified QR code for supplier replacement claim.",
+      "headline": "Immediate Feed Quarantine",
+      "primary": "Do not feed this batch to any dairy cattle or calves.",
+      "step_0": "Immediately isolate and tag this batch to prevent accidental feeding.",
+      "step_1": "Retain a sealed sample bag for laboratory verification.",
+      "step_2": "Notify your feed supplier and local veterinary officer.",
       "step_3": "Consult your local veterinary doctor if cattle have already consumed this feed."
     },
     "poor": {
@@ -769,18 +807,19 @@ export default {
       "step_3": "Retest next delivery batch to ensure supplier meets quality specifications."
     },
     "moderate": {
-      "headline": "MONITORED FEEDING WITH REGULAR INSPECTION",
-      "primary": "Acceptable feed quality. Suitable for standard feeding with daily health observation.",
-      "step_0": "Feed according to standard milk-yield ration chart (approx. 400g concentrate per liter of milk).",
-      "step_1": "Keep bags sealed in a dry, ventilated shed to prevent moisture absorption.",
-      "step_2": "Monitor feed intake and rumination times over the next 48 hours."
+      "headline": "Ration Balancing Required",
+      "primary": "Adjust concentrate proportions and supplement with mineral mixture.",
+      "step_0": "Do not feed as sole concentrate source.",
+      "step_1": "Add 50–100g approved mineral mixture per cow daily.",
+      "step_2": "Re-inspect batch after 7 days of storage."
     },
     "good": {
-      "headline": "APPROVED: PREMIUM FEED QUALITY — SAFE FOR HERD",
-      "primary": "Optimal nutritional composition. Continue standard daily feeding schedule.",
-      "step_0": "Continue standard feeding ration for lactating cows, pregnant cows, and growing calves.",
-      "step_1": "Maintain clean, dry pallet storage to preserve freshness and vitamin potency.",
-      "step_2": "Generate certified QR traceability certificate for farm records."
+      "headline": "Standard Feeding Protocol",
+      "primary": "Feed directly according to standard daily ration balance.",
+      "step_0": "Maintain clean, ad-lib drinking water access.",
+      "step_1": "Combine with 15–20 kg green fodder for optimal rumen digestion.",
+      "step_2": "Store bags off concrete floors in a dry, ventilated shed.",
+      "step_3": "Monitor milk yield and butterfat percentage regularly."
     },
     "good_headline": "നല്ല ഗുണനിലവാരം — കറവപ്പശുക്കൾക്ക് സുരക്ഷിതം",
     "moderate_headline": "മിതമായ ഗുണനിലവാരം — പോഷക സമീകരണം വേണം",
@@ -844,18 +883,18 @@ export default {
     "save_settings_btn": "ക്രമീകരണങ്ങൾ സേവ് ചെയ്യുക"
   },
   "advisory_nutrition": {
-    "all_balanced": "അളന്ന എല്ലാ പോഷക സൂചകങ്ങളും (പ്രോട്ടീൻ, ഈർപ്പം, നാര്, ഊർജ്ജം) സാധാരണ NDDB പരിധിക്കുള്ളിലാണ്.",
-    "low_nutrient": "കുറഞ്ഞ {{nutrient}}: നിലവിൽ {{value}} {{unit}} (ആവശ്യമായത്: {{min}}–{{max}} {{unit}}).",
-    "high_nutrient": "കൂടിയ {{nutrient}}: നിലവിൽ {{value}} {{unit}} (ആവശ്യമായത്: {{min}}–{{max}} {{unit}}).",
+    "all_balanced": "എല്ലാ പോഷക സൂചകങ്ങളും (പ്രോട്ടീൻ, ഈർപ്പം, നാര്, ഊർജ്ജം) NDDB മാനദണ്ഡങ്ങൾക്കുള്ളിൽ സുരക്ഷിതമാണ്.",
+    "low_nutrient": "Low {{nutrient}}: currently {{value}} {{unit}} (ideal: {{min}}–{{max}} {{unit}}).",
+    "high_nutrient": "High {{nutrient}}: currently {{value}} {{unit}} (ideal: {{min}}–{{max}} {{unit}}).",
     "status_balanced": "സന്തുലിതം",
     "status_attention": "ശ്രദ്ധിക്കേണ്ടതുണ്ട്"
   },
   "advisory_adulteration": {
-    "detected_headline": "മായം മുന്നറിയിപ്പ്: {{adulterant}} കണ്ടെത്തി.",
+    "detected_headline": "Adulterant Alert: {{adulterant}} detected.",
     "clean_headline": "ഈ സാമ്പിളിൽ രാസമാലിന്യങ്ങളോ മായങ്ങളോ കണ്ടെത്തിയിട്ടില്ല.",
     "clean_remedy": "കൃത്രിമ അല്ലെങ്കിൽ അജൈവ മാലിന്യങ്ങളിൽ നിന്ന് സുരക്ഷിതം.",
-    "remediation_1": "കന്നുകാലികൾക്ക് ഈ തീറ്റ നൽകുന്നത് ഉടനടി നിർത്തിവെക്കുക.",
-    "remediation_2": "പരാതിക്കും പരിശോധനയ്ക്കുമായി സാമ്പിൾ ചാക്ക് സൂക്ഷിക്കുക.",
-    "remediation_3": "മൃഗങ്ങൾക്ക് അസ്വസ്ഥത തോന്നിയാൽ മൃഗഡോക്ടറെ വിവരം അറിയിക്കുക."
+    "remediation_1": "Immediately withhold and isolate this batch from all livestock.",
+    "remediation_2": "Retain sample bag for batch verification and supplier complaint.",
+    "remediation_3": "Notify local veterinary officer if animals show distress."
   }
 };

@@ -541,7 +541,7 @@ export default function Layout() {
           </div>
 
           <p style={{ margin: '4px 0', fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
-            {t('common.sih_credit')}
+            {t('brand.product_footer', 'Feed Guard — AI-assisted feed and silage quality assessment for dairy farming.')}
           </p>
           <div style={{ fontSize: '0.74rem', color: 'var(--text-muted)' }}>
             © 2026 FEED GUARD. {t('brand.tagline')}

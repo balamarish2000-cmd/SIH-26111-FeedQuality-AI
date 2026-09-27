@@ -2,7 +2,8 @@ export default {
   "brand": {
     "name": "FEED GUARD",
     "subtitle": "ಡೈರಿ ರೈತರಿಗಾಗಿ AI-ಚಾಲಿತ ಮೇವು ಮತ್ತು ಸೈಲೇಜ್ ಗುಣಮಟ್ಟ ಪರೀಕ್ಷಾ ವ್ಯವಸ್ಥೆ",
-    "tagline": "ಪರೀಕ್ಷಿಸಿ. ಪತ್ತೆಹಚ್ಚಿ. ರಕ್ಷಿಸಿ."
+    "tagline": "ಪರೀಕ್ಷಿಸಿ. ಪತ್ತೆಹಚ್ಚಿ. ರಕ್ಷಿಸಿ.",
+    "product_footer": "ಫೀಡ್ ಗಾರ್ಡ್ — ಡೈರಿ ರೈತರಿಗಾಗಿ AI-ಚಾಲಿತ ಮೇವು ಮತ್ತು ಸೈಲೇಜ್ ಗುಣಮಟ್ಟ ಪರೀಕ್ಷಾ ವ್ಯವಸ್ಥೆ."
   },
   "nav": {
     "home": "ಡ್ಯಾಶ್‌ಬೋರ್ಡ್",
@@ -106,7 +107,10 @@ export default {
     "trust_message": "ನಿಮ್ಮ ರೈತ ದಾಖಲೆಗಳು ನಿಮ್ಮ ಖಾತೆಯೊಂದಿಗೆ ಸುರಕ್ಷಿತವಾಗಿ ಸಂಯೋಜಿಸಲ್ಪಟ್ಟಿವೆ.",
     "login_required": "ಲಾಗಿನ್ ಅಗತ್ಯವಿದೆ",
     "login_required_desc": "ಈ ಫಲಿತಾಂಶವನ್ನು ಉಳಿಸಲು ಮತ್ತು ರೈತರ ದಾಖಲೆಗಳನ್ನು ಪಡೆಯಲು ಲಾಗಿನ್ ಅಗತ್ಯವಿದೆ.",
-    "continue_exploring": "ಅನ್ವೇಷಣೆ ಮುಂದುವರಿಸಿ"
+    "continue_exploring": "ಅನ್ವೇಷಣೆ ಮುಂದುವರಿಸಿ",
+    "err_wrong_password": "ತಪ್ಪು ಪಾಸ್‌ವರ್ಡ್. ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.",
+    "err_account_not_found": "ಖಾತೆ ಕಂಡುಬಂದಿಲ್ಲ. ದಯವಿಟ್ಟು ವಿವರಗಳನ್ನು ಪರಿಶೀಲಿಸಿ ಅಥವಾ ಹೊಸ ಖಾತೆಯನ್ನು ರಚಿಸಿ.",
+    "explore_sample_analysis": "ಮಾದರಿ ವಿಶ್ಲೇಷಣೆ ವೀಕ್ಷಿಸಿ"
   },
   "dashboard": {
     "welcome": "Feed Guard ಗೆ ಸುಸ್ವಾಗತ",
@@ -156,7 +160,7 @@ export default {
     "open_iot_telemetry": "IoT ನೇರ ಮಾಪನಗಳನ್ನು ತೆರೆಯಿರಿ",
     "pit_silo_sample": "ಘಟಕ: ಹೊಂಡ ಸೈಲೇಜ್ 1 • 45 ದಿನಗಳು ಸೀಲ್ ಮಾಡಲಾಗಿದೆ",
     "account_active": "ಖಾತೆ ಸಕ್ರಿಯವಾಗಿದೆ",
-    "welcome_farmer": "ಸ್ವಾಗತ",
+    "welcome_farmer": "ಸ್ವಾಗತ, {{name}}",
     "operation_id": "ಡೈರಿ ಕಾರ್ಯಾಚರಣೆ ಐಡಿ",
     "no_records_yet": "ಇನ್ನೂ ಯಾವುದೇ ಪರೀಕ್ಷಾ ದಾಖಲೆಗಳಿಲ್ಲ.",
     "empty_state_desc": "ಗುಣಮಟ್ಟದ ಫಲಿತಾಂಶಗಳು ಮತ್ತು ರೈತ ಶಿಫಾರಸುಗಳನ್ನು ನೋಡಲು ನಿಮ್ಮ ಮೊದಲ ಮೇವಿನ ಪರೀಕ್ಷೆಯನ್ನು ಪ್ರಾರಂಭಿಸಿ.",
@@ -180,7 +184,10 @@ export default {
     "risk_alert": "ಅಪಾಯದ ಎಚ್ಚರಿಕೆ",
     "recommended_action": "ಶಿಫಾರಸು ಮಾಡಿದ ಕ್ರಮ",
     "save_result_btn": "ಫಲಿತಾಂಶ ಉಳಿಸಿ",
-    "saved_to_records": "ಪರೀಕ್ಷೆಯನ್ನು ನಿಮ್ಮ ರೈತ ದಾಖಲೆಗಳಲ್ಲಿ ಉಳಿಸಲಾಗಿದೆ."
+    "saved_to_records": "ಪರೀಕ್ಷೆಯನ್ನು ನಿಮ್ಮ ರೈತ ದಾಖಲೆಗಳಲ್ಲಿ ಉಳಿಸಲಾಗಿದೆ.",
+    "no_tests_yet": "ಇನ್ನೂ ಯಾವುದೇ ಪರೀಕ್ಷೆಗಳಿಲ್ಲ.",
+    "start_first_feed_test": "ನಿಮ್ಮ ಮೊದಲ ಮೇವು ಪರೀಕ್ಷೆಯನ್ನು ಪ್ರಾರಂಭಿಸಿ",
+    "explore_sample_analysis": "ಮಾದರಿ ವಿಶ್ಲೇಷಣೆ ವೀಕ್ಷಿಸಿ"
   },
   "analyze": {
     "title": "AI ತ್ವರಿತ ಮೇವು ಗುಣಮಟ್ಟ ಮತ್ತು ಸುರಕ್ಷತಾ ಪರೀಕ್ಷೆ",
@@ -232,7 +239,7 @@ export default {
     "action_save": "ಫಾರ್ಮ್ ಇತಿಹಾಸಕ್ಕೆ ಉಳಿಸಿ",
     "action_pdf": "PDF ವರದಿ ಡೌನ್‌ಲೋಡ್ ಮಾಡಿ",
     "action_qr": "QR ಮೂಲಕ ವರದಿ ಹಂಚಿಕೊಳ್ಳಿ",
-    "scenario_good": "ಉತ್ತಮ ಗುಣಮಟ್ಟ",
+    "scenario_good": "Good Quality Feed",
     "scenario_adulterated": "ಯೂರಿಯಾ ಬೆರೆಸಿದ ಪ್ರೋಟೀನ್ ಮಿಶ್ರಣ",
     "scenario_spoiled": "ತೇವವಾದ ಬೂಜು ಹಿಡಿದ ಮೇವು (ಹೆಚ್ಚಿನ ಅಫ್ಲಾಟಾಕ್ಸಿನ್)",
     "sample_preview_ready": "✓ ಮಾದರಿ ಪೂರ್ವವೀಕ್ಷಣೆ ಸಿದ್ಧವಾಗಿದೆ",
@@ -272,9 +279,9 @@ export default {
     "step3_desc": "ಪೌಷ್ಟಿಕಾಂಶ ಮತ್ತು ಭೌತಿಕ ನಿಯತಾಂಕ ಮೌಲ್ಯಗಳನ್ನು ಒದಗಿಸಿ",
     "step4_title": "4. AI ಗುಣಮಟ್ಟ & ಸಲಹಾ ಫಲಿತಾಂಶಗಳು",
     "step4_desc": "ಸಮಗ್ರ ಬಹು-ಗುರಿ ಗುಣಮಟ್ಟ ರೋಗನಿರ್ಣಯ ಮತ್ತು ರೈತರ ಶಿಫಾರಸುಗಳು",
-    "method_sensor": "NIR / ಸಂವೇದಕ ಇನ್‌ಪುಟ್",
-    "method_camera": "ದೃಶ್ಯ ತಪಾಸಣೆ (ಫೋಟೋ)",
-    "method_manual": "ರೈತರು ನಮೂದಿಸಿದ ಡೇಟಾ",
+    "method_sensor": "NIR / Sensor Input",
+    "method_camera": "Visual Screening",
+    "method_manual": "Manual Entry",
     "method_demo": "ಡೆಮೊ ಪರೀಕ್ಷೆ",
     "demo_banner_title": "ನಿಯಂತ್ರಿತ ಪ್ರದರ್ಶನ ಮೋಡ್ ಸಕ್ರಿಯವಾಗಿದೆ",
     "demo_banner_desc": "ನೇರ ಪ್ರದರ್ಶನಗಳು ಮತ್ತು ಪರೀಕ್ಷೆಗಾಗಿ ವಿನ್ಯಾಸಗೊಳಿಸಲಾದ ತ್ವರಿತ ವಾಸ್ತವಿಕ ಸನ್ನಿವೇಶಗಳು.",
@@ -309,9 +316,9 @@ export default {
     "select_image_error": "ದಯವಿಟ್ಟು ಮೊದಲು ಮೇವಿನ ಫೋಟೋವನ್ನು ಆಯ್ಕೆಮಾಡಿ ಅಥವಾ ಕ್ಯಾಮೆರಾದಿಂದ ಸೆರೆಹಿಡಿಯಿರಿ.",
     "step1_label": "ಮೇವಿನ ಪ್ರಕಾರವನ್ನು ಆಯ್ಕೆಮಾಡಿ",
     "step2_label": "ಇನ್‌ಪುಟ್ ವಿಧಾನವನ್ನು ಆಯ್ಕೆಮಾಡಿ",
-    "method_sensor_sub": "ಸ್ಪೆಕ್ಟ್ರೋಸ್ಕೋಪಿ ತನಿಖೆ",
-    "method_camera_sub": "ಕಂಪ್ಯೂಟರ್ ದೃಷ್ಟಿ",
-    "method_manual_sub": "ಹಸ್ತಚಾಲಿತ ನಮೂದು",
+    "method_sensor_sub": "Spectroscopy Probe",
+    "method_camera_sub": "Camera & Computer Vision",
+    "method_manual_sub": "Measured Laboratory / Farm Values",
     "method_demo_title": "ಡೆಮೊ ಮೋಡ್",
     "method_demo_sub": "ಸಿಮ್ಯುಲೇಟೆಡ್ ಸಂವೇದಕ ಡೇಟಾ",
     "demo_mode_title": "ನೇರ ಪ್ರದರ್ಶನ ಸನ್ನಿವೇಶಗಳು",
@@ -321,11 +328,11 @@ export default {
     "simulated_data": "ಸಿಮ್ಯುಲೇಟೆಡ್ ಡೇಟಾ",
     "demo_test_title": "ಡೆಮೊ ಪರೀಕ್ಷೆ",
     "demo_test_desc": "ಡೆಮೊ ಪರೀಕ್ಷೆಯು ಪ್ರದರ್ಶನಕ್ಕಾಗಿ ಸಿಮ್ಯುಲೇಟೆಡ್ ಸಂವೇದಕ ಡೇಟಾವನ್ನು ಬಳಸುತ್ತದೆ. ಪರೀಕ್ಷಿಸಲು ಕೆಳಗಿನ ಸನ್ನಿವೇಶವನ್ನು ಆಯ್ಕೆಮಾಡಿ:",
-    "scenario_good_desc": "ಸಮತೋಲಿತ ಹಸುವಿನ ಮೇವಿನ ಉಂಡೆಗಳು, ಸೂಕ್ತ ಪ್ರೋಟೀನ್, ಹಾಲು ಕೊಡುವ ಹಸುಗಳಿಗೆ ಸುರಕ್ಷಿತ",
-    "scenario_attention": "ಗಮನ ಅಗತ್ಯವಿದೆ",
-    "scenario_attention_desc": "ಹೆಚ್ಚಿದ ತೇವಾಂಶ ಮತ್ತು ಕಡಿಮೆ ಪ್ರೋಟೀನ್, ಮೇವಿನ ಹೊಂದಾಣಿಕೆ ಅಗತ್ಯವಿದೆ",
-    "scenario_unsafe": "ಕಳಪೆ / ಅಸುರಕ್ಷಿತ",
-    "scenario_unsafe_desc": "ಯೂರಿಯಾ ಕಲಬೆರಕೆ (9.5%) ಅಥವಾ ಅಪಾಯಕಾರಿ ಅಫ್ಲಾಟಾಕ್ಸಿನ್ ಶಿಲೀಂಧ್ರ",
+    "scenario_good_desc": "Status: Good / Low Risk",
+    "scenario_attention": "Feed Requiring Attention",
+    "scenario_attention_desc": "Status: Moderate Risk",
+    "scenario_unsafe": "Poor / Unsafe Feed",
+    "scenario_unsafe_desc": "Status: High Risk",
     "loading_title": "ಮೇವಿನ ಮಾದರಿಯನ್ನು ವಿಶ್ಲೇಷಿಸಲಾಗುತ್ತಿದೆ...",
     "loading_subtitle": "ಮಲ್ಟಿ-ಟಾರ್ಗೆಟ್ ML ತಪಾಸಣೆ ಮತ್ತು ಅಪಾಯ ವರ್ಗೀಕರಣ ಪ್ರಕ್ರಿಯೆ",
     "step_read_sensor": "1. ಸಂವೇದಕ ಟೆಲಿಮೆಟ್ರಿ ಡೇಟಾ ಓದಲಾಗುತ್ತಿದೆ",
@@ -355,7 +362,31 @@ export default {
     "simulated_tag": "ಸಿಮ್ಯುಲೇಟೆಡ್ ಸಂವೇದಕ ಡೇಟಾ",
     "visual_tag": "ದೃಶ್ಯ ತಪಾಸಣೆ",
     "sensor_tag": "NIR / ಸಂವೇದಕ ಇನ್‌ಪುಟ್",
-    "manual_tag": "ರೈತರು ನಮೂದಿಸಿದ ಡೇಟಾ"
+    "manual_tag": "ರೈತರು ನಮೂದಿಸಿದ ಡೇಟಾ",
+    "method_sample": "Sample Analysis",
+    "method_sample_sub": "Use prepared sample data to evaluate the complete workflow.",
+    "sample_data_badge": "ಮಾದರಿ ಡೇಟಾ — ಮೌಲ್ಯಮಾಪನಕ್ಕಾಗಿ",
+    "sensor_not_connected": "ಸೆನ್ಸಾರ್ ಸಂಪರ್ಕಗೊಂಡಿಲ್ಲ",
+    "sensor_not_connected_desc": "ಸಂಪರ್ಕ ಪೋರ್ಟ್‌ಗಳಲ್ಲಿ ಯಾವುದೇ NIR ಸ್ಪೆಕ್ಟ್ರೋಸ್ಕೋಪಿ ಪ್ರೋಬ್ ಅಥವಾ ಹಾರ್ಡ್‌ವೇರ್ ಕಂಡುಬಂದಿಲ್ಲ.",
+    "use_manual_entry": "ಹಸ್ತಚಾಲಿತ ನಮೂದನ್ನು ಬಳಸಿ",
+    "explore_sample_analysis": "ಮಾದರಿ ವಿಶ್ಲೇಷಣೆ ಅನ್ವೇಷಿಸಿ",
+    "feed_quality_result": "ಮೇವಿನ ಗುಣಮಟ್ಟದ ಫಲಿತಾಂಶ",
+    "adulteration_assessment": "ಕಲಬೆರಕೆ ಮೌಲ್ಯಮಾಪನ",
+    "spoilage_assessment": "ಹಾಳಾಗುವಿಕೆ / ಮಾಲಿನ್ಯ ಮೌಲ್ಯಮಾಪನ",
+    "farmer_advisory_heading": "ರೈತ ಸಲಹೆಗಾರ",
+    "what_result_means": "ಈ ಫಲಿತಾಂಶದ ಅರ್ಥವೇನು?",
+    "save_to_history": "ನನ್ನ ಇತಿಹಾಸದಲ್ಲಿ ಉಳಿಸಿ",
+    "sample_analysis_label": "ಮಾದರಿ ವಿಶ್ಲೇಷಣೆ",
+    "overall_quality": "ಒಟ್ಟಾರೆ ಗುಣಮಟ್ಟ",
+    "farmer_advisory": "ರೈತ ಸಲಹೆ",
+    "sample_data_eval": "ಮಾದರಿ ಡೇಟಾ — ಮೌಲ್ಯಮಾಪನಕ್ಕಾಗಿ",
+    "sample_analysis_title": "ಮಾದರಿ ವಿಶ್ಲೇಷಣೆ",
+    "sample_analysis_subtitle": "ಸಂಪೂರ್ಣ ಕಾರ್ಯವಿಧಾನವನ್ನು ಮೌಲ್ಯಮಾಪನ ಮಾಡಲು ಸಿದ್ಧಪಡಿಸಿದ ಮಾದರಿ ಡೇಟಾವನ್ನು ಬಳಸಿ.",
+    "detected": "ಪತ್ತೆಯಾಗಿದೆ",
+    "not_detected": "ಪತ್ತೆಯಾಗಿಲ್ಲ",
+    "fresh_safe": "ತಾಜಾ / ಸುರಕ್ಷಿತ",
+    "spoilage_detected": "ಹಾಳಾಗಿದೆ / ಕಲುಷಿತ",
+    "save_to_my_history": "ನನ್ನ ಇತಿಹಾಸಕ್ಕೆ ಉಳಿಸಿ"
   },
   "quality_grades": {
     "good": "ಉತ್ತಮ ✓",
@@ -488,7 +519,11 @@ export default {
     "temp_sub": "ಪಿಟ್ ಟೆಲಿಮೆಟ್ರಿ • ಸೂಕ್ತ ಹುದುಗುವಿಕೆ",
     "ph_sub": "pH ಪ್ರೋಬ್ • ಲ್ಯಾಕ್ಟಿಕ್ ಆಮ್ಲೀಯತೆ",
     "moisture_sub": "ತೇವಾಂಶ ಪ್ರೋಬ್ • ಸಂಕೋಚನ ಟೆಲಿಮೆಟ್ರಿ",
-    "spoilage_sub": "ಉಷ್ಣ ಸ್ಥಿರತೆ • ಸುರಕ್ಷಿತ ಸಂಗ್ರಹಣೆ"
+    "spoilage_sub": "ಉಷ್ಣ ಸ್ಥಿರತೆ • ಸುರಕ್ಷಿತ ಸಂಗ್ರಹಣೆ",
+    "sample_data_badge": "ಮಾದರಿ ಡೇಟಾ — ಮೌಲ್ಯಮಾಪನಕ್ಕಾಗಿ",
+    "live_sensor_data": "Live Sensor Data",
+    "stored_data": "Stored Data",
+    "sample_data_eval": "ಮಾದರಿ ಡೇಟಾ — ಮೌಲ್ಯಮಾಪನಕ್ಕಾಗಿ"
   },
   "history": {
     "title": "ಮಾದರಿ ಇತಿಹಾಸ",
@@ -548,7 +583,10 @@ export default {
     "col_spoilage": "ಹಾಳಾಗುವಿಕೆ",
     "view_qr": "QR ನೋಡಿ",
     "all_risk_levels": "ಎಲ್ಲಾ ಅಪಾಯದ ಮಟ್ಟಗಳು",
-    "all_input_methods": "ಎಲ್ಲಾ ಇನ್‌ಪುಟ್ ವಿಧಾನಗಳು"
+    "all_input_methods": "ಎಲ್ಲಾ ಇನ್‌ಪುಟ್ ವಿಧಾನಗಳು",
+    "col_data_type": "ಡೇಟಾ ಪ್ರಕಾರ",
+    "real_farmer_test": "ನೈಜ ರೈತ ಪರೀಕ್ಷೆ",
+    "sample_analysis": "ಮಾದರಿ ವಿಶ್ಲೇಷಣೆ"
   },
   "qr": {
     "title": "QR ವರದಿಗಳು",
@@ -729,8 +767,8 @@ export default {
     "unsafe": "ಅಪಾಯಕಾರಿ ಮಾಲಿನ್ಯ ಅಥವಾ ವಿಷಕಾರಿ ಅಂಶ ಪತ್ತೆಯಾಗಿದೆ! ಜಾನುವಾರುಗಳಿಗೆ ತಕ್ಷಣವೇ ಆಹಾರ ನೀಡುವುದನ್ನು ನಿಲ್ಲಿಸಿ ಮತ್ತು ಪಶುವೈದ್ಯರನ್ನು ಸಂಪರ್ಕಿಸಿ."
   },
   "advisory_feeding": {
-    "normal": "ದಿನಕ್ಕೆ 20–25 ಕೆಜಿ ತಾಜಾ ಹಸಿರು ಮೇವು ಮತ್ತು 4 ಕೆಜಿ ಒಣ ಮೇವಿನೊಂದಿಗೆ ಸಮತೋಲಿತ ಪ್ರಮಾಣದಲ್ಲಿ ನೀಡಿ.",
-    "compensate": "ಇದನ್ನು ಏಕೈಕ ಆಹಾರವಾಗಿ ನೀಡಬೇಡಿ. ಹಾಲಿನ ಇಳುವರಿ ಕಾಪಾಡಲು 1–2 ಕೆಜಿ ಉತ್ತಮ ಗುಣಮಟ್ಟದ ಪಶು ಆಹಾರವನ್ನು ಹೆಚ್ಚುವರಿಯಾಗಿ ನೀಡಿ.",
+    "normal": "Feed in standard daily proportions alongside 20–25 kg fresh green fodder and clean ad-lib drinking water.",
+    "compensate": "Do not feed as sole ration. Compensate with 1–2 kg quality concentrate pellet and bypass protein.",
     "lactating": "ಹಾಲು ನೀಡುವ ಹಸುವಿಗೆ ದಿನಕ್ಕೆ 15–20 ಕೆಜಿ ಹಸಿರು ಹುಲ್ಲು, 4 ಕೆಜಿ ಒಣ ಮೇವು ಮತ್ತು ಪ್ರತಿ 2.5 ಲೀಟರ್ ಹಾಲಿಗೆ 1 ಕೆಜಿ ಸಮತೋಲಿತ ಪಶು ಆಹಾರ ನೀಡಿ.",
     "dry": "ಒಣ ಹಸುಗಳಿಗೆ ಉತ್ತಮ ಗುಣಮಟ್ಟದ ಒಣ ಹುಲ್ಲಿನೊಂದಿಗೆ ದಿನಕ್ಕೆ 1.5–2 ಕೆಜಿ ಪಶು ಆಹಾರ ಮತ್ತು 50 ಗ್ರಾಂ ಖನಿಜ ಮಿಶ್ರಣ ನೀಡಿ.",
     "good": "ದಿನಕ್ಕೆ 20–25 ಕೆಜಿ ತಾಜಾ ಹಸಿರು ಮೇವು ಮತ್ತು 4 ಕೆಜಿ ಒಣ ಮೇವಿನೊಂದಿಗೆ ಸಮತೋಲಿತ ಪ್ರಮಾಣದಲ್ಲಿ ನೀಡಿ.",
@@ -740,24 +778,24 @@ export default {
     "critical": "ಇದನ್ನು ಏಕೈಕ ಆಹಾರವಾಗಿ ನೀಡಬೇಡಿ. ಹಾಲಿನ ಇಳುವರಿ ಕಾಪಾಡಲು 1–2 ಕೆಜಿ ಉತ್ತಮ ಗುಣಮಟ್ಟದ ಪಶು ಆಹಾರವನ್ನು ಹೆಚ್ಚುವರಿಯಾಗಿ ನೀಡಿ."
   },
   "advisory_storage": {
-    "spoiled": "ಗಂಭೀರ ಹಾಳಾಗುವಿಕೆ ಎಚ್ಚರಿಕೆ: ಜೈವಿಕ ವಿಘಟನೆ ಅಥವಾ ಶಿಲೀಂಧ್ರ ಬೆಳವಣಿಗೆ ಪತ್ತೆಯಾಗಿದೆ. ಸೋಂಕಿತ ಮೇವನ್ನು ತಕ್ಷಣವೇ ಪ್ರತ್ಯೇಕಿಸಿ ಮತ್ತು ಶೇಖರಣಾ ತೇವಾಂಶವನ್ನು ಕಡಿಮೆ ಮಾಡಿ.",
-    "stable": "ಶೇಖರಣಾ ನಿಯತಾಂಕಗಳು ಸ್ಥಿರವಾಗಿವೆ. ಬೂಜು ಬರದಂತೆ ಪ್ರಸ್ತುತ ತೇವಾಂಶ ಮತ್ತು ತಾಪಮಾನ ನಿಯಂತ್ರಣವನ್ನು ಮುಂದುವರಿಸಿ.",
+    "spoiled": "ತೀವ್ರ ಹಾಳಾಗುವ ಅಪಾಯ: ತಕ್ಷಣ ಪ್ರತ್ಯೇಕಿಸಿ ತೇವಾಂಶವನ್ನು ಪರೀಕ್ಷಿಸಿ.",
+    "stable": "ಮೇವನ್ನು ಒಣ, ಗಾಳಿಯಾಡುವ ಜಾಗದಲ್ಲಿ ಮರದ ಹಲಗೆಗಳ ಮೇಲೆ ಸಂಗ್ರಹಿಸಿ.",
     "dry_feed": "ಮೇವಿನ ಚೀಲಗಳನ್ನು ನೆಲದಿಂದ 15 ಸೆಂ.ಮೀ ಎತ್ತರದಲ್ಲಿ ಮರದ ಹಲಗೆಗಳ ಮೇಲೆ ತಂಪಾದ, ಒಣ ಜಾಗದಲ್ಲಿ ಸಂಗ್ರಹಿಸಿ.",
     "silage": "ಸೈಲೇಜ್ ಹೊಂಡವನ್ನು ಗಾಳಿಯಾಡದಂತೆ ಸೀಲ್ ಮಾಡಿ ಮುಚ್ಚಿಡಿ. ತಾಪಮಾನ 28°C ಗಿಂತ ಹೆಚ್ಚಾದರೆ ತಕ್ಷಣ ಪರೀಕ್ಷಿಸಿ.",
     "critical": "ಗಂಭೀರ ಹಾಳಾಗುವಿಕೆ ಎಚ್ಚರಿಕೆ: ಜೈವಿಕ ವಿಘಟನೆ ಅಥವಾ ಶಿಲೀಂಧ್ರ ಬೆಳವಣಿಗೆ ಪತ್ತೆಯಾಗಿದೆ. ಸೋಂಕಿತ ಮೇವನ್ನು ತಕ್ಷಣವೇ ಪ್ರತ್ಯೇಕಿಸಿ ಮತ್ತು ಶೇಖರಣಾ ತೇವಾಂಶವನ್ನು ಕಡಿಮೆ ಮಾಡಿ.",
     "normal": "ಶೇಖರಣಾ ನಿಯತಾಂಕಗಳು ಸ್ಥಿರವಾಗಿವೆ. ಬೂಜು ಬರದಂತೆ ಪ್ರಸ್ತುತ ತೇವಾಂಶ ಮತ್ತು ತಾಪಮಾನ ನಿಯಂತ್ರಣವನ್ನು ಮುಂದುವರಿಸಿ.",
-    "tip_pallets": "ಮೇವಿನ ಚೀಲಗಳನ್ನು ತೇವ ನೆಲದಿಂದ ಕನಿಷ್ಠ 15 ಸೆಂ.ಮೀ ಎತ್ತರದಲ್ಲಿ ಮರದ ಹಲಗೆಗಳ (ಪ್ಯಾಲೆಟ್‌ಗಳು) ಮೇಲೆ ಇರಿಸಿ.",
-    "tip_ventilation": "ತಾಪಮಾನ 28°C ಗಿಂತ ಕಡಿಮೆ ಇರುವಂತೆ ಒಣ, ಇಲಿ ಮುಕ್ತ ಮತ್ತು ಗಾಳಿಯಾಡುವ ಗೋದಾಮನ್ನು ನಿರ್ವಹಿಸಿ.",
-    "tip_silage": "ಸೈಲೇಜ್ ಹೊಂಡ ಅಥವಾ ಶೇಖರಣಾ ಘಟಕಗಳು ಗಾಳಿಯಾಡದಂತೆ ಬಿಗಿಯಾದ ಹೊದಿಕೆಯನ್ನು ಹೊಂದಿರಲಿ.",
-    "tip_fifo": "ಮೇವು ಹಳೆಯದಾಗಿ ಹಾಳಾಗುವುದನ್ನು ತಡೆಯಲು 'ಮೊದಲು ಬಂದದ್ದು ಮೊದಲು ಬಳಸಿ' (FIFO) ನಿಯಮ ಪಾಲಿಸಿ."
+    "tip_pallets": "Store feed sacks on wooden pallets at least 15 cm off damp concrete floors.",
+    "tip_ventilation": "Maintain dry, rodent-proof shed ventilation with ambient temperatures below 28°C.",
+    "tip_silage": "Ensure sealed silage or storage units have airtight covers with no punctures or loose edges.",
+    "tip_fifo": "Practice First-In, First-Out (FIFO) stock rotation to prevent aging."
   },
   "advisory_action": {
     "critical": {
-      "headline": "ACTION REQUIRED: DO NOT FEED — ISOLATE BATCH",
-      "primary": "STOP feeding this batch immediately. Quarantine the sack or storage unit.",
-      "step_0": "Immediately stop offering this feed to cattle, calves, or pregnant cows.",
-      "step_1": "Physically isolate affected bags to prevent accidental herd feeding.",
-      "step_2": "Document the Batch ID using the certified QR code for supplier replacement claim.",
+      "headline": "Immediate Feed Quarantine",
+      "primary": "Do not feed this batch to any dairy cattle or calves.",
+      "step_0": "Immediately isolate and tag this batch to prevent accidental feeding.",
+      "step_1": "Retain a sealed sample bag for laboratory verification.",
+      "step_2": "Notify your feed supplier and local veterinary officer.",
       "step_3": "Consult your local veterinary doctor if cattle have already consumed this feed."
     },
     "poor": {
@@ -769,18 +807,19 @@ export default {
       "step_3": "Retest next delivery batch to ensure supplier meets quality specifications."
     },
     "moderate": {
-      "headline": "MONITORED FEEDING WITH REGULAR INSPECTION",
-      "primary": "Acceptable feed quality. Suitable for standard feeding with daily health observation.",
-      "step_0": "Feed according to standard milk-yield ration chart (approx. 400g concentrate per liter of milk).",
-      "step_1": "Keep bags sealed in a dry, ventilated shed to prevent moisture absorption.",
-      "step_2": "Monitor feed intake and rumination times over the next 48 hours."
+      "headline": "Ration Balancing Required",
+      "primary": "Adjust concentrate proportions and supplement with mineral mixture.",
+      "step_0": "Do not feed as sole concentrate source.",
+      "step_1": "Add 50–100g approved mineral mixture per cow daily.",
+      "step_2": "Re-inspect batch after 7 days of storage."
     },
     "good": {
-      "headline": "APPROVED: PREMIUM FEED QUALITY — SAFE FOR HERD",
-      "primary": "Optimal nutritional composition. Continue standard daily feeding schedule.",
-      "step_0": "Continue standard feeding ration for lactating cows, pregnant cows, and growing calves.",
-      "step_1": "Maintain clean, dry pallet storage to preserve freshness and vitamin potency.",
-      "step_2": "Generate certified QR traceability certificate for farm records."
+      "headline": "Standard Feeding Protocol",
+      "primary": "Feed directly according to standard daily ration balance.",
+      "step_0": "Maintain clean, ad-lib drinking water access.",
+      "step_1": "Combine with 15–20 kg green fodder for optimal rumen digestion.",
+      "step_2": "Store bags off concrete floors in a dry, ventilated shed.",
+      "step_3": "Monitor milk yield and butterfat percentage regularly."
     },
     "good_headline": "ಉತ್ತಮ ಗುಣಮಟ್ಟ — ಹಾಲು ಕರೆಯುವ ಹಸುಗಳಿಗೆ ಸುರಕ್ಷಿತ",
     "moderate_headline": "ಮಧ್ಯಮ ಗುಣಮಟ್ಟ — ಪೋಷಕಾಂಶ ಸಮತೋಲನ ಅಗತ್ಯವಿದೆ",
@@ -844,18 +883,18 @@ export default {
     "save_settings_btn": "ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಉಳಿಸಿ"
   },
   "advisory_nutrition": {
-    "all_balanced": "ಅಳೆಯಲಾದ ಎಲ್ಲಾ ಪೌಷ್ಟಿಕಾಂಶಗಳು (ಪ್ರೋಟೀನ್, ತೇವಾಂಶ, ನಾರು, ಶಕ್ತಿ) ಪ್ರಮಾಣಿತ NDDB ವ್ಯಾಪ್ತಿಯಲ್ಲಿ ತೃಪ್ತಿಕರವಾಗಿವೆ.",
-    "low_nutrient": "ಕಡಿಮೆ {{nutrient}}: ಪ್ರಸ್ತುತ {{value}} {{unit}} (ಸೂಕ್ತ: {{min}}–{{max}} {{unit}}).",
-    "high_nutrient": "ಹೆಚ್ಚು {{nutrient}}: ಪ್ರಸ್ತುತ {{value}} {{unit}} (ಸೂಕ್ತ: {{min}}–{{max}} {{unit}}).",
+    "all_balanced": "ಎಲ್ಲಾ ಪೌಷ್ಠಿಕಾಂಶ ಸೂಚಕಗಳು (ಪ್ರೋಟೀನ್, ತೇವಾಂಶ, ನಾರು, ಶಕ್ತಿ) NDDB ಮಾನದಂಡಗಳ ಒಳಗೆ ಸುರಕ್ಷಿತವಾಗಿವೆ.",
+    "low_nutrient": "Low {{nutrient}}: currently {{value}} {{unit}} (ideal: {{min}}–{{max}} {{unit}}).",
+    "high_nutrient": "High {{nutrient}}: currently {{value}} {{unit}} (ideal: {{min}}–{{max}} {{unit}}).",
     "status_balanced": "ಸಮತೋಲಿತ",
     "status_attention": "ಗಮನ ಹರಿಸುವುದು ಅಗತ್ಯ"
   },
   "advisory_adulteration": {
-    "detected_headline": "ಕಲಬೆರಕೆ ಎಚ್ಚರಿಕೆ: {{adulterant}} ಪತ್ತೆಯಾಗಿದೆ.",
+    "detected_headline": "Adulterant Alert: {{adulterant}} detected.",
     "clean_headline": "ಈ ಮಾದರಿಯಲ್ಲಿ ಯಾವುದೇ ರಾಸಾಯನಿಕ ಕಲಬೆರಕೆ ಕಂಡುಬಂದಿಲ್ಲ.",
     "clean_remedy": "ಕೃತಕ ಅಥವಾ ಅಜೈವಿಕ ಕಲಬೆರಕೆಯಿಂದ ಸಂಪೂರ್ಣ ಮುಕ್ತ.",
-    "remediation_1": "ಜಾನುವಾರುಗಳಿಗೆ ಈ ಮೇವನ್ನು ನೀಡುವುದನ್ನು ತಕ್ಷಣವೇ ನಿಲ್ಲಿಸಿ ಪ್ರತ್ಯೇಕಿಸಿ.",
-    "remediation_2": "ದೂರು ಮತ್ತು ಪರಿಶೀಲನೆಗಾಗಿ ಮಾದರಿ ಚೀಲವನ್ನು ಸಂರಕ್ಷಿಸಿಡಿ.",
-    "remediation_3": "ಜಾನುವಾರುಗಳು ಅಸ್ವಸ್ಥಗೊಂಡರೆ ಪಶುವೈದ್ಯರನ್ನು ಸಂಪರ್ಕಿಸಿ."
+    "remediation_1": "Immediately withhold and isolate this batch from all livestock.",
+    "remediation_2": "Retain sample bag for batch verification and supplier complaint.",
+    "remediation_3": "Notify local veterinary officer if animals show distress."
   }
 };

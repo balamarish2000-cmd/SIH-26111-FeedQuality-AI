@@ -294,11 +294,11 @@ export default function Dashboard() {
 
             <button
               className="btn btn-secondary"
-              onClick={() => navigate('/qr')}
+              onClick={() => navigate('/analyze')}
               style={{ padding: '9px 14px', fontSize: '0.84rem', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: 6 }}
             >
-              <QrCode size={16} />
-              <span>{t('dashboard.scan_qr')}</span>
+              <Sparkles size={16} />
+              <span>{t('analyze.farmer_advisory', 'Farmer Advisory')}</span>
             </button>
           </div>
         </div>
@@ -367,20 +367,33 @@ export default function Dashboard() {
             }}>
               <Activity size={28} />
             </div>
-            <h3 style={{ fontSize: '1.2rem', fontFamily: 'var(--font-display)', margin: '0 0 6px', color: 'var(--text-primary)' }}>
-              {t('dashboard.no_records_yet')}
+            <h3 style={{ fontSize: '1.25rem', fontFamily: 'var(--font-display)', margin: '0 0 6px', color: 'var(--text-primary)' }}>
+              {t('dashboard.welcome_farmer', { name: user?.name || '' })}
             </h3>
-            <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', maxWidth: 420, margin: '0 auto var(--space-lg)', lineHeight: 1.5 }}>
+            <p style={{ fontSize: '0.95rem', fontWeight: 600, color: 'var(--text-secondary)', margin: '0 auto 12px' }}>
+              {t('dashboard.no_tests_yet', 'No tests yet.')}
+            </p>
+            <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', maxWidth: 420, margin: '0 auto var(--space-lg)', lineHeight: 1.5 }}>
               {t('dashboard.empty_state_desc')}
             </p>
-            <button
-              className="btn btn-primary"
-              onClick={() => navigate('/analyze')}
-              style={{ padding: '10px 20px', fontSize: '0.92rem', fontWeight: 700 }}
-            >
-              <PlusCircle size={16} />
-              <span>{t('dashboard.start_feed_test')}</span>
-            </button>
+            <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+              <button
+                className="btn btn-primary"
+                onClick={() => navigate('/analyze')}
+                style={{ padding: '10px 20px', fontSize: '0.92rem', fontWeight: 700 }}
+              >
+                <PlusCircle size={16} />
+                <span>{t('dashboard.start_first_feed_test', 'Start Your First Feed Test')}</span>
+              </button>
+              <button
+                className="btn btn-secondary"
+                onClick={() => navigate('/analyze?method=sample')}
+                style={{ padding: '10px 20px', fontSize: '0.92rem', fontWeight: 700 }}
+              >
+                <Sparkles size={16} />
+                <span>{t('dashboard.explore_sample_analysis', 'Explore Sample Analysis')}</span>
+              </button>
+            </div>
           </div>
 
           {/* Silage Monitoring Empty State Card */}
@@ -456,7 +469,7 @@ export default function Dashboard() {
                 {/* Feeding Recommendation */}
                 <div>
                   <strong style={{ fontSize: '0.75rem', color: 'var(--text-primary)', textTransform: 'uppercase', letterSpacing: '0.03em' }}>
-                    {t('dashboard.feeding_rec', 'Feeding Recommendation')}:
+                    {t('dashboard.feeding_recommendation', 'Feeding Recommendation')}:
                   </strong>
                   <div style={{ fontSize: '0.84rem', color: 'var(--text-secondary)', marginTop: 2, lineHeight: 1.45 }}>
                     {latestReport?.advisory?.feeding_recommendation || latestReport?.advisory?.structured_advisory?.nutritional_guidance?.feeding_ration_tip || t('dashboard.empty_state_desc')}
@@ -466,7 +479,7 @@ export default function Dashboard() {
                 {/* Storage Recommendation */}
                 <div>
                   <strong style={{ fontSize: '0.75rem', color: 'var(--text-primary)', textTransform: 'uppercase', letterSpacing: '0.03em' }}>
-                    {t('dashboard.storage_rec', 'Storage Recommendation')}:
+                    {t('dashboard.storage_recommendation', 'Storage Recommendation')}:
                   </strong>
                   <div style={{ fontSize: '0.84rem', color: 'var(--text-secondary)', marginTop: 2, lineHeight: 1.45 }}>
                     {latestReport?.advisory?.storage_recommendation || t('advisory_storage.stable', 'Store feed sacks on elevated wooden pallets in a cool, well-ventilated dry space.')}
@@ -493,7 +506,7 @@ export default function Dashboard() {
                 {/* Recommended Action */}
                 <div>
                   <strong style={{ fontSize: '0.75rem', color: 'var(--text-primary)', textTransform: 'uppercase', letterSpacing: '0.03em' }}>
-                    {t('dashboard.rec_action', 'Recommended Action')}:
+                    {t('dashboard.recommended_action', 'Recommended Action')}:
                   </strong>
                   <div style={{ fontSize: '0.84rem', color: 'var(--text-secondary)', marginTop: 2, lineHeight: 1.45 }}>
                     {latestReport?.advisory?.farmer_advisory || t('analyze.action_good', 'Feed directly according to recommended lactation ration schedules.')}
@@ -540,7 +553,7 @@ export default function Dashboard() {
                   fontWeight: 800,
                   letterSpacing: '0.04em'
                 }}>
-                  {t('dashboard.simulated_sensor_data', 'SIMULATED DATA')}
+                  {t('analyze.sample_data_eval', 'Sample Data — for evaluation')}
                 </span>
               </div>
 

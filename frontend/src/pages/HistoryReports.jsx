@@ -336,7 +336,9 @@ export default function HistoryReports() {
                   <th>{t('dashboard.col_feed')}</th>
                   <th>{t('dashboard.col_grade')}</th>
                   <th>{t('analyze.risk_level')}</th>
+                  <th>{t('history.col_data_type', 'Data Type')}</th>
                   <th>{t('analyze.pipeline_input')}</th>
+                  <th>{t('analyze.essential_params', 'Key Parameters')}</th>
                   <th style={{ textAlign: 'right' }}>{t('history.col_actions')}</th>
                 </tr>
               </thead>
@@ -347,6 +349,7 @@ export default function HistoryReports() {
                     : 'N/A';
                   const itemRisk = item.quality_status === 'Good' ? 'Low' : item.quality_status === 'Moderate' ? 'Medium' : 'High';
                   const riskColor = itemRisk === 'Low' ? 'var(--color-good)' : itemRisk === 'Medium' ? 'var(--color-moderate)' : 'var(--color-unsafe)';
+                  const isSample = Boolean(item.is_sample || item.input_method === 'Sample Analysis' || item.input_method === 'SIMULATED DATA');
 
                   return (
                     <tr
@@ -379,16 +382,33 @@ export default function HistoryReports() {
                       <td>
                         <span className="badge" style={{
                           fontSize: '0.72rem',
-                          background: (item.input_method || '').includes('SIMULATED') ? '#fef3c7' : 'var(--bg-card-alt)',
-                          color: (item.input_method || '').includes('SIMULATED') ? '#92400e' : 'var(--text-secondary)',
+                          background: isSample ? '#fef3c7' : 'var(--color-primary-light)',
+                          color: isSample ? '#92400e' : 'var(--color-primary)',
+                          fontWeight: 700
+                        }}>
+                          {isSample
+                            ? t('history.sample_analysis', 'Sample Analysis')
+                            : t('history.real_farmer_test', 'Real Farmer Test')}
+                        </span>
+                      </td>
+                      <td>
+                        <span className="badge" style={{
+                          fontSize: '0.72rem',
+                          background: isSample ? '#fef3c7' : 'var(--bg-card-alt)',
+                          color: isSample ? '#92400e' : 'var(--text-secondary)',
                           border: '1px solid var(--border-subtle)'
                         }}>
                           {item.input_method === 'REAL SENSOR INPUT' ? t('analyze.sensor_tag') :
                             item.input_method === 'IMAGE INPUT' ? t('analyze.visual_tag') :
                               item.input_method === 'USER ENTERED' ? t('analyze.manual_tag') :
-                                item.input_method === 'SIMULATED DATA' ? t('analyze.simulated_tag') :
+                                item.input_method === 'Sample Analysis' || item.input_method === 'SIMULATED DATA' ? t('analyze.sample_analysis_title', 'Sample Analysis') :
                                   item.input_method}
                         </span>
+                      </td>
+                      <td style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', whiteSpace: 'nowrap' }}>
+                        {item.readings?.moisture_pct ? `M: ${item.readings.moisture_pct}% ` : ''}
+                        {item.readings?.protein_pct ? `• P: ${item.readings.protein_pct}% ` : ''}
+                        {item.readings?.ph ? `• pH: ${item.readings.ph}` : ''}
                       </td>
                       <td style={{ textAlign: 'right' }}>
                         <div style={{ display: 'inline-flex', gap: 6 }}>

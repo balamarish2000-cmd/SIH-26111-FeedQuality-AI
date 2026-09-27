@@ -2,7 +2,8 @@ export default {
   "brand": {
     "name": "FEED GUARD",
     "subtitle": "ਡੇਅਰੀ ਕਿਸਾਨਾਂ ਲਈ AI-ਅਧਾਰਤ ਪਸ਼ੂ ਖ਼ੁਰਾਕ ਅਤੇ ਸਾਈਲੇਜ ਗੁਣਵੱਤਾ ਟੈਸਟਿੰਗ",
-    "tagline": "ਜਾਂਚੋ. ਪਛਾਣੋ. ਸੁਰੱਖਿਅਤ ਕਰੋ."
+    "tagline": "ਜਾਂਚੋ. ਪਛਾਣੋ. ਸੁਰੱਖਿਅਤ ਕਰੋ.",
+    "product_footer": "ਫੀਡ ਗਾਰਡ — ਡੇਅਰੀ ਕਿਸਾਨਾਂ ਲਈ ਏਆਈ-ਅਧਾਰਿਤ ਪਸ਼ੂ ਖੁਰਾਕ ਅਤੇ ਸਾਈਲੇਜ ਗੁਣਵੱਤਾ ਮੁਲਾਂਕਣ ਪ੍ਰਣਾਲੀ।"
   },
   "nav": {
     "home": "ਡੈਸ਼ਬੋਰਡ",
@@ -106,7 +107,10 @@ export default {
     "trust_message": "ਤੁਹਾਡੇ ਕਿਸਾਨ ਰਿਕਾਰਡ ਤੁਹਾਡੇ ਖਾਤੇ ਨਾਲ ਸੁਰੱਖਿਅਤ ਢੰਗ ਨਾਲ ਜੁੜੇ ਹੋਏ ਹਨ।",
     "login_required": "ਲੌਗਇਨ ਲੋੜੀਂਦਾ ਹੈ",
     "login_required_desc": "ਇਹ ਨਤੀਜਾ ਸੰਭਾਲਣ ਅਤੇ ਕਿਸਾਨ ਰਿਕਾਰਡ ਦੇਖਣ ਲਈ ਲੌਗਇਨ ਜ਼ਰੂਰੀ ਹੈ।",
-    "continue_exploring": "ਐਕਸਪਲੋਰ ਜਾਰੀ ਰੱਖੋ"
+    "continue_exploring": "ਐਕਸਪਲੋਰ ਜਾਰੀ ਰੱਖੋ",
+    "err_wrong_password": "ਗਲਤ ਪਾਸਵਰਡ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।",
+    "err_account_not_found": "ਖਾਤਾ ਨਹੀਂ ਲੱਭਿਆ। ਕਿਰਪਾ ਕਰਕੇ ਵੇਰਵੇ ਜਾਂਚੋ ਜਾਂ ਨਵਾਂ ਖਾਤਾ ਬਣਾਓ।",
+    "explore_sample_analysis": "ਨਮੂਨਾ ਵਿਸ਼ਲੇਸ਼ਣ ਦੇਖੋ"
   },
   "dashboard": {
     "welcome": "Feed Guard ਵਿੱਚ ਜੀ ਆਇਆਂ ਨੂੰ",
@@ -156,7 +160,7 @@ export default {
     "open_iot_telemetry": "IoT ਲਾਈਵ ਰੀਡਿੰਗ ਖੋਲ੍ਹੋ",
     "pit_silo_sample": "ਯੂਨਿਟ: ਪਿੱਟ ਸਾਈਲੋ 1 • 45 ਦਿਨਾਂ ਤੋਂ ਸੀਲਬੰਦ",
     "account_active": "ਖਾਤਾ ਸਰਗਰਮ ਹੈ",
-    "welcome_farmer": "ਜੀ ਆਇਆਂ ਨੂੰ",
+    "welcome_farmer": "ਜੀ ਆਇਆਂ ਨੂੰ, {{name}}",
     "operation_id": "ਡੇਅਰੀ ਅਪਰੇਸ਼ਨ ਆਈਡੀ",
     "no_records_yet": "ਅਜੇ ਤੱਕ ਕੋਈ ਟੈਸਟ ਰਿਕਾਰਡ ਨਹੀਂ ਹੈ।",
     "empty_state_desc": "ਗੁਣਵੱਤਾ ਦੇ ਨਤੀਜੇ ਅਤੇ ਕਿਸਾਨ ਸਿਫ਼ਾਰਸ਼ਾਂ ਦੇਖਣ ਲਈ ਆਪਣਾ ਪਹਿਲਾ ਫੀਡ ਟੈਸਟ ਸ਼ੁਰੂ ਕਰੋ।",
@@ -180,7 +184,10 @@ export default {
     "risk_alert": "ਖ਼ਤਰਾ ਚੇਤਾਵਨੀ",
     "recommended_action": "ਸਿਫ਼ਾਰਸ਼ ਕੀਤੀ ਕਾਰਵਾਈ",
     "save_result_btn": "ਨਤੀਜਾ ਸੰਭਾਲੋ",
-    "saved_to_records": "ਟੈਸਟ ਤੁਹਾਡੇ ਕਿਸਾਨ ਰਿਕਾਰਡ ਵਿੱਚ ਸੁਰੱਖਿਅਤ ਕੀਤਾ ਗਿਆ ਹੈ।"
+    "saved_to_records": "ਟੈਸਟ ਤੁਹਾਡੇ ਕਿਸਾਨ ਰਿਕਾਰਡ ਵਿੱਚ ਸੁਰੱਖਿਅਤ ਕੀਤਾ ਗਿਆ ਹੈ।",
+    "no_tests_yet": "ਅਜੇ ਤੱਕ ਕੋਈ ਟੈਸਟ ਨਹੀਂ ਹੋਇਆ।",
+    "start_first_feed_test": "ਆਪਣਾ ਪਹਿਲਾ ਖੁਰਾਕ ਟੈਸਟ ਸ਼ੁਰੂ ਕਰੋ",
+    "explore_sample_analysis": "ਨਮੂਨਾ ਵਿਸ਼ਲੇਸ਼ਣ ਦੇਖੋ"
   },
   "analyze": {
     "title": "AI ਤੇਜ਼ ਫੀਡ ਗੁਣਵੱਤਾ ਅਤੇ ਸੁਰੱਖਿਆ ਜਾਂਚ",
@@ -232,7 +239,7 @@ export default {
     "action_save": "ਇਤਿਹਾਸ ਵਿੱਚ ਸੁਰੱਖਿਅਤ ਕਰੋ",
     "action_pdf": "PDF ਰਿਪੋਰਟ ਡਾਊਨਲੋਡ ਕਰੋ",
     "action_qr": "QR ਰਾਹੀਂ ਸਾਂਝਾ ਕਰੋ",
-    "scenario_good": "ਵਧੀਆ ਗੁਣਵੱਤਾ",
+    "scenario_good": "Good Quality Feed",
     "scenario_adulterated": "ਯੂਰੀਆ ਮਿਲਾਵਟੀ ਪ੍ਰੋਟੀਨ ਖੁਰਾਕ",
     "scenario_spoiled": "ਸਿੱਲ੍ਹਾ ਉੱਲੀ ਵਾਲਾ ਚਾਰਾ (ਜ਼ਿਆਦਾ ਐਫਲਾਟੌਕਸਿਨ)",
     "sample_preview_ready": "✓ ਨਮੂਨਾ ਫੋਟੋ ਤਿਆਰ ਹੈ",
@@ -272,9 +279,9 @@ export default {
     "step3_desc": "ਪੌਸ਼ਟਿਕ ਮੁੱਲ ਦਰਜ ਕਰੋ",
     "step4_title": "4. AI ਗੁਣਵੱਤਾ ਨਤੀਜੇ",
     "step4_desc": "ਸਮੁੱਚਾ ਨਤੀਜਾ ਅਤੇ ਕਿਸਾਨ ਸਲਾਹ",
-    "method_sensor": "NIR / ਸੈਂਸਰ ਇਨਪੁਟ",
-    "method_camera": "ਵਿਜ਼ੂਅਲ ਸਕ੍ਰੀਨਿੰਗ (ਫੋਟੋ)",
-    "method_manual": "ਕਿਸਾਨ ਦੁਆਰਾ ਦਰਜ ਕੀਤਾ ਡਾਟਾ",
+    "method_sensor": "NIR / Sensor Input",
+    "method_camera": "Visual Screening",
+    "method_manual": "Manual Entry",
     "method_demo": "ਡੈਮੋ ਟੈਸਟ",
     "demo_banner_title": "ਡੈਮੋ ਮੋਡ ਸਰਗਰਮ ਹੈ",
     "demo_banner_desc": "ਲਾਈਵ ਪ੍ਰਦਰਸ਼ਨਾਂ ਅਤੇ ਟੈਸਟਿੰਗ ਲਈ ਤਿਆਰ ਕੀਤੇ ਨਮੂਨੇ।",
@@ -309,9 +316,9 @@ export default {
     "select_image_error": "ਕਿਰਪਾ ਕਰਕੇ ਪਹਿਲਾਂ ਚਾਰੇ ਦੀ ਫੋਟੋ ਚੁਣੋ ਜਾਂ ਕੈਮਰੇ ਨਾਲ ਲਵੋ।",
     "step1_label": "ਫੀਡ ਦੀ ਕਿਸਮ ਚੁਣੋ",
     "step2_label": "ਜਾਂਚ ਦਾ ਤਰੀਕਾ ਚੁਣੋ",
-    "method_sensor_sub": "ਸਪੈਕਟ੍ਰੋਸਕੋਪੀ ਜਾਂਚ",
-    "method_camera_sub": "ਕੰਪਿਊਟਰ ਵਿਜ਼ਨ",
-    "method_manual_sub": "ਮੈਨੂਅਲ ਐਂਟਰੀ",
+    "method_sensor_sub": "Spectroscopy Probe",
+    "method_camera_sub": "Camera & Computer Vision",
+    "method_manual_sub": "Measured Laboratory / Farm Values",
     "method_demo_title": "ਡੈਮੋ ਮੋਡ",
     "method_demo_sub": "ਸਿਮੂਲੇਟਡ ਸੈਂਸਰ ਡਾਟਾ",
     "demo_mode_title": "ਲਾਈਵ ਪ੍ਰਦਰਸ਼ਨ ਦ੍ਰਿਸ਼",
@@ -321,11 +328,11 @@ export default {
     "simulated_data": "ਸਿਮੂਲੇਟਡ ਡਾਟਾ",
     "demo_test_title": "ਡੈਮੋ ਟੈਸਟ",
     "demo_test_desc": "ਡੈਮੋ ਟੈਸਟ ਪ੍ਰਦਰਸ਼ਨ ਲਈ ਸਿਮੂਲੇਟਡ ਸੈਂਸਰ ਡਾਟਾ ਵਰਤਦਾ ਹੈ। ਟੈਸਟ ਕਰਨ ਲਈ ਹੇਠਾਂ ਦਿੱਤੀ ਸਥਿਤੀ ਚੁਣੋ:",
-    "scenario_good_desc": "ਸੰਤੁਲਿਤ ਪਸ਼ੂ ਖੁਰਾਕ ਗੋਲੀਆਂ, ਵਧੀਆ ਪ੍ਰੋਟੀਨ, ਦੁਧਾਰੂ ਪਸ਼ੂਆਂ ਲਈ ਸੁਰੱਖਿਅਤ",
-    "scenario_attention": "ਧਿਆਨ ਦੇਣ ਦੀ ਲੋੜ",
-    "scenario_attention_desc": "ਵੱਧ ਨਮੀ ਅਤੇ ਘੱਟ ਪ੍ਰੋਟੀਨ, ਖੁਰਾਕ ਸੁਧਾਰ ਦੀ ਲੋੜ",
-    "scenario_unsafe": "ਖ਼ਰਾਬ / ਅਸੁਰੱਖਿਅਤ",
-    "scenario_unsafe_desc": "ਯੂਰੀਆ ਮਿਲਾਵਟ (9.5%) ਜਾਂ ਉੱਲੀ ਵਾਲੀ ਖ਼ਤਰਨਾਕ ਖੁਰਾਕ",
+    "scenario_good_desc": "Status: Good / Low Risk",
+    "scenario_attention": "Feed Requiring Attention",
+    "scenario_attention_desc": "Status: Moderate Risk",
+    "scenario_unsafe": "Poor / Unsafe Feed",
+    "scenario_unsafe_desc": "Status: High Risk",
     "loading_title": "ਖੁਰਾਕ ਦੇ ਨਮੂਨੇ ਦਾ ਵਿਸ਼ਲੇਸ਼ਣ ਹੋ ਰਿਹਾ ਹੈ...",
     "loading_subtitle": "ਮਲਟੀ-ਟਾਰਗੇਟ ਐਮਐਲ ਸਕ੍ਰੀਨਿੰਗ ਅਤੇ ਜੋਖਮ ਵਰਗੀਕਰਣ ਪ੍ਰਕਿਰਿਆ",
     "step_read_sensor": "1. ਸੈਂਸਰ ਟੈਲੀਮੈਟਰੀ ਡਾਟਾ ਪੜ੍ਹਿਆ ਜਾ ਰਿਹਾ ਹੈ",
@@ -355,7 +362,31 @@ export default {
     "simulated_tag": "ਸਿਮੂਲੇਟਡ ਸੈਂਸਰ ਡਾਟਾ",
     "visual_tag": "ਵਿਜ਼ੂਅਲ ਸਕ੍ਰੀਨਿੰਗ",
     "sensor_tag": "NIR / ਸੈਂਸਰ ਇਨਪੁਟ",
-    "manual_tag": "ਕਿਸਾਨ ਦੁਆਰਾ ਦਰਜ ਕੀਤਾ ਡਾਟਾ"
+    "manual_tag": "ਕਿਸਾਨ ਦੁਆਰਾ ਦਰਜ ਕੀਤਾ ਡਾਟਾ",
+    "method_sample": "Sample Analysis",
+    "method_sample_sub": "Use prepared sample data to evaluate the complete workflow.",
+    "sample_data_badge": "ਨਮੂਨਾ ਡੇਟਾ — ਮੁਲਾਂਕਣ ਲਈ",
+    "sensor_not_connected": "ਸੈਂਸਰ ਕਨੈਕਟ ਨਹੀਂ ਹੈ",
+    "sensor_not_connected_desc": "ਸੰਚਾਰ ਪੋਰਟਾਂ 'ਤੇ ਕੋਈ NIR ਸਪੈਕਟ੍ਰੋਸਕੋਪੀ ਪ੍ਰੋਬ ਜਾਂ ਸੈਂਸਰ ਨਹੀਂ ਮਿਲਿਆ।",
+    "use_manual_entry": "ਮੈਨੂਅਲ ਐਂਟਰੀ ਵਰਤੋਂ",
+    "explore_sample_analysis": "ਨਮੂਨਾ ਵਿਸ਼ਲੇਸ਼ਣ ਵੇਖੋ",
+    "feed_quality_result": "ਚਾਰੇ ਦੀ ਗੁਣਵੱਤਾ ਦਾ ਨਤੀਜਾ",
+    "adulteration_assessment": "ਮਿਲਾਵਟ ਦਾ ਮੁਲਾਂਕਣ",
+    "spoilage_assessment": "ਖਰਾਬ / ਗੰਦਗੀ ਦਾ ਮੁਲਾਂਕਣ",
+    "farmer_advisory_heading": "ਕਿਸਾਨ ਸਲਾਹਕਾਰ",
+    "what_result_means": "ਇਸ ਨਤੀਜੇ ਦਾ ਕੀ ਅਰਥ ਹੈ?",
+    "save_to_history": "ਮੇਰੇ ਇਤਿਹਾਸ ਵਿੱਚ ਸੁਰੱਖਿਅਤ ਕਰੋ",
+    "sample_analysis_label": "ਨਮੂਨਾ ਵਿਸ਼ਲੇਸ਼ਣ",
+    "overall_quality": "ਕੁੱਲ ਗੁਣਵੱਤਾ",
+    "farmer_advisory": "ਕਿਸਾਨ ਸਲਾਹ",
+    "sample_data_eval": "ਨਮੂਨਾ ਡਾਟਾ — ਮੁਲਾਂਕਣ ਲਈ",
+    "sample_analysis_title": "ਨਮੂਨਾ ਵਿਸ਼ਲੇਸ਼ਣ",
+    "sample_analysis_subtitle": "ਪੂਰੇ ਕਾਰਜਪ੍ਰਵਾਹ ਦਾ ਮੁਲਾਂਕਣ ਕਰਨ ਲਈ ਤਿਆਰ ਨਮੂਨਾ ਡੇਟਾ ਦੀ ਵਰਤੋਂ ਕਰੋ।",
+    "detected": "ਪਾਇਆ ਗਿਆ",
+    "not_detected": "ਨਹੀਂ ਮਿਲਿਆ",
+    "fresh_safe": "ਤਾਜ਼ਾ / ਸੁਰੱਖਿਅਤ",
+    "spoilage_detected": "ਖਰਾਬ / ਦੂਸ਼ਿਤ",
+    "save_to_my_history": "ਮੇਰੇ ਇਤਿਹਾਸ ਵਿੱਚ ਸੰਭਾਲੋ"
   },
   "quality_grades": {
     "good": "ਉੱਤਮ ✓",
@@ -488,7 +519,11 @@ export default {
     "temp_sub": "ਟੋਏ ਦੀ ਟੈਲੀਮੈਟਰੀ • ਉੱਤਮ ਫਰਮੈਂਟੇਸ਼ਨ",
     "ph_sub": "pH ਪ੍ਰੋਬ • ਲੈਕਟਿਕ ਐਸਿਡਿਟੀ",
     "moisture_sub": "ਨਮੀ ਪ੍ਰੋਬ • ਦਬਾਅ ਟੈਲੀਮੈਟਰੀ",
-    "spoilage_sub": "ਥਰਮਲ ਸਥਿਰਤਾ • ਸੁਰੱਖਿਅਤ ਸਟੋਰੇਜ"
+    "spoilage_sub": "ਥਰਮਲ ਸਥਿਰਤਾ • ਸੁਰੱਖਿਅਤ ਸਟੋਰੇਜ",
+    "sample_data_badge": "ਨਮੂਨਾ ਡੇਟਾ — ਮੁਲਾਂਕਣ ਲਈ",
+    "live_sensor_data": "Live Sensor Data",
+    "stored_data": "Stored Data",
+    "sample_data_eval": "ਨਮੂਨਾ ਡਾਟਾ — ਮੁਲਾਂਕਣ ਲਈ"
   },
   "history": {
     "title": "ਟੈਸਟ ਇਤਿਹਾਸ",
@@ -548,7 +583,10 @@ export default {
     "col_spoilage": "ਖਰਾਬੀ",
     "view_qr": "QR ਦੇਖੋ",
     "all_risk_levels": "ਸਾਰੇ ਜੋਖਮ ਪੱਧਰ",
-    "all_input_methods": "ਸਾਰੇ ਇਨਪੁਟ ਤਰੀਕੇ"
+    "all_input_methods": "ਸਾਰੇ ਇਨਪੁਟ ਤਰੀਕੇ",
+    "col_data_type": "ਡਾਟਾ ਕਿਸਮ",
+    "real_farmer_test": "ਅਸਲ ਕਿਸਾਨ ਟੈਸਟ",
+    "sample_analysis": "ਨਮੂਨਾ ਵਿਸ਼ਲੇਸ਼ਣ"
   },
   "qr": {
     "title": "QR ਰਿਪੋਰਟਾਂ",
@@ -729,8 +767,8 @@ export default {
     "unsafe": "ਖ਼ਤਰਨਾਕ ਮਿਲਾਵਟ ਜਾਂ ਜ਼ਹਿਰੀਲੇ ਤੱਤ ਮਿਲੇ ਹਨ! ਪਸ਼ੂਆਂ ਨੂੰ ਖੁਆਉਣਾ ਤੁਰੰਤ ਬੰਦ ਕਰੋ ਅਤੇ ਡਾਕਟਰ ਦੀ ਸਲਾਹ ਲਵੋ।"
   },
   "advisory_feeding": {
-    "normal": "ਰੋਜ਼ਾਨਾ 20–25 ਕਿਲੋ ਤਾਜ਼ਾ ਹਰਾ ਚਾਰਾ ਅਤੇ 4 ਕਿਲੋ ਸੁੱਕੀ ਤੂੜੀ ਦੇ ਨਾਲ ਸੰਤੁਲਿਤ ਮਾਤਰਾ ਵਿੱਚ ਦਿਓ।",
-    "compensate": "ਇਸ ਨੂੰ ਇਕੱਲੀ ਖੁਰਾਕ ਵਜੋਂ ਨਾ ਦਿਓ। ਦੁੱਧ ਉਤਪਾਦਨ ਕਾਇਮ ਰੱਖਣ ਲਈ 1–2 ਕਿਲੋ ਵਧੀਆ ਵੰਡ ਵਾਧੂ ਦਿਓ।",
+    "normal": "Feed in standard daily proportions alongside 20–25 kg fresh green fodder and clean ad-lib drinking water.",
+    "compensate": "Do not feed as sole ration. Compensate with 1–2 kg quality concentrate pellet and bypass protein.",
     "lactating": "ਦੁਧਾਰੂ ਗਾਂ ਨੂੰ 15–20 ਕਿਲੋ ਹਰਾ ਚਾਰਾ, 4 ਕਿਲੋ ਸੁੱਕਾ ਤੂੜੀ ਅਤੇ ਹਰ 2.5 ਲੀਟਰ ਦੁੱਧ ਪਿੱਛੇ 1 ਕਿਲੋ ਵੰਡ ਦਿਓ।",
     "dry": "ਸੂਣ ਵਾਲੀਆਂ ਗਾਵਾਂ ਨੂੰ ਸੁੱਕੇ ਚਾਰੇ ਨਾਲ 1.5–2 ਕਿਲੋ ਵੰਡ ਅਤੇ 50 ਗ੍ਰਾਮ ਮਿਨਰਲ ਮਿਕਸਚਰ ਦਿਓ।",
     "good": "ਰੋਜ਼ਾਨਾ 20–25 ਕਿਲੋ ਤਾਜ਼ਾ ਹਰਾ ਚਾਰਾ ਅਤੇ 4 ਕਿਲੋ ਸੁੱਕੀ ਤੂੜੀ ਦੇ ਨਾਲ ਸੰਤੁਲਿਤ ਮਾਤਰਾ ਵਿੱਚ ਦਿਓ।",
@@ -740,24 +778,24 @@ export default {
     "critical": "ਇਸ ਨੂੰ ਇਕੱਲੀ ਖੁਰਾਕ ਵਜੋਂ ਨਾ ਦਿਓ। ਦੁੱਧ ਉਤਪਾਦਨ ਕਾਇਮ ਰੱਖਣ ਲਈ 1–2 ਕਿਲੋ ਵਧੀਆ ਵੰਡ ਵਾਧੂ ਦਿਓ।"
   },
   "advisory_storage": {
-    "spoiled": "ਗੰਭੀਰ ਖਰਾਬੀ ਚੇਤਾਵਨੀ: ਉੱਲੀ ਜਾਂ ਜੈਵਿਕ ਵਿਗਾੜ ਪਾਇਆ ਗਿਆ ਹੈ। ਪ੍ਰਭਾਵਿਤ ਫੀਡ ਨੂੰ ਤੁਰੰਤ ਵੱਖ ਕਰੋ ਅਤੇ ਸਟੋਰੇਜ ਦੀ ਨਮੀ ਘਟਾਓ।",
-    "stable": "ਸਟੋਰੇਜ ਮਾਪਦੰਡ ਸਥਿਰ ਹਨ। ਉੱਲੀ ਤੋਂ ਬਚਾਅ ਲਈ ਮੌਜੂਦਾ ਨਮੀ ਅਤੇ ਤਾਪਮਾਨ ਨਿਯੰਤਰਣ ਜਾਰੀ ਰੱਖੋ।",
+    "spoiled": "ਗੰਭੀਰ ਖਰਾਬੀ ਦਾ ਖਤਰਾ: ਤੁਰੰਤ ਵੱਖ ਕਰੋ ਅਤੇ ਨਮੀ ਦੀ ਜਾਂਚ ਕਰੋ।",
+    "stable": "ਖੁਰਾਕ ਦੀਆਂ ਬੋਰੀਆਂ ਨੂੰ ਸੁੱਕੀ ਅਤੇ ਹਵਾਦਾਰ ਥਾਂ 'ਤੇ ਲੱਕੜ ਦੇ ਫੱਟਿਆਂ 'ਤੇ ਰੱਖੋ।",
     "dry_feed": "ਬੋਰੀਆਂ ਨੂੰ ਜ਼ਮੀਨ ਤੋਂ 15 ਸੈਂਟੀਮੀਟਰ ਉੱਚੇ ਲੱਕੜ ਦੇ ਫੱਟਿਆਂ 'ਤੇ ਠੰਡੀ ਅਤੇ ਸੁੱਕੀ ਥਾਂ 'ਤੇ ਰੱਖੋ।",
     "silage": "ਸਾਈਲੇਜ ਦੇ ਟੋਏ ਨੂੰ ਹਵਾ-ਰਹਿਤ ਰੱਖੋ। ਤਾਪਮਾਨ 28°C ਤੋਂ ਵੱਧ ਹੋਵੇ ਤਾਂ ਤੁਰੰਤ ਜਾਂਚ ਕਰੋ।",
     "critical": "ਗੰਭੀਰ ਖਰਾਬੀ ਚੇਤਾਵਨੀ: ਉੱਲੀ ਜਾਂ ਜੈਵਿਕ ਵਿਗਾੜ ਪਾਇਆ ਗਿਆ ਹੈ। ਪ੍ਰਭਾਵਿਤ ਫੀਡ ਨੂੰ ਤੁਰੰਤ ਵੱਖ ਕਰੋ ਅਤੇ ਸਟੋਰੇਜ ਦੀ ਨਮੀ ਘਟਾਓ।",
     "normal": "ਸਟੋਰੇਜ ਮਾਪਦੰਡ ਸਥਿਰ ਹਨ। ਉੱਲੀ ਤੋਂ ਬਚਾਅ ਲਈ ਮੌਜੂਦਾ ਨਮੀ ਅਤੇ ਤਾਪਮਾਨ ਨਿਯੰਤਰਣ ਜਾਰੀ ਰੱਖੋ।",
-    "tip_pallets": "ਫੀਡ ਦੀਆਂ ਬੋਰੀਆਂ ਨੂੰ ਸਿੱਲ੍ਹੇ ਫਰਸ਼ ਤੋਂ ਘੱਟੋ-ਘੱਟ 15 ਸੈਂਟੀਮੀਟਰ ਉੱਚੇ ਲੱਕੜ ਦੇ ਫੱਟਿਆਂ 'ਤੇ ਰੱਖੋ।",
-    "tip_ventilation": "ਤਾਪਮਾਨ 28°C ਤੋਂ ਹੇਠਾਂ ਰੱਖਦੇ ਹੋਏ ਸੁੱਕੀ, ਚੂਹਿਆਂ ਤੋਂ ਸੁਰੱਖਿਅਤ ਅਤੇ ਹਵਾਦਾਰ ਜਗ੍ਹਾ ਯਕੀਨੀ ਬਣਾਓ।",
-    "tip_silage": "ਯਕੀਨੀ ਬਣਾਓ ਕਿ ਸਾਈਲੇਜ ਦੇ ਟੋਏ ਬਿਨਾਂ ਕਿਸੇ ਛੇਕ ਦੇ ਹਵਾ-ਰਹਿਤ ਢੱਕਣ ਨਾਲ ਚੰਗੀ ਤਰ੍ਹਾਂ ਸੀਲ ਹਨ।",
-    "tip_fifo": "ਫੀਡ ਪੁਰਾਣੀ ਹੋ ਕੇ ਖਰਾਬ ਹੋਣ ਤੋਂ ਰੋਕਣ ਲਈ 'ਪਹਿਲਾਂ ਆਇਆ ਪਹਿਲਾਂ ਵਰਤੋ' (FIFO) ਨਿਯਮ ਦੀ ਪਾਲਣਾ ਕਰੋ।"
+    "tip_pallets": "Store feed sacks on wooden pallets at least 15 cm off damp concrete floors.",
+    "tip_ventilation": "Maintain dry, rodent-proof shed ventilation with ambient temperatures below 28°C.",
+    "tip_silage": "Ensure sealed silage or storage units have airtight covers with no punctures or loose edges.",
+    "tip_fifo": "Practice First-In, First-Out (FIFO) stock rotation to prevent aging."
   },
   "advisory_action": {
     "critical": {
-      "headline": "ACTION REQUIRED: DO NOT FEED — ISOLATE BATCH",
-      "primary": "STOP feeding this batch immediately. Quarantine the sack or storage unit.",
-      "step_0": "Immediately stop offering this feed to cattle, calves, or pregnant cows.",
-      "step_1": "Physically isolate affected bags to prevent accidental herd feeding.",
-      "step_2": "Document the Batch ID using the certified QR code for supplier replacement claim.",
+      "headline": "Immediate Feed Quarantine",
+      "primary": "Do not feed this batch to any dairy cattle or calves.",
+      "step_0": "Immediately isolate and tag this batch to prevent accidental feeding.",
+      "step_1": "Retain a sealed sample bag for laboratory verification.",
+      "step_2": "Notify your feed supplier and local veterinary officer.",
       "step_3": "Consult your local veterinary doctor if cattle have already consumed this feed."
     },
     "poor": {
@@ -769,18 +807,19 @@ export default {
       "step_3": "Retest next delivery batch to ensure supplier meets quality specifications."
     },
     "moderate": {
-      "headline": "MONITORED FEEDING WITH REGULAR INSPECTION",
-      "primary": "Acceptable feed quality. Suitable for standard feeding with daily health observation.",
-      "step_0": "Feed according to standard milk-yield ration chart (approx. 400g concentrate per liter of milk).",
-      "step_1": "Keep bags sealed in a dry, ventilated shed to prevent moisture absorption.",
-      "step_2": "Monitor feed intake and rumination times over the next 48 hours."
+      "headline": "Ration Balancing Required",
+      "primary": "Adjust concentrate proportions and supplement with mineral mixture.",
+      "step_0": "Do not feed as sole concentrate source.",
+      "step_1": "Add 50–100g approved mineral mixture per cow daily.",
+      "step_2": "Re-inspect batch after 7 days of storage."
     },
     "good": {
-      "headline": "APPROVED: PREMIUM FEED QUALITY — SAFE FOR HERD",
-      "primary": "Optimal nutritional composition. Continue standard daily feeding schedule.",
-      "step_0": "Continue standard feeding ration for lactating cows, pregnant cows, and growing calves.",
-      "step_1": "Maintain clean, dry pallet storage to preserve freshness and vitamin potency.",
-      "step_2": "Generate certified QR traceability certificate for farm records."
+      "headline": "Standard Feeding Protocol",
+      "primary": "Feed directly according to standard daily ration balance.",
+      "step_0": "Maintain clean, ad-lib drinking water access.",
+      "step_1": "Combine with 15–20 kg green fodder for optimal rumen digestion.",
+      "step_2": "Store bags off concrete floors in a dry, ventilated shed.",
+      "step_3": "Monitor milk yield and butterfat percentage regularly."
     },
     "good_headline": "ਵਧੀਆ ਗੁਣਵੱਤਾ — ਦੁਧਾਰੂ ਪਸ਼ੂਆਂ ਲਈ ਸੁਰੱਖਿਅਤ",
     "moderate_headline": "ਦਰਮਿਆਨੀ ਗੁਣਵੱਤਾ — ਪੋਸ਼ਣ ਸੰਤੁਲਨ ਦੀ ਲੋੜ",
@@ -844,18 +883,18 @@ export default {
     "save_settings_btn": "ਸੈਟਿੰਗਾਂ ਸੁਰੱਖਿਅਤ ਕਰੋ"
   },
   "advisory_nutrition": {
-    "all_balanced": "ਮਾਪੇ ਗਏ ਸਾਰੇ ਪੋਸ਼ਕ ਤੱਤ (ਪ੍ਰੋਟੀਨ, ਨਮੀ, ਫਾਈਬਰ, ਊਰਜਾ) ਮਿਆਰੀ NDDB ਸੀਮਾਵਾਂ ਦੇ ਅੰਦਰ ਹਨ।",
-    "low_nutrient": "ਘੱਟ {{nutrient}}: ਮੌਜੂਦਾ {{value}} {{unit}} (ਲੋੜੀਂਦਾ: {{min}}–{{max}} {{unit}})।",
-    "high_nutrient": "ਵੱਧ {{nutrient}}: ਮੌਜੂਦਾ {{value}} {{unit}} (ਲੋੜੀਂਦਾ: {{min}}–{{max}} {{unit}})।",
+    "all_balanced": "ਸਾਰੇ ਪੋਸ਼ਕ ਤੱਤ (ਪ੍ਰੋਟੀਨ, ਨਮੀ, ਫਾਈਬਰ, ਊਰਜਾ) NDDB ਮਿਆਰਾਂ ਅਨੁਸਾਰ ਸੁਰੱਖਿਅਤ ਹਨ।",
+    "low_nutrient": "Low {{nutrient}}: currently {{value}} {{unit}} (ideal: {{min}}–{{max}} {{unit}}).",
+    "high_nutrient": "High {{nutrient}}: currently {{value}} {{unit}} (ideal: {{min}}–{{max}} {{unit}}).",
     "status_balanced": "ਸੰਤੁਲਿਤ",
     "status_attention": "ਧਿਆਨ ਦੇਣ ਦੀ ਲੋੜ"
   },
   "advisory_adulteration": {
-    "detected_headline": "ਮਿਲਾਵਟ ਚੇਤਾਵਨੀ: {{adulterant}} ਪਾਈ ਗਈ ਹੈ।",
+    "detected_headline": "Adulterant Alert: {{adulterant}} detected.",
     "clean_headline": "ਇਸ ਨਮੂਨੇ ਵਿੱਚ ਕੋਈ ਰਸਾਇਣਕ ਮਿਲਾਵਟ ਨਹੀਂ ਪਾਈ ਗਈ।",
     "clean_remedy": "ਸਿੰਥੈਟਿਕ ਜਾਂ ਅਕਾਰਬਨਿਕ ਮਿਲਾਵਟ ਤੋਂ ਬਿਲਕੁਲ ਸੁਰੱਖਿਅਤ।",
-    "remediation_1": "ਪਸ਼ੂਆਂ ਨੂੰ ਇਹ ਖੁਰਾਕ ਦੇਣਾ ਤੁਰੰਤ ਬੰਦ ਕਰੋ ਅਤੇ ਵੱਖਰਾ ਰੱਖੋ।",
-    "remediation_2": "ਸ਼ਿਕਾਇਤ ਅਤੇ ਜਾਂਚ ਲਈ ਨਮੂਨਾ ਬੋਰੀ ਸੰਭਾਲ ਕੇ ਰੱਖੋ।",
-    "remediation_3": "ਜੇਕਰ ਪਸ਼ੂ ਬਿਮਾਰ ਦਿਖਾਈ ਦੇਣ ਤਾਂ ਪਸ਼ੂ ਡਾਕਟਰ ਨਾਲ ਸੰਪਰਕ ਕਰੋ।"
+    "remediation_1": "Immediately withhold and isolate this batch from all livestock.",
+    "remediation_2": "Retain sample bag for batch verification and supplier complaint.",
+    "remediation_3": "Notify local veterinary officer if animals show distress."
   }
 };

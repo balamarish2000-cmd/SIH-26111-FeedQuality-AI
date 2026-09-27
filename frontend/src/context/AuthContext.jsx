@@ -186,11 +186,15 @@ export function AuthProvider({ children }) {
       });
 
       if (!matchedFarmer) {
-        throw new Error('Invalid mobile number/email or password.');
+        const errMsg = 'Account not found. Please check your details or create an account.';
+        setAuthError(errMsg);
+        return { success: false, errorCode: 'account_not_found', error: errMsg };
       }
 
       if (matchedFarmer.password !== password) {
-        throw new Error('Invalid mobile number/email or password.');
+        const errMsg = 'Incorrect password. Please try again.';
+        setAuthError(errMsg);
+        return { success: false, errorCode: 'wrong_password', error: errMsg };
       }
 
       // Valid session authenticated

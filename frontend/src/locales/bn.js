@@ -2,7 +2,8 @@ export default {
   "brand": {
     "name": "FEED GUARD",
     "subtitle": "দুগ্ধ খামারিদের জন্য এআই-চালিত গোখাদ্য ও সাইলেজ মান পরীক্ষা ব্যবস্থা",
-    "tagline": "পরীক্ষা করুন. সনাক্ত করুন. রক্ষা করুন."
+    "tagline": "পরীক্ষা করুন. সনাক্ত করুন. রক্ষা করুন.",
+    "product_footer": "ফিড গার্ড — দুগ্ধ খামারিদের জন্য এআই-চালিত গোখাদ্য এবং সাইলেজের গুণমান মূল্যায়ন ব্যবস্থা।"
   },
   "nav": {
     "home": "ড্যাশবোর্ড",
@@ -106,7 +107,10 @@ export default {
     "trust_message": "আপনার খামারের রেকর্ডগুলি আপনার অ্যাকাউন্টের সাথে সুরক্ষিতভাবে যুক্ত।",
     "login_required": "লগইন প্রয়োজন",
     "login_required_desc": "এই ফলাফল সংরক্ষণ ও কৃষকের রেকর্ড দেখতে লগইন প্রয়োজন।",
-    "continue_exploring": "অন্বেষণ চালিয়ে যান"
+    "continue_exploring": "অন্বেষণ চালিয়ে যান",
+    "err_wrong_password": "ভুল পাসওয়ার্ড। অনুগ্রহ করে আবার চেষ্টা করুন।",
+    "err_account_not_found": "অ্যাকাউন্ট পাওয়া যায়নি। বিবরণ পরীক্ষা করুন অথবা নতুন অ্যাকাউন্ট তৈরি করুন।",
+    "explore_sample_analysis": "নমুনা বিশ্লেষণ দেখুন"
   },
   "dashboard": {
     "welcome": "Feed Guard এ স্বাগতম",
@@ -156,7 +160,7 @@ export default {
     "open_iot_telemetry": "IoT রিয়েল-টাইম রিডিং খুলুন",
     "pit_silo_sample": "ইউনিট: পিট সাইলো ১ • ৪৫ দিন বায়ুরোধী সিল করা",
     "account_active": "অ্যাকাউন্ট সক্রিয়",
-    "welcome_farmer": "স্বাগতম",
+    "welcome_farmer": "স্বাগতম, {{name}}",
     "operation_id": "ডেইরি অপারেশন আইডি",
     "no_records_yet": "এখনও কোনো পরীক্ষার রেকর্ড নেই।",
     "empty_state_desc": "মানের ফলাফল এবং কৃষকদের পরামর্শ দেখতে আপনার প্রথম খাদ্য পরীক্ষা শুরু করুন।",
@@ -180,7 +184,10 @@ export default {
     "risk_alert": "ঝুঁকি সতর্কতা",
     "recommended_action": "প্রস্তাবিত পদক্ষেপ",
     "save_result_btn": "ফলাফল সংরক্ষণ করুন",
-    "saved_to_records": "পরীক্ষাটি আপনার কৃষক রেকর্ডে সংরক্ষিত হয়েছে।"
+    "saved_to_records": "পরীক্ষাটি আপনার কৃষক রেকর্ডে সংরক্ষিত হয়েছে।",
+    "no_tests_yet": "এখনও কোনো পরীক্ষা হয়নি।",
+    "start_first_feed_test": "আপনার প্রথম খাদ্য পরীক্ষা শুরু করুন",
+    "explore_sample_analysis": "নমুনা বিশ্লেষণ দেখুন"
   },
   "analyze": {
     "title": "AI দ্রুত গো-খাদ্য মান ও নিরাপত্তা পরীক্ষা",
@@ -232,7 +239,7 @@ export default {
     "action_save": "খামারের ইতিহাসে সংরক্ষণ করুন",
     "action_pdf": "PDF রিপোর্ট ডাউনলোড করুন",
     "action_qr": "QR কোডের মাধ্যমে শেয়ার করুন",
-    "scenario_good": "উন্নত মান",
+    "scenario_good": "Good Quality Feed",
     "scenario_adulterated": "ইউরিয়াযুক্ত ভেজাল প্রোটিন খাদ্য",
     "scenario_spoiled": "স্যাঁতসেঁতে ছত্রাকযুক্ত খাদ্য (উচ্চ আফলাটক্সিন)",
     "sample_preview_ready": "✓ নমুনার প্রিভিউ প্রস্তুত",
@@ -272,9 +279,9 @@ export default {
     "step3_desc": "পুষ্টি এবং শারীরিক পরিমাপের মান দিন",
     "step4_title": "৪. AI গুণমান ও পরামর্শ ফলাফল",
     "step4_desc": "সম্পূর্ণ গুণমান নির্ণয় এবং খামারি পরামর্শ",
-    "method_sensor": "এনআইআর / সেন্সর ইনপুট",
-    "method_camera": "ভিজ্যুয়াল স্ক্রীনিং (ছবি)",
-    "method_manual": "কৃষকের দেওয়া তথ্য",
+    "method_sensor": "NIR / Sensor Input",
+    "method_camera": "Visual Screening",
+    "method_manual": "Manual Entry",
     "method_demo": "ডেমো পরীক্ষা",
     "demo_banner_title": "ডেমো মোড সক্রিয় রয়েছে",
     "demo_banner_desc": "লাইভ ডেমো ও পরীক্ষার জন্য প্রস্তুতকৃত নমুনা পরিস্থিতি।",
@@ -309,9 +316,9 @@ export default {
     "select_image_error": "অনুগ্রহ করে প্রথমে খাদ্যের ছবি তুলুন বা নির্বাচন করুন।",
     "step1_label": "খাদ্যের ধরন নির্বাচন করুন",
     "step2_label": "পরীক্ষা পদ্ধতি নির্বাচন করুন",
-    "method_sensor_sub": "স্পেকট্রোস্কোপি প্রোব",
-    "method_camera_sub": "কম্পিউটার ভিশন",
-    "method_manual_sub": "ম্যানুয়াল এন্ট্রি",
+    "method_sensor_sub": "Spectroscopy Probe",
+    "method_camera_sub": "Camera & Computer Vision",
+    "method_manual_sub": "Measured Laboratory / Farm Values",
     "method_demo_title": "ডেমো মোড",
     "method_demo_sub": "সিমুলেটেড সেন্সর ডেটা",
     "demo_mode_title": "লাইভ ডেমো পরিস্থিতি",
@@ -321,11 +328,11 @@ export default {
     "simulated_data": "সিমুলেটেড ডেটা",
     "demo_test_title": "ডেমো পরীক্ষা",
     "demo_test_desc": "ডেমো পরীক্ষা প্রদর্শনের জন্য সিমুলেটেড সেন্সর ডেটা ব্যবহার করে। পরীক্ষা করার জন্য নিচের পরিস্থিতি নির্বাচন করুন:",
-    "scenario_good_desc": "সুষম গবাদি পশুর খাদ্য পিলেট, আদর্শ প্রোটিন, দুগ্ধবতী গরুর জন্য নিরাপদ",
-    "scenario_attention": "মনোযোগ প্রয়োজন",
-    "scenario_attention_desc": "উচ্চ আর্দ্রতা এবং কম প্রোটিন, খাদ্য সমন্বয় প্রয়োজন",
-    "scenario_unsafe": "খারাপ / অনিরাপদ",
-    "scenario_unsafe_desc": "ইউরিয়ার বিপজ্জনক ভেজাল (৯.৫%) বা ছত্রাকযুক্ত বিষাক্ত খাদ্য",
+    "scenario_good_desc": "Status: Good / Low Risk",
+    "scenario_attention": "Feed Requiring Attention",
+    "scenario_attention_desc": "Status: Moderate Risk",
+    "scenario_unsafe": "Poor / Unsafe Feed",
+    "scenario_unsafe_desc": "Status: High Risk",
     "loading_title": "খাদ্যের নমুনা বিশ্লেষণ করা হচ্ছে...",
     "loading_subtitle": "মাল্টি-টার্গেট এমএল স্ক্রীনিং এবং ঝুঁকি শ্রেণীকরণ প্রক্রিয়া",
     "step_read_sensor": "১. সেন্সর টেলিমেট্রি তথ্য পড়া হচ্ছে",
@@ -355,7 +362,31 @@ export default {
     "simulated_tag": "সিমুলেটেড সেন্সর ডেটা",
     "visual_tag": "ভিজ্যুয়াল স্ক্রীনিং",
     "sensor_tag": "এনআইআর / সেন্সর ইনপুট",
-    "manual_tag": "কৃষকের দেওয়া তথ্য"
+    "manual_tag": "কৃষকের দেওয়া তথ্য",
+    "method_sample": "Sample Analysis",
+    "method_sample_sub": "Use prepared sample data to evaluate the complete workflow.",
+    "sample_data_badge": "নমুনা ডেটা — মূল্যায়নের জন্য",
+    "sensor_not_connected": "সেন্সর সংযুক্ত নেই",
+    "sensor_not_connected_desc": "কমিউনিকেশন পোর্টে কোনো NIR স্পেকট্রোস্কোপি প্রোব বা সেন্সর পাওয়া যায়নি।",
+    "use_manual_entry": "ম্যানুয়াল এন্ট্রি ব্যবহার করুন",
+    "explore_sample_analysis": "নমুনা বিশ্লেষণ দেখুন",
+    "feed_quality_result": "পশুখাদ্যের মান ফলাফল",
+    "adulteration_assessment": "ভেজাল মূল্যায়ন",
+    "spoilage_assessment": "নষ্ট / দূষণ মূল্যায়ন",
+    "farmer_advisory_heading": "কৃষক পরামর্শ",
+    "what_result_means": "এই ফলাফলের অর্থ কী?",
+    "save_to_history": "ইতিহাসে সংরক্ষণ করুন",
+    "sample_analysis_label": "নমুনা বিশ্লেষণ",
+    "overall_quality": "সামগ্রিক মান",
+    "farmer_advisory": "কৃষক পরামর্শ",
+    "sample_data_eval": "নমুনা ডেটা — মূল্যায়নের জন্য",
+    "sample_analysis_title": "নমুনা বিশ্লেষণ",
+    "sample_analysis_subtitle": "সম্পূর্ণ কার্যপ্রবাহ মূল্যায়নের জন্য প্রস্তুত নমুনা ডেটা ব্যবহার করুন।",
+    "detected": "শনাক্ত হয়েছে",
+    "not_detected": "শনাক্ত হয়নি",
+    "fresh_safe": "তাজা / নিরাপদ",
+    "spoilage_detected": "নষ্ট / দূষিত",
+    "save_to_my_history": "আমার ইতিহাসে সংরক্ষণ করুন"
   },
   "quality_grades": {
     "good": "উত্তম ✓",
@@ -488,7 +519,11 @@ export default {
     "temp_sub": "পিট টেলিমেট্রি • সর্বোত্তম গাঁজন",
     "ph_sub": "পিএইচ প্রোব • ল্যাকটিক অম্লতা",
     "moisture_sub": "আর্দ্রতা প্রোব • কমপ্যাকশন টেলিমেট্রি",
-    "spoilage_sub": "তাপীয় স্থায়িত্ব • নিরাপদ সঞ্চয়"
+    "spoilage_sub": "তাপীয় স্থায়িত্ব • নিরাপদ সঞ্চয়",
+    "sample_data_badge": "নমুনা ডেটা — মূল্যায়নের জন্য",
+    "live_sensor_data": "Live Sensor Data",
+    "stored_data": "Stored Data",
+    "sample_data_eval": "নমুনা ডেটা — মূল্যায়নের জন্য"
   },
   "history": {
     "title": "নমুনা ইতিহাস",
@@ -548,7 +583,10 @@ export default {
     "col_spoilage": "পচন",
     "view_qr": "কিউআর দেখুন",
     "all_risk_levels": "সমস্ত ঝুঁকির স্তর",
-    "all_input_methods": "সমস্ত ইনপুট পদ্ধতি"
+    "all_input_methods": "সমস্ত ইনপুট পদ্ধতি",
+    "col_data_type": "ডেটার ধরণ",
+    "real_farmer_test": "প্রকৃত কৃষক পরীক্ষা",
+    "sample_analysis": "নমুনা বিশ্লেষণ"
   },
   "qr": {
     "title": "QR রিপোর্ট",
@@ -729,8 +767,8 @@ export default {
     "unsafe": "বিপজ্জনক ভেজাল বা বিষাক্ত উপাদান শনাক্ত হয়েছে! অবিলম্বে পশুদের খাওয়ানো বন্ধ করুন এবং ডাক্তারের পরামর্শ নিন।"
   },
   "advisory_feeding": {
-    "normal": "দিনে ২০–২৫ কেজি কাঁচা ঘাস এবং ৪ কেজি শুকনো খড়ের সাথে সুষম অনুপাতে খাওয়ান।",
-    "compensate": "এটি একমাত্র খাদ্য হিসেবে খাওয়াবেন না। দুধ উৎপাদন ঠিক রাখতে ১–২ কেজি উন্নত দানাদার খাদ্য অতিরিক্ত দিন।",
+    "normal": "Feed in standard daily proportions alongside 20–25 kg fresh green fodder and clean ad-lib drinking water.",
+    "compensate": "Do not feed as sole ration. Compensate with 1–2 kg quality concentrate pellet and bypass protein.",
     "lactating": "দুধালো গরুকে দিনে ১৫–২০ কেজি কাঁচা ঘাস, ৪ কেজি শুকনো খড় এবং প্রতি ২.৫ লিটার দুধে ১ কেজি সুষম দানাদার খাদ্য দিন।",
     "dry": "দুধহীন গাভীকে ভালো মানের শুকনো খড়ের সাথে দিনে ১.৫–২ কেজি দানাদার খাদ্য এবং ৫০ গ্রাম খনিজ মিশ্রণ দিন।",
     "good": "দিনে ২০–২৫ কেজি কাঁচা ঘাস এবং ৪ কেজি শুকনো খড়ের সাথে সুষম অনুপাতে খাওয়ান।",
@@ -740,24 +778,24 @@ export default {
     "critical": "এটি একমাত্র খাদ্য হিসেবে খাওয়াবেন না। দুধ উৎপাদন ঠিক রাখতে ১–২ কেজি উন্নত দানাদার খাদ্য অতিরিক্ত দিন।"
   },
   "advisory_storage": {
-    "spoiled": "মারাত্মক পচন সতর্কতা: ছত্রাকের আক্রমণ বা পচন শনাক্ত হয়েছে। আক্রান্ত খাদ্য অবিলম্বে সরিয়ে ফেলুন এবং গুদামের আর্দ্রতা কমান।",
-    "stable": "সংরক্ষণের অবস্থা স্থিতিশীল রয়েছে। ছত্রাক প্রতিরোধে বর্তমান আর্দ্রতা ও তাপমাত্রা নিয়ন্ত্রণ বজায় রাখুন।",
+    "spoiled": "গুরুতর পচনের ঝুঁকি: দ্রুত আলাদা করুন এবং আর্দ্রতা পরীক্ষা করুন।",
+    "stable": "খাদ্যের বস্তা শুকনো ও বাতাসযুক্ত স্থানে কাঠের তক্তার উপর রাখুন।",
     "dry_feed": "খাদ্যের বস্তা মেঝে থেকে ১৫ সেমি উঁচুতে কাঠের তক্তার ওপর ঠান্ডা ও শুকনো ঘরে রাখুন।",
     "silage": "সাইলেজের গর্ত বায়ুরোধী রাখুন। তাপমাত্রা ২৮°C এর বেশি হলে অবিলম্বে পরীক্ষা করুন।",
     "critical": "মারাত্মক পচন সতর্কতা: ছত্রাকের আক্রমণ বা পচন শনাক্ত হয়েছে। আক্রান্ত খাদ্য অবিলম্বে সরিয়ে ফেলুন এবং গুদামের আর্দ্রতা কমান।",
     "normal": "সংরক্ষণের অবস্থা স্থিতিশীল রয়েছে। ছত্রাক প্রতিরোধে বর্তমান আর্দ্রতা ও তাপমাত্রা নিয়ন্ত্রণ বজায় রাখুন।",
-    "tip_pallets": "খাদ্যের বস্তা ভেজা মেঝে থেকে কমপক্ষে ১৫ সেমি উঁচুতে কাঠের তক্তার ওপর রাখুন।",
-    "tip_ventilation": "তাপমাত্রা ২৮°C এর নিচে রেখে শুকনো, ইঁদুরমুক্ত ও বাতাস চলাচলের উপযুক্ত গুদাম বজায় রাখুন।",
-    "tip_silage": "সাইলেজের গর্ত বা সংরক্ষণ পাত্র কোনো ফুটো ছাড়া সম্পূর্ণ বায়ুরোধী ঢাকনা দিয়ে ঢেকে রাখুন।",
-    "tip_fifo": "খাদ্য পুরনো হয়ে নষ্ট হওয়া রোধ করতে 'আগে আসা খাদ্য আগে ব্যবহার' (FIFO) নিয়ম মেনে চলুন।"
+    "tip_pallets": "Store feed sacks on wooden pallets at least 15 cm off damp concrete floors.",
+    "tip_ventilation": "Maintain dry, rodent-proof shed ventilation with ambient temperatures below 28°C.",
+    "tip_silage": "Ensure sealed silage or storage units have airtight covers with no punctures or loose edges.",
+    "tip_fifo": "Practice First-In, First-Out (FIFO) stock rotation to prevent aging."
   },
   "advisory_action": {
     "critical": {
-      "headline": "ACTION REQUIRED: DO NOT FEED — ISOLATE BATCH",
-      "primary": "STOP feeding this batch immediately. Quarantine the sack or storage unit.",
-      "step_0": "Immediately stop offering this feed to cattle, calves, or pregnant cows.",
-      "step_1": "Physically isolate affected bags to prevent accidental herd feeding.",
-      "step_2": "Document the Batch ID using the certified QR code for supplier replacement claim.",
+      "headline": "Immediate Feed Quarantine",
+      "primary": "Do not feed this batch to any dairy cattle or calves.",
+      "step_0": "Immediately isolate and tag this batch to prevent accidental feeding.",
+      "step_1": "Retain a sealed sample bag for laboratory verification.",
+      "step_2": "Notify your feed supplier and local veterinary officer.",
       "step_3": "Consult your local veterinary doctor if cattle have already consumed this feed."
     },
     "poor": {
@@ -769,18 +807,19 @@ export default {
       "step_3": "Retest next delivery batch to ensure supplier meets quality specifications."
     },
     "moderate": {
-      "headline": "MONITORED FEEDING WITH REGULAR INSPECTION",
-      "primary": "Acceptable feed quality. Suitable for standard feeding with daily health observation.",
-      "step_0": "Feed according to standard milk-yield ration chart (approx. 400g concentrate per liter of milk).",
-      "step_1": "Keep bags sealed in a dry, ventilated shed to prevent moisture absorption.",
-      "step_2": "Monitor feed intake and rumination times over the next 48 hours."
+      "headline": "Ration Balancing Required",
+      "primary": "Adjust concentrate proportions and supplement with mineral mixture.",
+      "step_0": "Do not feed as sole concentrate source.",
+      "step_1": "Add 50–100g approved mineral mixture per cow daily.",
+      "step_2": "Re-inspect batch after 7 days of storage."
     },
     "good": {
-      "headline": "APPROVED: PREMIUM FEED QUALITY — SAFE FOR HERD",
-      "primary": "Optimal nutritional composition. Continue standard daily feeding schedule.",
-      "step_0": "Continue standard feeding ration for lactating cows, pregnant cows, and growing calves.",
-      "step_1": "Maintain clean, dry pallet storage to preserve freshness and vitamin potency.",
-      "step_2": "Generate certified QR traceability certificate for farm records."
+      "headline": "Standard Feeding Protocol",
+      "primary": "Feed directly according to standard daily ration balance.",
+      "step_0": "Maintain clean, ad-lib drinking water access.",
+      "step_1": "Combine with 15–20 kg green fodder for optimal rumen digestion.",
+      "step_2": "Store bags off concrete floors in a dry, ventilated shed.",
+      "step_3": "Monitor milk yield and butterfat percentage regularly."
     },
     "good_headline": "উন্নত মান — দুধালো পশুর জন্য নিরাপদ",
     "moderate_headline": "মাঝারি মান — পুষ্টির সমন্বয় প্রয়োজন",
@@ -844,18 +883,18 @@ export default {
     "save_settings_btn": "সেটিংস সংরক্ষণ করুন"
   },
   "advisory_nutrition": {
-    "all_balanced": "পরিমাপ করা সমস্ত পুষ্টি নির্দেশক (প্রোটিন, আর্দ্রতা, ফাইবার, শক্তি) আদর্শ NDDB সীমার মধ্যে রয়েছে।",
-    "low_nutrient": "কম {{nutrient}}: বর্তমানে {{value}} {{unit}} (আদর্শ: {{min}}–{{max}} {{unit}})।",
-    "high_nutrient": "বেশি {{nutrient}}: বর্তমানে {{value}} {{unit}} (আদর্শ: {{min}}–{{max}} {{unit}})।",
+    "all_balanced": "সমস্ত পুষ্টি সূচক (প্রোটিন, আর্দ্রতা, ফাইবার, শক্তি) NDDB মানদণ্ডের মধ্যে নিরাপদ।",
+    "low_nutrient": "Low {{nutrient}}: currently {{value}} {{unit}} (ideal: {{min}}–{{max}} {{unit}}).",
+    "high_nutrient": "High {{nutrient}}: currently {{value}} {{unit}} (ideal: {{min}}–{{max}} {{unit}}).",
     "status_balanced": "সুষম",
     "status_attention": "মনোযোগ প্রয়োজন"
   },
   "advisory_adulteration": {
-    "detected_headline": "ভেজাল সতর্কতা: {{adulterant}} শনাক্ত হয়েছে।",
+    "detected_headline": "Adulterant Alert: {{adulterant}} detected.",
     "clean_headline": "এই নমুনায় কোনো রাসায়নিক ভেজাল শনাক্ত হয়নি।",
     "clean_remedy": "সিন্থেটিক বা অজৈব ভেজাল থেকে সম্পূর্ণ নিরাপদ।",
-    "remediation_1": "গবাদি পশুকে এই খাদ্য দেওয়া অবিলম্বে বন্ধ করুন এবং আলাদা রাখুন।",
-    "remediation_2": "অভিযোগ ও যাচাইয়ের জন্য নমুনা বস্তাটি সংরক্ষণ করে রাখুন।",
-    "remediation_3": "পশুর কোনো অসুস্থতার লক্ষণ দেখা দিলে পশু চিকিৎসকের সাথে যোগাযোগ করুন।"
+    "remediation_1": "Immediately withhold and isolate this batch from all livestock.",
+    "remediation_2": "Retain sample bag for batch verification and supplier complaint.",
+    "remediation_3": "Notify local veterinary officer if animals show distress."
   }
 };
