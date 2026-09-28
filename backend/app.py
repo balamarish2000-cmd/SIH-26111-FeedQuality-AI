@@ -56,14 +56,22 @@ CORS(app)
 MAX_UPLOAD_MB = int(os.environ.get("MAX_UPLOAD_SIZE_MB", 5))
 app.config["MAX_CONTENT_LENGTH"] = MAX_UPLOAD_MB * 1024 * 1024
 
-# Load ML models once at startup
-print("Loading ML models...")
-try:
-    predictor = FeedQualityPredictor(models_dir=ML_DIR / "models")
-    print("Models loaded successfully.")
-except FileNotFoundError as e:
-    print(f"WARNING: {e}")
-    predictor = None
+# Lazy-load ML models on first request to ensure instant container startup
+_predictor = None
+
+def get_predictor():
+    global _predictor
+    if _predictor is None:
+        print("Loading ML models...")
+        try:
+            _predictor = FeedQualityPredictor(models_dir=ML_DIR / "models")
+            print("Models loaded successfully.")
+        except Exception as e:
+            print(f"WARNING: Model load error: {e}")
+            import traceback
+            traceback.print_exc()
+            return None
+    return _predictor
 
 # In-memory analysis history
 analysis_history: list[dict] = []
@@ -130,7 +138,7 @@ def health():
         "status": "ok",
         "service": "Feed Guard Platform",
         "version": "3.0.0",
-        "models_loaded": predictor is not None,
+        "models_loaded": (ML_DIR / "models").exists(),
         "timestamp": datetime.now(timezone.utc).isoformat(),
     })
 
@@ -143,6 +151,7 @@ def predict():
     Expects JSON body with sensor reading fields matching FEATURE_COLUMNS.
     Returns predictions, confidence scores, and full structured advisory.
     """
+    predictor = get_predictor()
     if predictor is None:
         return jsonify({"error": "AI prediction models are temporarily unavailable. Please verify backend service."}), 503
 
@@ -228,6 +237,7 @@ def predict_image():
 
     Expects multipart form with an 'image' file.
     """
+    predictor = get_predictor()
     if predictor is None:
         return jsonify({"error": "AI prediction models are temporarily unavailable."}), 503
 

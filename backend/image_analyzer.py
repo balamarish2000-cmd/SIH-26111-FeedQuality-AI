@@ -16,36 +16,42 @@ import math
 import random
 from io import BytesIO
 
-import cv2
 import numpy as np
 from PIL import Image
 
 
 def analyze_feed_image(image_bytes: bytes) -> dict:
-    """Analyze a feed image and estimate sensor readings.
+    """Analyze a feed image and estimate sensor readings."""
+    # Decode image using cv2 if available, or fall back cleanly to PIL
+    img_rgb = None
+    img_hsv = None
+    img_gray = None
+    laplacian_var = 50.0
 
-    Parameters
-    ----------
-    image_bytes : bytes
-        Raw image file bytes (JPEG/PNG).
+    try:
+        import cv2
+        nparr = np.frombuffer(image_bytes, np.uint8)
+        img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+        if img is not None:
+            img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+            img_hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+            img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+            laplacian_var = float(cv2.Laplacian(img_gray, cv2.CV_64F).var())
+    except Exception:
+        pass
 
-    Returns
-    -------
-    dict with:
-      - estimated_readings: dict of approximate sensor values
-      - visual_features: dict of extracted image features
-      - feed_type_guess: str
-      - analysis_notes: list[str]
-    """
-    # Decode image
-    nparr = np.frombuffer(image_bytes, np.uint8)
-    img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
-    if img is None:
-        raise ValueError("Could not decode image. Ensure it is a valid JPEG/PNG.")
-
-    img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-    img_hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
-    img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    if img_rgb is None:
+        try:
+            pil_img = Image.open(BytesIO(image_bytes)).convert("RGB")
+            img_rgb = np.array(pil_img)
+            img_gray = np.array(pil_img.convert("L"))
+            # Fast PIL HSV approximation
+            pil_hsv = pil_img.convert("HSV")
+            img_hsv = np.array(pil_hsv)
+            gx, gy = np.gradient(img_gray.astype(float))
+            laplacian_var = float(np.var(gx) + np.var(gy))
+        except Exception as e:
+            raise ValueError(f"Could not decode image. Ensure it is a valid JPEG/PNG: {e}")
 
     # ---- Extract visual features ----
     features = {}
@@ -67,7 +73,6 @@ def analyze_feed_image(image_bytes: bytes) -> dict:
     features["dark_ratio"] = float(dark_mask.sum() / dark_mask.size)
 
     # Texture: Laplacian variance (sharpness / granularity)
-    laplacian_var = cv2.Laplacian(img_gray, cv2.CV_64F).var()
     features["texture_variance"] = float(laplacian_var)
 
     # Uniformity: std of gray
