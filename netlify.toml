@@ -1,0 +1,21 @@
+# Netlify hosts the static React frontend only. The Flask API (scikit-learn
+# models) cannot run on Netlify: deploy it elsewhere (Render, Railway, Fly.io,
+# Vercel...) and set VITE_API_BASE in Netlify's site settings to its /api URL.
+[build]
+  base = "frontend"
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# Single-page app: serve index.html for client-side routes (/history, /report/:id, ...)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

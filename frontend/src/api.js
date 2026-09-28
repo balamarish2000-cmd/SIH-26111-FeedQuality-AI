@@ -1,4 +1,6 @@
-const API_BASE = '/api';
+// Same-origin '/api' in dev (Vite proxy) and on Vercel; set VITE_API_BASE to the
+// full backend URL (e.g. https://feedguard-api.onrender.com/api) for Netlify.
+const API_BASE = (import.meta.env.VITE_API_BASE || '/api').replace(/\/+$/, '');
 
 async function handleResponse(res, fallbackMessage = 'Request failed') {
   let data;
