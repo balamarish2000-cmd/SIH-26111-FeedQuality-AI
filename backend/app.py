@@ -25,8 +25,11 @@ import pandas as pd
 import numpy as np
 
 # Add the ML directory to path so we can import the trained predictor
+backend_ml = Path(__file__).parent / "ml"
 ml_base = Path(__file__).parent.parent / "ML"
-if (ml_base / "pipeline").exists():
+if (backend_ml / "models").exists():
+    ML_DIR = backend_ml
+elif (ml_base / "pipeline").exists():
     ML_DIR = ml_base / "pipeline"
 else:
     ML_DIR = ml_base / "New Folder"
