@@ -21,12 +21,35 @@ from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
 from flask import Flask, request, jsonify
+from flask.json.provider import DefaultJSONProvider
 from flask_cors import CORS
+from werkzeug.exceptions import HTTPException
+
+
+def _sanitize_for_json(obj):
+    """Recursively replace NaN/Inf floats with None so output is 100% RFC-8259 valid JSON."""
+    if isinstance(obj, float) and (math.isnan(obj) or math.isinf(obj)):
+        return None
+    if isinstance(obj, dict):
+        return {k: _sanitize_for_json(v) for k, v in obj.items()}
+    if isinstance(obj, (list, tuple)):
+        return [_sanitize_for_json(v) for v in obj]
+    return obj
+
+
+class SafeJSONProvider(DefaultJSONProvider):
+    """Browsers' JSON.parse rejects bare NaN, which unmeasured (blank) sensor
+    fields would otherwise leak into every response."""
+
+    def dumps(self, obj, **kwargs):
+        return super().dumps(_sanitize_for_json(obj), **kwargs)
+
 
 # ---------------------------------------------------------------------------
 # App initialization (MUST remain at the very top for Vercel Serverless)
 # ---------------------------------------------------------------------------
 app = Flask(__name__)
+app.json = SafeJSONProvider(app)
 CORS(app)
 handler = app
 
@@ -155,20 +178,13 @@ def _seed_history():
 
 _seed_history()
 
-def _sanitize_for_json(obj):
-    """Recursively replace NaN/Inf floats with None so output is 100% RFC-8259 valid JSON."""
-    if isinstance(obj, float) and (math.isnan(obj) or math.isinf(obj)):
-        return None
-    if isinstance(obj, dict):
-        return {k: _sanitize_for_json(v) for k, v in obj.items()}
-    if isinstance(obj, list):
-        return [_sanitize_for_json(v) for v in obj]
-    return obj
-
 
 # Global JSON error handler
 @app.errorhandler(Exception)
 def handle_global_exception(e):
+    # Keep 400/404/405/413 etc. as-is instead of collapsing them into 500s
+    if isinstance(e, HTTPException):
+        return jsonify({"error": e.description, "status": "error"}), e.code
     traceback.print_exc()
     return jsonify({
         "error": str(e),
@@ -205,27 +221,32 @@ def predict():
     if predictor is None:
         return jsonify({"error": "AI prediction models are temporarily unavailable. Please verify backend service."}), 503
 
-    data = request.get_json()
-    if not data:
+    data = request.get_json(silent=True)
+    if not data or not isinstance(data, dict):
         return jsonify({"error": "No input data provided for feed analysis."}), 400
 
     try:
+        # Device metadata the farmer UI never sends; the models were trained with it present
+        defaults = {"firmware_version": "1.2.0", "measurement_repeat": 1.0, "sampling_depth_cm": 20.0}
         readings = {}
+        invalid = []
         for col in FEATURE_COLUMNS:
             val = data.get(col)
             if val is None or val == "" or (isinstance(val, float) and math.isnan(val)):
-                readings[col] = float("nan") if col not in ("feed_type", "firmware_version") else val
+                if col in defaults:
+                    readings[col] = defaults[col]
+                else:
+                    readings[col] = float("nan") if col not in ("feed_type", "firmware_version") else val
             else:
                 if col not in ("feed_type", "firmware_version"):
                     try:
                         val = float(val)
                     except (ValueError, TypeError):
-                        pass
+                        invalid.append(col)
                 readings[col] = val
 
-        readings.setdefault("firmware_version", "1.2.0")
-        readings.setdefault("measurement_repeat", 1)
-        readings.setdefault("sampling_depth_cm", 20.0)
+        if invalid:
+            return jsonify({"error": f"Non-numeric value(s) for: {', '.join(invalid)}."}), 400
 
         df = pd.DataFrame([readings])
         results = predictor.predict(df)
@@ -361,7 +382,7 @@ def qr_generate():
     """Generate a QR code for a completed analysis."""
     if not generate_qr:
         return jsonify({"error": "QR system unavailable"}), 503
-    data = request.get_json()
+    data = request.get_json(silent=True)
     if not data:
         return jsonify({"error": "No data provided"}), 400
     analysis_result = data.get("analysis_result", {})

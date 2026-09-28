@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import os
 import hashlib
+import hmac
 import json
 import time
 import uuid
@@ -34,7 +35,15 @@ def generate_batch_id() -> str:
 
 
 def _sign(data: str) -> str:
-    return hashlib.sha256(f"{SECRET_KEY}:{data}".encode()).hexdigest()[:16]
+    return hmac.new(SECRET_KEY.encode(), data.encode(), hashlib.sha256).hexdigest()[:16]
+
+
+def _adulterant_name(analysis_result: dict) -> str:
+    """advisories[0] is always the quality-grade advisory, so read the
+    adulterant from the structured section instead."""
+    structured = analysis_result.get("structured_advisory") or {}
+    warning = structured.get("adulteration_warning") or {}
+    return warning.get("adulterant_name") or "None"
 
 
 def generate_qr(analysis_result: dict, readings: dict) -> dict:
@@ -50,7 +59,7 @@ def generate_qr(analysis_result: dict, readings: dict) -> dict:
         "timestamp": timestamp,
         "feed_type": readings.get("feed_type", "Unknown"),
         "quality_status": analysis_result.get("quality_grade", "Unknown"),
-        "adulteration": analysis_result.get("advisories", [{}])[0].get("title", "None"),
+        "adulteration": _adulterant_name(analysis_result),
         "overall_status": analysis_result.get("overall_status", "unknown"),
     }
 
@@ -106,7 +115,7 @@ def verify_qr(batch_id: str) -> dict:
     }
     expected_sig = _sign(json.dumps(payload_check, sort_keys=True))
 
-    if expected_sig != record.get("signature"):
+    if not hmac.compare_digest(expected_sig, record.get("signature", "")):
         return {"valid": False, "error": "Signature mismatch — record may be tampered."}
 
     record["verified_count"] += 1

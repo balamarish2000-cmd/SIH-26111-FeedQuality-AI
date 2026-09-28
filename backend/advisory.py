@@ -11,6 +11,8 @@ explanation, and concrete remediation steps.
 
 from __future__ import annotations
 
+import math
+
 SEVERITY_CRITICAL = "critical"
 SEVERITY_WARNING = "warning"
 SEVERITY_INFO = "info"
@@ -86,6 +88,9 @@ def generate_advisory(readings: dict, predictions: dict, lang: str = "en") -> di
     dict with keys: overall_status, advisories (list), feed_recommendations,
     storage_advisory, nutrition_summary.
     """
+    # Blank sensor fields arrive as NaN (the models impute them); the rules
+    # below treat None as "not measured", so NaN must not reach them.
+    readings = {k: (None if isinstance(v, float) and math.isnan(v) else v) for k, v in readings.items()}
     feed_type = readings.get("feed_type", "Cattle Feed Pellet")
     ranges = IDEAL_RANGES.get(feed_type, DEFAULT_RANGES)
 
@@ -512,7 +517,7 @@ def _build_structured_sections(readings, predictions, ranges, feed_type, advisor
     tip_key = "normal" if quality in ("Good", "Moderate") else "compensate"
 
     nutri_guidance = {
-        "status": "Balanced" if len(nutri_points) == 1 and "All measured" in nutri_points[0] else "Attention Required",
+        "status": "Balanced" if nutri_keys == [{"key": "advisory_nutrition.all_balanced"}] else "Attention Required",
         "title_key": "analyze.nutri_guidance_title",
         "description_key": f"advisory_feeding.{tip_key}",
         "highlights": nutri_points,
@@ -899,14 +904,14 @@ def _feeding_rate(feed_type: str) -> list[str]:
 
 def _supplement_suggestions(readings: dict, feed_type: str) -> list[str]:
     suggestions = []
-    protein = readings.get("protein_pct", 15)
-    if protein < 14:
+    protein = readings.get("protein_pct")
+    if protein is not None and protein < 14:
         suggestions.append("Add soybean meal (250–500g/day) to increase protein intake")
-    mineral_idx = readings.get("mineral_deficiency_index", 5)
-    if mineral_idx > 12:
+    mineral_idx = readings.get("mineral_deficiency_index")
+    if mineral_idx is not None and mineral_idx > 12:
         suggestions.append("Add commercial mineral mixture (50–100g/day)")
-    energy = readings.get("energy_mcal_per_kg", 2.5)
-    if energy < 2.2:
+    energy = readings.get("energy_mcal_per_kg")
+    if energy is not None and energy < 2.2:
         suggestions.append("Add maize grain or rice bran to increase energy density")
     if not suggestions:
         suggestions.append("Feed quality is acceptable; continue current supplementation")
