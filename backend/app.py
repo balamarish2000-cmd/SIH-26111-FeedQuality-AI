@@ -24,16 +24,21 @@ from flask_cors import CORS
 import pandas as pd
 import numpy as np
 
-# Add the ML directory to path so we can import the trained predictor
-backend_ml = Path(__file__).parent / "ml"
-ml_base = Path(__file__).parent.parent / "ML"
+# Ensure current directory and ML directory are in sys.path
+CURRENT_DIR = Path(__file__).resolve().parent
+if str(CURRENT_DIR) not in sys.path:
+    sys.path.insert(0, str(CURRENT_DIR))
+
+backend_ml = CURRENT_DIR / "ml"
+ml_base = CURRENT_DIR.parent / "ML"
 if (backend_ml / "models").exists():
     ML_DIR = backend_ml
 elif (ml_base / "pipeline").exists():
     ML_DIR = ml_base / "pipeline"
 else:
     ML_DIR = ml_base / "New Folder"
-sys.path.insert(0, str(ML_DIR))
+if str(ML_DIR) not in sys.path:
+    sys.path.insert(0, str(ML_DIR))
 
 from predict import FeedQualityPredictor
 from common import FEATURE_COLUMNS
@@ -103,10 +108,22 @@ def _sanitize_for_json(obj):
     return obj
 
 
+# Global JSON error handler to prevent HTML 500 error pages
+@app.errorhandler(Exception)
+def handle_global_exception(e):
+    import traceback
+    traceback.print_exc()
+    return jsonify({
+        "error": str(e),
+        "status": "error"
+    }), 500
+
+
 # ---------------------------------------------------------------------------
-# API Routes
+# API Routes (supporting both /api/* and /* for transparent proxying)
 # ---------------------------------------------------------------------------
 
+@app.route("/health", methods=["GET"])
 @app.route("/api/health", methods=["GET"])
 def health():
     return jsonify({
@@ -118,6 +135,7 @@ def health():
     })
 
 
+@app.route("/predict", methods=["POST"])
 @app.route("/api/predict", methods=["POST"])
 def predict():
     """Run feed quality prediction on sensor readings.
@@ -170,6 +188,7 @@ def predict():
                 val = int(val)
             elif isinstance(val, (np.floating,)):
                 val = float(val)
+            predictions[col] = val
         # Extract language
         lang = request.args.get("lang") or (data.get("lang") if isinstance(data, dict) else "en") or "en"
 
@@ -202,6 +221,7 @@ def predict():
         return jsonify({"error": f"Analysis failed: {str(e)}"}), 400
 
 
+@app.route("/predict/image", methods=["POST"])
 @app.route("/api/predict/image", methods=["POST"])
 def predict_image():
     """Analyze a feed photo and run computer-vision feature extraction + ML prediction.
@@ -292,6 +312,7 @@ def predict_image():
         return jsonify({"error": "Unable to complete image analysis. Please ensure good lighting and clear camera focus."}), 500
 
 
+@app.route("/qr/generate", methods=["POST"])
 @app.route("/api/qr/generate", methods=["POST"])
 def qr_generate():
     """Generate a QR code for a completed analysis."""
@@ -306,6 +327,7 @@ def qr_generate():
     return jsonify({"success": True, **result})
 
 
+@app.route("/qr/verify/<batch_id>", methods=["GET"])
 @app.route("/api/qr/verify/<batch_id>", methods=["GET"])
 def qr_verify(batch_id: str):
     """Verify a QR code by batch ID."""
@@ -313,12 +335,14 @@ def qr_verify(batch_id: str):
     return jsonify(result)
 
 
+@app.route("/qr/batches", methods=["GET"])
 @app.route("/api/qr/batches", methods=["GET"])
 def qr_batches():
     """List all QR-registered batches."""
     return jsonify({"batches": get_all_batches()})
 
 
+@app.route("/dashboard/stats", methods=["GET"])
 @app.route("/api/dashboard/stats", methods=["GET"])
 def dashboard_stats():
     """Aggregated analytics for the cloud dashboard."""
@@ -361,6 +385,7 @@ def dashboard_stats():
     })
 
 
+@app.route("/silage/monitor", methods=["GET"])
 @app.route("/api/silage/monitor", methods=["GET"])
 def silage_monitor():
     """Simulated real-time IoT silage monitoring data.
@@ -476,6 +501,7 @@ def _storage_alerts(units):
     return alerts
 
 
+@app.route("/history", methods=["GET"])
 @app.route("/api/history", methods=["GET"])
 def history():
     """Return analysis history with optional filters (feed_type, quality_status, search)."""
@@ -504,6 +530,7 @@ def history():
     })
 
 
+@app.route("/history/<record_id>", methods=["GET"])
 @app.route("/api/history/<record_id>", methods=["GET"])
 def history_detail(record_id: str):
     """Retrieve full analysis report for a single record."""

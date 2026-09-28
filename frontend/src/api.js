@@ -1,8 +1,33 @@
 const API_BASE = '/api';
 
+async function handleResponse(res, fallbackMessage = 'Request failed') {
+  let data;
+  const contentType = res.headers.get('content-type') || '';
+  if (contentType.includes('application/json')) {
+    try {
+      data = await res.json();
+    } catch {
+      data = null;
+    }
+  }
+
+  if (!res.ok) {
+    if (data && data.error) {
+      throw new Error(data.error);
+    }
+    const text = await res.text().catch(() => '');
+    throw new Error(text || `${fallbackMessage} (${res.status})`);
+  }
+
+  if (data !== null && data !== undefined) {
+    return data;
+  }
+  return await res.json();
+}
+
 export async function checkHealth() {
   try {
-    const res = await fetch(`${API_BASE}/health`, { signal: AbortSignal.timeout(4000) });
+    const res = await fetch(`${API_BASE}/health`, { signal: AbortSignal.timeout(6000) });
     if (!res.ok) return { status: 'error', models_loaded: false };
     return await res.json();
   } catch (err) {
@@ -16,8 +41,7 @@ export async function predictFeed(readings, lang = 'en') {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ ...readings, lang }),
   });
-  if (!res.ok) throw new Error((await res.json()).error || 'Prediction failed');
-  return res.json();
+  return handleResponse(res, 'Feed quality prediction failed');
 }
 
 export async function predictImage(file, lang = 'en') {
@@ -28,20 +52,17 @@ export async function predictImage(file, lang = 'en') {
     method: 'POST',
     body: form,
   });
-  if (!res.ok) throw new Error((await res.json()).error || 'Image analysis failed');
-  return res.json();
+  return handleResponse(res, 'Image analysis failed');
 }
 
 export async function getDashboardStats() {
   const res = await fetch(`${API_BASE}/dashboard/stats`);
-  if (!res.ok) throw new Error('Failed to load dashboard stats');
-  return res.json();
+  return handleResponse(res, 'Failed to load dashboard stats');
 }
 
 export async function getSilageMonitor() {
   const res = await fetch(`${API_BASE}/silage/monitor`);
-  if (!res.ok) throw new Error('Failed to load silage data');
-  return res.json();
+  return handleResponse(res, 'Failed to load silage data');
 }
 
 export async function generateQR(analysisResult, readings) {
@@ -50,26 +71,22 @@ export async function generateQR(analysisResult, readings) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ analysis_result: analysisResult, readings }),
   });
-  if (!res.ok) throw new Error('Failed to generate QR code');
-  return res.json();
+  return handleResponse(res, 'Failed to generate QR code');
 }
 
 export async function verifyQR(batchId) {
   const res = await fetch(`${API_BASE}/qr/verify/${encodeURIComponent(batchId)}`);
-  if (!res.ok) throw new Error('Verification failed');
-  return res.json();
+  return handleResponse(res, 'Verification failed');
 }
 
 export async function getQRBatches() {
   const res = await fetch(`${API_BASE}/qr/batches`);
-  if (!res.ok) throw new Error('Failed to load batches');
-  return res.json();
+  return handleResponse(res, 'Failed to load batches');
 }
 
 export async function getHistory(limit = 50) {
   const res = await fetch(`${API_BASE}/history?limit=${limit}`);
-  if (!res.ok) throw new Error('Failed to load history');
-  return res.json();
+  return handleResponse(res, 'Failed to load history');
 }
 
 export async function getHistoryFiltered({ feedType = '', qualityStatus = '', search = '', limit = 100 } = {}) {
@@ -80,12 +97,10 @@ export async function getHistoryFiltered({ feedType = '', qualityStatus = '', se
   if (limit) params.append('limit', limit);
 
   const res = await fetch(`${API_BASE}/history?${params.toString()}`);
-  if (!res.ok) throw new Error('Failed to load filtered history');
-  return res.json();
+  return handleResponse(res, 'Failed to load filtered history');
 }
 
 export async function getHistoryDetail(recordId) {
   const res = await fetch(`${API_BASE}/history/${encodeURIComponent(recordId)}`);
-  if (!res.ok) throw new Error(`Report '${recordId}' not found`);
-  return res.json();
+  return handleResponse(res, `Report '${recordId}' not found`);
 }
