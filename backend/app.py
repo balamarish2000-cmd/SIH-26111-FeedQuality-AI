@@ -24,6 +24,15 @@ from flask_cors import CORS
 import pandas as pd
 import numpy as np
 
+# ---------------------------------------------------------------------------
+# App setup (initialized early so serverless runtime never fails import)
+# ---------------------------------------------------------------------------
+app = Flask(__name__)
+CORS(app)
+
+MAX_UPLOAD_MB = int(os.environ.get("MAX_UPLOAD_SIZE_MB", 5))
+app.config["MAX_CONTENT_LENGTH"] = MAX_UPLOAD_MB * 1024 * 1024
+
 # Ensure current directory and ML directory are in sys.path
 CURRENT_DIR = Path(__file__).resolve().parent
 if str(CURRENT_DIR) not in sys.path:
@@ -40,21 +49,19 @@ else:
 if str(ML_DIR) not in sys.path:
     sys.path.insert(0, str(ML_DIR))
 
-from predict import FeedQualityPredictor
-from common import FEATURE_COLUMNS
-
-from advisory import generate_advisory
-from qr_system import generate_qr, verify_qr, get_all_batches
-from image_analyzer import analyze_feed_image
-
-# ---------------------------------------------------------------------------
-# App setup
-# ---------------------------------------------------------------------------
-app = Flask(__name__)
-CORS(app)
-
-MAX_UPLOAD_MB = int(os.environ.get("MAX_UPLOAD_SIZE_MB", 5))
-app.config["MAX_CONTENT_LENGTH"] = MAX_UPLOAD_MB * 1024 * 1024
+init_error = None
+try:
+    import common
+    sys.modules["common"] = common
+    from predict import FeedQualityPredictor
+    from common import FEATURE_COLUMNS
+    from advisory import generate_advisory
+    from qr_system import generate_qr, verify_qr, get_all_batches
+    from image_analyzer import analyze_feed_image
+except Exception as e:
+    init_error = f"{type(e).__name__}: {str(e)}"
+    import traceback
+    traceback.print_exc()
 
 # Lazy-load ML models on first request to ensure instant container startup
 _predictor = None
@@ -135,10 +142,11 @@ def handle_global_exception(e):
 @app.route("/api/health", methods=["GET"])
 def health():
     return jsonify({
-        "status": "ok",
+        "status": "ok" if not init_error else "degraded",
         "service": "Feed Guard Platform",
         "version": "3.0.0",
-        "models_loaded": (ML_DIR / "models").exists(),
+        "init_error": init_error,
+        "models_loaded": (ML_DIR / "models").exists() if "ML_DIR" in globals() else False,
         "timestamp": datetime.now(timezone.utc).isoformat(),
     })
 
