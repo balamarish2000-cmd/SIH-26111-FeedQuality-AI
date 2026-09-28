@@ -180,6 +180,9 @@ export default {
     "live_sensor_data": "ಲೈವ್ ಸಂವೇದಕ ಡೇಟಾ",
     "latest_farmer_advisory": "ಇತ್ತೀಚಿನ ರೈತ ಸಲಹೆ",
     "feeding_recommendation": "ಆಹಾರ ಶಿಫಾರಸು",
+    "feeding_rec": "ಆಹಾರ ಶಿಫಾರಸು",
+    "storage_rec": "ಶೇಖರಣಾ ಶಿಫಾರಸು",
+    "no_risk_alert": "ಈ ಮಾದರಿಯಲ್ಲಿ ಯಾವುದೇ ರಾಸಾಯನಿಕ ಕಲಬೆರಕೆ ಕಂಡುಬಂದಿಲ್ಲ.",
     "storage_recommendation": "ಶೇಖರಣಾ ಶಿಫಾರಸು",
     "risk_alert": "ಅಪಾಯದ ಎಚ್ಚರಿಕೆ",
     "recommended_action": "ಶಿಫಾರಸು ಮಾಡಿದ ಕ್ರಮ",
@@ -892,6 +895,7 @@ export default {
   "advisory_adulteration": {
     "detected_headline": "Adulterant Alert: {{adulterant}} detected.",
     "clean_headline": "ಈ ಮಾದರಿಯಲ್ಲಿ ಯಾವುದೇ ರಾಸಾಯನಿಕ ಕಲಬೆರಕೆ ಕಂಡುಬಂದಿಲ್ಲ.",
+    "safe_summary": "ಕೃತಕ ಅಥವಾ ಅಜೈವಿಕ ಕಲಬೆರಕೆಯಿಂದ ಸಂಪೂರ್ಣ ಮುಕ್ತ.",
     "clean_remedy": "ಕೃತಕ ಅಥವಾ ಅಜೈವಿಕ ಕಲಬೆರಕೆಯಿಂದ ಸಂಪೂರ್ಣ ಮುಕ್ತ.",
     "remediation_1": "Immediately withhold and isolate this batch from all livestock.",
     "remediation_2": "Retain sample bag for batch verification and supplier complaint.",

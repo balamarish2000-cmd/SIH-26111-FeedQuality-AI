@@ -180,6 +180,9 @@ export default {
     "live_sensor_data": "LIVE SENSOR DATA",
     "latest_farmer_advisory": "Latest Farmer Advisory",
     "feeding_recommendation": "Feeding Recommendation",
+    "feeding_rec": "Feeding Recommendation",
+    "storage_rec": "Storage Recommendation",
+    "no_risk_alert": "All measured safety indicators within standard limits.",
     "storage_recommendation": "Storage Recommendation",
     "risk_alert": "Risk Alert",
     "recommended_action": "Recommended Action",
@@ -880,6 +883,7 @@ export default {
   "advisory_adulteration": {
     "detected_headline": "Adulterant Alert: {{adulterant}} detected.",
     "clean_headline": "No chemical adulterants detected in this sample.",
+    "safe_summary": "No synthetic nitrogen spike (urea), mineral dust adulteration, or toxic mycotoxins detected in this batch.",
     "clean_remedy": "Safe from synthetic or inorganic adulteration.",
     "remediation_1": "Immediately withhold and isolate this batch from all livestock.",
     "remediation_2": "Retain sample bag for batch verification and supplier complaint.",

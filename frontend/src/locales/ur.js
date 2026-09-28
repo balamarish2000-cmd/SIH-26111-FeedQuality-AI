@@ -180,6 +180,9 @@ export default {
     "live_sensor_data": "لائیو سینسر ڈیٹا",
     "latest_farmer_advisory": "تازہ ترین کسان ایڈوائزری",
     "feeding_recommendation": "خوراک کی سفارش",
+    "feeding_rec": "خوراک کی سفارش",
+    "storage_rec": "اسٹوریج کی سفارش",
+    "no_risk_alert": "اس نمونے میں کوئی کیمیائی ملاوٹ نہیں پائی گئی۔",
     "storage_recommendation": "اسٹوریج کی سفارش",
     "risk_alert": "خطرہ الرٹ",
     "recommended_action": "تجویز کردہ کارروائی",
@@ -892,6 +895,7 @@ export default {
   "advisory_adulteration": {
     "detected_headline": "Adulterant Alert: {{adulterant}} detected.",
     "clean_headline": "اس نمونے میں کوئی کیمیائی ملاوٹ نہیں پائی گئی۔",
+    "safe_summary": "مصنوعی یا غیر نامیاتی ملاوٹ سے مکمل طور پر محفوظ۔",
     "clean_remedy": "مصنوعی یا غیر نامیاتی ملاوٹ سے مکمل طور پر محفوظ۔",
     "remediation_1": "Immediately withhold and isolate this batch from all livestock.",
     "remediation_2": "Retain sample bag for batch verification and supplier complaint.",

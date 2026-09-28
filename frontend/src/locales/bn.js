@@ -180,6 +180,9 @@ export default {
     "live_sensor_data": "লাইভ সেন্সর ডেটা",
     "latest_farmer_advisory": "সর্বশেষ কৃষক পরামর্শ",
     "feeding_recommendation": "খাদ্য সুপারিশ",
+    "feeding_rec": "খাদ্য সুপারিশ",
+    "storage_rec": "সংরক্ষণ সুপারিশ",
+    "no_risk_alert": "এই নমুনায় কোনো রাসায়নিক ভেজাল শনাক্ত হয়নি।",
     "storage_recommendation": "সংরক্ষণ সুপারিশ",
     "risk_alert": "ঝুঁকি সতর্কতা",
     "recommended_action": "প্রস্তাবিত পদক্ষেপ",
@@ -892,6 +895,7 @@ export default {
   "advisory_adulteration": {
     "detected_headline": "Adulterant Alert: {{adulterant}} detected.",
     "clean_headline": "এই নমুনায় কোনো রাসায়নিক ভেজাল শনাক্ত হয়নি।",
+    "safe_summary": "সিন্থেটিক বা অজৈব ভেজাল থেকে সম্পূর্ণ নিরাপদ।",
     "clean_remedy": "সিন্থেটিক বা অজৈব ভেজাল থেকে সম্পূর্ণ নিরাপদ।",
     "remediation_1": "Immediately withhold and isolate this batch from all livestock.",
     "remediation_2": "Retain sample bag for batch verification and supplier complaint.",

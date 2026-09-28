@@ -479,7 +479,7 @@ export default function Dashboard() {
                 {/* Storage Recommendation */}
                 <div>
                   <strong style={{ fontSize: '0.75rem', color: 'var(--text-primary)', textTransform: 'uppercase', letterSpacing: '0.03em' }}>
-                    {t('dashboard.storage_rec', 'Storage Recommendation')}:
+                    {t('dashboard.storage_recommendation', t('dashboard.storage_rec', 'Storage Recommendation'))}:
                   </strong>
                   <div style={{ fontSize: '0.84rem', color: 'var(--text-secondary)', marginTop: 2, lineHeight: 1.45 }}>
                     {latestReport?.advisory?.storage_recommendation || t('advisory_storage.stable', 'Store feed sacks on elevated wooden pallets in a cool, well-ventilated dry space.')}
@@ -499,7 +499,7 @@ export default function Dashboard() {
                   }}>
                     {latestReport?.adulteration_type && latestReport.adulteration_type !== 'None'
                       ? `${t('analyze.adulteration_flagged')}: ${getAdulterantName(t, latestReport.adulteration_type)}`
-                      : t('dashboard.no_risk_alert', 'All measured safety indicators within standard limits.')}
+                      : t('advisory_adulteration.clean_headline', t('dashboard.no_risk_alert', 'All measured safety indicators within standard limits.'))}
                   </div>
                 </div>
 

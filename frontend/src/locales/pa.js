@@ -180,6 +180,9 @@ export default {
     "live_sensor_data": "ਲਾਈਵ ਸੈਂਸਰ ਡਾਟਾ",
     "latest_farmer_advisory": "ਤਾਜ਼ਾ ਕਿਸਾਨ ਸਲਾਹ",
     "feeding_recommendation": "ਖੁਰਾਕ ਸਿਫ਼ਾਰਸ਼",
+    "feeding_rec": "ਖੁਰਾਕ ਸਿਫ਼ਾਰਸ਼",
+    "storage_rec": "ਸਟੋਰੇਜ ਸਿਫ਼ਾਰਸ਼",
+    "no_risk_alert": "ਇਸ ਨਮੂਨੇ ਵਿੱਚ ਕੋਈ ਰਸਾਇਣਕ ਮਿਲਾਵਟ ਨਹੀਂ ਪਾਈ ਗਈ।",
     "storage_recommendation": "ਸਟੋਰੇਜ ਸਿਫ਼ਾਰਸ਼",
     "risk_alert": "ਖ਼ਤਰਾ ਚੇਤਾਵਨੀ",
     "recommended_action": "ਸਿਫ਼ਾਰਸ਼ ਕੀਤੀ ਕਾਰਵਾਈ",
@@ -892,6 +895,7 @@ export default {
   "advisory_adulteration": {
     "detected_headline": "Adulterant Alert: {{adulterant}} detected.",
     "clean_headline": "ਇਸ ਨਮੂਨੇ ਵਿੱਚ ਕੋਈ ਰਸਾਇਣਕ ਮਿਲਾਵਟ ਨਹੀਂ ਪਾਈ ਗਈ।",
+    "safe_summary": "ਸਿੰਥੈਟਿਕ ਜਾਂ ਅਕਾਰਬਨਿਕ ਮਿਲਾਵਟ ਤੋਂ ਬਿਲਕੁਲ ਸੁਰੱਖਿਅਤ।",
     "clean_remedy": "ਸਿੰਥੈਟਿਕ ਜਾਂ ਅਕਾਰਬਨਿਕ ਮਿਲਾਵਟ ਤੋਂ ਬਿਲਕੁਲ ਸੁਰੱਖਿਅਤ।",
     "remediation_1": "Immediately withhold and isolate this batch from all livestock.",
     "remediation_2": "Retain sample bag for batch verification and supplier complaint.",

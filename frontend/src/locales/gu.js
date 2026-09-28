@@ -180,6 +180,9 @@ export default {
     "live_sensor_data": "લાઇવ સેન્સર ડેટા",
     "latest_farmer_advisory": "નવીનતમ ખેડૂત સલાહ",
     "feeding_recommendation": "આહાર ભલામણ",
+    "feeding_rec": "આહાર ભલામણ",
+    "storage_rec": "સંગ્રહ ભલામણ",
+    "no_risk_alert": "આ નમૂનામાં કોઈ રાસાયણિક ભેળસેળ જોવા મળી નથી.",
     "storage_recommendation": "સંગ્રહ ભલામણ",
     "risk_alert": "જોખમ ચેતવણી",
     "recommended_action": "ભલામણ કરેલ પગલાં",
@@ -893,6 +896,7 @@ export default {
   "advisory_adulteration": {
     "detected_headline": "Adulterant Alert: {{adulterant}} detected.",
     "clean_headline": "આ નમૂનામાં કોઈ રાસાયણિક ભેળસેળ જોવા મળી નથી.",
+    "safe_summary": "કૃત્રિમ કે અકાર્બનિક ભેળસેળથી સંપૂર્ણ સુરક્ષિત.",
     "clean_remedy": "કૃત્રિમ કે અકાર્બનિક ભેળસેળથી સંપૂર્ણ સુરક્ષિત.",
     "remediation_1": "Immediately withhold and isolate this batch from all livestock.",
     "remediation_2": "Retain sample bag for batch verification and supplier complaint.",

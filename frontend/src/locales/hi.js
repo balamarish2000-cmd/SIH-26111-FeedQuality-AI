@@ -180,6 +180,9 @@ export default {
     "live_sensor_data": "लाइव सेंसर डेटा",
     "latest_farmer_advisory": "नवीनतम किसान परामर्श",
     "feeding_recommendation": "खुराक अनुशंसा",
+    "feeding_rec": "खुराक अनुशंसा",
+    "storage_rec": "भंडारण अनुशंसा",
+    "no_risk_alert": "इस नमूने में कोई रासायनिक या अकार्बनिक मिलावट नहीं पाई गई।",
     "storage_recommendation": "भंडारण अनुशंसा",
     "risk_alert": "जोखिम चेतावनी",
     "recommended_action": "अनुशंसित कार्रवाई",
@@ -880,6 +883,7 @@ export default {
   "advisory_adulteration": {
     "detected_headline": "मिलावट चेतावनी: {{adulterant}} पाया गया है।",
     "clean_headline": "इस नमूने में कोई रासायनिक या अकार्बनिक मिलावट नहीं पाई गई।",
+    "safe_summary": "सिंथेटिक अथवा अकार्बनिक मिलावट से पूरी तरह सुरक्षित।",
     "clean_remedy": "सिंथेटिक अथवा अकार्बनिक मिलावट से पूरी तरह सुरक्षित।",
     "remediation_1": "इस बैच को तुरंत रोकें और सभी पशुओं से दूर रखें।",
     "remediation_2": "आपूर्तिकर्ता शिकायत और सत्यापन के लिए नमूना सुरक्षित रखें।",

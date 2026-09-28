@@ -180,6 +180,9 @@ export default {
     "live_sensor_data": "లైవ్ సెన్సార్ డేటా",
     "latest_farmer_advisory": "తాజా రైతు సలహా",
     "feeding_recommendation": "దాణా సిఫార్సు",
+    "feeding_rec": "దాణా సిఫార్సు",
+    "storage_rec": "నిల్వ సిఫార్సు",
+    "no_risk_alert": "ఈ నమూనాలో ఎటువంటి రసాయన కల్తీలు కనుగొనబడలేదు.",
     "storage_recommendation": "నిల్వ సిఫార్సు",
     "risk_alert": "ప్రమాద హెచ్చరిక",
     "recommended_action": "సిఫార్సు చేసిన చర్య",
@@ -880,6 +883,7 @@ export default {
   "advisory_adulteration": {
     "detected_headline": "కల్తీ హెచ్చరిక: {{adulterant}} కనుగొనబడింది.",
     "clean_headline": "ఈ నమూనాలో ఎటువంటి రసాయన కల్తీలు కనుగొనబడలేదు.",
+    "safe_summary": "రసాయన లేదా అకర్బన కల్తీల నుండి పూర్తిగా సురక్షితం.",
     "clean_remedy": "రసాయన లేదా అకర్బన కల్తీల నుండి పూర్తిగా సురక్షితం.",
     "remediation_1": "ఈ బ్యాచ్‌ను పశువులకు తినిపించకుండా వెంటనే వేరు చేయండి.",
     "remediation_2": "ఫిర్యాదు మరియు ధృవీకరణ కోసం నమూనా సంచిని దాచండి.",

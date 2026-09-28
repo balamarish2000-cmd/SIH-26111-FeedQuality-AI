@@ -180,6 +180,9 @@ export default {
     "live_sensor_data": "लाइव्ह सेन्सर डेटा",
     "latest_farmer_advisory": "नवीनतम शेतकरी सल्ला",
     "feeding_recommendation": "खुराक शिफारस",
+    "feeding_rec": "खुराक शिफारस",
+    "storage_rec": "साठवणूक शिफारस",
+    "no_risk_alert": "या नमुन्यात कोणतीही रासायनिक अथवा अकार्बनिक भेसळ आढळली नाही.",
     "storage_recommendation": "साठवणूक शिफारस",
     "risk_alert": "धोका इशारा",
     "recommended_action": "शिफारस केलेली कृती",
@@ -880,6 +883,7 @@ export default {
   "advisory_adulteration": {
     "detected_headline": "भेसळ इशारा: {{adulterant}} आढळले आहे.",
     "clean_headline": "या नमुन्यात कोणतीही रासायनिक अथवा अकार्बनिक भेसळ आढळली नाही.",
+    "safe_summary": "सिंथेटिक किंवा अकार्बनिक भेसळीपासून पूर्णपणे सुरक्षित.",
     "clean_remedy": "सिंथेटिक किंवा अकार्बनिक भेसळीपासून पूर्णपणे सुरक्षित.",
     "remediation_1": "हा साठा तात्काळ थांबवा आणि जनावरांपासून दूर ठेवा.",
     "remediation_2": "तक्रार व तपासणीसाठी नमुना पिशवी सुरक्षित ठेवा.",

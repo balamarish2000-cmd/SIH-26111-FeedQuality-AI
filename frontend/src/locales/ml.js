@@ -180,6 +180,9 @@ export default {
     "live_sensor_data": "തത്സമയ സെൻസർ ഡാറ്റ",
     "latest_farmer_advisory": "ഏറ്റവും പുതിയ കർഷക ഉപദേശം",
     "feeding_recommendation": "തീറ്റ നിർദ്ദേശം",
+    "feeding_rec": "തീറ്റ നിർദ്ദേശം",
+    "storage_rec": "സംഭരണ നിർദ്ദേശം",
+    "no_risk_alert": "ഈ സാമ്പിളിൽ രാസമാലിന്യങ്ങളോ മായങ്ങളോ കണ്ടെത്തിയിട്ടില്ല.",
     "storage_recommendation": "സംഭരണ നിർദ്ദേശം",
     "risk_alert": "അപകട മുന്നറിയിപ്പ്",
     "recommended_action": "ശുപാർശ ചെയ്യുന്ന നടപടി",
@@ -892,6 +895,7 @@ export default {
   "advisory_adulteration": {
     "detected_headline": "Adulterant Alert: {{adulterant}} detected.",
     "clean_headline": "ഈ സാമ്പിളിൽ രാസമാലിന്യങ്ങളോ മായങ്ങളോ കണ്ടെത്തിയിട്ടില്ല.",
+    "safe_summary": "കൃത്രിമ അല്ലെങ്കിൽ അജൈവ മാലിന്യങ്ങളിൽ നിന്ന് സുരക്ഷിതം.",
     "clean_remedy": "കൃത്രിമ അല്ലെങ്കിൽ അജൈവ മാലിന്യങ്ങളിൽ നിന്ന് സുരക്ഷിതം.",
     "remediation_1": "Immediately withhold and isolate this batch from all livestock.",
     "remediation_2": "Retain sample bag for batch verification and supplier complaint.",
