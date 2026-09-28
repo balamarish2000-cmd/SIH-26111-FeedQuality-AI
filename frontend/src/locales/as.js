@@ -182,15 +182,16 @@ export default {
     "feeding_recommendation": "খাদ্য পৰামৰ্শ",
     "feeding_rec": "খাদ্য পৰামৰ্শ",
     "storage_rec": "সংৰক্ষণ পৰামৰ্শ",
-    "no_risk_alert": "এই নমুনাত কোনো ৰাসায়নিক ভেজাল ধৰা পৰা নাই।",
+    "no_risk_alert": "সকলো পৰিমাপ কৰা সুৰক্ষা সূচক মানক সীমাৰ ভিতৰত আছে।",
     "storage_recommendation": "সংৰক্ষণ পৰামৰ্শ",
-    "risk_alert": "বিপদ সতৰ্কবাণী",
+    "risk_alert": "সুৰক্ষা সতৰ্কবাণী",
     "recommended_action": "পৰামৰ্শিত পদক্ষেপ",
     "save_result_btn": "ফলাফল সংৰক্ষণ কৰক",
     "saved_to_records": "পৰীক্ষা আপোনাৰ কৃষক ৰেকৰ্ডত সংৰক্ষিত কৰা হৈছে।",
     "no_tests_yet": "এতিয়ালৈকে কোনো পৰীক্ষা কৰা হোৱা নাই।",
     "start_first_feed_test": "আপোনাৰ প্ৰথম খাদ্য পৰীক্ষা আৰম্ভ কৰক",
-    "explore_sample_analysis": "নমুনা বিশ্লেষণ চাওক"
+    "explore_sample_analysis": "নমুনা বিশ্লেষণ চাওক",
+    "safety_alert": "সুৰক্ষা সতৰ্কবাণী"
   },
   "analyze": {
     "title": "AI দ্ৰুত গো-খাদ্য মান আৰু সুৰক্ষা পৰীক্ষা",
@@ -770,71 +771,71 @@ export default {
     "unsafe": "বিপদজনক ভেজাল বা বিষাক্ত উপাদান চিনাক্ত হৈছে! পশুৰ খোৱা তৎক্ষণাত বন্ধ কৰক আৰু ডাক্তৰৰ পৰামৰ্শ লওক।"
   },
   "advisory_feeding": {
-    "normal": "Feed in standard daily proportions alongside 20–25 kg fresh green fodder and clean ad-lib drinking water.",
-    "compensate": "Do not feed as sole ration. Compensate with 1–2 kg quality concentrate pellet and bypass protein.",
+    "normal": "২০-২৫ কেজি সতেজ সেউজীয়া ঘাঁহ আৰু পৰিষ্কাৰ খোৱাপানীৰ সৈতে নিয়মীয়া মাত্ৰাত যোগান ধৰক।",
+    "compensate": "কেৱল এইটোৱেই একমাত্ৰ খাদ্য হিচাপে নিদিব। ১-২ কেজি উন্নত দানা আৰু বাইপাছ প্ৰ'টিন দি সমন্বয় কৰক।",
     "lactating": "গাখীৰতী গাইক ১৫–২০ কেজি কেঁচা ঘাঁহ, ৪ কেজি শুকান খেৰ আৰু প্ৰতি ২.৫ লিটাৰ গাখীৰৰ বাবে ১ কেজি সুষম দানা দিয়ক।",
     "dry": "গাভিনী গাইক শুকান ঘাঁহৰ সৈতে ১.৫–২ কেজি দানা আৰু ৫০ গ্ৰাম মিনাৰেল মিশ্ৰণ দিয়ক।",
-    "good": "দৈনিক ২০–২৫ কেজি সতেজ কেঁচা ঘাঁহ আৰু ৪ কেজি শুকান খেৰৰ সৈতে সুষম অনুপাতত দিয়ক।",
-    "moderate": "দৈনিক ২০–২৫ কেজি সতেজ কেঁচা ঘাঁহ আৰু ৪ কেজি শুকান খেৰৰ সৈতে সুষম অনুপাতত দিয়ক।",
-    "poor": "ইয়াক একমাত্ৰ খাদ্য হিচাপে নিদিব। গাখীৰ উৎপাদন অক্ষুণ্ণ ৰাখিবলৈ ১–২ কেজি উন্নত দানা অতিৰিক্তভাৱে দিয়ক।",
-    "unsafe": "ইয়াক একমাত্ৰ খাদ্য হিচাপে নিদিব। গাখীৰ উৎপাদন অক্ষুণ্ণ ৰাখিবলৈ ১–২ কেজি উন্নত দানা অতিৰিক্তভাৱে দিয়ক।",
-    "critical": "ইয়াক একমাত্ৰ খাদ্য হিচাপে নিদিব। গাখীৰ উৎপাদন অক্ষুণ্ণ ৰাখিবলৈ ১–২ কেজি উন্নত দানা অতিৰিক্তভাৱে দিয়ক।"
+    "good": "২০-২৫ কেজি সতেজ সেউজীয়া ঘাঁহ আৰু পৰিষ্কাৰ খোৱাপানীৰ সৈতে নিয়মীয়া মাত্ৰাত যোগান ধৰক।",
+    "moderate": "২০-২৫ কেজি সতেজ সেউজীয়া ঘাঁহ আৰু পৰিষ্কাৰ খোৱাপানীৰ সৈতে নিয়মীয়া মাত্ৰাত যোগান ধৰক।",
+    "poor": "কেৱল এইটোৱেই একমাত্ৰ খাদ্য হিচাপে নিদিব। ১-২ কেজি উন্নত দানা যোগ কৰক।",
+    "unsafe": "এই খাদ্য দিয়া বন্ধ কৰক আৰু পৃথক কৰক।",
+    "critical": "এই খাদ্য দিয়া বন্ধ কৰক আৰু পৃথক কৰক।"
   },
   "advisory_storage": {
-    "spoiled": "গুৰুতৰ নষ্ট হোৱাৰ আশংকা: লগে লগে পৃথক কৰক আৰু আৰ্দ্ৰতা পৰীক্ষা কৰক।",
-    "stable": "খাদ্যৰ বস্তাবোৰ শুকান আৰু বতাহ চলাচল কৰা স্থানত কাঠৰ তক্তাৰ ওপৰত ৰাখক।",
+    "spoiled": "গুৰুতৰ নষ্ট হোৱাৰ আশংকা: লগে লগে বেচটো পৃথক কৰক আৰু আৰ্দ্ৰতা পৰীক্ষা কৰক।",
+    "stable": "খাদ্যৰ বস্তাবোৰ ঠাণ্ডা, বায়ু চলাচল কৰা শুকান ঠাইত কাঠৰ তক্তাৰ ওপৰত ৰাখক।",
     "dry_feed": "বস্তা মজিয়াৰ পৰা ১৫ চেমি ওপৰত কাঠৰ তক্তাত ঠাণ্ডা আৰু শুকান ঠাইত ৰাখক।",
     "silage": "চাইলেজৰ গাঁত বায়ুনীৰোধক কৰি ৰাখক। উষ্ণতা ২৮°C তকৈ বেছি হ'লে তৎকালীনভাৱে পৰীক্ষা কৰক।",
-    "critical": "মাৰাত্মক পচন সতৰ্কবাণী: ভেকুৰৰ আক্ৰমণ বা জৈৱিক পচন ধৰা পৰিছে। ক্ষতিগ্ৰস্ত খাদ্য তৎকালীনভাৱে আঁতৰাওক আৰু আৰ্দ্ৰতা নিয়ন্ত্ৰণ কৰক।",
-    "normal": "সংৰক্ষণৰ অৱস্থা স্থিৰ আছে। ভেকুৰ প্ৰতিৰোধ কৰিবলৈ বৰ্তমানৰ আৰ্দ্ৰতা আৰু উষ্ণতা নিয়ন্ত্ৰণ বজাই ৰাখক।",
-    "tip_pallets": "Store feed sacks on wooden pallets at least 15 cm off damp concrete floors.",
-    "tip_ventilation": "Maintain dry, rodent-proof shed ventilation with ambient temperatures below 28°C.",
-    "tip_silage": "Ensure sealed silage or storage units have airtight covers with no punctures or loose edges.",
-    "tip_fifo": "Practice First-In, First-Out (FIFO) stock rotation to prevent aging."
+    "critical": "গুৰুতৰ নষ্ট হোৱাৰ সতৰ্কবাণী: জৈৱিক অৱক্ষয় বা ভেঁকুৰৰ বৃদ্ধি ধৰা পৰিছে। বিষাক্ত মাইক'টক্সিনৰ উচ্চ আশংকা।",
+    "normal": "সংৰক্ষণৰ পৰিমাপ স্থিৰ। বৰ্তমানৰ আৰ্দ্ৰতা আৰু উষ্ণতা নিৰীক্ষণ অব্যাহত ৰাখক।",
+    "tip_pallets": "সেমেকা মজিয়াৰ পৰা কমেও ১৫ চে.মি. ওপৰত কাঠৰ তক্তাত খাদ্যৰ বস্তাবোৰ ৰাখক।",
+    "tip_ventilation": "২৮°C তকৈ কম উষ্ণতাৰ সৈতে শুকান, নিগনি প্ৰতিৰোধী গোহালিৰ বায়ু চলাচল নিশ্চিত কৰক।",
+    "tip_silage": "চাইলেজ বা সংৰক্ষণ ইউনিটবোৰত কোনো ফুটা নথকা বায়ুৰোধী ঢাকনি থকাটো নিশ্চিত কৰক।",
+    "tip_fifo": "খাদ্য পুৰণি হোৱাৰ পৰা ৰক্ষা কৰিবলৈ প্ৰথমে-অহা, প্ৰথমে-ব্যৱহাৰ (FIFO) পদ্ধতি অনুসৰণ কৰক।"
   },
   "advisory_action": {
     "critical": {
-      "headline": "Immediate Feed Quarantine",
-      "primary": "Do not feed this batch to any dairy cattle or calves.",
-      "step_0": "Immediately isolate and tag this batch to prevent accidental feeding.",
-      "step_1": "Retain a sealed sample bag for laboratory verification.",
-      "step_2": "Notify your feed supplier and local veterinary officer.",
-      "step_3": "Consult your local veterinary doctor if cattle have already consumed this feed."
+      "headline": "খাদ্য লগে লগে পৃথক কৰক",
+      "primary": "এই বেচ কোনো গাইগৰু বা পোৱালিক খাবলৈ নিদিব।",
+      "step_0": "ভুলবশতঃ খুওৱাৰ পৰা হাত সাৰিবলৈ এই বেচটো লগে লগে আঁতৰাওক।",
+      "step_1": "পৰীক্ষাগাৰৰ পৰীক্ষাৰ বাবে ছীল কৰা নমুনা বেগ সংৰক্ষণ কৰক।",
+      "step_2": "যোগানকৰ্তা আৰু স্থানীয় পশু চিকিৎসকক অৱগত কৰক।",
+      "step_3": "পশুধনে ইতিমধ্যে এই খাদ্য খাইছে যদি চিকিৎসকৰ পৰামৰ্শ লওক।"
     },
     "poor": {
-      "headline": "CAUTION: BLEND OR SUPPLEMENT BEFORE FEEDING",
-      "primary": "Feed quality is below standard. Do not use as sole feed source.",
-      "step_0": "Limit this feed to dry stock or non-milking cows; avoid giving to high-yield lactating cows.",
-      "step_1": "Blend with 50% high-grade concentrate or fresh leguminous green fodder.",
-      "step_2": "Add 50g commercial mineral mixture per animal daily to offset nutritional deficiency.",
-      "step_3": "Retest next delivery batch to ensure supplier meets quality specifications."
+      "headline": "সতৰ্কবাণী: খুওৱাৰ আগতে মিশ্ৰণ কৰক বা পৰিপূৰক যোগ কৰক",
+      "primary": "খাদ্যৰ মানদণ্ড কম। কেৱল এইটোৱেই একমাত্ৰ খাদ্য হিচাপে ব্যৱহাৰ নকৰিব।",
+      "step_0": "গাখীৰ নিদিয়া গাইৰ বাবে সীমিত কৰক।",
+      "step_1": "৫০% উচ্চমানৰ দানা বা সতেজ সেউজীয়া ঘাঁহৰ সৈতে মিহলাওক।",
+      "step_2": "পুষ্টিৰ ঘাটি পূৰণ কৰিবলৈ দৈনিক প্ৰতিটো পশুক ৫০ গ্ৰাম খনিজ মিশ্ৰণ দিয়ক।",
+      "step_3": "পৰৱৰ্তী যোগানৰ মান পৰীক্ষা কৰিবলৈ পুনৰ পৰীক্ষা কৰক।"
     },
     "moderate": {
-      "headline": "Ration Balancing Required",
-      "primary": "Adjust concentrate proportions and supplement with mineral mixture.",
-      "step_0": "Do not feed as sole concentrate source.",
-      "step_1": "Add 50–100g approved mineral mixture per cow daily.",
-      "step_2": "Re-inspect batch after 7 days of storage."
+      "headline": "খাদ্যৰ সমতা ৰক্ষা কৰা প্ৰয়োজন",
+      "primary": "দানাৰ পৰিমাণ ঠিক কৰক আৰু খনিজ মিশ্ৰণ যোগ কৰক।",
+      "step_0": "কেৱল এইটোৱেই একমাত্ৰ দানাৰ উৎস হিচাপে নিদিব।",
+      "step_1": "প্ৰতিজনী গাইক দৈনিক ৫০-১০০ গ্ৰাম অনুমোদিত খনিজ মিশ্ৰণ দিয়ক।",
+      "step_2": "৭ দিন সংৰক্ষণৰ পিছত বেচটো পুনৰ পৰীক্ষা কৰক।"
     },
     "good": {
-      "headline": "Standard Feeding Protocol",
-      "primary": "Feed directly according to standard daily ration balance.",
-      "step_0": "Maintain clean, ad-lib drinking water access.",
-      "step_1": "Combine with 15–20 kg green fodder for optimal rumen digestion.",
-      "step_2": "Store bags off concrete floors in a dry, ventilated shed.",
-      "step_3": "Monitor milk yield and butterfat percentage regularly."
+      "headline": "মানক খাদ্য ব্যৱস্থা",
+      "primary": "দৈনিক সুষম অনুপাত অনুসৰি পোনপটীয়াকৈ গৰুক খুৱাওক।",
+      "step_0": "পৰিষ্কাৰ খোৱাপানী সদায় উপলব্ধ ৰাখক।",
+      "step_1": "ভাল হজমৰ বাবে ১৫-২০ কেজি সেউজীয়া ঘাঁহৰ সৈতে মিহলাওক।",
+      "step_2": "বস্তাবোৰ শুকান, বায়ু চলাচল কৰা ঠাইত মজিয়াৰ পৰা ওপৰত ৰাখক।",
+      "step_3": "গাখীৰ উৎপাদন আৰু চৰ্বিৰ পৰিমাণ নিয়মীয়াকৈ নিৰীক্ষণ কৰক।"
     },
     "good_headline": "উৎকৃষ্ট মান — গাখীৰতী পশুৰ বাবে নিৰাপদ",
     "moderate_headline": "মজলীয়া মান — পুষ্টিৰ সমন্বয় প্ৰয়োজন",
     "poor_headline": "বেয়া মান — সাৱধানে ব্যৱহাৰ কৰক",
     "unsafe_headline": "অসুৰক্ষিত — তৎক্ষণাত খুওৱা বন্ধ কৰক!",
     "unsafe": {
-      "headline": "ACTION REQUIRED: DO NOT FEED — ISOLATE BATCH",
-      "primary": "STOP feeding this batch immediately. Quarantine the sack or storage unit.",
-      "step_0": "Immediately stop offering this feed to cattle, calves, or pregnant cows.",
-      "step_1": "Physically isolate affected bags to prevent accidental herd feeding.",
-      "step_2": "Document the Batch ID using the certified QR code for supplier replacement claim.",
-      "step_3": "Consult your local veterinary doctor if cattle have already consumed this feed."
+      "headline": "পদক্ষেপ প্ৰয়োজন: খাবলৈ নিদিব — বেচ পৃথক কৰক",
+      "primary": "এই বেচ খুওৱা লগে লগে বন্ধ কৰক। বস্তা বা সংৰক্ষণ ইউনিট পৃথক কৰক।",
+      "step_0": "গাইগৰু, পোৱালি বা গাভিনী গৰুক দিয়া লগে লগে বন্ধ কৰক।",
+      "step_1": "ভুলবশতঃ খুওৱাৰ পৰা ৰক্ষা কৰিবলৈ বস্তাবোৰ সুকীয়াকৈ ৰাখক।",
+      "step_2": "যোগানকৰ্তাৰ ওচৰত দাবীৰ বাবে কিউআৰ ক'ড ব্যৱহাৰ কৰি বেচ আইডি সংৰক্ষণ কৰক।",
+      "step_3": "পশুধনে ইতিমধ্যে এই খাদ্য খাইছে যদি চিকিৎসকৰ পৰামৰ্শ লওক।"
     }
   },
   "regions": {
@@ -886,19 +887,34 @@ export default {
     "save_settings_btn": "ছেটিংছ সংৰক্ষণ কৰক"
   },
   "advisory_nutrition": {
-    "all_balanced": "সকলো পুষ্টি সূচক (প্ৰ'টিন, আৰ্দ্ৰতা, আঁহ, শক্তি) NDDB মানৰ ভিতৰত সুৰক্ষিত।",
-    "low_nutrient": "Low {{nutrient}}: currently {{value}} {{unit}} (ideal: {{min}}–{{max}} {{unit}}).",
-    "high_nutrient": "High {{nutrient}}: currently {{value}} {{unit}} (ideal: {{min}}–{{max}} {{unit}}).",
-    "status_balanced": "সুষম",
-    "status_attention": "মনোযোগ দিয়া প্ৰয়োজন"
+    "all_balanced": "সকলো পৰিমাপ কৰা পুষ্টি সূচক (প্ৰ'টিন, আৰ্দ্ৰতা, আঁহ, শক্তি) মানক NDDB সীমাৰ ভিতৰত আছে।",
+    "low_nutrient": "কম {{nutrient}}: বৰ্তমান {{value}} {{unit}} (আদৰ্শ: {{min}}–{{max}} {{unit}})।",
+    "high_nutrient": "বেছি {{nutrient}}: বৰ্তমান {{value}} {{unit}} (আদৰ্শ: {{min}}–{{max}} {{unit}})।",
+    "status_balanced": "ভাৰসাম্যপূৰ্ণ",
+    "status_attention": "মনোযোগৰ প্ৰয়োজন"
   },
   "advisory_adulteration": {
-    "detected_headline": "Adulterant Alert: {{adulterant}} detected.",
-    "clean_headline": "এই নমুনাত কোনো ৰাসায়নিক ভেজাল ধৰা পৰা নাই।",
-    "safe_summary": "কৃত্ৰিম বা অজৈৱিক ভেজালৰ পৰা সম্পূৰ্ণ সুৰক্ষিত।",
-    "clean_remedy": "কৃত্ৰিম বা অজৈৱিক ভেজালৰ পৰা সম্পূৰ্ণ সুৰক্ষিত।",
-    "remediation_1": "Immediately withhold and isolate this batch from all livestock.",
-    "remediation_2": "Retain sample bag for batch verification and supplier complaint.",
-    "remediation_3": "Notify local veterinary officer if animals show distress."
+    "detected_headline": "ভেজাল সতৰ্কবাণী: {{adulterant}} ধৰা পৰিছে।",
+    "clean_headline": "সকলো পৰিমাপ কৰা সুৰক্ষা সূচক মানক সীমাৰ ভিতৰত আছে।",
+    "safe_summary": "এই বেচটোত কোনো কৃত্ৰিম নাইট্ৰ'জেন বৃদ্ধি (ইউৰিয়া), খনিজ ধূলিৰ ভেজাল বা বিষাক্ত মাইক'টক্সিন ধৰা পৰা নাই।",
+    "clean_remedy": "এই বেচটোত কোনো কৃত্ৰিম নাইট্ৰ'জেন বৃদ্ধি (ইউৰিয়া), খনিজ ধূলিৰ ভেজাল বা বিষাক্ত মাইক'টক্সিন ধৰা পৰা নাই।",
+    "remediation_1": "লগে লগে এই বেচটো পশুধনৰ পৰা আঁতৰাই পৃথক কৰি ৰাখক।",
+    "remediation_2": "বেচ পৰীক্ষণ আৰু যোগানকৰ্তাৰ অভিযোগৰ বাবে নমুনা বেগটো সংৰক্ষণ কৰক।",
+    "remediation_3": "যদি জীৱ-জন্তুবোৰ অসুস্থ যেন লাগে তেন্তে স্থানীয় পশু চিকিৎসকক অৱগত কৰক।"
+  },
+  "nutrients": {
+    "protein": "প্ৰ'টিন",
+    "moisture": "আৰ্দ্ৰতা",
+    "fiber": "আঁহ",
+    "energy": "শক্তি",
+    "mineral": "খনিজ সূচক",
+    "urea": "ইউৰিয়া",
+    "sand": "বালু / ছিলিকা",
+    "aflatoxin": "এফ্লাটক্সিন",
+    "fungal": "ভেঁকুৰৰ লোড",
+    "mould": "ভেঁকুৰ সূচক",
+    "temperature": "উষ্ণতা",
+    "ph": "pH",
+    "depth": "নমুনাৰ গভীৰতা"
   }
 };

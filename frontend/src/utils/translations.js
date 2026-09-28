@@ -103,11 +103,60 @@ export const NUTRIENT_KEY_MAP = {
 };
 
 export function getNutrientLabel(t, key, fallbackLabel) {
-  const i18nKey = NUTRIENT_KEY_MAP[key];
-  if (i18nKey) {
-    return t('analyze.' + i18nKey, fallbackLabel || key);
+  if (!key && !fallbackLabel) return '';
+  const raw = String(key || fallbackLabel || '').trim();
+  const lower = raw.toLowerCase();
+
+  // Match known nutrient parameters directly to localized clean names
+  if (lower.includes('protein')) return t('nutrients.protein', 'Protein');
+  if (lower.includes('moist')) return t('nutrients.moisture', 'Moisture');
+  if (lower.includes('fiber') || lower.includes('fibre')) return t('nutrients.fiber', 'Fiber');
+  if (lower.includes('energy') || lower.includes('mcal')) return t('nutrients.energy', 'Energy');
+  if (lower.includes('urea')) return t('nutrients.urea', 'Urea');
+  if (lower.includes('sand') || lower.includes('silica')) return t('nutrients.sand', 'Sand / Silica');
+  if (lower.includes('aflatoxin')) return t('nutrients.aflatoxin', 'Aflatoxin');
+  if (lower.includes('fungal')) return t('nutrients.fungal', 'Fungal Load');
+  if (lower.includes('mould') || lower.includes('mold')) return t('nutrients.mould', 'Mould Index');
+  if (lower.includes('temp')) return t('nutrients.temperature', 'Temperature');
+  if (lower.includes('ph')) return t('nutrients.ph', 'pH');
+  if (lower.includes('depth')) return t('nutrients.depth', 'Sampling Depth');
+  if (lower.includes('mineral')) return t('nutrients.mineral', 'Mineral Index');
+
+  const cleanKey = lower.replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '');
+  return t('nutrients.' + cleanKey, t('analyze.' + cleanKey, fallbackLabel || key));
+}
+
+/**
+ * Localize feeding recommendation dynamically based on report quality status.
+ */
+export function getLocalizedFeedingTip(t, advisory, qualityStatus) {
+  const rawStatus = String(qualityStatus || advisory?.quality_status || 'Good').toLowerCase();
+  const tipKey = (rawStatus === 'good' || rawStatus === 'moderate') ? 'normal' : 'compensate';
+  return t(`advisory_feeding.${tipKey}`, advisory?.feeding_recommendation || advisory?.structured_advisory?.nutritional_guidance?.feeding_ration_tip || '');
+}
+
+/**
+ * Localize storage recommendation dynamically based on spoilage flag.
+ */
+export function getLocalizedStorageTip(t, advisory, spoilageFlag) {
+  const isSpoiled = spoilageFlag !== undefined && spoilageFlag !== null && spoilageFlag !== 0 && spoilageFlag !== '0';
+  return isSpoiled
+    ? t('advisory_storage.spoiled', 'Critical Spoilage Risk: Quarantine batch immediately and inspect storage humidity.')
+    : t('advisory_storage.stable', 'Store feed sacks on elevated wooden pallets in a cool, well-ventilated dry space.');
+}
+
+/**
+ * Localize farmer advisory / recommended action dynamically.
+ */
+export function getLocalizedFarmerAction(t, advisory, qualityStatus) {
+  const rawStatus = String(qualityStatus || advisory?.quality_status || 'Good').toLowerCase();
+  if (rawStatus === 'good') {
+    return t('analyze.action_good', t('advisory_action.good.primary', 'Feed directly according to standard daily ration balance.'));
   }
-  return fallbackLabel || key;
+  if (rawStatus === 'moderate') {
+    return t('analyze.action_moderate', t('advisory_action.moderate.primary', 'Adjust concentrate proportions and supplement with mineral mixture.'));
+  }
+  return t('analyze.action_unsafe', t('advisory_action.critical.primary', 'Do not feed this batch to any dairy cattle or calves.'));
 }
 
 /**

@@ -182,15 +182,16 @@ export default {
     "feeding_recommendation": "આહાર ભલામણ",
     "feeding_rec": "આહાર ભલામણ",
     "storage_rec": "સંગ્રહ ભલામણ",
-    "no_risk_alert": "આ નમૂનામાં કોઈ રાસાયણિક ભેળસેળ જોવા મળી નથી.",
+    "no_risk_alert": "બધા માપેલા સુરક્ષા સૂચકાંકો પ્રમાણભૂત મર્યાદામાં છે.",
     "storage_recommendation": "સંગ્રહ ભલામણ",
-    "risk_alert": "જોખમ ચેતવણી",
+    "risk_alert": "સુરક્ષા ચેતવણી",
     "recommended_action": "ભલામણ કરેલ પગલાં",
     "save_result_btn": "પરિણામ સાચવો",
     "saved_to_records": "પરીક્ષણ તમારા ખેડૂત રેકોર્ડમાં સાચવવામાં આવ્યું છે.",
     "no_tests_yet": "હજી સુધી કોઈ પરીક્ષણ નથી.",
     "start_first_feed_test": "તમારું પ્રથમ આહાર પરીક્ષણ શરૂ કરો",
-    "explore_sample_analysis": "નમૂના વિશ્લેષણ જુઓ"
+    "explore_sample_analysis": "નમૂના વિશ્લેષણ જુઓ",
+    "safety_alert": "સુરક્ષા ચેતવણી"
   },
   "analyze": {
     "title": "AI ઝડપી ખાણ ગુણવત્તા અને સલામતી તપાસ",
@@ -770,71 +771,71 @@ export default {
     "unsafe": "જોખમી ભેળસેળ અથવા ઝેરી તત્વો મળ્યા છે! પશુઓને ખવડાવવાનું તરત બંધ કરો અને ડોક્ટરની સલાહ લો."
   },
   "advisory_feeding": {
-    "normal": "Feed in standard daily proportions alongside 20–25 kg fresh green fodder and clean ad-lib drinking water.",
-    "compensate": "Do not feed as sole ration. Compensate with 1–2 kg quality concentrate pellet and bypass protein.",
+    "normal": "20–25 કિલો તાજા લીલા ઘાસચારા અને સ્વચ્છ પીવાના પાણી સાથે પ્રમાણભૂત દૈનિક માત્રામાં આપો.",
+    "compensate": "માત્ર આ જ ખોરાક તરીકે ન આપો. 1–2 કિલો ગુણવત્તાયુક્ત દાણ અને બાયપાસ પ્રોટીન ઉમેરીને સંતુલિત કરો.",
     "lactating": "દૂઝણી ગાયને ૧૫–૨૦ કિલો લીલો ચારો, ૪ કિલો સૂકો ચારો અને દર ૨.૫ લીટર દૂધ દીઠ ૧ કિલો દાણ આપો.",
     "dry": "વસૂકેલી ગાયોને સૂકા ઘાસ સાથે ૧.૫–૨ કિલો દાણ અને ૫૦ ગ્રામ મિનરલ મિશ્રણ આપો.",
-    "good": "રોજ ૨૦–૨૫ કિલો તાજા લીલા ચારા અને ૪ કિલો સૂકા ચારા સાથે સંતુલિત પ્રમાણમાં આપો.",
-    "moderate": "રોજ ૨૦–૨૫ કિલો તાજા લીલા ચારા અને ૪ કિલો સૂકા ચારા સાથે સંતુલિત પ્રમાણમાં આપો.",
-    "poor": "આને એકમાત્ર આહાર તરીકે ન આપો. દૂધનું પ્રમાણ જાળવવા ૧–૨ કિલો ઉચ્ચ ગુણવત્તાવાળો દાણ વધારાનો આપો.",
-    "unsafe": "આને એકમાત્ર આહાર તરીકે ન આપો. દૂધનું પ્રમાણ જાળવવા ૧–૨ કિલો ઉચ્ચ ગુણવત્તાવાળો દાણ વધારાનો આપો.",
-    "critical": "આને એકમાત્ર આહાર તરીકે ન આપો. દૂધનું પ્રમાણ જાળવવા ૧–૨ કિલો ઉચ્ચ ગુણવત્તાવાળો દાણ વધારાનો આપો."
+    "good": "20–25 કિલો તાજા લીલા ઘાસચારા અને સ્વચ્છ પીવાના પાણી સાથે પ્રમાણભૂત દૈનિક માત્રામાં આપો.",
+    "moderate": "20–25 કિલો તાજા લીલા ઘાસચારા અને સ્વચ્છ પીવાના પાણી સાથે પ્રમાણભૂત દૈનિક માત્રામાં આપો.",
+    "poor": "માત્ર આ જ ખોરાક તરીકે ન આપો. 1–2 કિલો ગુણવત્તાયુક્ત દાણ ઉમેરો.",
+    "unsafe": "માત્ર આ જ ખોરાક તરીકે ન આપો. તરત અલગ રાખો.",
+    "critical": "માત્ર આ જ ખોરાક તરીકે ન આપો. તરત અલગ રાખો."
   },
   "advisory_storage": {
-    "spoiled": "ગંભીર બગાડનું જોખમ: બેચને અલગ કરો અને ભેજ તપાસો.",
-    "stable": "ખાણની ગુણીઓને સૂકી અને હવાઉજાસવાળી જગ્યાએ લાકડાના પાટિયા પર રાખો.",
+    "spoiled": "ગંભીર બગાડનું જોખમ: તરત જ બેચને અલગ કરો અને સંગ્રહ ભેજ તપાસો.",
+    "stable": "ખાણની ગુણીઓને ઠંડી, સારી રીતે વેન્ટિલેટેડ સૂકી જગ્યાએ લાકડાના પ્લેટફોર્મ પર રાખો.",
     "dry_feed": "ગુણીઓને જમીનથી ૧૫ સેમી ઊંચી લાકડાની પટ્ટીઓ પર ઠંડી અને સૂકી જગ્યાએ રાખો.",
     "silage": "સાયલેજ ખાડો હવાચુસ્ત રાખો. તાપમાન ૨૮°C થી વધુ થાય તો તરત તપાસો.",
-    "critical": "ગંભીર બગાડ ચેતવણી: જૈવિક વિઘટન અથવા ફૂગ જોવા મળી છે. બગડેલો ખોરાક તરત જ અલગ કરો અને ભેજ નિયંત્રિત કરો.",
-    "normal": "સંગ્રહ પરિમાણો સ્થિર છે. ફૂગ અટકાવવા માટે હાલનું ભેજ અને તાપમાન નિયંત્રણ ચાલુ રાખો.",
-    "tip_pallets": "Store feed sacks on wooden pallets at least 15 cm off damp concrete floors.",
-    "tip_ventilation": "Maintain dry, rodent-proof shed ventilation with ambient temperatures below 28°C.",
-    "tip_silage": "Ensure sealed silage or storage units have airtight covers with no punctures or loose edges.",
-    "tip_fifo": "Practice First-In, First-Out (FIFO) stock rotation to prevent aging."
+    "critical": "ગંભીર બગાડ ચેતવણી: જૈવિક બગાડ અથવા ફૂગની વૃદ્ધિ જોવા મળી છે. ઝેરી માયકોટૉક્સિનનું ઊંચું જોખમ.",
+    "normal": "સંગ્રહ પરિમાણો સ્થિર છે. વર્તમાન ભેજ અને તાપમાનનું નિરીક્ષણ ચાલુ રાખો.",
+    "tip_pallets": "ખાણની ગુણીઓને ભીના ભોંયતળિયાથી ઓછામાં ઓછી 15 સેમી ઊંચી લાકડાની પેલેટ પર રાખો.",
+    "tip_ventilation": "28°C થી નીચેના તાપમાન સાથે સૂકી, ઉંદર-મુક્ત શેડ વેન્ટિલેશન જાળવો.",
+    "tip_silage": "ખાતરી કરો કે સાઇલેજ અથવા સ્ટોરેજ યુનિટ પર કોઈ પંચર વગરનું એરટાઇટ કવર હોય.",
+    "tip_fifo": "ખાણ જૂની થતી અટકાવવા માટે ફર્સ્ટ-ઇન, ફર્સ્ટ-આઉટ (FIFO) સ્ટોક રોટેશન પદ્ધતિ અપનાવો."
   },
   "advisory_action": {
     "critical": {
-      "headline": "Immediate Feed Quarantine",
-      "primary": "Do not feed this batch to any dairy cattle or calves.",
-      "step_0": "Immediately isolate and tag this batch to prevent accidental feeding.",
-      "step_1": "Retain a sealed sample bag for laboratory verification.",
-      "step_2": "Notify your feed supplier and local veterinary officer.",
-      "step_3": "Consult your local veterinary doctor if cattle have already consumed this feed."
+      "headline": "તાત્કાલિક ખોરાક અલગ કરો",
+      "primary": "આ બેચ કોઈપણ દૂધાળા પશુઓ કે વાછરડાઓને ખવડાવશો નહીં.",
+      "step_0": "ભૂલથી ખવડાવવાનું ટાળવા માટે આ બેચને તરત જ અલગ કરો.",
+      "step_1": "લેબ ચકાસણી માટે સીલબંધ સેમ્પલ બેગ સાચવી રાખો.",
+      "step_2": "તમારા ફીડ સપ્લાયર અને સ્થાનિક પશુચિકિત્સકને જાણ કરો.",
+      "step_3": "જો પશુઓએ આ ખોરાક ખાઈ લીધો હોય તો પશુચિકિત્સકની સલાહ લો."
     },
     "poor": {
-      "headline": "CAUTION: BLEND OR SUPPLEMENT BEFORE FEEDING",
-      "primary": "Feed quality is below standard. Do not use as sole feed source.",
-      "step_0": "Limit this feed to dry stock or non-milking cows; avoid giving to high-yield lactating cows.",
-      "step_1": "Blend with 50% high-grade concentrate or fresh leguminous green fodder.",
-      "step_2": "Add 50g commercial mineral mixture per animal daily to offset nutritional deficiency.",
-      "step_3": "Retest next delivery batch to ensure supplier meets quality specifications."
+      "headline": "સાવચેતી: ખવડાવતા પહેલા મિશ્રણ કરો અથવા પૂરક આહાર ઉમેરો",
+      "primary": "ખોરાકની ગુણવત્તા ઓછી છે. માત્ર આ જ ખોરાક સ્ત્રોત તરીકે ન વાપરો.",
+      "step_0": "દૂધ ન આપતા પશુઓ પૂરતો જ મર્યાદિત રાખો.",
+      "step_1": "50% ઉચ્ચ ગુણવત્તાવાળા દાણ અથવા તાજા લીલા ઘાસચારા સાથે મિક્સ કરો.",
+      "step_2": "પોષણની ખામી પૂરી કરવા દરરોજ પશુ દીઠ 50 ગ્રામ મિનરલ મિશ્રણ ઉમેરો.",
+      "step_3": "સપ્લાયર ગુણવત્તા જાળવે છે તેની ખાતરી કરવા આગામી ડિલિવરી બેચ ફરીથી ચકાસો."
     },
     "moderate": {
-      "headline": "Ration Balancing Required",
-      "primary": "Adjust concentrate proportions and supplement with mineral mixture.",
-      "step_0": "Do not feed as sole concentrate source.",
-      "step_1": "Add 50–100g approved mineral mixture per cow daily.",
-      "step_2": "Re-inspect batch after 7 days of storage."
+      "headline": "આહાર સંતુલન જરૂરી છે",
+      "primary": "દાણનું પ્રમાણ ગોઠવો અને મિનરલ મિશ્રણ ઉમેરો.",
+      "step_0": "માત્ર આ જ દાણ સ્ત્રોત તરીકે ન આપો.",
+      "step_1": "ગાય દીઠ દરરોજ 50-100 ગ્રામ માન્ય મિનરલ મિશ્રણ ઉમેરો.",
+      "step_2": "7 દિવસના સંગ્રહ પછી બેચનું ફરીથી નિરીક્ષણ કરો."
     },
     "good": {
-      "headline": "Standard Feeding Protocol",
-      "primary": "Feed directly according to standard daily ration balance.",
-      "step_0": "Maintain clean, ad-lib drinking water access.",
-      "step_1": "Combine with 15–20 kg green fodder for optimal rumen digestion.",
-      "step_2": "Store bags off concrete floors in a dry, ventilated shed.",
-      "step_3": "Monitor milk yield and butterfat percentage regularly."
+      "headline": "પ્રમાણભૂત આહાર પ્રોટોકોલ",
+      "primary": "દૈનિક સંતુલિત આહાર મુજબ સીધું જ પશુઓને ખવડાવો.",
+      "step_0": "સ્વચ્છ પીવાનું પાણી સતત ઉપલબ્ધ રાખો.",
+      "step_1": "યોગ્ય પાચન માટે 15-20 કિલો લીલા ઘાસચારા સાથે આપો.",
+      "step_2": "ગુણીઓને સૂકી, વેન્ટિલેટેડ શેડમાં જમીનથી ઊંચી રાખો.",
+      "step_3": "દૂધનું ઉત્પાદન અને ફેટ નિયમિતપણે તપાસો."
     },
     "good_headline": "ઉચ્ચ ગુણવત્તા — દૂઝણાં પશુઓ માટે સલામત",
     "moderate_headline": "મધ્યમ ગુણવત્તા — પોષણ સંતુલન જરૂરી",
     "poor_headline": "નબળી ગુણવત્તા — સાવધાનીથી વાપરો",
     "unsafe_headline": "અસુરક્ષિત — તરત જ ખવડાવવાનું બંધ કરો!",
     "unsafe": {
-      "headline": "ACTION REQUIRED: DO NOT FEED — ISOLATE BATCH",
-      "primary": "STOP feeding this batch immediately. Quarantine the sack or storage unit.",
-      "step_0": "Immediately stop offering this feed to cattle, calves, or pregnant cows.",
-      "step_1": "Physically isolate affected bags to prevent accidental herd feeding.",
-      "step_2": "Document the Batch ID using the certified QR code for supplier replacement claim.",
-      "step_3": "Consult your local veterinary doctor if cattle have already consumed this feed."
+      "headline": "પગલાં જરૂરી: ખવડાવશો નહીં — બેચ અલગ કરો",
+      "primary": "આ બેચ ખવડાવવાનું તરત જ બંધ કરો. ગુણી અથવા સ્ટોરેજ યુનિટ અલગ કરો.",
+      "step_0": "પશુઓ, વાછરડા કે ગાભણ ગાયોને આપવાનું તરત જ બંધ કરો.",
+      "step_1": "ભૂલથી અપાઈ ન જાય તે માટે અસરગ્રસ્ત ગુણીઓને ભૌતિક રીતે અલગ કરો.",
+      "step_2": "સપ્લાયર બદલી દાવા માટે પ્રમાણિત ક્યૂઆર કોડનો ઉપયોગ કરીને બેચ આઈડી નોંધો.",
+      "step_3": "જો પશુઓએ આ ખોરાક ખાઈ લીધો હોય તો પશુચિકિત્સકની સલાહ લો."
     }
   },
   "regions": {
@@ -887,19 +888,34 @@ export default {
     "save_settings_btn": "સેટિંગ્સ સાચવો"
   },
   "advisory_nutrition": {
-    "all_balanced": "બધા પોષક સૂચકાંકો (પ્રોટીન, ભેજ, ફાઇબર, ઊર્જા) NDDB ધોરણોની અંદર સુરક્ષિત છે.",
-    "low_nutrient": "Low {{nutrient}}: currently {{value}} {{unit}} (ideal: {{min}}–{{max}} {{unit}}).",
-    "high_nutrient": "High {{nutrient}}: currently {{value}} {{unit}} (ideal: {{min}}–{{max}} {{unit}}).",
+    "all_balanced": "બધા માપેલા પોષક સૂચકાંકો (પ્રોટીન, ભેજ, ફાઇબર, ઊર્જા) પ્રમાણભૂત NDDB રેન્જમાં સુસંગત છે.",
+    "low_nutrient": "ઓછું {{nutrient}}: હાલમાં {{value}} {{unit}} (આદર્શ: {{min}}–{{max}} {{unit}}).",
+    "high_nutrient": "વધુ {{nutrient}}: હાલમાં {{value}} {{unit}} (આદર્શ: {{min}}–{{max}} {{unit}}).",
     "status_balanced": "સંતુલિત",
-    "status_attention": "ધ્યાન આપવું જરૂરી"
+    "status_attention": "ધ્યાન જરૂરી"
   },
   "advisory_adulteration": {
-    "detected_headline": "Adulterant Alert: {{adulterant}} detected.",
-    "clean_headline": "આ નમૂનામાં કોઈ રાસાયણિક ભેળસેળ જોવા મળી નથી.",
-    "safe_summary": "કૃત્રિમ કે અકાર્બનિક ભેળસેળથી સંપૂર્ણ સુરક્ષિત.",
-    "clean_remedy": "કૃત્રિમ કે અકાર્બનિક ભેળસેળથી સંપૂર્ણ સુરક્ષિત.",
-    "remediation_1": "Immediately withhold and isolate this batch from all livestock.",
-    "remediation_2": "Retain sample bag for batch verification and supplier complaint.",
-    "remediation_3": "Notify local veterinary officer if animals show distress."
+    "detected_headline": "ભેળસેળ ચેતવણી: {{adulterant}} મળી આવ્યું.",
+    "clean_headline": "બધા માપેલા સુરક્ષા સૂચકાંકો પ્રમાણભૂત મર્યાદામાં છે.",
+    "safe_summary": "આ બેચમાં કોઈ સિન્થેટિક નાઇટ્રોજન વધારો (યુરિયા), ખનિજ ધૂળની ભેળસેળ કે ઝેરી માયકોટૉક્સિન જોવા મળ્યા નથી.",
+    "clean_remedy": "આ બેચમાં કોઈ સિન્થેટિક નાઇટ્રોજન વધારો (યુરિયા), ખનિજ ધૂળની ભેળસેળ કે ઝેરી માયકોટૉક્સિન જોવા મળ્યા નથી.",
+    "remediation_1": "તરત જ આ બેચને પશુઓને ખવડાવવાનું બંધ કરો અને અલગ રાખો.",
+    "remediation_2": "બેચ ચકાસણી અને સપ્લાયરની ફરિયાદ માટે સેમ્પલ બેગ સાચવી રાખો.",
+    "remediation_3": "જો પશુઓમાં અસ્વસ્થતા જણાય તો સ્થાનિક પશુચિકિત્સકને જાણ કરો."
+  },
+  "nutrients": {
+    "protein": "પ્રોટીન",
+    "moisture": "ભેજ",
+    "fiber": "ફાઇબર",
+    "energy": "ઊર્જા",
+    "mineral": "ખનિજ સૂચકાંક",
+    "urea": "યુરિયા",
+    "sand": "રેતી / સિલિકા",
+    "aflatoxin": "એફ્લાટોક્સિન",
+    "fungal": "ફંગલ લોડ",
+    "mould": "ફૂગ સૂચકાંક",
+    "temperature": "તાપમાન",
+    "ph": "pH",
+    "depth": "સેમ્પલિંગ ઊંડાઈ"
   }
 };

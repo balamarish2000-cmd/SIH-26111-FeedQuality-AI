@@ -182,15 +182,16 @@ export default {
     "feeding_recommendation": "ਖੁਰਾਕ ਸਿਫ਼ਾਰਸ਼",
     "feeding_rec": "ਖੁਰਾਕ ਸਿਫ਼ਾਰਸ਼",
     "storage_rec": "ਸਟੋਰੇਜ ਸਿਫ਼ਾਰਸ਼",
-    "no_risk_alert": "ਇਸ ਨਮੂਨੇ ਵਿੱਚ ਕੋਈ ਰਸਾਇਣਕ ਮਿਲਾਵਟ ਨਹੀਂ ਪਾਈ ਗਈ।",
+    "no_risk_alert": "ਸਾਰੇ ਮਾਪੇ ਗਏ ਸੁਰੱਖਿਆ ਸੰਕੇਤਕ ਮਿਆਰੀ ਸੀਮਾਵਾਂ ਦੇ ਅੰਦਰ ਹਨ।",
     "storage_recommendation": "ਸਟੋਰੇਜ ਸਿਫ਼ਾਰਸ਼",
-    "risk_alert": "ਖ਼ਤਰਾ ਚੇਤਾਵਨੀ",
+    "risk_alert": "ਸੁਰੱਖਿਆ ਚੇਤਾਵਨੀ",
     "recommended_action": "ਸਿਫ਼ਾਰਸ਼ ਕੀਤੀ ਕਾਰਵਾਈ",
     "save_result_btn": "ਨਤੀਜਾ ਸੰਭਾਲੋ",
     "saved_to_records": "ਟੈਸਟ ਤੁਹਾਡੇ ਕਿਸਾਨ ਰਿਕਾਰਡ ਵਿੱਚ ਸੁਰੱਖਿਅਤ ਕੀਤਾ ਗਿਆ ਹੈ।",
     "no_tests_yet": "ਅਜੇ ਤੱਕ ਕੋਈ ਟੈਸਟ ਨਹੀਂ ਹੋਇਆ।",
     "start_first_feed_test": "ਆਪਣਾ ਪਹਿਲਾ ਖੁਰਾਕ ਟੈਸਟ ਸ਼ੁਰੂ ਕਰੋ",
-    "explore_sample_analysis": "ਨਮੂਨਾ ਵਿਸ਼ਲੇਸ਼ਣ ਦੇਖੋ"
+    "explore_sample_analysis": "ਨਮੂਨਾ ਵਿਸ਼ਲੇਸ਼ਣ ਦੇਖੋ",
+    "safety_alert": "ਸੁਰੱਖਿਆ ਚੇਤਾਵਨੀ"
   },
   "analyze": {
     "title": "AI ਤੇਜ਼ ਫੀਡ ਗੁਣਵੱਤਾ ਅਤੇ ਸੁਰੱਖਿਆ ਜਾਂਚ",
@@ -770,71 +771,71 @@ export default {
     "unsafe": "ਖ਼ਤਰਨਾਕ ਮਿਲਾਵਟ ਜਾਂ ਜ਼ਹਿਰੀਲੇ ਤੱਤ ਮਿਲੇ ਹਨ! ਪਸ਼ੂਆਂ ਨੂੰ ਖੁਆਉਣਾ ਤੁਰੰਤ ਬੰਦ ਕਰੋ ਅਤੇ ਡਾਕਟਰ ਦੀ ਸਲਾਹ ਲਵੋ।"
   },
   "advisory_feeding": {
-    "normal": "Feed in standard daily proportions alongside 20–25 kg fresh green fodder and clean ad-lib drinking water.",
-    "compensate": "Do not feed as sole ration. Compensate with 1–2 kg quality concentrate pellet and bypass protein.",
+    "normal": "20–25 ਕਿਲੋ ਤਾਜ਼ਾ ਹਰਾ ਚਾਰਾ ਅਤੇ ਸਾਫ਼ ਪੀਣ ਵਾਲੇ ਪਾਣੀ ਦੇ ਨਾਲ ਮਿਆਰੀ ਰੋਜ਼ਾਨਾ ਅਨੁਪਾਤ ਵਿੱਚ ਪਾਓ।",
+    "compensate": "ਸਿਰਫ਼ ਇਸਨੂੰ ਹੀ ਇਕੱਲੀ ਖੁਰਾਕ ਵਜੋਂ ਨਾ ਦਿਓ। 1–2 ਕਿਲੋ ਮਿਆਰੀ ਵੰਡ ਅਤੇ ਬਾਈਪਾਸ ਪ੍ਰੋਟੀਨ ਨਾਲ ਸੰਤੁਲਿਤ ਕਰੋ।",
     "lactating": "ਦੁਧਾਰੂ ਗਾਂ ਨੂੰ 15–20 ਕਿਲੋ ਹਰਾ ਚਾਰਾ, 4 ਕਿਲੋ ਸੁੱਕਾ ਤੂੜੀ ਅਤੇ ਹਰ 2.5 ਲੀਟਰ ਦੁੱਧ ਪਿੱਛੇ 1 ਕਿਲੋ ਵੰਡ ਦਿਓ।",
     "dry": "ਸੂਣ ਵਾਲੀਆਂ ਗਾਵਾਂ ਨੂੰ ਸੁੱਕੇ ਚਾਰੇ ਨਾਲ 1.5–2 ਕਿਲੋ ਵੰਡ ਅਤੇ 50 ਗ੍ਰਾਮ ਮਿਨਰਲ ਮਿਕਸਚਰ ਦਿਓ।",
-    "good": "ਰੋਜ਼ਾਨਾ 20–25 ਕਿਲੋ ਤਾਜ਼ਾ ਹਰਾ ਚਾਰਾ ਅਤੇ 4 ਕਿਲੋ ਸੁੱਕੀ ਤੂੜੀ ਦੇ ਨਾਲ ਸੰਤੁਲਿਤ ਮਾਤਰਾ ਵਿੱਚ ਦਿਓ।",
-    "moderate": "ਰੋਜ਼ਾਨਾ 20–25 ਕਿਲੋ ਤਾਜ਼ਾ ਹਰਾ ਚਾਰਾ ਅਤੇ 4 ਕਿਲੋ ਸੁੱਕੀ ਤੂੜੀ ਦੇ ਨਾਲ ਸੰਤੁਲਿਤ ਮਾਤਰਾ ਵਿੱਚ ਦਿਓ।",
-    "poor": "ਇਸ ਨੂੰ ਇਕੱਲੀ ਖੁਰਾਕ ਵਜੋਂ ਨਾ ਦਿਓ। ਦੁੱਧ ਉਤਪਾਦਨ ਕਾਇਮ ਰੱਖਣ ਲਈ 1–2 ਕਿਲੋ ਵਧੀਆ ਵੰਡ ਵਾਧੂ ਦਿਓ।",
-    "unsafe": "ਇਸ ਨੂੰ ਇਕੱਲੀ ਖੁਰਾਕ ਵਜੋਂ ਨਾ ਦਿਓ। ਦੁੱਧ ਉਤਪਾਦਨ ਕਾਇਮ ਰੱਖਣ ਲਈ 1–2 ਕਿਲੋ ਵਧੀਆ ਵੰਡ ਵਾਧੂ ਦਿਓ।",
-    "critical": "ਇਸ ਨੂੰ ਇਕੱਲੀ ਖੁਰਾਕ ਵਜੋਂ ਨਾ ਦਿਓ। ਦੁੱਧ ਉਤਪਾਦਨ ਕਾਇਮ ਰੱਖਣ ਲਈ 1–2 ਕਿਲੋ ਵਧੀਆ ਵੰਡ ਵਾਧੂ ਦਿਓ।"
+    "good": "20–25 ਕਿਲੋ ਤਾਜ਼ਾ ਹਰਾ ਚਾਰਾ ਅਤੇ ਸਾਫ਼ ਪੀਣ ਵਾਲੇ ਪਾਣੀ ਦੇ ਨਾਲ ਮਿਆਰੀ ਰੋਜ਼ਾਨਾ ਅਨੁਪਾਤ ਵਿੱਚ ਪਾਓ।",
+    "moderate": "20–25 ਕਿਲੋ ਤਾਜ਼ਾ ਹਰਾ ਚਾਰਾ ਅਤੇ ਸਾਫ਼ ਪੀਣ ਵਾਲੇ ਪਾਣੀ ਦੇ ਨਾਲ ਮਿਆਰੀ ਰੋਜ਼ਾਨਾ ਅਨੁਪਾਤ ਵਿੱਚ ਪਾਓ।",
+    "poor": "ਸਿਰਫ਼ ਇਸਨੂੰ ਹੀ ਇਕੱਲੀ ਖੁਰਾਕ ਵਜੋਂ ਨਾ ਦਿਓ। 1–2 ਕਿਲੋ ਮਿਆਰੀ ਵੰਡ ਸ਼ਾਮਲ ਕਰੋ।",
+    "unsafe": "ਸਿਰਫ਼ ਇਸਨੂੰ ਹੀ ਇਕੱਲੀ ਖੁਰਾਕ ਵਜੋਂ ਨਾ ਦਿਓ। ਤੁਰੰਤ ਵੱਖ ਕਰੋ।",
+    "critical": "ਸਿਰਫ਼ ਇਸਨੂੰ ਹੀ ਇਕੱਲੀ ਖੁਰਾਕ ਵਜੋਂ ਨਾ ਦਿਓ। ਤੁਰੰਤ ਵੱਖ ਕਰੋ।"
   },
   "advisory_storage": {
-    "spoiled": "ਗੰਭੀਰ ਖਰਾਬੀ ਦਾ ਖਤਰਾ: ਤੁਰੰਤ ਵੱਖ ਕਰੋ ਅਤੇ ਨਮੀ ਦੀ ਜਾਂਚ ਕਰੋ।",
-    "stable": "ਖੁਰਾਕ ਦੀਆਂ ਬੋਰੀਆਂ ਨੂੰ ਸੁੱਕੀ ਅਤੇ ਹਵਾਦਾਰ ਥਾਂ 'ਤੇ ਲੱਕੜ ਦੇ ਫੱਟਿਆਂ 'ਤੇ ਰੱਖੋ।",
+    "spoiled": "ਗੰਭੀਰ ਖਰਾਬੀ ਦਾ ਖਤਰਾ: ਤੁਰੰਤ ਬੈਚ ਨੂੰ ਵੱਖ ਕਰੋ ਅਤੇ ਸਟੋਰੇਜ ਨਮੀ ਦੀ ਜਾਂਚ ਕਰੋ।",
+    "stable": "ਖੁਰਾਕ ਦੀਆਂ ਬੋਰੀਆਂ ਨੂੰ ਠੰਡੀ, ਹਵਾਦਾਰ ਅਤੇ ਸੁੱਕੀ ਥਾਂ 'ਤੇ ਲੱਕੜ ਦੇ ਫੱਟਿਆਂ 'ਤੇ ਰੱਖੋ।",
     "dry_feed": "ਬੋਰੀਆਂ ਨੂੰ ਜ਼ਮੀਨ ਤੋਂ 15 ਸੈਂਟੀਮੀਟਰ ਉੱਚੇ ਲੱਕੜ ਦੇ ਫੱਟਿਆਂ 'ਤੇ ਠੰਡੀ ਅਤੇ ਸੁੱਕੀ ਥਾਂ 'ਤੇ ਰੱਖੋ।",
     "silage": "ਸਾਈਲੇਜ ਦੇ ਟੋਏ ਨੂੰ ਹਵਾ-ਰਹਿਤ ਰੱਖੋ। ਤਾਪਮਾਨ 28°C ਤੋਂ ਵੱਧ ਹੋਵੇ ਤਾਂ ਤੁਰੰਤ ਜਾਂਚ ਕਰੋ।",
-    "critical": "ਗੰਭੀਰ ਖਰਾਬੀ ਚੇਤਾਵਨੀ: ਉੱਲੀ ਜਾਂ ਜੈਵਿਕ ਵਿਗਾੜ ਪਾਇਆ ਗਿਆ ਹੈ। ਪ੍ਰਭਾਵਿਤ ਫੀਡ ਨੂੰ ਤੁਰੰਤ ਵੱਖ ਕਰੋ ਅਤੇ ਸਟੋਰੇਜ ਦੀ ਨਮੀ ਘਟਾਓ।",
-    "normal": "ਸਟੋਰੇਜ ਮਾਪਦੰਡ ਸਥਿਰ ਹਨ। ਉੱਲੀ ਤੋਂ ਬਚਾਅ ਲਈ ਮੌਜੂਦਾ ਨਮੀ ਅਤੇ ਤਾਪਮਾਨ ਨਿਯੰਤਰਣ ਜਾਰੀ ਰੱਖੋ।",
-    "tip_pallets": "Store feed sacks on wooden pallets at least 15 cm off damp concrete floors.",
-    "tip_ventilation": "Maintain dry, rodent-proof shed ventilation with ambient temperatures below 28°C.",
-    "tip_silage": "Ensure sealed silage or storage units have airtight covers with no punctures or loose edges.",
-    "tip_fifo": "Practice First-In, First-Out (FIFO) stock rotation to prevent aging."
+    "critical": "ਗੰਭੀਰ ਖਰਾਬੀ ਦੀ ਚੇਤਾਵਨੀ: ਜੈਵਿਕ ਗਿਰਾਵਟ ਜਾਂ ਉੱਲੀ ਦਾ ਵਾਧਾ ਪਾਇਆ ਗਿਆ ਹੈ। ਜ਼ਹਿਰੀਲੇ ਮਾਈਕੋਟੌਕਸਿਨ ਦਾ ਉੱਚ ਜੋਖਮ।",
+    "normal": "ਸਟੋਰੇਜ ਮਾਪਦੰਡ ਸਥਿਰ ਹਨ। ਮੌਜੂਦਾ ਨਮੀ ਅਤੇ ਤਾਪਮਾਨ ਦੀ ਨਿਗਰਾਨੀ ਜਾਰੀ ਰੱਖੋ।",
+    "tip_pallets": "ਖੁਰਾਕ ਦੀਆਂ ਬੋਰੀਆਂ ਨੂੰ ਸਿੱਲ੍ਹੇ ਫਰਸ਼ ਤੋਂ ਘੱਟੋ-ਘੱਟ 15 ਸੈਂਟੀਮੀਟਰ ਉੱਚੇ ਲੱਕੜ ਦੇ ਫੱਟਿਆਂ 'ਤੇ ਰੱਖੋ।",
+    "tip_ventilation": "28°C ਤੋਂ ਘੱਟ ਤਾਪਮਾਨ ਵਾਲੀ ਸੁੱਕੀ, ਚੂਹਿਆਂ ਤੋਂ ਸੁਰੱਖਿਅਤ ਸ਼ੈੱਡ ਹਵਾਦਾਰੀ ਬਣਾਈ ਰੱਖੋ।",
+    "tip_silage": "ਯਕੀਨੀ ਬਣਾਓ ਕਿ ਸਾਈਲੇਜ ਜਾਂ ਸਟੋਰੇਜ ਯੂਨਿਟਾਂ 'ਤੇ ਬਿਨਾਂ ਕਿਸੇ ਛੇਕ ਦੇ ਏਅਰਟਾਈਟ ਕਵਰ ਹੋਣ।",
+    "tip_fifo": "ਖੁਰਾਕ ਪੁਰਾਣੀ ਹੋਣ ਤੋਂ ਬਚਾਉਣ ਲਈ ਪਹਿਲਾਂ-ਆਇਆ, ਪਹਿਲਾਂ-ਵਰਤੋਂ (FIFO) ਸਟਾਕ ਰੋਟੇਸ਼ਨ ਦਾ ਅਭਿਆਸ ਕਰੋ।"
   },
   "advisory_action": {
     "critical": {
-      "headline": "Immediate Feed Quarantine",
-      "primary": "Do not feed this batch to any dairy cattle or calves.",
-      "step_0": "Immediately isolate and tag this batch to prevent accidental feeding.",
-      "step_1": "Retain a sealed sample bag for laboratory verification.",
-      "step_2": "Notify your feed supplier and local veterinary officer.",
-      "step_3": "Consult your local veterinary doctor if cattle have already consumed this feed."
+      "headline": "ਖੁਰਾਕ ਨੂੰ ਤੁਰੰਤ ਵੱਖ ਕਰੋ",
+      "primary": "ਇਹ ਬੈਚ ਕਿਸੇ ਵੀ ਦੁਧਾਰੂ ਪਸ਼ੂ ਜਾਂ ਵੱਛਿਆਂ ਨੂੰ ਨਾ ਪਾਓ।",
+      "step_0": "ਗਲਤੀ ਨਾਲ ਪਾਉਣ ਤੋਂ ਬਚਣ ਲਈ ਤੁਰੰਤ ਇਸ ਬੈਚ ਨੂੰ ਵੱਖ ਕਰੋ।",
+      "step_1": "ਲੈਬ ਟੈਸਟ ਲਈ ਸੀਲਬੰਦ ਨਮੂਨਾ ਬੈਗ ਸੁਰੱਖਿਅਤ ਰੱਖੋ।",
+      "step_2": "ਆਪਣੇ ਖੁਰਾਕ ਸਪਲਾਇਰ ਅਤੇ ਪਸ਼ੂ ਡਾਕਟਰ ਨੂੰ ਸੂਚਿਤ ਕਰੋ।",
+      "step_3": "ਜੇਕਰ ਪਸ਼ੂਆਂ ਨੇ ਇਹ ਪਹਿਲਾਂ ਹੀ ਖਾ ਲਿਆ ਹੈ ਤਾਂ ਪਸ਼ੂ ਡਾਕਟਰ ਨਾਲ ਸੰਪਰਕ ਕਰੋ।"
     },
     "poor": {
-      "headline": "CAUTION: BLEND OR SUPPLEMENT BEFORE FEEDING",
-      "primary": "Feed quality is below standard. Do not use as sole feed source.",
-      "step_0": "Limit this feed to dry stock or non-milking cows; avoid giving to high-yield lactating cows.",
-      "step_1": "Blend with 50% high-grade concentrate or fresh leguminous green fodder.",
-      "step_2": "Add 50g commercial mineral mixture per animal daily to offset nutritional deficiency.",
-      "step_3": "Retest next delivery batch to ensure supplier meets quality specifications."
+      "headline": "ਸਾਵਧਾਨੀ: ਪਾਉਣ ਤੋਂ ਪਹਿਲਾਂ ਮਿਲਾਓ ਜਾਂ ਵਾਧੂ ਪੋਸ਼ਣ ਸ਼ਾਮਲ ਕਰੋ",
+      "primary": "ਖੁਰਾਕ ਦੀ ਗੁਣਵੱਤਾ ਘੱਟ ਹੈ। ਇਸਨੂੰ ਇਕੱਲੀ ਖੁਰਾਕ ਵਜੋਂ ਨਾ ਵਰਤੋ।",
+      "step_0": "ਸੁੱਕੀਆਂ ਜਾਂ ਦੁੱਧ ਨਾ ਦੇਣ ਵਾਲੀਆਂ ਗਾਵਾਂ ਤੱਕ ਹੀ ਸੀਮਤ ਰੱਖੋ।",
+      "step_1": "50% ਉੱਚ-ਗੁਣਵੱਤਾ ਵਾਲੀ ਵੰਡ ਜਾਂ ਤਾਜ਼ੇ ਹਰੇ ਚਾਰੇ ਨਾਲ ਮਿਲਾਓ।",
+      "step_2": "ਪੋਸ਼ਣ ਦੀ ਘਾਟ ਪੂਰੀ ਕਰਨ ਲਈ ਰੋਜ਼ਾਨਾ ਪ੍ਰਤੀ ਪਸ਼ੂ 50 ਗ੍ਰਾਮ ਮਿਨਰਲ ਮਿਕਸਚਰ ਸ਼ਾਮਲ ਕਰੋ।",
+      "step_3": "ਅਗਲੀ ਸਪਲਾਈ ਦੀ ਗੁਣਵੱਤਾ ਯਕੀਨੀ ਬਣਾਉਣ ਲਈ ਦੁਬਾਰਾ ਜਾਂਚ ਕਰੋ।"
     },
     "moderate": {
-      "headline": "Ration Balancing Required",
-      "primary": "Adjust concentrate proportions and supplement with mineral mixture.",
-      "step_0": "Do not feed as sole concentrate source.",
-      "step_1": "Add 50–100g approved mineral mixture per cow daily.",
-      "step_2": "Re-inspect batch after 7 days of storage."
+      "headline": "ਖੁਰਾਕ ਸੰਤੁਲਨ ਦੀ ਲੋੜ ਹੈ",
+      "primary": "ਵੰਡ ਦੀ ਮਾਤਰਾ ਵਿਵਸਥਿਤ ਕਰੋ ਅਤੇ ਮਿਨਰਲ ਮਿਕਸਚਰ ਸ਼ਾਮਲ ਕਰੋ।",
+      "step_0": "ਇਸਨੂੰ ਇਕੱਲੀ ਖੁਰਾਕ ਵਜੋਂ ਨਾ ਪਾਓ।",
+      "step_1": "ਪ੍ਰਤੀ ਗਾਂ ਰੋਜ਼ਾਨਾ 50-100 ਗ੍ਰਾਮ ਪ੍ਰਵਾਨਿਤ ਮਿਨਰਲ ਮਿਕਸਚਰ ਪਾਓ।",
+      "step_2": "7 ਦਿਨਾਂ ਦੇ ਸਟੋਰੇਜ ਤੋਂ ਬਾਅਦ ਬੈਚ ਦੀ ਦੁਬਾਰਾ ਜਾਂਚ ਕਰੋ।"
     },
     "good": {
-      "headline": "Standard Feeding Protocol",
-      "primary": "Feed directly according to standard daily ration balance.",
-      "step_0": "Maintain clean, ad-lib drinking water access.",
-      "step_1": "Combine with 15–20 kg green fodder for optimal rumen digestion.",
-      "step_2": "Store bags off concrete floors in a dry, ventilated shed.",
-      "step_3": "Monitor milk yield and butterfat percentage regularly."
+      "headline": "ਮਿਆਰੀ ਖੁਰਾਕ ਪ੍ਰੋਟੋਕੋਲ",
+      "primary": "ਰੋਜ਼ਾਨਾ ਸੰਤੁਲਿਤ ਖੁਰਾਕ ਅਨੁਸਾਰ ਸਿੱਧਾ ਪਸ਼ੂਆਂ ਨੂੰ ਪਾਓ।",
+      "step_0": "ਸਾਫ਼ ਪੀਣ ਵਾਲਾ ਪਾਣੀ ਲਗਾਤਾਰ ਉਪਲਬਧ ਰੱਖੋ।",
+      "step_1": "ਚੰਗੀ ਪਾਚਨ ਕਿਰਿਆ ਲਈ 15-20 ਕਿਲੋ ਹਰੇ ਚਾਰੇ ਨਾਲ ਮਿਲਾਓ।",
+      "step_2": "ਬੋਰੀਆਂ ਨੂੰ ਸੁੱਕੀ, ਹਵਾਦਾਰ ਸ਼ੈੱਡ ਵਿੱਚ ਫਰਸ਼ ਤੋਂ ਉੱਚਾ ਰੱਖੋ।",
+      "step_3": "ਦੁੱਧ ਦੀ ਮਾਤਰਾ ਅਤੇ ਫੈਟ ਦੀ ਨਿਯਮਿਤ ਨਿਗਰਾਨੀ ਕਰੋ।"
     },
     "good_headline": "ਵਧੀਆ ਗੁਣਵੱਤਾ — ਦੁਧਾਰੂ ਪਸ਼ੂਆਂ ਲਈ ਸੁਰੱਖਿਅਤ",
     "moderate_headline": "ਦਰਮਿਆਨੀ ਗੁਣਵੱਤਾ — ਪੋਸ਼ਣ ਸੰਤੁਲਨ ਦੀ ਲੋੜ",
     "poor_headline": "ਮਾੜੀ ਗੁਣਵੱਤਾ — ਸਾਵਧਾਨੀ ਨਾਲ ਵਰਤੋ",
     "unsafe_headline": "ਅਸੁਰੱਖਿਅਤ — ਤੁਰੰਤ ਖੁਆਉਣਾ ਬੰਦ ਕਰੋ!",
     "unsafe": {
-      "headline": "ACTION REQUIRED: DO NOT FEED — ISOLATE BATCH",
-      "primary": "STOP feeding this batch immediately. Quarantine the sack or storage unit.",
-      "step_0": "Immediately stop offering this feed to cattle, calves, or pregnant cows.",
-      "step_1": "Physically isolate affected bags to prevent accidental herd feeding.",
-      "step_2": "Document the Batch ID using the certified QR code for supplier replacement claim.",
-      "step_3": "Consult your local veterinary doctor if cattle have already consumed this feed."
+      "headline": "ਕਾਰਵਾਈ ਦੀ ਲੋੜ: ਖੁਰਾਕ ਨਾ ਪਾਓ — ਬੈਚ ਵੱਖ ਕਰੋ",
+      "primary": "ਇਸ ਬੈਚ ਨੂੰ ਪਾਉਣਾ ਤੁਰੰਤ ਬੰਦ ਕਰੋ। ਬੋਰੀ ਜਾਂ ਸਟੋਰੇਜ ਨੂੰ ਵੱਖ ਕਰੋ।",
+      "step_0": "ਗਾਵਾਂ, ਵੱਛਿਆਂ ਜਾਂ ਗੱਭਣ ਗਾਵਾਂ ਨੂੰ ਦੇਣਾ ਤੁਰੰਤ ਬੰਦ ਕਰੋ।",
+      "step_1": "ਗਲਤੀ ਨਾਲ ਪਾਉਣ ਤੋਂ ਰੋਕਣ ਲਈ ਪ੍ਰਭਾਵਿਤ ਬੋਰੀਆਂ ਨੂੰ ਵੱਖ ਰੱਖੋ।",
+      "step_2": "ਸਪਲਾਇਰ ਕਲੇਮ ਲਈ ਪ੍ਰਮਾਣਿਤ ਕਿਊਆਰ ਕੋਡ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਬੈਚ ਆਈਡੀ ਨੋਟ ਕਰੋ।",
+      "step_3": "ਜੇਕਰ ਪਸ਼ੂਆਂ ਨੇ ਇਹ ਪਹਿਲਾਂ ਹੀ ਖਾ ਲਿਆ ਹੈ ਤਾਂ ਪਸ਼ੂ ਡਾਕਟਰ ਨਾਲ ਸੰਪਰਕ ਕਰੋ।"
     }
   },
   "regions": {
@@ -886,19 +887,34 @@ export default {
     "save_settings_btn": "ਸੈਟਿੰਗਾਂ ਸੁਰੱਖਿਅਤ ਕਰੋ"
   },
   "advisory_nutrition": {
-    "all_balanced": "ਸਾਰੇ ਪੋਸ਼ਕ ਤੱਤ (ਪ੍ਰੋਟੀਨ, ਨਮੀ, ਫਾਈਬਰ, ਊਰਜਾ) NDDB ਮਿਆਰਾਂ ਅਨੁਸਾਰ ਸੁਰੱਖਿਅਤ ਹਨ।",
-    "low_nutrient": "Low {{nutrient}}: currently {{value}} {{unit}} (ideal: {{min}}–{{max}} {{unit}}).",
-    "high_nutrient": "High {{nutrient}}: currently {{value}} {{unit}} (ideal: {{min}}–{{max}} {{unit}}).",
+    "all_balanced": "ਸਾਰੇ ਮਾਪੇ ਗਏ ਪੋਸ਼ਣ ਸੰਕੇਤਕ (ਪ੍ਰੋਟੀਨ, ਨਮੀ, ਫਾਈਬਰ, ਊਰਜਾ) ਮਿਆਰੀ NDDB ਸੀਮਾਵਾਂ ਦੇ ਅੰਦਰ ਸੁਖਾਵੇਂ ਹਨ।",
+    "low_nutrient": "ਘੱਟ {{nutrient}}: ਮੌਜੂਦਾ {{value}} {{unit}} (ਆਦਰਸ਼: {{min}}–{{max}} {{unit}})।",
+    "high_nutrient": "ਵੱਧ {{nutrient}}: ਮੌਜੂਦਾ {{value}} {{unit}} (ਆਦਰਸ਼: {{min}}–{{max}} {{unit}})।",
     "status_balanced": "ਸੰਤੁਲਿਤ",
-    "status_attention": "ਧਿਆਨ ਦੇਣ ਦੀ ਲੋੜ"
+    "status_attention": "ਧਿਆਨ ਦੀ ਲੋੜ"
   },
   "advisory_adulteration": {
-    "detected_headline": "Adulterant Alert: {{adulterant}} detected.",
-    "clean_headline": "ਇਸ ਨਮੂਨੇ ਵਿੱਚ ਕੋਈ ਰਸਾਇਣਕ ਮਿਲਾਵਟ ਨਹੀਂ ਪਾਈ ਗਈ।",
-    "safe_summary": "ਸਿੰਥੈਟਿਕ ਜਾਂ ਅਕਾਰਬਨਿਕ ਮਿਲਾਵਟ ਤੋਂ ਬਿਲਕੁਲ ਸੁਰੱਖਿਅਤ।",
-    "clean_remedy": "ਸਿੰਥੈਟਿਕ ਜਾਂ ਅਕਾਰਬਨਿਕ ਮਿਲਾਵਟ ਤੋਂ ਬਿਲਕੁਲ ਸੁਰੱਖਿਅਤ।",
-    "remediation_1": "Immediately withhold and isolate this batch from all livestock.",
-    "remediation_2": "Retain sample bag for batch verification and supplier complaint.",
-    "remediation_3": "Notify local veterinary officer if animals show distress."
+    "detected_headline": "ਮਿਲਾਵਟ ਚੇਤਾਵਨੀ: {{adulterant}} ਦਾ ਪਤਾ ਲੱਗਾ।",
+    "clean_headline": "ਸਾਰੇ ਮਾਪੇ ਗਏ ਸੁਰੱਖਿਆ ਸੰਕੇਤਕ ਮਿਆਰੀ ਸੀਮਾਵਾਂ ਦੇ ਅੰਦਰ ਹਨ।",
+    "safe_summary": "ਇਸ ਬੈਚ ਵਿੱਚ ਕੋਈ ਸਿੰਥੈਟਿਕ ਨਾਈਟ੍ਰੋਜਨ ਵਾਧਾ (ਯੂਰੀਆ), ਖਣਿਜ ਧੂੜ ਮਿਲਾਵਟ ਜਾਂ ਜ਼ਹਿਰੀਲੇ ਮਾਈਕੋਟੌਕਸਿਨ ਨਹੀਂ ਮਿਲੇ ਹਨ।",
+    "clean_remedy": "ਇਸ ਬੈਚ ਵਿੱਚ ਕੋਈ ਸਿੰਥੈਟਿਕ ਨਾਈਟ੍ਰੋਜਨ ਵਾਧਾ (ਯੂਰੀਆ), ਖਣਿਜ ਧੂੜ ਮਿਲਾਵਟ ਜਾਂ ਜ਼ਹਿਰੀਲੇ ਮਾਈਕੋਟੌਕਸਿਨ ਨਹੀਂ ਮਿਲੇ ਹਨ।",
+    "remediation_1": "ਤੁਰੰਤ ਇਸ ਬੈਚ ਨੂੰ ਪਸ਼ੂਆਂ ਨੂੰ ਪਾਉਣ ਤੋਂ ਰੋਕੋ ਅਤੇ ਵੱਖ ਕਰੋ।",
+    "remediation_2": "ਬੈਚ ਤਸਦੀਕ ਅਤੇ ਸਪਲਾਇਰ ਸ਼ਿਕਾਇਤ ਲਈ ਨਮੂਨਾ ਬੋਰੀ ਸੁਰੱਖਿਅਤ ਰੱਖੋ।",
+    "remediation_3": "ਜੇਕਰ ਪਸ਼ੂ ਬਿਮਾਰ ਦਿਖਾਈ ਦੇਣ ਤਾਂ ਤੁਰੰਤ ਸਥਾਨਕ ਪਸ਼ੂ ਡਾਕਟਰ ਨੂੰ ਸੂਚਿਤ ਕਰੋ।"
+  },
+  "nutrients": {
+    "protein": "ਪ੍ਰੋਟੀਨ",
+    "moisture": "ਨਮੀ",
+    "fiber": "ਫਾਈਬਰ",
+    "energy": "ਊਰਜਾ",
+    "mineral": "ਖਣਿਜ ਸੂਚਕਾਂਕ",
+    "urea": "ਯੂਰੀਆ",
+    "sand": "ਰੇਤ / ਸਿਲਿਕਾ",
+    "aflatoxin": "ਐਫਲਾਟੌਕਸਿਨ",
+    "fungal": "ਫੰਗਲ ਲੋਡ",
+    "mould": "ਉੱਲੀ ਸੂਚਕਾਂਕ",
+    "temperature": "ਤਾਪਮਾਨ",
+    "ph": "pH",
+    "depth": "ਨਮੂਨੇ ਦੀ ਡੂੰਘਾਈ"
   }
 };

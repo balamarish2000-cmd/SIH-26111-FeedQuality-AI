@@ -1242,7 +1242,7 @@ export default function Analyze() {
                         <div className="advisory-card critical">
                           <h4>
                             <XCircle size={18} style={{ color: 'var(--color-unsafe)' }} />
-                            {t('dashboard.risk_alert', 'Risk Alert')}: {warningHeadline}
+                            {t('dashboard.safety_alert', t('dashboard.risk_alert', 'Safety Alert'))}: {warningHeadline}
                           </h4>
                           <ul style={{ paddingLeft: 'var(--space-lg)', margin: '4px 0 0' }}>
                             {remediationSteps.map((rem, idx) => (
@@ -1257,7 +1257,7 @@ export default function Analyze() {
                       <div className="advisory-card good">
                         <h4>
                           <CheckCircle2 size={18} style={{ color: 'var(--color-good)' }} />
-                          {t('dashboard.risk_alert', 'Risk Alert')}: {t('advisory_adulteration.clean_headline', t('dashboard.no_risk_alert', 'All measured safety indicators within standard limits.'))}
+                          {t('dashboard.safety_alert', t('dashboard.risk_alert', 'Safety Alert'))}: {t('advisory_adulteration.clean_headline', t('dashboard.no_risk_alert', 'All measured safety indicators within standard limits.'))}
                         </h4>
                         <p style={{ margin: '4px 0 0', fontSize: '0.86rem' }}>
                           {t('advisory_adulteration.clean_remedy', t('advisory_adulteration.safe_summary', 'No synthetic nitrogen spike (urea), mineral dust adulteration, or toxic mycotoxins detected in this batch.'))}

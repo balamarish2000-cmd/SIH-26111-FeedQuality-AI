@@ -182,15 +182,16 @@ export default {
     "feeding_recommendation": "খাদ্য সুপারিশ",
     "feeding_rec": "খাদ্য সুপারিশ",
     "storage_rec": "সংরক্ষণ সুপারিশ",
-    "no_risk_alert": "এই নমুনায় কোনো রাসায়নিক ভেজাল শনাক্ত হয়নি।",
+    "no_risk_alert": "সমস্ত পরিমাপকৃত সুরক্ষা সূচক আদর্শ সীমার মধ্যে রয়েছে।",
     "storage_recommendation": "সংরক্ষণ সুপারিশ",
-    "risk_alert": "ঝুঁকি সতর্কতা",
+    "risk_alert": "নিরাপত্তা সতর্কতা",
     "recommended_action": "প্রস্তাবিত পদক্ষেপ",
     "save_result_btn": "ফলাফল সংরক্ষণ করুন",
     "saved_to_records": "পরীক্ষাটি আপনার কৃষক রেকর্ডে সংরক্ষিত হয়েছে।",
     "no_tests_yet": "এখনও কোনো পরীক্ষা হয়নি।",
     "start_first_feed_test": "আপনার প্রথম খাদ্য পরীক্ষা শুরু করুন",
-    "explore_sample_analysis": "নমুনা বিশ্লেষণ দেখুন"
+    "explore_sample_analysis": "নমুনা বিশ্লেষণ দেখুন",
+    "safety_alert": "নিরাপত্তা সতর্কতা"
   },
   "analyze": {
     "title": "AI দ্রুত গো-খাদ্য মান ও নিরাপত্তা পরীক্ষা",
@@ -770,71 +771,71 @@ export default {
     "unsafe": "বিপজ্জনক ভেজাল বা বিষাক্ত উপাদান শনাক্ত হয়েছে! অবিলম্বে পশুদের খাওয়ানো বন্ধ করুন এবং ডাক্তারের পরামর্শ নিন।"
   },
   "advisory_feeding": {
-    "normal": "Feed in standard daily proportions alongside 20–25 kg fresh green fodder and clean ad-lib drinking water.",
-    "compensate": "Do not feed as sole ration. Compensate with 1–2 kg quality concentrate pellet and bypass protein.",
+    "normal": "২০-২৫ কেজি তাজা সবুজ ঘাস এবং পরিষ্কার পানীয় জলের সাথে সাধারণ দৈনিক অনুপাতে খাওয়ান।",
+    "compensate": "শুধুমাত্র এটি একক খাদ্য হিসেবে খাওয়াবেন না। ১-২ কেজি উন্নত দানাদার খাদ্য এবং বাইপাস প্রোটিন দিয়ে সমন্বয় করুন।",
     "lactating": "দুধালো গরুকে দিনে ১৫–২০ কেজি কাঁচা ঘাস, ৪ কেজি শুকনো খড় এবং প্রতি ২.৫ লিটার দুধে ১ কেজি সুষম দানাদার খাদ্য দিন।",
     "dry": "দুধহীন গাভীকে ভালো মানের শুকনো খড়ের সাথে দিনে ১.৫–২ কেজি দানাদার খাদ্য এবং ৫০ গ্রাম খনিজ মিশ্রণ দিন।",
-    "good": "দিনে ২০–২৫ কেজি কাঁচা ঘাস এবং ৪ কেজি শুকনো খড়ের সাথে সুষম অনুপাতে খাওয়ান।",
-    "moderate": "দিনে ২০–২৫ কেজি কাঁচা ঘাস এবং ৪ কেজি শুকনো খড়ের সাথে সুষম অনুপাতে খাওয়ান।",
-    "poor": "এটি একমাত্র খাদ্য হিসেবে খাওয়াবেন না। দুধ উৎপাদন ঠিক রাখতে ১–২ কেজি উন্নত দানাদার খাদ্য অতিরিক্ত দিন।",
-    "unsafe": "এটি একমাত্র খাদ্য হিসেবে খাওয়াবেন না। দুধ উৎপাদন ঠিক রাখতে ১–২ কেজি উন্নত দানাদার খাদ্য অতিরিক্ত দিন।",
-    "critical": "এটি একমাত্র খাদ্য হিসেবে খাওয়াবেন না। দুধ উৎপাদন ঠিক রাখতে ১–২ কেজি উন্নত দানাদার খাদ্য অতিরিক্ত দিন।"
+    "good": "২০-২৫ কেজি তাজা সবুজ ঘাস এবং পরিষ্কার পানীয় জলের সাথে সাধারণ দৈনিক অনুপাতে খাওয়ান।",
+    "moderate": "২০-২৫ কেজি তাজা সবুজ ঘাস এবং পরিষ্কার পানীয় জলের সাথে সাধারণ দৈনিক অনুপাতে খাওয়ান।",
+    "poor": "শুধুমাত্র এটি একক খাদ্য হিসেবে খাওয়াবেন না। ১-২ কেজি মানসম্মত দানাদার খাদ্য যোগ করুন।",
+    "unsafe": "শুধুমাত্র এটি একক খাদ্য হিসেবে খাওয়াবেন না। অবিলম্বে আলাদা করুন।",
+    "critical": "শুধুমাত্র এটি একক খাদ্য হিসেবে খাওয়াবেন না। অবিলম্বে আলাদা করুন।"
   },
   "advisory_storage": {
-    "spoiled": "গুরুতর পচনের ঝুঁকি: দ্রুত আলাদা করুন এবং আর্দ্রতা পরীক্ষা করুন।",
-    "stable": "খাদ্যের বস্তা শুকনো ও বাতাসযুক্ত স্থানে কাঠের তক্তার উপর রাখুন।",
+    "spoiled": "গুরুতর নষ্টের ঝুঁকি: অবিলম্বে এই ব্যাচ আলাদা করুন এবং আর্দ্রতা পরীক্ষা করুন।",
+    "stable": "খাবারের বস্তাগুলি একটি শীতল, শুষ্ক এবং বাতাস চলাচলযুক্ত স্থানে কাঠের প্যালেটে সংরক্ষণ করুন।",
     "dry_feed": "খাদ্যের বস্তা মেঝে থেকে ১৫ সেমি উঁচুতে কাঠের তক্তার ওপর ঠান্ডা ও শুকনো ঘরে রাখুন।",
     "silage": "সাইলেজের গর্ত বায়ুরোধী রাখুন। তাপমাত্রা ২৮°C এর বেশি হলে অবিলম্বে পরীক্ষা করুন।",
-    "critical": "মারাত্মক পচন সতর্কতা: ছত্রাকের আক্রমণ বা পচন শনাক্ত হয়েছে। আক্রান্ত খাদ্য অবিলম্বে সরিয়ে ফেলুন এবং গুদামের আর্দ্রতা কমান।",
-    "normal": "সংরক্ষণের অবস্থা স্থিতিশীল রয়েছে। ছত্রাক প্রতিরোধে বর্তমান আর্দ্রতা ও তাপমাত্রা নিয়ন্ত্রণ বজায় রাখুন।",
-    "tip_pallets": "Store feed sacks on wooden pallets at least 15 cm off damp concrete floors.",
-    "tip_ventilation": "Maintain dry, rodent-proof shed ventilation with ambient temperatures below 28°C.",
-    "tip_silage": "Ensure sealed silage or storage units have airtight covers with no punctures or loose edges.",
-    "tip_fifo": "Practice First-In, First-Out (FIFO) stock rotation to prevent aging."
+    "critical": "গুরুতর নষ্টের সতর্কতা: জৈবিক অবনতি বা ছত্রাকের বৃদ্ধি শনাক্ত হয়েছে। বিষাক্ত মাইকোটক্সিনের উচ্চ ঝুঁকি।",
+    "normal": "সংরক্ষণের প্যারামিটারগুলি স্থিতিশীল। আর্দ্রতা এবং তাপমাত্রা পর্যবেক্ষণ চালিয়ে যান।",
+    "tip_pallets": "স্যাঁতসেঁতে মেঝে থেকে কমপক্ষে 15 সেমি উঁচুতে কাঠের প্যালেটের উপর খাবারের বস্তা রাখুন।",
+    "tip_ventilation": "২৮°C-এর নিচে তাপমাত্রা সহ শুকনো এবং ইঁদুর-মুক্ত শেড বায়ুচলাচল বজায় রাখুন।",
+    "tip_silage": "নিশ্চিত করুন যে সাইলেজ বা স্টোরেজ ইউনিটে কোনো ছিদ্র ছাড়াই বায়ুরোধী কভার রয়েছে।",
+    "tip_fifo": "খাবার পুরনো হওয়া রোধ করতে ফার্স্ট-ইন, ফার্স্ট-আউট (FIFO) স্টক ঘূর্ণন পদ্ধতি অনুসরণ করুন।"
   },
   "advisory_action": {
     "critical": {
-      "headline": "Immediate Feed Quarantine",
-      "primary": "Do not feed this batch to any dairy cattle or calves.",
-      "step_0": "Immediately isolate and tag this batch to prevent accidental feeding.",
-      "step_1": "Retain a sealed sample bag for laboratory verification.",
-      "step_2": "Notify your feed supplier and local veterinary officer.",
-      "step_3": "Consult your local veterinary doctor if cattle have already consumed this feed."
+      "headline": "অবিলম্বে খাদ্য কোয়ারেন্টাইন করুন",
+      "primary": "এই ব্যাচ কোনো দুগ্ধবতী গাভী বা বাছুরকে খাওয়াবেন না।",
+      "step_0": "ভুলবশত খাওয়ানো এড়াতে অবিলম্বে এই ব্যাচ আলাদা করুন।",
+      "step_1": "ল্যাব পরীক্ষার জন্য একটি সিল করা নমুনা ব্যাগ রাখুন।",
+      "step_2": "আপনার খাদ্য সরবরাহকারী এবং পশু চিকিৎসককে অবহিত করুন।",
+      "step_3": "পশুরা এটি ইতিমধ্যে খেয়ে থাকলে অবিলম্বে পশু চিকিৎসকের পরামর্শ নিন।"
     },
     "poor": {
-      "headline": "CAUTION: BLEND OR SUPPLEMENT BEFORE FEEDING",
-      "primary": "Feed quality is below standard. Do not use as sole feed source.",
-      "step_0": "Limit this feed to dry stock or non-milking cows; avoid giving to high-yield lactating cows.",
-      "step_1": "Blend with 50% high-grade concentrate or fresh leguminous green fodder.",
-      "step_2": "Add 50g commercial mineral mixture per animal daily to offset nutritional deficiency.",
-      "step_3": "Retest next delivery batch to ensure supplier meets quality specifications."
+      "headline": "সতর্কতা: খাওয়ানোর আগে মেশান বা পুষ্টি যোগ করুন",
+      "primary": "খাদ্যের গুণমান কম। এটি একমাত্র খাদ্য হিসেবে ব্যবহার করবেন না।",
+      "step_0": "দুধ না দেওয়া গাভীদের জন্য সীমাবদ্ধ রাখুন।",
+      "step_1": "৫০% উচ্চমানের দানাদার খাদ্য বা তাজা সবুজ ঘাসের সাথে মেশান।",
+      "step_2": "পুষ্টির ঘাটতি মেটাতে প্রতিদিন পশুপ্রতি ৫০ গ্রাম খনিজ মিশ্রণ যোগ করুন।",
+      "step_3": "পরবর্তী সরবরাহের গুণমান যাচাই করতে পুনরায় পরীক্ষা করুন।"
     },
     "moderate": {
-      "headline": "Ration Balancing Required",
-      "primary": "Adjust concentrate proportions and supplement with mineral mixture.",
-      "step_0": "Do not feed as sole concentrate source.",
-      "step_1": "Add 50–100g approved mineral mixture per cow daily.",
-      "step_2": "Re-inspect batch after 7 days of storage."
+      "headline": "খাদ্য ভারসাম্যের প্রয়োজন",
+      "primary": "দানাদার খাদ্যের পরিমাণ সমন্বয় করুন এবং খনিজ মিশ্রণ যোগ করুন।",
+      "step_0": "এটি একমাত্র দানাদার খাদ্য হিসেবে খাওয়াবেন না।",
+      "step_1": "গাভী প্রতি প্রতিদিন ৫০-১০০ গ্রাম অনুমোদিত খনিজ মিশ্রণ দিন।",
+      "step_2": "৭ দিন সংরক্ষণের পর ব্যাচটি পুনরায় পরীক্ষা করুন।"
     },
     "good": {
-      "headline": "Standard Feeding Protocol",
-      "primary": "Feed directly according to standard daily ration balance.",
-      "step_0": "Maintain clean, ad-lib drinking water access.",
-      "step_1": "Combine with 15–20 kg green fodder for optimal rumen digestion.",
-      "step_2": "Store bags off concrete floors in a dry, ventilated shed.",
-      "step_3": "Monitor milk yield and butterfat percentage regularly."
+      "headline": "আদর্শ খাওয়ানোর নিয়ম",
+      "primary": "দৈনিক সুষম অনুপাত অনুযায়ী সরাসরি পশুকে খাওয়ান।",
+      "step_0": "পরিষ্কার পানীয় জলের অবাধ সরবরাহ বজায় রাখুন।",
+      "step_1": "ভালো হজমের জন্য ১৫-২০ কেজি সবুজ ঘাসের সাথে মেশান।",
+      "step_2": "বস্তাগুলি মেঝে থেকে উঁচুতে শুকনো, বাতাসযুক্ত শেডে রাখুন।",
+      "step_3": "দুধের ফলন এবং ফ্যাটের পরিমাণ নিয়মিত পর্যবেক্ষণ করুন।"
     },
     "good_headline": "উন্নত মান — দুধালো পশুর জন্য নিরাপদ",
     "moderate_headline": "মাঝারি মান — পুষ্টির সমন্বয় প্রয়োজন",
     "poor_headline": "নিম্নমানের — সতর্কতার সাথে ব্যবহার করুন",
     "unsafe_headline": "অনিরাপদ — অবিলম্বে খাওয়ানো বন্ধ করুন!",
     "unsafe": {
-      "headline": "ACTION REQUIRED: DO NOT FEED — ISOLATE BATCH",
-      "primary": "STOP feeding this batch immediately. Quarantine the sack or storage unit.",
-      "step_0": "Immediately stop offering this feed to cattle, calves, or pregnant cows.",
-      "step_1": "Physically isolate affected bags to prevent accidental herd feeding.",
-      "step_2": "Document the Batch ID using the certified QR code for supplier replacement claim.",
-      "step_3": "Consult your local veterinary doctor if cattle have already consumed this feed."
+      "headline": "জরুরি পদক্ষেপ: খাওয়াবেন না — ব্যাচ আলাদা করুন",
+      "primary": "এই ব্যাচ খাওয়ানো অবিলম্বে বন্ধ করুন। বস্তা বা স্টোরেজ আলাদা করুন।",
+      "step_0": "গাভী, বাছুর বা গর্ভবতী গরুকে দেওয়া অবিলম্বে বন্ধ করুন।",
+      "step_1": "ভুলবশত খাওয়ানো রোধ করতে বস্তাগুলি শারীরিকভাবে আলাদা রাখুন।",
+      "step_2": "প্রতিস্থাপন দাবির জন্য কিউআর কোড ব্যবহার করে ব্যাচ আইডি নথিভুক্ত করুন।",
+      "step_3": "পশুরা এটি ইতিমধ্যে খেয়ে থাকলে পশু চিকিৎসকের পরামর্শ নিন।"
     }
   },
   "regions": {
@@ -886,19 +887,34 @@ export default {
     "save_settings_btn": "সেটিংস সংরক্ষণ করুন"
   },
   "advisory_nutrition": {
-    "all_balanced": "সমস্ত পুষ্টি সূচক (প্রোটিন, আর্দ্রতা, ফাইবার, শক্তি) NDDB মানদণ্ডের মধ্যে নিরাপদ।",
-    "low_nutrient": "Low {{nutrient}}: currently {{value}} {{unit}} (ideal: {{min}}–{{max}} {{unit}}).",
-    "high_nutrient": "High {{nutrient}}: currently {{value}} {{unit}} (ideal: {{min}}–{{max}} {{unit}}).",
-    "status_balanced": "সুষম",
-    "status_attention": "মনোযোগ প্রয়োজন"
+    "all_balanced": "সমস্ত পরিমাপকৃত পুষ্টি সূচক (প্রোটিন, আর্দ্রতা, ফাইবার, শক্তি) আদর্শ NDDB সীমার মধ্যে স্বাচ্ছন্দ্যে রয়েছে।",
+    "low_nutrient": "কম {{nutrient}}: বর্তমানে {{value}} {{unit}} (আদর্শ: {{min}}–{{max}} {{unit}})।",
+    "high_nutrient": "বেশি {{nutrient}}: বর্তমানে {{value}} {{unit}} (আদর্শ: {{min}}–{{max}} {{unit}})।",
+    "status_balanced": "ভারসাম্যপূর্ণ",
+    "status_attention": "দৃষ্টি আকর্ষণ প্রয়োজন"
   },
   "advisory_adulteration": {
-    "detected_headline": "Adulterant Alert: {{adulterant}} detected.",
-    "clean_headline": "এই নমুনায় কোনো রাসায়নিক ভেজাল শনাক্ত হয়নি।",
-    "safe_summary": "সিন্থেটিক বা অজৈব ভেজাল থেকে সম্পূর্ণ নিরাপদ।",
-    "clean_remedy": "সিন্থেটিক বা অজৈব ভেজাল থেকে সম্পূর্ণ নিরাপদ।",
-    "remediation_1": "Immediately withhold and isolate this batch from all livestock.",
-    "remediation_2": "Retain sample bag for batch verification and supplier complaint.",
-    "remediation_3": "Notify local veterinary officer if animals show distress."
+    "detected_headline": "ভেজাল সতর্কতা: {{adulterant}} শনাক্ত হয়েছে।",
+    "clean_headline": "সমস্ত পরিমাপকৃত সুরক্ষা সূচক আদর্শ সীমার মধ্যে রয়েছে।",
+    "safe_summary": "এই ব্যাচে কোনো সিন্থেটিক নাইট্রোজেন বৃদ্ধি (ইউরিয়া), খনিজ ধুলার ভেজাল বা বিষাক্ত মাইকোটক্সিন শনাক্ত হয়নি।",
+    "clean_remedy": "এই ব্যাচে কোনো সিন্থেটিক নাইট্রোজেন বৃদ্ধি (ইউরিয়া), খনিজ ধুলার ভেজাল বা বিষাক্ত মাইকোটক্সিন শনাক্ত হয়নি।",
+    "remediation_1": "অবিলম্বে এই ব্যাচটি গবাদি পশুকে খাওয়ানো বন্ধ করুন এবং আলাদা রাখুন।",
+    "remediation_2": "ব্যাচ যাচাইকরণ এবং সরবরাহকারী অভিযোগের জন্য নমুনা ব্যাগ সংরক্ষণ করুন।",
+    "remediation_3": "পশুদের কোনো অসুস্থতার লক্ষণ দেখা দিলে স্থানীয় পশু চিকিৎসককে অবহিত করুন।"
+  },
+  "nutrients": {
+    "protein": "প্রোটিন",
+    "moisture": "আর্দ্রতা",
+    "fiber": "ফাইবার",
+    "energy": "শক্তি",
+    "mineral": "খনিজ সূচক",
+    "urea": "ইউরিয়া",
+    "sand": "বালু / সিলিকা",
+    "aflatoxin": "অ্যাফ্লাটক্সিন",
+    "fungal": "ছত্রাক লোড",
+    "mould": "ছত্রাক সূচক",
+    "temperature": "তাপমাত্রা",
+    "ph": "pH",
+    "depth": "নমুনার গভীরতা"
   }
 };

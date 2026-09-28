@@ -184,13 +184,14 @@ export default {
     "storage_rec": "Storage Recommendation",
     "no_risk_alert": "All measured safety indicators within standard limits.",
     "storage_recommendation": "Storage Recommendation",
-    "risk_alert": "Risk Alert",
+    "risk_alert": "Safety Alert",
     "recommended_action": "Recommended Action",
     "save_result_btn": "Save Result",
     "saved_to_records": "Test saved to your farmer records.",
     "no_tests_yet": "No tests yet.",
     "start_first_feed_test": "Start Your First Feed Test",
-    "explore_sample_analysis": "Explore Sample Analysis"
+    "explore_sample_analysis": "Explore Sample Analysis",
+    "safety_alert": "Safety Alert"
   },
   "analyze": {
     "title": "Rapid AI Feed Quality & Safety Screening",
@@ -767,18 +768,18 @@ export default {
   },
   "advisory_feeding": {
     "normal": "Feed in standard daily proportions alongside 20–25 kg fresh green fodder and clean ad-lib drinking water.",
-    "compensate": "Do not feed as sole ration. Compensate with 1–2 kg quality concentrate pellet and bypass protein.",
+    "compensate": "Do not feed as sole ration. Compensate with 1–2 kg quality concentrate and bypass protein.",
     "good": "Feed in standard daily proportions alongside 20–25 kg fresh green fodder and clean ad-lib drinking water.",
     "moderate": "Feed in standard daily proportions alongside 20–25 kg fresh green fodder and clean ad-lib drinking water.",
-    "poor": "Do not feed as sole ration. Compensate with 1–2 kg quality concentrate pellet and bypass protein.",
-    "unsafe": "Do not feed as sole ration. Compensate with 1–2 kg quality concentrate pellet and bypass protein.",
-    "critical": "Do not feed as sole ration. Compensate with 1–2 kg quality concentrate pellet and bypass protein."
+    "poor": "Do not feed as sole ration. Compensate with 1–2 kg quality concentrate and bypass protein.",
+    "unsafe": "Do not feed as sole ration. Isolate batch immediately.",
+    "critical": "Do not feed as sole ration. Isolate batch immediately."
   },
   "advisory_storage": {
-    "spoiled": "Critical spoilage risk: isolate batch and inspect storage moisture and ventilation immediately.",
+    "spoiled": "Critical Spoilage Risk: Quarantine batch immediately and inspect storage humidity.",
     "stable": "Store feed sacks on elevated wooden pallets in a cool, well-ventilated dry space.",
-    "critical": "Critical Spoilage Alert: Biological breakdown or fungal proliferation detected. High risk of harmful mycotoxins (Aflatoxin B1).",
-    "normal": "Storage parameters are stable. Continue current moisture and temperature management.",
+    "critical": "Critical Spoilage Alert: Biological degradation or mould growth detected. High risk of toxic mycotoxins.",
+    "normal": "Storage parameters are stable. Maintain current humidity and temperature monitoring.",
     "tip_pallets": "Store feed sacks on wooden pallets at least 15 cm off damp concrete floors.",
     "tip_ventilation": "Maintain dry, rodent-proof shed ventilation with ambient temperatures below 28°C.",
     "tip_silage": "Ensure sealed silage or storage units have airtight covers with no punctures or loose edges.",
@@ -882,11 +883,26 @@ export default {
   },
   "advisory_adulteration": {
     "detected_headline": "Adulterant Alert: {{adulterant}} detected.",
-    "clean_headline": "No chemical adulterants detected in this sample.",
+    "clean_headline": "All measured safety indicators within standard limits.",
     "safe_summary": "No synthetic nitrogen spike (urea), mineral dust adulteration, or toxic mycotoxins detected in this batch.",
-    "clean_remedy": "Safe from synthetic or inorganic adulteration.",
+    "clean_remedy": "No synthetic nitrogen spike (urea), mineral dust adulteration, or toxic mycotoxins detected in this batch.",
     "remediation_1": "Immediately withhold and isolate this batch from all livestock.",
     "remediation_2": "Retain sample bag for batch verification and supplier complaint.",
     "remediation_3": "Notify local veterinary officer if animals show distress."
+  },
+  "nutrients": {
+    "protein": "Protein",
+    "moisture": "Moisture",
+    "fiber": "Fiber",
+    "energy": "Energy",
+    "mineral": "Mineral Index",
+    "urea": "Urea",
+    "sand": "Sand / Silica",
+    "aflatoxin": "Aflatoxin",
+    "fungal": "Fungal Load",
+    "mould": "Mould Index",
+    "temperature": "Temperature",
+    "ph": "pH",
+    "depth": "Sampling Depth"
   }
 };

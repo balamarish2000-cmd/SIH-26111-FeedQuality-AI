@@ -17,7 +17,10 @@ import {
   getAdulterantName,
   getFeedTypeName,
   getQualityStatusName,
-  getRiskLevelName
+  getRiskLevelName,
+  getLocalizedFeedingTip,
+  getLocalizedStorageTip,
+  getLocalizedFarmerAction
 } from '../utils/translations';
 
 ChartJS.register(
@@ -469,10 +472,10 @@ export default function Dashboard() {
                 {/* Feeding Recommendation */}
                 <div>
                   <strong style={{ fontSize: '0.75rem', color: 'var(--text-primary)', textTransform: 'uppercase', letterSpacing: '0.03em' }}>
-                    {t('dashboard.feeding_rec', 'Feeding Recommendation')}:
+                    {t('dashboard.feeding_recommendation', t('dashboard.feeding_rec', 'Feeding Recommendation'))}:
                   </strong>
                   <div style={{ fontSize: '0.84rem', color: 'var(--text-secondary)', marginTop: 2, lineHeight: 1.45 }}>
-                    {latestReport?.advisory?.feeding_recommendation || latestReport?.advisory?.structured_advisory?.nutritional_guidance?.feeding_ration_tip || t('dashboard.empty_state_desc')}
+                    {getLocalizedFeedingTip(t, latestReport?.advisory, latestReport?.quality_status)}
                   </div>
                 </div>
 
@@ -482,14 +485,14 @@ export default function Dashboard() {
                     {t('dashboard.storage_recommendation', t('dashboard.storage_rec', 'Storage Recommendation'))}:
                   </strong>
                   <div style={{ fontSize: '0.84rem', color: 'var(--text-secondary)', marginTop: 2, lineHeight: 1.45 }}>
-                    {latestReport?.advisory?.storage_recommendation || t('advisory_storage.stable', 'Store feed sacks on elevated wooden pallets in a cool, well-ventilated dry space.')}
+                    {getLocalizedStorageTip(t, latestReport?.advisory, latestReport?.spoilage_flag)}
                   </div>
                 </div>
 
-                {/* Risk Alert */}
+                {/* Risk Alert / Safety Alert */}
                 <div>
                   <strong style={{ fontSize: '0.75rem', color: 'var(--text-primary)', textTransform: 'uppercase', letterSpacing: '0.03em' }}>
-                    {t('dashboard.risk_alert', 'Risk Alert')}:
+                    {t('dashboard.safety_alert', t('dashboard.risk_alert', 'Safety Alert'))}:
                   </strong>
                   <div style={{
                     fontSize: '0.84rem',
@@ -509,7 +512,7 @@ export default function Dashboard() {
                     {t('dashboard.rec_action', 'Recommended Action')}:
                   </strong>
                   <div style={{ fontSize: '0.84rem', color: 'var(--text-secondary)', marginTop: 2, lineHeight: 1.45 }}>
-                    {latestReport?.advisory?.farmer_advisory || t('analyze.action_good', 'Feed directly according to recommended lactation ration schedules.')}
+                    {getLocalizedFarmerAction(t, latestReport?.advisory, latestReport?.quality_status)}
                   </div>
                 </div>
               </div>

@@ -182,15 +182,16 @@ export default {
     "feeding_recommendation": "ಆಹಾರ ಶಿಫಾರಸು",
     "feeding_rec": "ಆಹಾರ ಶಿಫಾರಸು",
     "storage_rec": "ಶೇಖರಣಾ ಶಿಫಾರಸು",
-    "no_risk_alert": "ಈ ಮಾದರಿಯಲ್ಲಿ ಯಾವುದೇ ರಾಸಾಯನಿಕ ಕಲಬೆರಕೆ ಕಂಡುಬಂದಿಲ್ಲ.",
+    "no_risk_alert": "ಅಳೆಯಲಾದ ಎಲ್ಲಾ ಸುರಕ್ಷತಾ ಸೂಚಕಗಳು ಪ್ರಮಾಣಿತ ಮಿತಿಗಳ ಒಳಗೆ ಇವೆ.",
     "storage_recommendation": "ಶೇಖರಣಾ ಶಿಫಾರಸು",
-    "risk_alert": "ಅಪಾಯದ ಎಚ್ಚರಿಕೆ",
+    "risk_alert": "ಸುರಕ್ಷತಾ ಎಚ್ಚರಿಕೆ",
     "recommended_action": "ಶಿಫಾರಸು ಮಾಡಿದ ಕ್ರಮ",
     "save_result_btn": "ಫಲಿತಾಂಶ ಉಳಿಸಿ",
     "saved_to_records": "ಪರೀಕ್ಷೆಯನ್ನು ನಿಮ್ಮ ರೈತ ದಾಖಲೆಗಳಲ್ಲಿ ಉಳಿಸಲಾಗಿದೆ.",
     "no_tests_yet": "ಇನ್ನೂ ಯಾವುದೇ ಪರೀಕ್ಷೆಗಳಿಲ್ಲ.",
     "start_first_feed_test": "ನಿಮ್ಮ ಮೊದಲ ಮೇವು ಪರೀಕ್ಷೆಯನ್ನು ಪ್ರಾರಂಭಿಸಿ",
-    "explore_sample_analysis": "ಮಾದರಿ ವಿಶ್ಲೇಷಣೆ ವೀಕ್ಷಿಸಿ"
+    "explore_sample_analysis": "ಮಾದರಿ ವಿಶ್ಲೇಷಣೆ ವೀಕ್ಷಿಸಿ",
+    "safety_alert": "ಸುರಕ್ಷತಾ ಎಚ್ಚರಿಕೆ"
   },
   "analyze": {
     "title": "AI ತ್ವರಿತ ಮೇವು ಗುಣಮಟ್ಟ ಮತ್ತು ಸುರಕ್ಷತಾ ಪರೀಕ್ಷೆ",
@@ -770,71 +771,71 @@ export default {
     "unsafe": "ಅಪಾಯಕಾರಿ ಮಾಲಿನ್ಯ ಅಥವಾ ವಿಷಕಾರಿ ಅಂಶ ಪತ್ತೆಯಾಗಿದೆ! ಜಾನುವಾರುಗಳಿಗೆ ತಕ್ಷಣವೇ ಆಹಾರ ನೀಡುವುದನ್ನು ನಿಲ್ಲಿಸಿ ಮತ್ತು ಪಶುವೈದ್ಯರನ್ನು ಸಂಪರ್ಕಿಸಿ."
   },
   "advisory_feeding": {
-    "normal": "Feed in standard daily proportions alongside 20–25 kg fresh green fodder and clean ad-lib drinking water.",
-    "compensate": "Do not feed as sole ration. Compensate with 1–2 kg quality concentrate pellet and bypass protein.",
+    "normal": "20–25 ಕೆಜಿ ತಾಜಾ ಹಸಿರು ಮೇವು ಮತ್ತು ಶುದ್ಧ ಕುಡಿಯುವ ನೀರಿನೊಂದಿಗೆ ಪ್ರಮಾಣಿತ ದೈನಂದಿನ ಪ್ರಮಾಣದಲ್ಲಿ ನೀಡಿ.",
+    "compensate": "ಇದನ್ನೇ ಏಕೈಕ ಆಹಾರವಾಗಿ ನೀಡಬೇಡಿ. 1–2 ಕೆಜಿ ಗುಣಮಟ್ಟದ ಹಿಂಡಿ ಮತ್ತು ಬೈಪಾಸ್ ಪ್ರೋಟೀನ್‌ನೊಂದಿಗೆ ಸರಿದೂಗಿಸಿ.",
     "lactating": "ಹಾಲು ನೀಡುವ ಹಸುವಿಗೆ ದಿನಕ್ಕೆ 15–20 ಕೆಜಿ ಹಸಿರು ಹುಲ್ಲು, 4 ಕೆಜಿ ಒಣ ಮೇವು ಮತ್ತು ಪ್ರತಿ 2.5 ಲೀಟರ್ ಹಾಲಿಗೆ 1 ಕೆಜಿ ಸಮತೋಲಿತ ಪಶು ಆಹಾರ ನೀಡಿ.",
     "dry": "ಒಣ ಹಸುಗಳಿಗೆ ಉತ್ತಮ ಗುಣಮಟ್ಟದ ಒಣ ಹುಲ್ಲಿನೊಂದಿಗೆ ದಿನಕ್ಕೆ 1.5–2 ಕೆಜಿ ಪಶು ಆಹಾರ ಮತ್ತು 50 ಗ್ರಾಂ ಖನಿಜ ಮಿಶ್ರಣ ನೀಡಿ.",
-    "good": "ದಿನಕ್ಕೆ 20–25 ಕೆಜಿ ತಾಜಾ ಹಸಿರು ಮೇವು ಮತ್ತು 4 ಕೆಜಿ ಒಣ ಮೇವಿನೊಂದಿಗೆ ಸಮತೋಲಿತ ಪ್ರಮಾಣದಲ್ಲಿ ನೀಡಿ.",
-    "moderate": "ದಿನಕ್ಕೆ 20–25 ಕೆಜಿ ತಾಜಾ ಹಸಿರು ಮೇವು ಮತ್ತು 4 ಕೆಜಿ ಒಣ ಮೇವಿನೊಂದಿಗೆ ಸಮತೋಲಿತ ಪ್ರಮಾಣದಲ್ಲಿ ನೀಡಿ.",
-    "poor": "ಇದನ್ನು ಏಕೈಕ ಆಹಾರವಾಗಿ ನೀಡಬೇಡಿ. ಹಾಲಿನ ಇಳುವರಿ ಕಾಪಾಡಲು 1–2 ಕೆಜಿ ಉತ್ತಮ ಗುಣಮಟ್ಟದ ಪಶು ಆಹಾರವನ್ನು ಹೆಚ್ಚುವರಿಯಾಗಿ ನೀಡಿ.",
-    "unsafe": "ಇದನ್ನು ಏಕೈಕ ಆಹಾರವಾಗಿ ನೀಡಬೇಡಿ. ಹಾಲಿನ ಇಳುವರಿ ಕಾಪಾಡಲು 1–2 ಕೆಜಿ ಉತ್ತಮ ಗುಣಮಟ್ಟದ ಪಶು ಆಹಾರವನ್ನು ಹೆಚ್ಚುವರಿಯಾಗಿ ನೀಡಿ.",
-    "critical": "ಇದನ್ನು ಏಕೈಕ ಆಹಾರವಾಗಿ ನೀಡಬೇಡಿ. ಹಾಲಿನ ಇಳುವರಿ ಕಾಪಾಡಲು 1–2 ಕೆಜಿ ಉತ್ತಮ ಗುಣಮಟ್ಟದ ಪಶು ಆಹಾರವನ್ನು ಹೆಚ್ಚುವರಿಯಾಗಿ ನೀಡಿ."
+    "good": "20–25 ಕೆಜಿ ತಾಜಾ ಹಸಿರು ಮೇವು ಮತ್ತು ಶುದ್ಧ ಕುಡಿಯುವ ನೀರಿನೊಂದಿಗೆ ಪ್ರಮಾಣಿತ ದೈನಂದಿನ ಪ್ರಮಾಣದಲ್ಲಿ ನೀಡಿ.",
+    "moderate": "20–25 ಕೆಜಿ ತಾಜಾ ಹಸಿರು ಮೇವು ಮತ್ತು ಶುದ್ಧ ಕುಡಿಯುವ ನೀರಿನೊಂದಿಗೆ ಪ್ರಮಾಣಿತ ದೈನಂದಿನ ಪ್ರಮಾಣದಲ್ಲಿ ನೀಡಿ.",
+    "poor": "ಇದನ್ನೇ ಏಕೈಕ ಆಹಾರವಾಗಿ ನೀಡಬೇಡಿ. 1–2 ಕೆಜಿ ಗುಣಮಟ್ಟದ ಹಿಂಡಿ ಸೇರಿಸಿ.",
+    "unsafe": "ಇದನ್ನೇ ಏಕೈಕ ಆಹಾರವಾಗಿ ನೀಡಬೇಡಿ. ತಕ್ಷಣ ಪ್ರತ್ಯೇಕಿಸಿ.",
+    "critical": "ಇದನ್ನೇ ಏಕೈಕ ಆಹಾರವಾಗಿ ನೀಡಬೇಡಿ. ತಕ್ಷಣ ಪ್ರತ್ಯೇಕಿಸಿ."
   },
   "advisory_storage": {
-    "spoiled": "ತೀವ್ರ ಹಾಳಾಗುವ ಅಪಾಯ: ತಕ್ಷಣ ಪ್ರತ್ಯೇಕಿಸಿ ತೇವಾಂಶವನ್ನು ಪರೀಕ್ಷಿಸಿ.",
-    "stable": "ಮೇವನ್ನು ಒಣ, ಗಾಳಿಯಾಡುವ ಜಾಗದಲ್ಲಿ ಮರದ ಹಲಗೆಗಳ ಮೇಲೆ ಸಂಗ್ರಹಿಸಿ.",
+    "spoiled": "ತೀವ್ರ ಹಾಳಾಗುವ ಅಪಾಯ: ತಕ್ಷಣ ಬ್ಯಾಚ್ ಪ್ರತ್ಯೇಕಿಸಿ ಮತ್ತು ಶೇಖರಣಾ ತೇವಾಂಶವನ್ನು ಪರೀಕ್ಷಿಸಿ.",
+    "stable": "ಆಹಾರದ ಚೀಲಗಳನ್ನು ತಂಪಾದ, ಗಾಳಿಯಾಡುವ ಒಣ ಜಾಗದಲ್ಲಿ ಮರದ ಹಲಗೆಗಳ ಮೇಲೆ ಶೇಖರಿಸಿ.",
     "dry_feed": "ಮೇವಿನ ಚೀಲಗಳನ್ನು ನೆಲದಿಂದ 15 ಸೆಂ.ಮೀ ಎತ್ತರದಲ್ಲಿ ಮರದ ಹಲಗೆಗಳ ಮೇಲೆ ತಂಪಾದ, ಒಣ ಜಾಗದಲ್ಲಿ ಸಂಗ್ರಹಿಸಿ.",
     "silage": "ಸೈಲೇಜ್ ಹೊಂಡವನ್ನು ಗಾಳಿಯಾಡದಂತೆ ಸೀಲ್ ಮಾಡಿ ಮುಚ್ಚಿಡಿ. ತಾಪಮಾನ 28°C ಗಿಂತ ಹೆಚ್ಚಾದರೆ ತಕ್ಷಣ ಪರೀಕ್ಷಿಸಿ.",
-    "critical": "ಗಂಭೀರ ಹಾಳಾಗುವಿಕೆ ಎಚ್ಚರಿಕೆ: ಜೈವಿಕ ವಿಘಟನೆ ಅಥವಾ ಶಿಲೀಂಧ್ರ ಬೆಳವಣಿಗೆ ಪತ್ತೆಯಾಗಿದೆ. ಸೋಂಕಿತ ಮೇವನ್ನು ತಕ್ಷಣವೇ ಪ್ರತ್ಯೇಕಿಸಿ ಮತ್ತು ಶೇಖರಣಾ ತೇವಾಂಶವನ್ನು ಕಡಿಮೆ ಮಾಡಿ.",
-    "normal": "ಶೇಖರಣಾ ನಿಯತಾಂಕಗಳು ಸ್ಥಿರವಾಗಿವೆ. ಬೂಜು ಬರದಂತೆ ಪ್ರಸ್ತುತ ತೇವಾಂಶ ಮತ್ತು ತಾಪಮಾನ ನಿಯಂತ್ರಣವನ್ನು ಮುಂದುವರಿಸಿ.",
-    "tip_pallets": "Store feed sacks on wooden pallets at least 15 cm off damp concrete floors.",
-    "tip_ventilation": "Maintain dry, rodent-proof shed ventilation with ambient temperatures below 28°C.",
-    "tip_silage": "Ensure sealed silage or storage units have airtight covers with no punctures or loose edges.",
-    "tip_fifo": "Practice First-In, First-Out (FIFO) stock rotation to prevent aging."
+    "critical": "ತೀವ್ರ ಹಾಳಾಗುವಿಕೆಯ ಎಚ್ಚರಿಕೆ: ಜೈವಿಕ ಅವನತಿ ಅಥವಾ ಶಿಲೀಂಧ್ರ ಬೆಳವಣಿಗೆ ಪತ್ತೆಯಾಗಿದೆ. ವಿಷಕಾರಿ ಮೈಕೋಟಾಕ್ಸಿನ್‌ಗಳ ಹೆಚ್ಚಿನ ಅಪಾಯ.",
+    "normal": "ಶೇಖರಣಾ ನಿಯತಾಂಕಗಳು ಸ್ಥಿರವಾಗಿವೆ. ಪ್ರಸ್ತುತ ತೇವಾಂಶ ಮತ್ತು ತಾಪಮಾನ ಮೇಲ್ವಿಚಾರಣೆಯನ್ನು ಮುಂದುವರಿಸಿ.",
+    "tip_pallets": "ಆಹಾರದ ಚೀಲಗಳನ್ನು ತೇವಾಂಶವುಳ್ಳ ಕಾಂಕ್ರೀಟ್ ನೆಲದಿಂದ ಕನಿಷ್ಠ 15 ಸೆಂ.ಮೀ ಎತ್ತರದಲ್ಲಿ ಮರದ ಹಲಗೆಗಳ ಮೇಲೆ ಇರಿಸಿ.",
+    "tip_ventilation": "28°C ಗಿಂತ ಕಡಿಮೆ ತಾಪಮಾನವಿರುವ ಒಣ ಮತ್ತು ಇಲಿಗಳಿಂದ ಸುರಕ್ಷಿತವಾದ ಕೊಟ್ಟಿಗೆ ಗಾಳಿ ಬೆಳಕನ್ನು ನಿರ್ವಹಿಸಿ.",
+    "tip_silage": "ಸೈಲೇಜ್ ಅಥವಾ ಶೇಖರಣಾ ಘಟಕಗಳು ಯಾವುದೇ ರಂಧ್ರಗಳಿಲ್ಲದ ಗಾಳಿಯಾಡದ ಕವರ್‌ಗಳನ್ನು ಹೊಂದಿರುವುದನ್ನು ಖಚಿತಪಡಿಸಿಕೊಳ್ಳಿ.",
+    "tip_fifo": "ಆಹಾರ ಹಳೆಯದಾಗುವುದನ್ನು ತಡೆಯಲು ಮೊದಲು ಬಂದದ್ದನ್ನು ಮೊದಲು ಬಳಸುವ (FIFO) ಪದ್ಧತಿಯನ್ನು ಅನುಸರಿಸಿ."
   },
   "advisory_action": {
     "critical": {
-      "headline": "Immediate Feed Quarantine",
-      "primary": "Do not feed this batch to any dairy cattle or calves.",
-      "step_0": "Immediately isolate and tag this batch to prevent accidental feeding.",
-      "step_1": "Retain a sealed sample bag for laboratory verification.",
-      "step_2": "Notify your feed supplier and local veterinary officer.",
-      "step_3": "Consult your local veterinary doctor if cattle have already consumed this feed."
+      "headline": "ತಕ್ಷಣದ ಆಹಾರ ಪ್ರತ್ಯೇಕಿಸುವಿಕೆ",
+      "primary": "ಈ ಬ್ಯಾಚ್ ಅನ್ನು ಯಾವುದೇ ಹಸುಗಳಿಗೆ ಅಥವಾ ಕರುಗಳಿಗೆ ತಿನ್ನಿಸಬೇಡಿ.",
+      "step_0": "ಆಕಸ್ಮಿಕವಾಗಿ ತಿನ್ನಿಸುವುದನ್ನು ತಪ್ಪಿಸಲು ಈ ಬ್ಯಾಚ್ ಅನ್ನು ತಕ್ಷಣ ಪ್ರತ್ಯೇಕಿಸಿ.",
+      "step_1": "ಪ್ರಯೋಗಾಲಯ ಪರಿಶೀಲನೆಗಾಗಿ ಸೀಲ್ ಮಾಡಿದ ಮಾದರಿ ಚೀಲವನ್ನು ಇರಿಸಿಕೊಳ್ಳಿ.",
+      "step_2": "ನಿಮ್ಮ ಆಹಾರ ಪೂರೈಕೆದಾರರು ಮತ್ತು ಪಶುವೈದ್ಯಾಧಿಕಾರಿಗೆ ತಿಳಿಸಿ.",
+      "step_3": "ಜಾನುವಾರುಗಳು ಇದನ್ನು ಈಗಾಗಲೇ ಸೇವಿಸಿದ್ದರೆ ಪಶುವೈದ್ಯರನ್ನು ಸಂಪರ್ಕಿಸಿ."
     },
     "poor": {
-      "headline": "CAUTION: BLEND OR SUPPLEMENT BEFORE FEEDING",
-      "primary": "Feed quality is below standard. Do not use as sole feed source.",
-      "step_0": "Limit this feed to dry stock or non-milking cows; avoid giving to high-yield lactating cows.",
-      "step_1": "Blend with 50% high-grade concentrate or fresh leguminous green fodder.",
-      "step_2": "Add 50g commercial mineral mixture per animal daily to offset nutritional deficiency.",
-      "step_3": "Retest next delivery batch to ensure supplier meets quality specifications."
+      "headline": "ಎಚ್ಚರಿಕೆ: ತಿನ್ನಿಸುವ ಮೊದಲು ಮಿಶ್ರಣ ಮಾಡಿ ಅಥವಾ ಪೂರಕಗಳನ್ನು ಸೇರಿಸಿ",
+      "primary": "ಆಹಾರದ ಗುಣಮಟ್ಟ ಕಳಪೆಯಾಗಿದೆ. ಇದನ್ನು ಮಾತ್ರ ಸಂಪೂರ್ಣ ಆಹಾರವಾಗಿ ಬಳಸಬೇಡಿ.",
+      "step_0": "ಹಾಲು ನೀಡದ ಅಥವಾ ಒಣ ಹಸುಗಳಿಗೆ ಮಾತ್ರ ಸೀಮಿತಗೊಳಿಸಿ.",
+      "step_1": "50% ಉನ್ನತ ದರ್ಜೆಯ ಹಿಂಡಿ ಅಥವಾ ತಾಜಾ ಹಸಿರು ಹುಲ್ಲಿನೊಂದಿಗೆ ಬೆರೆಸಿ.",
+      "step_2": "ಪೌಷ್ಟಿಕಾಂಶದ ಕೊರತೆಯನ್ನು ನೀಗಿಸಲು ದಿನಕ್ಕೆ 50 ಗ್ರಾಂ ಖನಿಜ ಮಿಶ್ರಣವನ್ನು ಸೇರಿಸಿ.",
+      "step_3": "ಮುಂದಿನ ವಿತರಣಾ ಬ್ಯಾಚ್ ಅನ್ನು ಗುಣಮಟ್ಟ ಪರೀಕ್ಷಿಸಿ."
     },
     "moderate": {
-      "headline": "Ration Balancing Required",
-      "primary": "Adjust concentrate proportions and supplement with mineral mixture.",
-      "step_0": "Do not feed as sole concentrate source.",
-      "step_1": "Add 50–100g approved mineral mixture per cow daily.",
-      "step_2": "Re-inspect batch after 7 days of storage."
+      "headline": "ಆಹಾರ ಸಮತೋಲನ ಅಗತ್ಯವಿದೆ",
+      "primary": "ಹಿಂಡಿ ಪ್ರಮಾಣವನ್ನು ಸರಿಹೊಂದಿಸಿ ಮತ್ತು ಖನಿಜ ಮಿಶ್ರಣವನ್ನು ಸೇರಿಸಿ.",
+      "step_0": "ಇದನ್ನು ಏಕೈಕ ಹಿಂಡಿ ಮೂಲವಾಗಿ ನೀಡಬೇಡಿ.",
+      "step_1": "ಪ್ರತಿ ಹಸುವಿಗೆ ದಿನಕ್ಕೆ 50–100 ಗ್ರಾಂ ಅನುಮೋದಿತ ಖನಿಜ ಮಿಶ್ರಣ ಸೇರಿಸಿ.",
+      "step_2": "7 ದಿನಗಳ ಶೇಖರಣೆಯ ನಂತರ ಬ್ಯಾಚ್ ಅನ್ನು ಮರುಪರಿಶೀಲಿಸಿ."
     },
     "good": {
-      "headline": "Standard Feeding Protocol",
-      "primary": "Feed directly according to standard daily ration balance.",
-      "step_0": "Maintain clean, ad-lib drinking water access.",
-      "step_1": "Combine with 15–20 kg green fodder for optimal rumen digestion.",
-      "step_2": "Store bags off concrete floors in a dry, ventilated shed.",
-      "step_3": "Monitor milk yield and butterfat percentage regularly."
+      "headline": "ಪ್ರಮಾಣಿತ ಆಹಾರ ಪ್ರೋಟೋಕಾಲ್",
+      "primary": "ದೈನಂದಿನ ಸಮತೋಲನದ ಪ್ರಕಾರ ನೇರವಾಗಿ ಜಾನುವಾರುಗಳಿಗೆ ನೀಡಿ.",
+      "step_0": "ಸ್ವಚ್ಛ ಕುಡಿಯುವ ನೀರನ್ನು ಸದಾ ಒದಗಿಸಿ.",
+      "step_1": "ಉತ್ತಮ ಜೀರ್ಣಕ್ರಿಯೆಗೆ 15–20 ಕೆಜಿ ಹಸಿರು ಮೇವಿನೊಂದಿಗೆ ಬೆರೆಸಿ.",
+      "step_2": "ಚೀಲಗಳನ್ನು ಒಣ, ಗಾಳಿಯಾಡುವ ಕೊಟ್ಟಿಗೆಯಲ್ಲಿ ನೆಲದಿಂದ ಮೇಲಿರಿಸಿ.",
+      "step_3": "ಹಾಲಿನ ಇಳುವರಿ ಮತ್ತು ಬೆಣ್ಣೆಯ ಕೊಬ್ಬಿನ ಶೇಕಡಾವನ್ನು ನಿಯಮಿತವಾಗಿ ಗಮನಿಸಿ."
     },
     "good_headline": "ಉತ್ತಮ ಗುಣಮಟ್ಟ — ಹಾಲು ಕರೆಯುವ ಹಸುಗಳಿಗೆ ಸುರಕ್ಷಿತ",
     "moderate_headline": "ಮಧ್ಯಮ ಗುಣಮಟ್ಟ — ಪೋಷಕಾಂಶ ಸಮತೋಲನ ಅಗತ್ಯವಿದೆ",
     "poor_headline": "ಕಳಪೆ ಗುಣಮಟ್ಟ — ಎಚ್ಚರಿಕೆಯಿಂದ ಬಳಸಿ",
     "unsafe_headline": "ಅಸುರಕ್ಷಿತ — ತಕ್ಷಣವೇ ಮೇವು ನೀಡುವುದನ್ನು ನಿಲ್ಲಿಸಿ!",
     "unsafe": {
-      "headline": "ACTION REQUIRED: DO NOT FEED — ISOLATE BATCH",
-      "primary": "STOP feeding this batch immediately. Quarantine the sack or storage unit.",
-      "step_0": "Immediately stop offering this feed to cattle, calves, or pregnant cows.",
-      "step_1": "Physically isolate affected bags to prevent accidental herd feeding.",
-      "step_2": "Document the Batch ID using the certified QR code for supplier replacement claim.",
-      "step_3": "Consult your local veterinary doctor if cattle have already consumed this feed."
+      "headline": "ಕ್ರಮ ಅಗತ್ಯ: ಆಹಾರ ನೀಡಬೇಡಿ — ಬ್ಯಾಚ್ ಪ್ರತ್ಯೇಕಿಸಿ",
+      "primary": "ಈ ಬ್ಯಾಚ್ ತಿನ್ನಿಸುವುದನ್ನು ತಕ್ಷಣ ನಿಲ್ಲಿಸಿ. ಚೀಲ ಅಥವಾ ಶೇಖರಣೆಯನ್ನು ಪ್ರತ್ಯೇಕಿಸಿ.",
+      "step_0": "ಹಸುಗಳು, ಕರುಗಳು ಅಥವಾ ಗರ್ಭಿಣಿ ಹಸುಗಳಿಗೆ ನೀಡುವುದನ್ನು ತಕ್ಷಣ ನಿಲ್ಲಿಸಿ.",
+      "step_1": "ಹಿಂಡಿಗೆ ತಪ್ಪಾಗಿ ನೀಡುವುದನ್ನು ತಡೆಯಲು ಚೀಲಗಳನ್ನು ಪ್ರತ್ಯೇಕಿಸಿ.",
+      "step_2": "ಬದಲಿ ಕ್ಲೈಮ್‌ಗಾಗಿ ಕ್ಯೂಆರ್ ಕೋಡ್ ಬಳಸಿ ಬ್ಯಾಚ್ ಐಡಿ ದಾಖಲಿಸಿ.",
+      "step_3": "ಜಾನುವಾರುಗಳು ಇದನ್ನು ಈಗಾಗಲೇ ಸೇವಿಸಿದ್ದರೆ ಪಶುವೈದ್ಯರನ್ನು ಸಂಪರ್ಕಿಸಿ."
     }
   },
   "regions": {
@@ -886,19 +887,34 @@ export default {
     "save_settings_btn": "ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಉಳಿಸಿ"
   },
   "advisory_nutrition": {
-    "all_balanced": "ಎಲ್ಲಾ ಪೌಷ್ಠಿಕಾಂಶ ಸೂಚಕಗಳು (ಪ್ರೋಟೀನ್, ತೇವಾಂಶ, ನಾರು, ಶಕ್ತಿ) NDDB ಮಾನದಂಡಗಳ ಒಳಗೆ ಸುರಕ್ಷಿತವಾಗಿವೆ.",
-    "low_nutrient": "Low {{nutrient}}: currently {{value}} {{unit}} (ideal: {{min}}–{{max}} {{unit}}).",
-    "high_nutrient": "High {{nutrient}}: currently {{value}} {{unit}} (ideal: {{min}}–{{max}} {{unit}}).",
+    "all_balanced": "ಅಳೆಯಲಾದ ಎಲ್ಲಾ ಪೌಷ್ಟಿಕಾಂಶ ಸೂಚಕಗಳು (ಪ್ರೋಟೀನ್, ತೇವಾಂಶ, ನಾರು, ಶಕ್ತಿ) ಪ್ರಮಾಣಿತ NDDB ವ್ಯಾಪ್ತಿಯಲ್ಲಿ ಆರಾಮವಾಗಿ ಹೊಂದಿಕೊಳ್ಳುತ್ತವೆ.",
+    "low_nutrient": "ಕಡಿಮೆ {{nutrient}}: ಪ್ರಸ್ತುತ {{value}} {{unit}} (ಸೂಕ್ತ: {{min}}–{{max}} {{unit}}).",
+    "high_nutrient": "ಹೆಚ್ಚಿನ {{nutrient}}: ಪ್ರಸ್ತುತ {{value}} {{unit}} (ಸೂಕ್ತ: {{min}}–{{max}} {{unit}}).",
     "status_balanced": "ಸಮತೋಲಿತ",
-    "status_attention": "ಗಮನ ಹರಿಸುವುದು ಅಗತ್ಯ"
+    "status_attention": "ಗಮನ ಅಗತ್ಯವಿದೆ"
   },
   "advisory_adulteration": {
-    "detected_headline": "Adulterant Alert: {{adulterant}} detected.",
-    "clean_headline": "ಈ ಮಾದರಿಯಲ್ಲಿ ಯಾವುದೇ ರಾಸಾಯನಿಕ ಕಲಬೆರಕೆ ಕಂಡುಬಂದಿಲ್ಲ.",
-    "safe_summary": "ಕೃತಕ ಅಥವಾ ಅಜೈವಿಕ ಕಲಬೆರಕೆಯಿಂದ ಸಂಪೂರ್ಣ ಮುಕ್ತ.",
-    "clean_remedy": "ಕೃತಕ ಅಥವಾ ಅಜೈವಿಕ ಕಲಬೆರಕೆಯಿಂದ ಸಂಪೂರ್ಣ ಮುಕ್ತ.",
-    "remediation_1": "Immediately withhold and isolate this batch from all livestock.",
-    "remediation_2": "Retain sample bag for batch verification and supplier complaint.",
-    "remediation_3": "Notify local veterinary officer if animals show distress."
+    "detected_headline": "ಕಲಬೆರಕೆ ಎಚ್ಚರಿಕೆ: {{adulterant}} ಪತ್ತೆಯಾಗಿದೆ.",
+    "clean_headline": "ಅಳೆಯಲಾದ ಎಲ್ಲಾ ಸುರಕ್ಷತಾ ಸೂಚಕಗಳು ಪ್ರಮಾಣಿತ ಮಿತಿಗಳ ಒಳಗೆ ಇವೆ.",
+    "safe_summary": "ಈ ಬ್ಯಾಚ್‌ನಲ್ಲಿ ಯಾವುದೇ ಕೃತಕ ಸಾರಜನಕ ಹೆಚ್ಚಳ (ಯೂರಿಯಾ), ಖನಿಜ ಧೂಳಿನ ಕಲಬೆರಕೆ ಅಥವಾ ವಿಷಕಾರಿ ಮೈಕೋಟಾಕ್ಸಿನ್‌ಗಳು ಕಂಡುಬಂದಿಲ್ಲ.",
+    "clean_remedy": "ಈ ಬ್ಯಾಚ್‌ನಲ್ಲಿ ಯಾವುದೇ ಕೃತಕ ಸಾರಜನಕ ಹೆಚ್ಚಳ (ಯೂರಿಯಾ), ಖನಿಜ ಧೂಳಿನ ಕಲಬೆರಕೆ ಅಥವಾ ವಿಷಕಾರಿ ಮೈಕೋಟಾಕ್ಸಿನ್‌ಗಳು ಕಂಡುಬಂದಿಲ್ಲ.",
+    "remediation_1": "ತಕ್ಷಣ ಈ ಬ್ಯಾಚ್ ಅನ್ನು ಜಾನುವಾರುಗಳಿಗೆ ನೀಡದೆ ಪ್ರತ್ಯೇಕಿಸಿ.",
+    "remediation_2": "ಬ್ಯಾಚ್ ಪರಿಶೀಲನೆ ಮತ್ತು ಪೂರೈಕೆದಾರರ ದೂರಿಗಾಗಿ ಮಾದರಿ ಚೀಲವನ್ನು ಇರಿಸಿಕೊಳ್ಳಿ.",
+    "remediation_3": "ಪ್ರಾಣಿಗಳು ಅಸ್ವಸ್ಥತೆ ತೋರಿಸಿದರೆ ಸ್ಥಳೀಯ ಪಶುವೈದ್ಯರಿಗೆ ತಕ್ಷಣ ತಿಳಿಸಿ."
+  },
+  "nutrients": {
+    "protein": "ಪ್ರೋಟೀನ್",
+    "moisture": "ತೇವಾಂಶ",
+    "fiber": "ನಾರು",
+    "energy": "ಶಕ್ತಿ",
+    "mineral": "ಖನಿಜ ಸೂಚ್ಯಂಕ",
+    "urea": "ಯೂರಿಯಾ",
+    "sand": "ಮರಳು / ಸಿಲಿಕಾ",
+    "aflatoxin": "ಅಫ್ಲಾಟಾಕ್ಸಿನ್",
+    "fungal": "ಶಿಲೀಂಧ್ರ ಹೊರೆ",
+    "mould": "ಬೂಜು ಸೂಚ್ಯಂಕ",
+    "temperature": "ತಾಪಮಾನ",
+    "ph": "pH",
+    "depth": "ಮಾದರಿ ಆಳ"
   }
 };

@@ -182,15 +182,16 @@ export default {
     "feeding_recommendation": "തീറ്റ നിർദ്ദേശം",
     "feeding_rec": "തീറ്റ നിർദ്ദേശം",
     "storage_rec": "സംഭരണ നിർദ്ദേശം",
-    "no_risk_alert": "ഈ സാമ്പിളിൽ രാസമാലിന്യങ്ങളോ മായങ്ങളോ കണ്ടെത്തിയിട്ടില്ല.",
+    "no_risk_alert": "അളന്ന എല്ലാ സുരക്ഷാ സൂചകങ്ങളും സാധാരണ പരിധിക്കുള്ളിലാണ്.",
     "storage_recommendation": "സംഭരണ നിർദ്ദേശം",
-    "risk_alert": "അപകട മുന്നറിയിപ്പ്",
+    "risk_alert": "സുരക്ഷാ മുന്നറിയിപ്പ്",
     "recommended_action": "ശുപാർശ ചെയ്യുന്ന നടപടി",
     "save_result_btn": "ഫലം സംരക്ഷിക്കുക",
     "saved_to_records": "പരിശോധന നിങ്ങളുടെ കർഷക രേഖകളിൽ സംരക്ഷിച്ചു.",
     "no_tests_yet": "ഇതുവരെ പരിശോധനകളൊന്നും നടത്തിയിട്ടില്ല.",
     "start_first_feed_test": "നിങ്ങളുടെ ആദ്യ തീറ്റ പരിശോധന ആരംഭിക്കുക",
-    "explore_sample_analysis": "മാതൃകാ വിശകലനം കാണുക"
+    "explore_sample_analysis": "മാതൃകാ വിശകലനം കാണുക",
+    "safety_alert": "സുരക്ഷാ മുന്നറിയിപ്പ്"
   },
   "analyze": {
     "title": "AI ത്വരിത തീറ്റ ഗുണനിലവാര സുരക്ഷാ പരിശോധന",
@@ -770,71 +771,71 @@ export default {
     "unsafe": "അപകടകരമായ മായമോ വിഷാംശമോ കണ്ടെത്തി! കന്നുകാലികൾക്ക് നൽകുന്നത് ഉടൻ നിർത്തി ഡോക്ടറുടെ സഹായം തേടുക."
   },
   "advisory_feeding": {
-    "normal": "Feed in standard daily proportions alongside 20–25 kg fresh green fodder and clean ad-lib drinking water.",
-    "compensate": "Do not feed as sole ration. Compensate with 1–2 kg quality concentrate pellet and bypass protein.",
+    "normal": "20–25 കിലോ പുതിയ പച്ചപ്പുല്ലും ശുദ്ധമായ കുടിവെള്ളവും ചേർത്ത് സാധാരണ ദൈനംദിന അനുപാതത്തിൽ നൽകുക.",
+    "compensate": "ഇത് മാത്രമായി നൽകരുത്. 1–2 കിലോ ഗുണനിലവാരമുള്ള കാലിത്തീറ്റയും ബൈപാസ് പ്രോട്ടീനും നൽകി പരിഹരിക്കുക.",
     "lactating": "കറവപ്പശുവിന് 15–20 കിലോ പച്ചപ്പുല്ല്, 4 കിലോ ഉണക്കപ്പുല്ല്, കറക്കുന്ന ഓരോ 2.5 ലിറ്റർ പാലിനും 1 കിലോ കാലിത്തീറ്റ വീതം നൽകുക.",
     "dry": "കറവയില്ലാത്ത പശുക്കൾക്ക് നല്ല ഉണക്കപ്പുല്ലിനൊപ്പം 1.5–2 കിലോ തീറ്റയും 50 ഗ്രാം മിനറൽ മിശ്രിതവും നൽകുക.",
-    "good": "ദിവസവും 20–25 കിലോ പച്ചപ്പുല്ലും 4 കിലോ ഉണക്കപ്പുല്ലും ചേർത്ത് കൃത്യമായ അളവിൽ നൽകുക.",
-    "moderate": "ദിവസവും 20–25 കിലോ പച്ചപ്പുല്ലും 4 കിലോ ഉണക്കപ്പുല്ലും ചേർത്ത് കൃത്യമായ അളവിൽ നൽകുക.",
-    "poor": "ഇത് മാത്രമായി നൽകരുത്. പാൽ ഉൽപ്പാദനം നിലനിർത്താൻ 1–2 കിലോ മികച്ച കാലിത്തീറ്റ അധികമായി നൽകുക.",
-    "unsafe": "ഇത് മാത്രമായി നൽകരുത്. പാൽ ഉൽപ്പാദനം നിലനിർത്താൻ 1–2 കിലോ മികച്ച കാലിത്തീറ്റ അധികമായി നൽകുക.",
-    "critical": "ഇത് മാത്രമായി നൽകരുത്. പാൽ ഉൽപ്പാദനം നിലനിർത്താൻ 1–2 കിലോ മികച്ച കാലിത്തീറ്റ അധികമായി നൽകുക."
+    "good": "20–25 കിലോ പുതിയ പച്ചപ്പുല്ലും ശുദ്ധമായ കുടിവെള്ളവും ചേർത്ത് സാധാരണ ദൈനംദിന അനുപാതത്തിൽ നൽകുക.",
+    "moderate": "20–25 കിലോ പുതിയ പച്ചപ്പുല്ലും ശുദ്ധമായ കുടിവെള്ളവും ചേർത്ത് സാധാരണ ദൈനംദിന അനുപാതത്തിൽ നൽകുക.",
+    "poor": "ഇത് മാത്രമായി നൽകരുത്. 1–2 കിലോ ഗുണനിലവാരമുള്ള കാലിത്തീറ്റ ചേർക്കുക.",
+    "unsafe": "ഇത് മാത്രമായി നൽകരുത്. ഉടനടി മാറ്റിനിർത്തുക.",
+    "critical": "ഇത് മാത്രമായി നൽകരുത്. ഉടനടി മാറ്റിനിർത്തുക."
   },
   "advisory_storage": {
-    "spoiled": "ഗുരുതരമായ കേടുപാട് സാധ്യത: ബാച്ച് ഉടനടി മാറ്റി സൂക്ഷിക്കുക.",
-    "stable": "തീറ്റച്ചാക്കുകൾ തറയിൽ തട്ടാതെ പലകകളിൽ ഈർപ്പമില്ലാത്ത സ്ഥലത്ത് സൂക്ഷിക്കുക.",
+    "spoiled": "ഗുരുതരമായ കേടുപാടുകൾ: ബാച്ച് ഉടനടി മാറ്റിനിർത്തുക, സംഭരണ ഈർപ്പം പരിശോധിക്കുക.",
+    "stable": "തീറ്റച്ചാക്കുകൾ തണുപ്പുള്ളതും വായുസഞ്ചാരമുള്ളതുമായ ഉണങ്ങിയ സ്ഥലത്ത് മരപ്പലകകളിൽ സൂക്ഷിക്കുക.",
     "dry_feed": "തീറ്റച്ചാക്കുകൾ തറയിൽ നിന്ന് 15 സെ.മീ ഉയരത്തിൽ തടിപ്പലകകളിൽ തണുപ്പുള്ള സ്ഥലത്ത് സൂക്ഷിക്കുക.",
     "silage": "സൈലേജ് കുഴി വായു കടക്കാതെ മൂടി സൂക്ഷിക്കുക. താപനില 28°C ൽ കൂടുതലായാൽ ഉടൻ പരിശോധിക്കുക.",
-    "critical": "ഗുരുതരമായ കേടുപാട് മുന്നറിയിപ്പ്: പൂപ്പലോ ചീഞ്ഞളിയലോ കണ്ടെത്തി. കേടായ തീറ്റ ഉടൻ മാറ്റി ഈർപ്പം കുറയ്ക്കുക.",
-    "normal": "സംഭരണ അവസ്ഥ തൃപ്തികരമാണ്. പൂപ്പൽ വരാതിരിക്കാൻ നിലവിലെ ഈർപ്പവും താപനിലയും നിലനിർത്തുക.",
-    "tip_pallets": "Store feed sacks on wooden pallets at least 15 cm off damp concrete floors.",
-    "tip_ventilation": "Maintain dry, rodent-proof shed ventilation with ambient temperatures below 28°C.",
-    "tip_silage": "Ensure sealed silage or storage units have airtight covers with no punctures or loose edges.",
-    "tip_fifo": "Practice First-In, First-Out (FIFO) stock rotation to prevent aging."
+    "critical": "ഗുരുതരമായ കേടുപാട് മുന്നറിയിപ്പ്: ജൈവ അപചയം അല്ലെങ്കിൽ പൂപ്പൽ ബാധ കണ്ടെത്തി. വിഷാംശമുള്ള മൈക്കോടോക്സിനുകളുടെ ഉയർന്ന സാധ്യത.",
+    "normal": "സംഭരണ പാരാമീറ്ററുകൾ സ്ഥിരമാണ്. ഈർപ്പവും താപനിലയും നിരീക്ഷിക്കുന്നത് തുടരുക.",
+    "tip_pallets": "ഈർപ്പമുള്ള കോൺക്രീറ്റ് തറയിൽ നിന്ന് കുറഞ്ഞത് 15 സെ.മീ ഉയരത്തിൽ മരപ്പലകകളിൽ തീറ്റച്ചാക്കുകൾ സൂക്ഷിക്കുക.",
+    "tip_ventilation": "28°C-ൽ താഴെയുള്ള ഊഷ്മാവിൽ ഉണങ്ങിയതും എലികൾ കയറാത്തതുമായ ഷെഡ് വായുസഞ്ചാരം ഉറപ്പാക്കുക.",
+    "tip_silage": "സൈലേജ് അല്ലെങ്കിൽ സംഭരണ യൂണിറ്റുകളിൽ ദ്വാരങ്ങളോ അയഞ്ഞ അരികുകളോ ഇല്ലാത്ത വായു കടക്കാത്ത മൂടികൾ ഉണ്ടെന്ന് ഉറപ്പാക്കുക.",
+    "tip_fifo": "തീറ്റ പഴകുന്നത് തടയാൻ ആദ്യം വന്നത് ആദ്യം ഉപയോഗിക്കുക (FIFO) എന്ന രീതി പാലിക്കുക."
   },
   "advisory_action": {
     "critical": {
-      "headline": "Immediate Feed Quarantine",
-      "primary": "Do not feed this batch to any dairy cattle or calves.",
-      "step_0": "Immediately isolate and tag this batch to prevent accidental feeding.",
-      "step_1": "Retain a sealed sample bag for laboratory verification.",
-      "step_2": "Notify your feed supplier and local veterinary officer.",
-      "step_3": "Consult your local veterinary doctor if cattle have already consumed this feed."
+      "headline": "തീറ്റ ഉടനടി മാറ്റിനിർത്തുക",
+      "primary": "ഈ ബാച്ച് കറവപ്പശുക്കൾക്കോ കിടാങ്ങൾക്കോ നൽകരുത്.",
+      "step_0": "അബദ്ധത്തിൽ നൽകുന്നത് ഒഴിവാക്കാൻ ഈ ബാച്ച് ഉടൻ മാറ്റിനിർത്തുക.",
+      "step_1": "ലാബ് പരിശോധനയ്ക്കായി സീൽ ചെയ്ത സാമ്പിൾ ബാഗ് സൂക്ഷിക്കുക.",
+      "step_2": "നിങ്ങളുടെ തീറ്റ വിതരണക്കാരനെയും വെറ്ററിനറി ഓഫീസറെയും അറിയിക്കുക.",
+      "step_3": "കന്നുകാലികൾ ഇത് ഇതിനകം കഴിച്ചിട്ടുണ്ടെങ്കിൽ വെറ്ററിനറി ഡോക്ടറെ സമീപിക്കുക."
     },
     "poor": {
-      "headline": "CAUTION: BLEND OR SUPPLEMENT BEFORE FEEDING",
-      "primary": "Feed quality is below standard. Do not use as sole feed source.",
-      "step_0": "Limit this feed to dry stock or non-milking cows; avoid giving to high-yield lactating cows.",
-      "step_1": "Blend with 50% high-grade concentrate or fresh leguminous green fodder.",
-      "step_2": "Add 50g commercial mineral mixture per animal daily to offset nutritional deficiency.",
-      "step_3": "Retest next delivery batch to ensure supplier meets quality specifications."
+      "headline": "മുന്നറിയിപ്പ്: നൽകുന്നതിന് മുൻപ് കലർത്തുകയോ അനുബന്ധങ്ങൾ ചേർക്കുകയോ ചെയ്യുക",
+      "primary": "തീറ്റയുടെ ഗുണനിലവാരം കുറവാണ്. ഇത് മാത്രം മുഴുവൻ തീറ്റയായി നൽകരുത്.",
+      "step_0": "കറവയില്ലാത്ത പശുക്കൾക്ക് മാത്രമായി പരിമിതപ്പെടുത്തുക.",
+      "step_1": "50% ഉയർന്ന ഗുണമേന്മയുള്ള കാലിത്തീറ്റയോ പച്ചപ്പുല്ലോ ചേർത്ത് നൽകുക.",
+      "step_2": "പോഷകക്കുറവ് പരിഹരിക്കാൻ പ്രതിദിനം 50 ഗ്രാം മിനറൽ മിശ്രിതം ചേർക്കുക.",
+      "step_3": "അടുത്ത വിതരണ ബാച്ചിന്റെ ഗുണനിലവാരം ഉറപ്പാക്കാൻ വീണ്ടും പരിശോധിക്കുക."
     },
     "moderate": {
-      "headline": "Ration Balancing Required",
-      "primary": "Adjust concentrate proportions and supplement with mineral mixture.",
-      "step_0": "Do not feed as sole concentrate source.",
-      "step_1": "Add 50–100g approved mineral mixture per cow daily.",
-      "step_2": "Re-inspect batch after 7 days of storage."
+      "headline": "റേഷൻ സന്തുലിതാവസ്ഥ ആവശ്യമാണ്",
+      "primary": "കാലിത്തീറ്റയുടെ അളവ് ക്രമീകരിക്കുകയും മിനറൽ മിശ്രിതം നൽകുകയും ചെയ്യുക.",
+      "step_0": "ഇത് പ്രധാന തീറ്റയായി മാത്രം നൽകരുത്.",
+      "step_1": "ഒരു പശുവിന് പ്രതിദിനം 50–100 ഗ്രാം മിനറൽ മിശ്രിതം നൽകുക.",
+      "step_2": "7 ദിവസത്തെ സംഭരണത്തിന് ശേഷം ബാച്ച് വീണ്ടും പരിശോധിക്കുക."
     },
     "good": {
-      "headline": "Standard Feeding Protocol",
-      "primary": "Feed directly according to standard daily ration balance.",
-      "step_0": "Maintain clean, ad-lib drinking water access.",
-      "step_1": "Combine with 15–20 kg green fodder for optimal rumen digestion.",
-      "step_2": "Store bags off concrete floors in a dry, ventilated shed.",
-      "step_3": "Monitor milk yield and butterfat percentage regularly."
+      "headline": "സാധാരണ തീറ്റക്രമം",
+      "primary": "ദൈനംദിന സമീകൃത റേഷൻ പ്രകാരം നേരിട്ട് പശുക്കൾക്ക് നൽകാം.",
+      "step_0": "ശുദ്ധമായ കുടിവെള്ളം തടസ്സമില്ലാതെ ലഭ്യമാക്കുക.",
+      "step_1": "മികച്ച ദഹനത്തിനായി 15–20 കിലോ പച്ചപ്പുല്ല് ചേർക്കുക.",
+      "step_2": "ഈർപ്പമില്ലാത്ത, വായുസഞ്ചാരമുള്ള ഷെഡിൽ തറയിൽ നിന്ന് ഉയർത്തി ചാക്കുകൾ സൂക്ഷിക്കുക.",
+      "step_3": "പാൽ ഉൽപ്പാദനവും കൊഴുപ്പിന്റെ അളവും കൃത്യമായി നിരീക്ഷിക്കുക."
     },
     "good_headline": "നല്ല ഗുണനിലവാരം — കറവപ്പശുക്കൾക്ക് സുരക്ഷിതം",
     "moderate_headline": "മിതമായ ഗുണനിലവാരം — പോഷക സമീകരണം വേണം",
     "poor_headline": "മോശം ഗുണനിലവാരം — ശ്രദ്ധയോടെ ഉപയോഗിക്കുക",
     "unsafe_headline": "സുരക്ഷിതമല്ല — ഉടൻ തീറ്റ നൽകുന്നത് നിർത്തുക!",
     "unsafe": {
-      "headline": "ACTION REQUIRED: DO NOT FEED — ISOLATE BATCH",
-      "primary": "STOP feeding this batch immediately. Quarantine the sack or storage unit.",
-      "step_0": "Immediately stop offering this feed to cattle, calves, or pregnant cows.",
-      "step_1": "Physically isolate affected bags to prevent accidental herd feeding.",
-      "step_2": "Document the Batch ID using the certified QR code for supplier replacement claim.",
-      "step_3": "Consult your local veterinary doctor if cattle have already consumed this feed."
+      "headline": "നടപടി ആവശ്യം: തീറ്റ നൽകരുത് — ബാച്ച് മാറ്റിനിർത്തുക",
+      "primary": "ഈ ബാച്ച് നൽകുന്നത് ഉടനടി നിർത്തുക. ചാക്ക് അല്ലെങ്കിൽ സംഭരണശാല മാറ്റിനിർത്തുക.",
+      "step_0": "പശുക്കൾക്കോ കിടാങ്ങൾക്കോ ഗർഭിണിയായ പശുക്കൾക്കോ നൽകുന്നത് ഉടൻ നിർത്തുക.",
+      "step_1": "കൂട്ടത്തോടെ നൽകുന്നത് ഒഴിവാക്കാൻ ബാധിച്ച ചാക്കുകൾ പ്രത്യേകം സൂക്ഷിക്കുക.",
+      "step_2": "പകരം തീറ്റ ലഭിക്കുന്നതിന് ക്യുആർ കോഡ് ഉപയോഗിച്ച് ബാച്ച് ഐഡി രേഖപ്പെടുത്തുക.",
+      "step_3": "കന്നുകാലികൾ ഇത് ഇതിനകം കഴിച്ചിട്ടുണ്ടെങ്കിൽ വെറ്ററിനറി ഡോക്ടറെ സമീപിക്കുക."
     }
   },
   "regions": {
@@ -886,19 +887,34 @@ export default {
     "save_settings_btn": "ക്രമീകരണങ്ങൾ സേവ് ചെയ്യുക"
   },
   "advisory_nutrition": {
-    "all_balanced": "എല്ലാ പോഷക സൂചകങ്ങളും (പ്രോട്ടീൻ, ഈർപ്പം, നാര്, ഊർജ്ജം) NDDB മാനദണ്ഡങ്ങൾക്കുള്ളിൽ സുരക്ഷിതമാണ്.",
-    "low_nutrient": "Low {{nutrient}}: currently {{value}} {{unit}} (ideal: {{min}}–{{max}} {{unit}}).",
-    "high_nutrient": "High {{nutrient}}: currently {{value}} {{unit}} (ideal: {{min}}–{{max}} {{unit}}).",
+    "all_balanced": "അളന്ന എല്ലാ പോഷക സൂചകങ്ങളും (പ്രോട്ടീൻ, ഈർപ്പം, നാര്, ഊർജ്ജം) സാധാരണ NDDB പരിധിക്കുള്ളിൽ തൃപ്തികരമായി നിലനിൽക്കുന്നു.",
+    "low_nutrient": "കുറഞ്ഞ {{nutrient}}: നിലവിൽ {{value}} {{unit}} (ആവശ്യമായത്: {{min}}–{{max}} {{unit}}).",
+    "high_nutrient": "കൂടിയ {{nutrient}}: നിലവിൽ {{value}} {{unit}} (ആവശ്യമായത്: {{min}}–{{max}} {{unit}}).",
     "status_balanced": "സന്തുലിതം",
-    "status_attention": "ശ്രദ്ധിക്കേണ്ടതുണ്ട്"
+    "status_attention": "ശ്രദ്ധ ആവശ്യമാണ്"
   },
   "advisory_adulteration": {
-    "detected_headline": "Adulterant Alert: {{adulterant}} detected.",
-    "clean_headline": "ഈ സാമ്പിളിൽ രാസമാലിന്യങ്ങളോ മായങ്ങളോ കണ്ടെത്തിയിട്ടില്ല.",
-    "safe_summary": "കൃത്രിമ അല്ലെങ്കിൽ അജൈവ മാലിന്യങ്ങളിൽ നിന്ന് സുരക്ഷിതം.",
-    "clean_remedy": "കൃത്രിമ അല്ലെങ്കിൽ അജൈവ മാലിന്യങ്ങളിൽ നിന്ന് സുരക്ഷിതം.",
-    "remediation_1": "Immediately withhold and isolate this batch from all livestock.",
-    "remediation_2": "Retain sample bag for batch verification and supplier complaint.",
-    "remediation_3": "Notify local veterinary officer if animals show distress."
+    "detected_headline": "മായം മുന്നറിയിപ്പ്: {{adulterant}} കണ്ടെത്തി.",
+    "clean_headline": "അളന്ന എല്ലാ സുരക്ഷാ സൂചകങ്ങളും സാധാരണ പരിധിക്കുള്ളിലാണ്.",
+    "safe_summary": "ഈ ബാച്ചിൽ സിന്തറ്റിക് നൈട്രജൻ സ്പൈക്ക് (യൂറിയ), ധാതു പൊടി മായം ചേർക്കൽ, അല്ലെങ്കിൽ വിഷാംശമുള്ള മൈകോടോക്സിനുകൾ എന്നിവ കണ്ടെത്തിയിട്ടില്ല.",
+    "clean_remedy": "ഈ ബാച്ചിൽ സിന്തറ്റിക് നൈട്രജൻ സ്പൈക്ക് (യൂറിയ), ധാതു പൊടി മായം ചേർക്കൽ, അല്ലെങ്കിൽ വിഷാംശമുള്ള മൈകോടോക്സിനുകൾ എന്നിവ കണ്ടെത്തിയിട്ടില്ല.",
+    "remediation_1": "ഈ ബാച്ച് കന്നുകാലികൾക്ക് നൽകാതെ ഉടൻ തന്നെ മാറ്റിനിർത്തുക.",
+    "remediation_2": "ബാച്ച് പരിശോധനയ്ക്കും വിതരണക്കാരന്റെ പരാതിക്കുമായി സാമ്പിൾ ബാഗ് സൂക്ഷിക്കുക.",
+    "remediation_3": "മൃഗങ്ങൾക്ക് അസ്വസ്ഥത കാണുകയാണെങ്കിൽ ഉടൻ തന്നെ വെറ്ററിനറി ഡോക്ടറെ അറിയിക്കുക."
+  },
+  "nutrients": {
+    "protein": "പ്രോട്ടീൻ",
+    "moisture": "ഈർപ്പം",
+    "fiber": "നാര്",
+    "energy": "ഊർജ്ജം",
+    "mineral": "മിനറൽ സൂചിക",
+    "urea": "യൂറിയ",
+    "sand": "മണൽ / സിലിക്ക",
+    "aflatoxin": "അഫ്ലാടോക്സിൻ",
+    "fungal": "ഫംഗൽ ലോഡ്",
+    "mould": "പൂപ്പൽ സൂചിക",
+    "temperature": "താപനില",
+    "ph": "pH",
+    "depth": "സാമ്പിൾ ആഴം"
   }
 };

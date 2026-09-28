@@ -453,7 +453,7 @@ I18N_ADVISORY = {
 def _build_structured_sections(readings, predictions, ranges, feed_type, advisories, feed_recs, storage_adv, nutrition_summary, lang: str = "en") -> dict:
     """Build a comprehensive 5-part farmer-friendly AI decision-support report."""
     lang = lang.lower() if isinstance(lang, str) else "en"
-    if lang not in ("en", "hi", "mr", "ta", "te"):
+    if lang not in ("en", "ta", "hi", "te", "kn", "ml", "mr", "bn", "gu", "pa", "as", "or", "ur"):
         lang = "en"
 
     quality = predictions.get("quality_status", "Moderate")
@@ -490,7 +490,22 @@ def _build_structured_sections(readings, predictions, ranges, feed_type, advisor
             nutri_points.append(f"High {info.get('label')}: currently {info.get('value')} {info.get('unit')} (ideal: {info.get('ideal_range')[0]}–{info.get('ideal_range')[1]} {info.get('unit')}).")
             nutri_keys.append({"key": "advisory_nutrition.high_nutrient", "params": {"nutrient": info.get('label'), "value": info.get('value'), "unit": info.get('unit'), "min": info.get('ideal_range')[0], "max": info.get('ideal_range')[1]}})
     if not nutri_points:
-        nutri_points.append("All measured nutritional indicators (Protein, Moisture, Fiber, Energy) fall comfortably within standard NDDB ranges.")
+        balanced_dict = {
+            "en": "All measured nutritional indicators (Protein, Moisture, Fiber, Energy) fall comfortably within standard NDDB ranges.",
+            "ta": "அளவிடப்பட்ட அனைத்து ஊட்டச்சத்து குறிகாட்டிகளும் (புரதம், ஈரப்பதம், நார்ச்சத்து, ஆற்றல்) நிலையான NDDB வரம்புகளுக்குள் வசதியாக உள்ளன.",
+            "hi": "सभी मापे गए पोषण संकेतक (प्रोटीन, नमी, फाइबर, ऊर्जा) मानक NDDB सीमाओं के भीतर आराम से हैं।",
+            "te": "కొలిచిన అన్ని పోషక సూచికలు (ప్రోటీన్, తేమ, పీచు, శక్తి) ప్రామాణిక NDDB పరిధిలో సౌకర్యవంతంగా ఉన్నాయి.",
+            "kn": "ಅಳೆಯಲಾದ ಎಲ್ಲಾ ಪೌಷ್ಟಿಕಾಂಶ ಸೂಚಕಗಳು (ಪ್ರೋಟೀನ್, ತೇವಾಂಶ, ನಾರು, ಶಕ್ತಿ) ಪ್ರಮಾಣಿತ NDDB ವ್ಯಾಪ್ತಿಯಲ್ಲಿ ಆರಾಮವಾಗಿ ಹೊಂದಿಕೊಳ್ಳುತ್ತವೆ.",
+            "ml": "അളന്ന എല്ലാ പോഷക സൂചകങ്ങളും (പ്രോട്ടീൻ, ഈർപ്പം, നാര്, ഊർജ്ജം) സാധാരണ NDDB പരിധിക്കുള്ളിൽ തൃപ്തികരമായി നിലനിൽക്കുന്നു.",
+            "mr": "सर्व मोजलेले पोषण निर्देशांक (प्रथिने, ओलावा, फायबर, ऊर्जा) प्रमाणित NDDB श्रेणींमध्ये व्यवस्थित बसतात.",
+            "bn": "সমস্ত পরিমাপকৃত পুষ্টি সূচক (প্রোটিন, আর্দ্রতা, ফাইবার, শক্তি) আদর্শ NDDB সীমার মধ্যে স্বাচ্ছন্দ্যে রয়েছে।",
+            "gu": "બધા માપેલા પોષક સૂચકાંકો (પ્રોટીન, ભેજ, ફાઇબર, ઊર્જા) પ્રમાણભૂત NDDB રેન્જમાં સુસંગત છે.",
+            "pa": "ਸਾਰੇ ਮਾਪੇ ਗਏ ਪੋਸ਼ਣ ਸੰਕੇਤਕ (ਪ੍ਰੋਟੀਨ, ਨਮੀ, ਫਾਈਬਰ, ਊਰਜਾ) ਮਿਆਰੀ NDDB ਸੀਮਾਵਾਂ ਦੇ ਅੰਦਰ ਸੁਖਾਵੇਂ ਹਨ।",
+            "or": "ସମସ୍ତ ମାପ କରାଯାଇଥିବା ପୋଷକ ସୂଚକାଙ୍କ (ପ୍ରୋଟିନ୍, ଆର୍ଦ୍ରତା, ତନ୍ତୁ, ଶକ୍ତି) ମାନକ NDDB ସୀମା ମଧ୍ୟରେ ରହିଛି।",
+            "as": "সকলো পৰিমাপ কৰা পুষ্টি সূচক (প্ৰ'টিন, আৰ্দ্ৰতা, আঁহ, শক্তি) মানক NDDB সীমাৰ ভিতৰত আছে।",
+            "ur": "تمام ناپے گئے غذائی اشارے (پروٹین، نمی، فائبر، توانائی) معیاری NDDB حدود کے اندر ہیں۔"
+        }
+        nutri_points.append(balanced_dict.get(lang, balanced_dict["en"]))
         nutri_keys.append({"key": "advisory_nutrition.all_balanced"})
 
     f_dict = I18N_ADVISORY["feeding_tips"].get(lang, I18N_ADVISORY["feeding_tips"]["en"])

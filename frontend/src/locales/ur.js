@@ -182,15 +182,16 @@ export default {
     "feeding_recommendation": "خوراک کی سفارش",
     "feeding_rec": "خوراک کی سفارش",
     "storage_rec": "اسٹوریج کی سفارش",
-    "no_risk_alert": "اس نمونے میں کوئی کیمیائی ملاوٹ نہیں پائی گئی۔",
+    "no_risk_alert": "تمام ناپے گئے حفاظتی اشارے معیاری حدود کے اندر ہیں۔",
     "storage_recommendation": "اسٹوریج کی سفارش",
-    "risk_alert": "خطرہ الرٹ",
+    "risk_alert": "حفاظتی الرٹ",
     "recommended_action": "تجویز کردہ کارروائی",
     "save_result_btn": "نتیجہ محفوظ کریں",
     "saved_to_records": "ٹیسٹ آپ کے کسان ریکارڈ میں محفوظ کر لیا گیا ہے۔",
     "no_tests_yet": "ابھی تک کوئی ٹیسٹ نہیں ہوا ہے۔",
     "start_first_feed_test": "اپنا پہلا فیڈ ٹیسٹ شروع کریں",
-    "explore_sample_analysis": "نمونہ تجزیہ دیکھیں"
+    "explore_sample_analysis": "نمونہ تجزیہ دیکھیں",
+    "safety_alert": "حفاظتی الرٹ"
   },
   "analyze": {
     "title": "AI تیز رفتار فیڈ کوالٹی اور سیفٹی اسکریننگ",
@@ -770,71 +771,71 @@ export default {
     "unsafe": "خطرناک ملاوٹ یا زہریلے مادے پائے گئے ہیں! جانوروں کو کھلانا فوری طور پر بند کریں اور ڈاکٹر سے رجوع کریں۔"
   },
   "advisory_feeding": {
-    "normal": "Feed in standard daily proportions alongside 20–25 kg fresh green fodder and clean ad-lib drinking water.",
-    "compensate": "Do not feed as sole ration. Compensate with 1–2 kg quality concentrate pellet and bypass protein.",
+    "normal": "روزانہ 20–25 کلو تازہ سبز چارے اور صاف پینے کے پانی کے ساتھ معیاری تناسب میں کھلائیں۔",
+    "compensate": "اسے واحد خوراک کے طور پر نہ دیں۔ 1–2 کلو معیاری ونڈا اور بائی پاس پروٹین دے کر متوازن کریں۔",
     "lactating": "دودھیل گائے کو 15–20 کلو سبز چارہ، 4 کلو خشک بھوسہ اور ہر 2.5 لیٹر دودھ کے پیچھے 1 کلو ونڈا دیں۔",
     "dry": "خشک گائے کو اچھے خشک چارے کے ساتھ 1.5–2 کلو ونڈا اور 50 گرام منرل مکسچر دیں۔",
-    "good": "روزانہ 20–25 کلو تازہ سبز چارہ اور 4 کلو خشک بھوسے کے ساتھ متوازن مقدار میں دیں۔",
-    "moderate": "روزانہ 20–25 کلو تازہ سبز چارہ اور 4 کلو خشک بھوسے کے ساتھ متوازن مقدار میں دیں۔",
-    "poor": "اسے واحد خوراک کے طور پر نہ دیں۔ دودھ کی پیداوار برقرار رکھنے کے لیے 1–2 کلو اعلیٰ معیار کا ونڈا اضافی دیں۔",
-    "unsafe": "اسے واحد خوراک کے طور پر نہ دیں۔ دودھ کی پیداوار برقرار رکھنے کے لیے 1–2 کلو اعلیٰ معیار کا ونڈا اضافی دیں۔",
-    "critical": "اسے واحد خوراک کے طور پر نہ دیں۔ دودھ کی پیداوار برقرار رکھنے کے لیے 1–2 کلو اعلیٰ معیار کا ونڈا اضافی دیں۔"
+    "good": "روزانہ 20–25 کلو تازہ سبز چارے اور صاف پینے کے پانی کے ساتھ معیاری تناسب میں کھلائیں۔",
+    "moderate": "روزانہ 20–25 کلو تازہ سبز چارے اور صاف پینے کے پانی کے ساتھ معیاری تناسب میں کھلائیں۔",
+    "poor": "اسے واحد خوراک کے طور پر نہ دیں۔ 1–2 کلو معیاری ونڈا شامل کریں۔",
+    "unsafe": "اس خوراک کو فوری طور پر روک دیں اور الگ رکھیں۔",
+    "critical": "اس خوراک کو فوری طور پر روک دیں اور الگ رکھیں۔"
   },
   "advisory_storage": {
-    "spoiled": "سڑنے کا شدید خطرہ: فوری طور پر الگ کریں اور نمی کی جانچ کریں۔",
-    "stable": "چارے کی بوریوں کو خشک اور ہوادار جگہ پر لکڑی کے تختوں پر رکھیں۔",
+    "spoiled": "سڑنے کا شدید خطرہ: فوری طور پر بیچ کو الگ کریں اور نمی کی جانچ کریں۔",
+    "stable": "چارے کی بوریوں کو ٹھنڈی، ہوادار اور خشک جگہ پر لکڑی کے تختوں پر رکھیں۔",
     "dry_feed": "بوریوں کو فرش سے 15 سینٹی میٹر اونچے لکڑی کے تختوں پر ٹھنڈی اور خشک جگہ پر رکھیں۔",
     "silage": "سائلیج کے گڑھے کو ہوا بند رکھیں۔ درجہ حرارت 28°C سے زیادہ ہو تو فوری جانچ کریں۔",
-    "critical": "شدید خرابی الرٹ: پھپھوندی یا حیاتیاتی بگاڑ پایا گیا ہے۔ متاثرہ چارے کو فوری طور پر الگ کریں اور اسٹوریج کی نمی کم کریں۔",
-    "normal": "اسٹوریج کے پیرامیٹرز مستحکم ہیں۔ پھپھوندی سے بچاؤ کے لیے موجودہ نمی اور درجہ حرارت کا کنٹرول جاری رکھیں۔",
-    "tip_pallets": "Store feed sacks on wooden pallets at least 15 cm off damp concrete floors.",
-    "tip_ventilation": "Maintain dry, rodent-proof shed ventilation with ambient temperatures below 28°C.",
-    "tip_silage": "Ensure sealed silage or storage units have airtight covers with no punctures or loose edges.",
-    "tip_fifo": "Practice First-In, First-Out (FIFO) stock rotation to prevent aging."
+    "critical": "شدید خرابی کا انتباہ: حیاتیاتی بگاڑ یا پھپھوندی کی نشوونما پائی گئی ہے۔ زہریلے مائکوٹوکسن کا زیادہ خطرہ۔",
+    "normal": "اسٹوریج کے پیرامیٹرز مستحکم ہیں۔ موجودہ نمی اور درجہ حرارت کی نگرانی جاری رکھیں۔",
+    "tip_pallets": "چارے کی بوریوں کو نم کنکریٹ کے فرش سے کم از کم 15 سینٹی میٹر اونچے لکڑی کے تختوں پر رکھیں۔",
+    "tip_ventilation": "28 ڈگری سینٹی گریڈ سے کم درجہ حرارت کے ساتھ خشک، چوہوں سے پاک شیڈ کی ہوا کا انتظام رکھیں۔",
+    "tip_silage": "یقینی بنائیں کہ سائیلیج یا اسٹوریج یونٹس پر بغیر کسی سوراخ کے ہوا بند کور موجود ہوں۔",
+    "tip_fifo": "چارے کو پرانا ہونے سے بچانے کے لیے پہلے-آئیں، پہلے-پائیں (FIFO) اسٹاک روٹیشن پر عمل کریں۔"
   },
   "advisory_action": {
     "critical": {
-      "headline": "Immediate Feed Quarantine",
-      "primary": "Do not feed this batch to any dairy cattle or calves.",
-      "step_0": "Immediately isolate and tag this batch to prevent accidental feeding.",
-      "step_1": "Retain a sealed sample bag for laboratory verification.",
-      "step_2": "Notify your feed supplier and local veterinary officer.",
-      "step_3": "Consult your local veterinary doctor if cattle have already consumed this feed."
+      "headline": "خوراک کو فوری طور پر الگ کریں",
+      "primary": "یہ بیچ کسی بھی دودھیل گائے یا بچھڑے کو نہ کھلائیں۔",
+      "step_0": "حادثاتی طور پر کھلانے سے بچنے کے لیے اس بیچ کو فوری طور پر الگ کریں۔",
+      "step_1": "لیبارٹری ٹیسٹ کے لیے نمونے کا بیگ محفوظ رکھیں۔",
+      "step_2": "اپنے فیڈ سپلائر اور ویٹرنری افسر کو مطلع کریں۔",
+      "step_3": "اگر مویشیوں نے یہ پہلے ہی کھا لیا ہے تو فوری ڈاکٹر سے رجوع کریں۔"
     },
     "poor": {
-      "headline": "CAUTION: BLEND OR SUPPLEMENT BEFORE FEEDING",
-      "primary": "Feed quality is below standard. Do not use as sole feed source.",
-      "step_0": "Limit this feed to dry stock or non-milking cows; avoid giving to high-yield lactating cows.",
-      "step_1": "Blend with 50% high-grade concentrate or fresh leguminous green fodder.",
-      "step_2": "Add 50g commercial mineral mixture per animal daily to offset nutritional deficiency.",
-      "step_3": "Retest next delivery batch to ensure supplier meets quality specifications."
+      "headline": "احتیاط: کھلانے سے پہلے ملائیں یا اضافی غذائیت شامل کریں",
+      "primary": "خوراک کا معیار کم ہے۔ اسے واحد خوراک کے طور پر استعمال نہ کریں۔",
+      "step_0": "خشک گائے یا دودھ نہ دینے والی گائے تک محدود رکھیں۔",
+      "step_1": "50% اعلیٰ معیار کے ونڈے یا تازہ سبز چارے کے ساتھ ملائیں۔",
+      "step_2": "غذائی کمی پوری کرنے کے لیے روزانہ فی جانور 50 گرام منرل مکسچر شامل کریں۔",
+      "step_3": "اگلی سپلائی کے معیار کو یقینی بنانے کے لیے دوبارہ ٹیسٹ کریں۔"
     },
     "moderate": {
-      "headline": "Ration Balancing Required",
-      "primary": "Adjust concentrate proportions and supplement with mineral mixture.",
-      "step_0": "Do not feed as sole concentrate source.",
-      "step_1": "Add 50–100g approved mineral mixture per cow daily.",
-      "step_2": "Re-inspect batch after 7 days of storage."
+      "headline": "خوراک میں توازن ضروری ہے",
+      "primary": "ونڈے کا تناسب درست کریں اور منرل مکسچر شامل کریں۔",
+      "step_0": "اسے واحد ونڈے کے طور پر نہ کھلائیں۔",
+      "step_1": "ہر گائے کو روزانہ 50-100 گرام منظور شدہ منرل مکسچر دیں۔",
+      "step_2": "7 دن ذخیرہ کرنے کے بعد بیچ کا دوبارہ معائنہ کریں۔"
     },
     "good": {
-      "headline": "Standard Feeding Protocol",
-      "primary": "Feed directly according to standard daily ration balance.",
-      "step_0": "Maintain clean, ad-lib drinking water access.",
-      "step_1": "Combine with 15–20 kg green fodder for optimal rumen digestion.",
-      "step_2": "Store bags off concrete floors in a dry, ventilated shed.",
-      "step_3": "Monitor milk yield and butterfat percentage regularly."
+      "headline": "معیاری خوراک کا طریقہ کار",
+      "primary": "روزانہ متوازن راشن کے مطابق براہ راست مویشیوں کو کھلائیں۔",
+      "step_0": "صاف پینے کے پانی کی بلا تعطل فراہمی یقینی بنائیں۔",
+      "step_1": "بہتر ہاضمے کے لیے 15-20 کلو سبز چارے کے ساتھ ملائیں۔",
+      "step_2": "بوریوں کو فرش سے اونچا ہوادار شیڈ میں رکھیں۔",
+      "step_3": "دودھ کی پیداوار اور چکنائی کی باقاعدگی سے نگرانی کریں۔"
     },
     "good_headline": "اعلیٰ معیار — دودھیل جانوروں کے لیے محفوظ",
     "moderate_headline": "درمیانہ معیار — غذائی توازن کی ضرورت",
     "poor_headline": "خراب معیار — احتیاط سے استعمال کریں",
     "unsafe_headline": "غیر محفوظ — فوری طور پر خوراک بند کریں!",
     "unsafe": {
-      "headline": "ACTION REQUIRED: DO NOT FEED — ISOLATE BATCH",
-      "primary": "STOP feeding this batch immediately. Quarantine the sack or storage unit.",
-      "step_0": "Immediately stop offering this feed to cattle, calves, or pregnant cows.",
-      "step_1": "Physically isolate affected bags to prevent accidental herd feeding.",
-      "step_2": "Document the Batch ID using the certified QR code for supplier replacement claim.",
-      "step_3": "Consult your local veterinary doctor if cattle have already consumed this feed."
+      "headline": "فوری کارروائی: نہ کھلائیں — بیچ الگ کریں",
+      "primary": "اس بیچ کو کھلانا فوری طور پر بند کریں۔ بوری یا اسٹوریج یونٹ کو الگ کریں۔",
+      "step_0": "گائے، بچھڑوں یا حاملہ گائے کو دینا فوری طور پر بند کریں۔",
+      "step_1": "غلطی سے کھلانے سے بچنے کے لیے متاثرہ بوریوں کو الگ رکھیں۔",
+      "step_2": "سپلائر کلیم کے لیے کیو آر کوڈ کے ذریعے بیچ آئی ڈی محفوظ کریں۔",
+      "step_3": "اگر مویشیوں نے یہ پہلے ہی کھا لیا ہے تو ویٹرنری ڈاکٹر سے مشورہ کریں۔"
     }
   },
   "regions": {
@@ -886,19 +887,34 @@ export default {
     "save_settings_btn": "ترتیبات محفوظ کریں"
   },
   "advisory_nutrition": {
-    "all_balanced": "تمام غذائی اجزاء (پروٹین، نمی، ریشہ، توانائی) NDDB معیار کے مطابق محفوظ ہیں۔",
-    "low_nutrient": "Low {{nutrient}}: currently {{value}} {{unit}} (ideal: {{min}}–{{max}} {{unit}}).",
-    "high_nutrient": "High {{nutrient}}: currently {{value}} {{unit}} (ideal: {{min}}–{{max}} {{unit}}).",
+    "all_balanced": "تمام ناپے گئے غذائی اشارے (پروٹین، نمی، فائبر، توانائی) معیاری NDDB حدود کے اندر ہیں۔",
+    "low_nutrient": "کم {{nutrient}}: فی الحال {{value}} {{unit}} (مثالی: {{min}}–{{max}} {{unit}})-",
+    "high_nutrient": "زیادہ {{nutrient}}: فی الحال {{value}} {{unit}} (مثالی: {{min}}–{{max}} {{unit}})-",
     "status_balanced": "متوازن",
-    "status_attention": "توجہ طلب"
+    "status_attention": "توجہ درکار ہے"
   },
   "advisory_adulteration": {
-    "detected_headline": "Adulterant Alert: {{adulterant}} detected.",
-    "clean_headline": "اس نمونے میں کوئی کیمیائی ملاوٹ نہیں پائی گئی۔",
-    "safe_summary": "مصنوعی یا غیر نامیاتی ملاوٹ سے مکمل طور پر محفوظ۔",
-    "clean_remedy": "مصنوعی یا غیر نامیاتی ملاوٹ سے مکمل طور پر محفوظ۔",
-    "remediation_1": "Immediately withhold and isolate this batch from all livestock.",
-    "remediation_2": "Retain sample bag for batch verification and supplier complaint.",
-    "remediation_3": "Notify local veterinary officer if animals show distress."
+    "detected_headline": "ملاوٹ الرٹ: {{adulterant}} پایا گیا۔",
+    "clean_headline": "تمام ناپے گئے حفاظتی اشارے معیاری حدود کے اندر ہیں۔",
+    "safe_summary": "اس بیچ میں مصنوعی نائٹروجن اضافہ (یوریا)، معدنی مٹی کی ملاوٹ یا زہریلے مائکوٹوکسن نہیں پائے گئے۔",
+    "clean_remedy": "اس بیچ میں مصنوعی نائٹروجن اضافہ (یوریا)، معدنی مٹی کی ملاوٹ یا زہریلے مائکوٹوکسن نہیں پائے گئے۔",
+    "remediation_1": "فوری طور پر اس بیچ کو مویشیوں کو کھلانے سے روکیں اور الگ رکھیں۔",
+    "remediation_2": "بیچ کی تصدیق اور سپلائر کی شکایت کے لیے نمونے کا بیگ محفوظ رکھیں۔",
+    "remediation_3": "اگر جانور تکلیف میں نظر آئیں تو مقامی ویٹرنری ڈاکٹر کو مطلع کریں۔"
+  },
+  "nutrients": {
+    "protein": "پروٹین",
+    "moisture": "نمی",
+    "fiber": "فائبر",
+    "energy": "توانائی",
+    "mineral": "منرل انڈیکس",
+    "urea": "یوریا",
+    "sand": "ریت / سلیکا",
+    "aflatoxin": "افلاٹوکسن",
+    "fungal": "فنگل لوڈ",
+    "mould": "پھپھوندی انڈیکس",
+    "temperature": "درجہ حرارت",
+    "ph": "pH",
+    "depth": "نمونے کی گہرائی"
   }
 };

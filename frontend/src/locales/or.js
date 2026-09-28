@@ -182,15 +182,16 @@ export default {
     "feeding_recommendation": "ଖାଦ୍ୟ ପରାମର୍ଶ",
     "feeding_rec": "ଖାଦ୍ୟ ପରାମର୍ଶ",
     "storage_rec": "ସଂରକ୍ଷଣ ପରାମର୍ଶ",
-    "no_risk_alert": "ଏହି ନମୁନାରେ କୌଣସି ରାସାୟନିକ ଭେଜାଲ୍ ଚିହ୍ନଟ ହୋଇନାହିଁ।",
+    "no_risk_alert": "ସମସ୍ତ ମାପ କରାଯାଇଥିବା ସୁରକ୍ଷା ସୂଚକାଙ୍କ ମାନକ ସୀମା ମଧ୍ୟରେ ଅଛି।",
     "storage_recommendation": "ସଂରକ୍ଷଣ ପରାମର୍ଶ",
-    "risk_alert": "ବିପଦ ସତର୍କତା",
+    "risk_alert": "ସୁରକ୍ଷା ସତର୍କତା",
     "recommended_action": "ପରାମର୍ଶିତ ପଦକ୍ଷେପ",
     "save_result_btn": "ଫଳାଫଳ ସଞ୍ଚୟ କରନ୍ତୁ",
     "saved_to_records": "ପରୀକ୍ଷା ଆପଣଙ୍କ କୃଷକ ରେକର୍ଡରେ ସଂରକ୍ଷିତ ହୋଇଛି।",
     "no_tests_yet": "ଏପର୍ଯ୍ୟନ୍ତ କୌଣସି ପରୀକ୍ଷଣ ହୋଇନାହିଁ।",
     "start_first_feed_test": "ଆପଣଙ୍କର ପ୍ରଥମ ଖାଦ୍ୟ ପରୀକ୍ଷା ଆରମ୍ଭ କରନ୍ତୁ",
-    "explore_sample_analysis": "ନମୁନା ବିଶ୍ଳେଷଣ ଦେଖନ୍ତୁ"
+    "explore_sample_analysis": "ନମୁନା ବିଶ୍ଳେଷଣ ଦେଖନ୍ତୁ",
+    "safety_alert": "ସୁରକ୍ଷା ସତର୍କତା"
   },
   "analyze": {
     "title": "AI ଦ୍ରୁତ ଗୋ-ଖାଦ୍ୟ ମାନ ଓ ସୁରକ୍ଷା ପରୀକ୍ଷା",
@@ -770,71 +771,71 @@ export default {
     "unsafe": "ବିପଜ୍ଜନକ ଭେଜାଲ ବା ବିଷାକ୍ତ ଉପାଦାନ ଚିହ୍ନଟ ହୋଇଛି! ପଶୁଙ୍କୁ ଖାଇବାକୁ ଦେବା ତୁରନ୍ତ ବନ୍ଦ କରନ୍ତୁ ଏବଂ ଡାକ୍ତରଙ୍କ ପରାମର୍ଶ ନିଅନ୍ତୁ।"
   },
   "advisory_feeding": {
-    "normal": "Feed in standard daily proportions alongside 20–25 kg fresh green fodder and clean ad-lib drinking water.",
-    "compensate": "Do not feed as sole ration. Compensate with 1–2 kg quality concentrate pellet and bypass protein.",
+    "normal": "୨୦–୨୫ କେଜି ସତେଜ ସବୁଜ ଘାସ ଏବଂ ବିଶୁଦ୍ଧ ପାନୀୟ ଜଳ ସହିତ ମାନକ ଦୈନିକ ଅନୁପାତରେ ଦିଅନ୍ତୁ।",
+    "compensate": "କେବଳ ଏହାକୁ ଏକମାତ୍ର ଖାଦ୍ୟ ଭାବରେ ଦିଅନ୍ତୁ ନାହିଁ। ୧–୨ କେଜି ଉନ୍ନତ ଦାନା ଏବଂ ବାଇପାସ୍ ପ୍ରୋଟିନ୍ ସହିତ ସନ୍ତୁଳିତ କରନ୍ତୁ।",
     "lactating": "କ୍ଷୀର ଦେଉଥିବା ଗାଈକୁ ୧୫–୨୦ କେଜି କଞ୍ଚା ଘାସ, ୪ କେଜି ଶୁଖିଲା ନଡ଼ା ଏବଂ ପ୍ରତି ୨.୫ ଲିଟର କ୍ଷୀର ପିଛା ୧ କେଜି ଦାନା ଦିଅନ୍ତୁ।",
     "dry": "ଗର୍ଭବତୀ ଗାଈଙ୍କୁ ଶୁଖିଲା ଘାସ ସହିତ ୧.୫–୨ କେଜି ଦାନା ଏବଂ ୫୦ ଗ୍ରାମ୍ ମିନେରାଲ୍ ମିକ୍ସଚର୍ ଦିଅନ୍ତୁ।",
-    "good": "ଦୈନିକ ୨୦–୨୫ କେଜି ସତେଜ କଞ୍ଚା ଘାସ ଏବଂ ୪ କେଜି ଶୁଖିଲା ନଡ଼ା ସହିତ ସନ୍ତୁଳିତ ମାତ୍ରାରେ ଦିଅନ୍ତୁ।",
-    "moderate": "ଦୈନିକ ୨୦–୨୫ କେଜି ସତେଜ କଞ୍ଚା ଘାସ ଏବଂ ୪ କେଜି ଶୁଖିଲା ନଡ଼ା ସହିତ ସନ୍ତୁଳିତ ମାତ୍ରାରେ ଦିଅନ୍ତୁ।",
-    "poor": "ଏହାକୁ ଏକମାତ୍ର ଆହାର ଭାବେ ଦିଅନ୍ତୁ ନାହିଁ। କ୍ଷୀର ଉତ୍ପାଦନ ବଜାୟ ରଖିବା ପାଇଁ ୧–୨ କେଜି ଉନ୍ନତ ଦାନା ଅଧିକ ଦିଅନ୍ତୁ।",
-    "unsafe": "ଏହାକୁ ଏକମାତ୍ର ଆହାର ଭାବେ ଦିଅନ୍ତୁ ନାହିଁ। କ୍ଷୀର ଉତ୍ପାଦନ ବଜାୟ ରଖିବା ପାଇଁ ୧–୨ କେଜି ଉନ୍ନତ ଦାନା ଅଧିକ ଦିଅନ୍ତୁ।",
-    "critical": "ଏହାକୁ ଏକମାତ୍ର ଆହାର ଭାବେ ଦିଅନ୍ତୁ ନାହିଁ। କ୍ଷୀର ଉତ୍ପାଦନ ବଜାୟ ରଖିବା ପାଇଁ ୧–୨ କେଜି ଉନ୍ନତ ଦାନା ଅଧିକ ଦିଅନ୍ତୁ।"
+    "good": "୨୦–୨୫ କେଜି ସତେଜ ସବୁଜ ଘାସ ଏବଂ ବିଶୁଦ୍ଧ ପାନୀୟ ଜଳ ସହିତ ମାନକ ଦୈନିକ ଅନୁପାତରେ ଦିଅନ୍ତୁ।",
+    "moderate": "୨୦–୨୫ କେଜି ସତେଜ ସବୁଜ ଘାସ ଏବଂ ବିଶୁଦ୍ଧ ପାନୀୟ ଜଳ ସହିତ ମାନକ ଦୈନିକ ଅନୁପାତରେ ଦିଅନ୍ତୁ।",
+    "poor": "କେବଳ ଏହାକୁ ଏକମାତ୍ର ଖାଦ୍ୟ ଭାବରେ ଦିଅନ୍ତୁ ନାହିଁ। ୧–୨ କେଜି ଉନ୍ନତ ଦାନା ମିଶାନ୍ତୁ।",
+    "unsafe": "ଏହି ଖାଦ୍ୟ ଦେବା ତୁରନ୍ତ ବନ୍ଦ କରନ୍ତୁ।",
+    "critical": "ଏହି ଖାଦ୍ୟ ଦେବା ତୁରନ୍ତ ବନ୍ଦ କରନ୍ତୁ।"
   },
   "advisory_storage": {
-    "spoiled": "ଗମ୍ଭୀର ନଷ୍ଟ ଆଶଙ୍କା: ତୁରନ୍ତ ଅଲଗା କରନ୍ତୁ ଏବଂ ଆର୍ଦ୍ରତା ଯାଞ୍ଚ କରନ୍ତୁ।",
-    "stable": "ଖାଦ୍ୟ ବସ୍ତାକୁ ଶୁଖିଲା ଓ ପବନ ଚଳାଚଳ ସ୍ଥାନରେ କାଠ ପଟା ଉପରେ ରଖନ୍ତୁ।",
+    "spoiled": "ଗମ୍ଭୀର ନଷ୍ଟ ଆଶଙ୍କା: ତୁରନ୍ତ ବ୍ୟାଚ୍ ଅଲଗା କରନ୍ତୁ ଏବଂ ଆର୍ଦ୍ରତା ଯାଞ୍ଚ କରନ୍ତୁ।",
+    "stable": "ଖାଦ୍ୟ ବସ୍ତାକୁ ଥଣ୍ଡା, ପବନ ଚଳାଚଳ ତଥା ଶୁଖିଲା ସ୍ଥାନରେ କାଠ ପଟା ଉପରେ ରଖନ୍ତୁ।",
     "dry_feed": "ବସ୍ତାକୁ ଚଟାଣରୁ ୧୫ ସେମି ଉଚ୍ଚରେ କାଠ ପଟା ଉପରେ ଥଣ୍ଡା ଓ ଶୁଖିଲା ସ୍ଥାନରେ ରଖନ୍ତୁ।",
     "silage": "ସାଇଲେଜ୍ ଖାଲ ପବନ ନ ପଶିବା ଭଳି ରଖନ୍ତୁ। ତାପମାତ୍ରା ୨୮°C ରୁ ଅଧିକ ହେଲେ ତୁରନ୍ତ ଯାଞ୍ଚ କରନ୍ତୁ।",
-    "critical": "ଗମ୍ଭୀର ନଷ୍ଟ ଚେତାବନୀ: କବକ ବୃଦ୍ଧି ବା ଜୈବିକ ବିଘଟନ ଦେଖାଯାଇଛି। ନଷ୍ଟ ଦାନା ତୁରନ୍ତ ଅଲଗା କରନ୍ତୁ ଏବଂ ଆର୍ଦ୍ରତା ନିୟନ୍ତ୍ରଣ କରନ୍ତୁ।",
-    "normal": "ସଂରକ୍ଷଣ ଅବସ୍ଥା ସ୍ଥିର ଅଛି। ଫିମ୍ପି ରୋକିବା ପାଇଁ ବର୍ତ୍ତମାନର ଆର୍ଦ୍ରତା ଓ ତାପମାତ୍ରା ନିୟନ୍ତ୍ରଣ ଜାରି ରଖନ୍ତୁ।",
-    "tip_pallets": "Store feed sacks on wooden pallets at least 15 cm off damp concrete floors.",
-    "tip_ventilation": "Maintain dry, rodent-proof shed ventilation with ambient temperatures below 28°C.",
-    "tip_silage": "Ensure sealed silage or storage units have airtight covers with no punctures or loose edges.",
-    "tip_fifo": "Practice First-In, First-Out (FIFO) stock rotation to prevent aging."
+    "critical": "ଗମ୍ଭୀର ନଷ୍ଟ ଚେତାବନୀ: ଜୈବିକ ଅବକ୍ଷୟ କିମ୍ବା ଫିମ୍ପି ବୃଦ୍ଧି ଚିହ୍ନଟ ହୋଇଛି। ବିଷାକ୍ତ ମାଇକୋଟକ୍ସିନର ଉଚ୍ଚ ଆଶଙ୍କା।",
+    "normal": "ସଂରକ୍ଷଣ ପାରାମିଟର ସ୍ଥିର ଅଛି। ବର୍ତ୍ତମାନର ଆର୍ଦ୍ରତା ଏବଂ ତାପମାତ୍ରା ଉପରେ ନଜର ରଖନ୍ତୁ।",
+    "tip_pallets": "ଖାଦ୍ୟ ବସ୍ତାକୁ ଓଦା ଚଟାଣରୁ ଅତି କମରେ ୧୫ ସେମି ଉଚ୍ଚରେ କାଠ ପଟା ଉପରେ ରଖନ୍ତୁ।",
+    "tip_ventilation": "୨୮°C ରୁ କମ୍ ତାପମାତ୍ରା ସହିତ ଶୁଖିଲା ଏବଂ ମୂଷାମୁକ୍ତ ସ୍ଥାନ ବଜାୟ ରଖନ୍ତୁ।",
+    "tip_silage": "ସାଇଲେଜ୍ କିମ୍ବା ଷ୍ଟୋରେଜ୍ ୟୁନିଟ୍ ଗୁଡ଼ିକରେ କୌଣସି ଛିଦ୍ର ନଥାଇ ବାୟୁରୋଧୀ ଘୋଡ଼ଣୀ ଥିବା ନିଶ୍ଚିତ କରନ୍ତୁ।",
+    "tip_fifo": "ଖାଦ୍ୟ ପୁରୁଣା ନହେବା ପାଇଁ ପ୍ରଥମେ-ଆସିବା, ପ୍ରଥମେ-ବ୍ୟବହାର (FIFO) ପଦ୍ଧତି ଅନୁସରଣ କରନ୍ତୁ।"
   },
   "advisory_action": {
     "critical": {
-      "headline": "Immediate Feed Quarantine",
-      "primary": "Do not feed this batch to any dairy cattle or calves.",
-      "step_0": "Immediately isolate and tag this batch to prevent accidental feeding.",
-      "step_1": "Retain a sealed sample bag for laboratory verification.",
-      "step_2": "Notify your feed supplier and local veterinary officer.",
-      "step_3": "Consult your local veterinary doctor if cattle have already consumed this feed."
+      "headline": "ତୁରନ୍ତ ଖାଦ୍ୟ ପୃଥକ କରନ୍ତୁ",
+      "primary": "ଏହି ବ୍ୟାଚ୍ କୌଣସି ଗାଈ କିମ୍ବା ବାଛୁରୀକୁ ଖାଇବାକୁ ଦିଅନ୍ତୁ ନାହିଁ।",
+      "step_0": "ଭୁଲରେ ଖାଇବାକୁ ନଦେବା ପାଇଁ ତୁରନ୍ତ ଅଲଗା କରନ୍ତୁ।",
+      "step_1": "ପରୀକ୍ଷାଗାର ଯାଞ୍ଚ ପାଇଁ ଏକ ସିଲ୍ ନମୁନା ବ୍ୟାଗ୍ ରଖନ୍ତୁ।",
+      "step_2": "ଆପଣଙ୍କ ଖାଦ୍ୟ ଯୋଗାଣକାରୀ ଏବଂ ପ୍ରାଣୀ ଚିକିତ୍ସକଙ୍କୁ ଜଣାନ୍ତୁ।",
+      "step_3": "ଯଦି ପଶୁମାନେ ପୂର୍ବରୁ ଏହା ଖାଇସାରିଛନ୍ତି ତେବେ ଡାକ୍ତରଙ୍କ ପରାମର୍ଶ ନିଅନ୍ତୁ।"
     },
     "poor": {
-      "headline": "CAUTION: BLEND OR SUPPLEMENT BEFORE FEEDING",
-      "primary": "Feed quality is below standard. Do not use as sole feed source.",
-      "step_0": "Limit this feed to dry stock or non-milking cows; avoid giving to high-yield lactating cows.",
-      "step_1": "Blend with 50% high-grade concentrate or fresh leguminous green fodder.",
-      "step_2": "Add 50g commercial mineral mixture per animal daily to offset nutritional deficiency.",
-      "step_3": "Retest next delivery batch to ensure supplier meets quality specifications."
+      "headline": "ସତର୍କତା: ଖାଇବାକୁ ଦେବା ପୂର୍ବରୁ ମିଶାନ୍ତୁ କିମ୍ବା ପୋଷକ ତତ୍ତ୍ୱ ଯୋଡନ୍ତୁ",
+      "primary": "ଖାଦ୍ୟର ଗୁଣବତ୍ତା କମ୍ ଅଟେ। ଏହାକୁ ଏକମାତ୍ର ଖାଦ୍ୟ ଭାବରେ ବ୍ୟବହାର କରନ୍ତୁ ନାହିଁ।",
+      "step_0": "ଅଣ-ଦୁଗ୍ଧବତୀ ଗାଈମାନଙ୍କ ପାଇଁ ସୀମିତ ରଖନ୍ତୁ।",
+      "step_1": "୫୦% ଉଚ୍ଚ-ଗୁଣବତ୍ତା ଦାନା କିମ୍ବା ସତେଜ ସବୁଜ ଘାସ ସହିତ ମିଶାନ୍ତୁ।",
+      "step_2": "ପୋଷକ ଅଭାବ ପୂରଣ ପାଇଁ ଦୈନିକ ପଶୁପ୍ରତି ୫୦ ଗ୍ରାମ୍ ଖଣିଜ ମିଶ୍ରଣ ଯୋଡନ୍ତୁ।",
+      "step_3": "ପରବର୍ତ୍ତୀ ଯୋଗାଣ ଗୁଣବତ୍ତା ଯାଞ୍ଚ କରିବାକୁ ପୁନର୍ବାର ପରୀକ୍ଷା କରନ୍ତୁ।"
     },
     "moderate": {
-      "headline": "Ration Balancing Required",
-      "primary": "Adjust concentrate proportions and supplement with mineral mixture.",
-      "step_0": "Do not feed as sole concentrate source.",
-      "step_1": "Add 50–100g approved mineral mixture per cow daily.",
-      "step_2": "Re-inspect batch after 7 days of storage."
+      "headline": "ଖାଦ୍ୟ ସନ୍ତୁଳନ ଆବଶ୍ୟକ",
+      "primary": "ଦାନାର ଅନୁପାତ ସଜାଡନ୍ତୁ ଏବଂ ଖଣିଜ ମିଶ୍ରଣ ଯୋଡନ୍ତୁ।",
+      "step_0": "ଏହାକୁ ଏକମାତ୍ର ଦାନା ଭାବରେ ଦିଅନ୍ତୁ ନାହିଁ।",
+      "step_1": "ଗାଈ ପିଛା ଦୈନିକ ୫୦–୧୦୦ ଗ୍ରାମ୍ ଅନୁମୋଦିତ ଖଣିଜ ମିଶ୍ରଣ ଦିଅନ୍ତୁ।",
+      "step_2": "୭ ଦିନ ସଂରକ୍ଷଣ ପରେ ବ୍ୟାଚ୍ କୁ ପୁନଃ ଯାଞ୍ଚ କରନ୍ତୁ।"
     },
     "good": {
-      "headline": "Standard Feeding Protocol",
-      "primary": "Feed directly according to standard daily ration balance.",
-      "step_0": "Maintain clean, ad-lib drinking water access.",
-      "step_1": "Combine with 15–20 kg green fodder for optimal rumen digestion.",
-      "step_2": "Store bags off concrete floors in a dry, ventilated shed.",
-      "step_3": "Monitor milk yield and butterfat percentage regularly."
+      "headline": "ମାନକ ଖାଦ୍ୟ ନିୟମ",
+      "primary": "ଦୈନିକ ସନ୍ତୁଳିତ ଅନୁପାତ ଅନୁଯାୟୀ ସିଧାସଳଖ ପଶୁକୁ ଖାଇବାକୁ ଦିଅନ୍ତୁ।",
+      "step_0": "ବିଶୁଦ୍ଧ ପାନୀୟ ଜଳ ନିରନ୍ତର ଉପଲବ୍ଧ କରାନ୍ତୁ।",
+      "step_1": "ଉତ୍ତମ ହଜମ ପାଇଁ ୧୫–୨୦ କେଜି ସବୁଜ ଘାସ ସହିତ ମିଶାନ୍ତୁ।",
+      "step_2": "ବସ୍ତାଗୁଡ଼ିକୁ ଶୁଖିଲା, ପବନ ଚଳାଚଳ ସ୍ଥାନରେ ଚଟାଣରୁ ଉଚ୍ଚରେ ରଖନ୍ତୁ।",
+      "step_3": "କ୍ଷୀର ଉତ୍ପାଦନ ଏବଂ ଫ୍ୟାଟ୍ ନିୟମିତ ଭାବରେ ଯାଞ୍ଚ କରନ୍ତୁ।"
     },
     "good_headline": "ଉତ୍କୃଷ୍ଟ ମାନ — ଦୁଗ୍ଧବତୀ ପଶୁଙ୍କ ପାଇଁ ନିରାପଦ",
     "moderate_headline": "ମଧ୍ୟମ ମାନ — ପୋଷଣ ସନ୍ତୁଳନ ଆବଶ୍ୟକ",
     "poor_headline": "ଖରାପ ମାନ — ସାବଧାନତାର ସହ ବ୍ୟବହାର କରନ୍ତୁ",
     "unsafe_headline": "ଅସୁରକ୍ଷିତ — ତୁରନ୍ତ ଖାଇବା ବନ୍ଦ କରନ୍ତୁ!",
     "unsafe": {
-      "headline": "ACTION REQUIRED: DO NOT FEED — ISOLATE BATCH",
-      "primary": "STOP feeding this batch immediately. Quarantine the sack or storage unit.",
-      "step_0": "Immediately stop offering this feed to cattle, calves, or pregnant cows.",
-      "step_1": "Physically isolate affected bags to prevent accidental herd feeding.",
-      "step_2": "Document the Batch ID using the certified QR code for supplier replacement claim.",
-      "step_3": "Consult your local veterinary doctor if cattle have already consumed this feed."
+      "headline": "କାର୍ଯ୍ୟାନୁଷ୍ଠାନ ଆବଶ୍ୟକ: ଖାଇବାକୁ ଦିଅନ୍ତୁ ନାହିଁ — ବ୍ୟାଚ୍ ଅଲଗା କରନ୍ତୁ",
+      "primary": "ଏହି ବ୍ୟାଚ୍ ଖାଇବାକୁ ଦେବା ତୁରନ୍ତ ବନ୍ଦ କରନ୍ତୁ। ବସ୍ତା କିମ୍ବା ଷ୍ଟୋରେଜ୍ ଅଲଗା କରନ୍ତୁ।",
+      "step_0": "ଗାଈ, ବାଛୁରୀ କିମ୍ବା ଗର୍ଭବତୀ ଗାଈମାନଙ୍କୁ ଦେବା ତୁରନ୍ତ ବନ୍ଦ କରନ୍ତୁ।",
+      "step_1": "ଭୁଲରେ ଖାଇବାକୁ ନଦେବା ପାଇଁ ପ୍ରଭାବିତ ବସ୍ତାଗୁଡ଼ିକୁ ଅଲଗା ରଖନ୍ତୁ।",
+      "step_2": "କ୍ଲେମ୍ ପାଇଁ ପ୍ରମାଣିତ QR କୋଡ୍ ବ୍ୟବହାର କରି ବ୍ୟାଚ୍ ଆଇଡି ରେକର୍ଡ କରନ୍ତୁ।",
+      "step_3": "ଯଦି ପଶୁମାନେ ଏହା ଖାଇସାରିଛନ୍ତି ତେବେ ପ୍ରାଣୀ ଚିକିତ୍ସକଙ୍କ ପରାମର୍ଶ ନିଅନ୍ତୁ।"
     }
   },
   "regions": {
@@ -886,19 +887,34 @@ export default {
     "save_settings_btn": "ସେଟିଂସ ସଂରକ୍ଷଣ କରନ୍ତୁ"
   },
   "advisory_nutrition": {
-    "all_balanced": "ସମସ୍ତ ପୋଷକ ତତ୍ତ୍ୱ (ପ୍ରୋଟିନ୍, ଆର୍ଦ୍ରତା, ତନ୍ତୁ, ଶକ୍ତି) NDDB ମାନକ ଅନୁଯାୟୀ ସୁରକ୍ଷିତ।",
-    "low_nutrient": "Low {{nutrient}}: currently {{value}} {{unit}} (ideal: {{min}}–{{max}} {{unit}}).",
-    "high_nutrient": "High {{nutrient}}: currently {{value}} {{unit}} (ideal: {{min}}–{{max}} {{unit}}).",
+    "all_balanced": "ସମସ୍ତ ମାପ କରାଯାଇଥିବା ପୋଷକ ସୂଚକାଙ୍କ (ପ୍ରୋଟିନ୍, ଆର୍ଦ୍ରତା, ତନ୍ତୁ, ଶକ୍ତି) ମାନକ NDDB ସୀମା ମଧ୍ୟରେ ରହିଛି।",
+    "low_nutrient": "କମ୍ {{nutrient}}: ବର୍ତ୍ତମାନ {{value}} {{unit}} (ଆଦର୍ଶ: {{min}}–{{max}} {{unit}})।",
+    "high_nutrient": "ଅଧିକ {{nutrient}}: ବର୍ତ୍ତମାନ {{value}} {{unit}} (ଆଦର୍ଶ: {{min}}–{{max}} {{unit}})।",
     "status_balanced": "ସନ୍ତୁଳିତ",
-    "status_attention": "ଧ୍ୟାନ ଦେବା ଆବଶ୍ୟକ"
+    "status_attention": "ଧ୍ୟାନ ଆବଶ୍ୟକ"
   },
   "advisory_adulteration": {
-    "detected_headline": "Adulterant Alert: {{adulterant}} detected.",
-    "clean_headline": "ଏହି ନମୁନାରେ କୌଣସି ରାସାୟନିକ ଭେଜାଲ୍ ଚିହ୍ନଟ ହୋଇନାହିଁ।",
-    "safe_summary": "ସିନ୍ଥେଟିକ୍ ବା ଅଜୈବିକ ଭେଜାଲ୍ ରୁ ସମ୍ପୂର୍ଣ୍ଣ ସୁରକ୍ଷିତ।",
-    "clean_remedy": "ସିନ୍ଥେଟିକ୍ ବା ଅଜୈବିକ ଭେଜାଲ୍ ରୁ ସମ୍ପୂର୍ଣ୍ଣ ସୁରକ୍ଷିତ।",
-    "remediation_1": "Immediately withhold and isolate this batch from all livestock.",
-    "remediation_2": "Retain sample bag for batch verification and supplier complaint.",
-    "remediation_3": "Notify local veterinary officer if animals show distress."
+    "detected_headline": "ଭେଜାଲ୍ ସତର୍କତା: {{adulterant}} ଚିହ୍ନଟ ହୋଇଛି।",
+    "clean_headline": "ସମସ୍ତ ମାପ କରାଯାଇଥିବା ସୁରକ୍ଷା ସୂଚକାଙ୍କ ମାନକ ସୀମା ମଧ୍ୟରେ ଅଛି।",
+    "safe_summary": "ଏହି ବ୍ୟାଚ୍ ରେ କୌଣସି ସିନ୍ଥେଟିକ୍ ଯବକ୍ଷାରଜାନ ବୃଦ୍ଧି (ୟୁରିଆ), ଖଣିଜ ଧୂଳି ଭେଜାଲ୍ କିମ୍ବା ବିଷାକ୍ତ ମାଇକୋଟକ୍ସିନ୍ ମିଳିନାହିଁ।",
+    "clean_remedy": "ଏହି ବ୍ୟାଚ୍ ରେ କୌଣସି ସିନ୍ଥେଟିକ୍ ଯବକ୍ଷାରଜାନ ବୃଦ୍ଧି (ୟୁରିଆ), ଖଣିଜ ଧୂଳି ଭେଜାଲ୍ କିମ୍ବା ବିଷାକ୍ତ ମାଇକୋଟକ୍ସିନ୍ ମିଳିନାହିଁ।",
+    "remediation_1": "ତୁରନ୍ତ ଏହି ବ୍ୟାଚ୍ କୁ ଗୋରୁମାନଙ୍କୁ ଖାଇବାକୁ ନଦେଇ ଅଲଗା ରଖନ୍ତୁ।",
+    "remediation_2": "ବ୍ୟାଚ୍ ଯାଞ୍ଚ ଏବଂ ଯୋଗାଣକାରୀ ଅଭିଯୋଗ ପାଇଁ ନମୁନା ବସ୍ତା ସୁରକ୍ଷିତ ରଖନ୍ତୁ।",
+    "remediation_3": "ଯଦି ପଶୁମାନେ ଅସୁସ୍ଥ ଦେଖାଯାଆନ୍ତି ତେବେ ସ୍ଥାନୀୟ ପ୍ରାଣୀ ଚିକିତ୍ସକଙ୍କୁ ଜଣାନ୍ତୁ।"
+  },
+  "nutrients": {
+    "protein": "ପ୍ରୋଟିନ୍",
+    "moisture": "ଆର୍ଦ୍ରତା",
+    "fiber": "ତନ୍ତୁ",
+    "energy": "ଶକ୍ତି",
+    "mineral": "ଖଣିଜ ସୂଚକାଙ୍କ",
+    "urea": "ୟୁରିଆ",
+    "sand": "ବାଲି / ସିଲିକା",
+    "aflatoxin": "ଆଫ୍ଲାଟକ୍ସିନ୍",
+    "fungal": "ଫଙ୍ଗଲ୍ ଭାର",
+    "mould": "ଛତୁଆ ସୂଚକାଙ୍କ",
+    "temperature": "ତାପମାତ୍ରା",
+    "ph": "pH",
+    "depth": "ନମୁନା ଗଭୀରତା"
   }
 };
