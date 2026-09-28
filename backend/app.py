@@ -53,7 +53,15 @@ app.json = SafeJSONProvider(app)
 CORS(app)
 handler = app
 
-MAX_UPLOAD_MB = int(os.environ.get("MAX_UPLOAD_SIZE_MB", 5))
+def _env_int(name: str, default: int) -> int:
+    """Hosting dashboards often leave a variable set but blank; fall back instead of crashing at import."""
+    try:
+        return int((os.environ.get(name) or "").strip() or default)
+    except ValueError:
+        return default
+
+
+MAX_UPLOAD_MB = _env_int("MAX_UPLOAD_SIZE_MB", 5)
 app.config["MAX_CONTENT_LENGTH"] = MAX_UPLOAD_MB * 1024 * 1024
 
 # Setup paths
@@ -603,6 +611,6 @@ def history_detail(record_id: str):
 
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
+    port = _env_int("PORT", 5000)
     print(f"Starting Feed Quality API on port {port}...")
     app.run(host="0.0.0.0", port=port, debug=False)
