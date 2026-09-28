@@ -7,15 +7,15 @@
     },
     "backend": {
       "root": "backend/",
-      "entrypoint": "app:app",
-      "maxDuration": 60
+      "entrypoint": "app:app"
     }
   },
   "rewrites": [
     {
-      "source": "/api/(.*)",
+      "source": "/api/:path*",
       "destination": {
-        "service": "backend"
+        "service": "backend",
+        "path": "/api/:path*"
       }
     },
     {
