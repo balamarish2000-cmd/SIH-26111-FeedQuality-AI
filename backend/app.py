@@ -11,29 +11,29 @@ Serves the trained ML models via REST endpoints and provides:
 
 from __future__ import annotations
 
-import math
 import os
 import sys
+import math
 import random
 import json
+import traceback
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-import pandas as pd
-import numpy as np
 
 # ---------------------------------------------------------------------------
-# App setup (initialized early so serverless runtime never fails import)
+# App initialization (MUST remain at the very top for Vercel Serverless)
 # ---------------------------------------------------------------------------
 app = Flask(__name__)
 CORS(app)
+handler = app
 
 MAX_UPLOAD_MB = int(os.environ.get("MAX_UPLOAD_SIZE_MB", 5))
 app.config["MAX_CONTENT_LENGTH"] = MAX_UPLOAD_MB * 1024 * 1024
 
-# Ensure current directory and ML directory are in sys.path
+# Setup paths
 CURRENT_DIR = Path(__file__).resolve().parent
 if str(CURRENT_DIR) not in sys.path:
     sys.path.insert(0, str(CURRENT_DIR))
@@ -46,44 +46,87 @@ elif (ml_base / "pipeline").exists():
     ML_DIR = ml_base / "pipeline"
 else:
     ML_DIR = ml_base / "New Folder"
+
 if str(ML_DIR) not in sys.path:
     sys.path.insert(0, str(ML_DIR))
 
-init_error = None
-try:
-    import common
-    sys.modules["common"] = common
-    from predict import FeedQualityPredictor
-    from common import FEATURE_COLUMNS
-    from advisory import generate_advisory
-    from qr_system import generate_qr, verify_qr, get_all_batches
-    from image_analyzer import analyze_feed_image
-except Exception as e:
-    init_error = f"{type(e).__name__}: {str(e)}"
-    import traceback
-    traceback.print_exc()
+# Safe module loading
+STARTUP_ERROR = None
+pd = None
+np = None
+generate_advisory = None
+generate_qr = None
+verify_qr = None
+get_all_batches = None
+analyze_feed_image = None
+FeedQualityPredictor = None
 
-# Lazy-load ML models on first request to ensure instant container startup
+try:
+    import pandas as _pd
+    import numpy as _np
+    pd = _pd
+    np = _np
+
+    # Register common module in sys.modules so unpickler always finds it
+    try:
+        import common
+        sys.modules["common"] = common
+    except Exception as ce:
+        print("Note: direct common import warning:", ce)
+
+    from advisory import generate_advisory as _ga
+    generate_advisory = _ga
+
+    from qr_system import (
+        generate_qr as _gqr,
+        verify_qr as _vqr,
+        get_all_batches as _gab,
+    )
+    generate_qr = _gqr
+    verify_qr = _vqr
+    get_all_batches = _gab
+
+    from image_analyzer import analyze_feed_image as _afi
+    analyze_feed_image = _afi
+
+    from predict import FeedQualityPredictor as _fqp
+    FeedQualityPredictor = _fqp
+
+except Exception as e:
+    STARTUP_ERROR = traceback.format_exc()
+    print("STARTUP IMPORT WARNING:\n", STARTUP_ERROR, file=sys.stderr)
+
+FEATURE_COLUMNS = [
+    "moisture_pct", "protein_pct", "fiber_pct", "energy_mcal_per_kg",
+    "mineral_deficiency_index", "urea_pct", "sand_silica_pct",
+    "aflatoxin_ppb", "fungal_load_index", "mould_index_pct",
+    "storage_temperature_c", "ph", "sampling_depth_cm", "measurement_repeat",
+    "feed_type", "firmware_version"
+]
+
+# Lazy-load ML models on first predict request
 _predictor = None
 
 def get_predictor():
-    global _predictor
-    if _predictor is None:
-        print("Loading ML models...")
-        try:
-            _predictor = FeedQualityPredictor(models_dir=ML_DIR / "models")
-            print("Models loaded successfully.")
-        except Exception as e:
-            print(f"WARNING: Model load error: {e}")
-            import traceback
-            traceback.print_exc()
-            return None
-    return _predictor
+    global _predictor, FeedQualityPredictor
+    if _predictor is not None:
+        return _predictor
+    try:
+        if FeedQualityPredictor is None:
+            import common
+            sys.modules["common"] = common
+            from predict import FeedQualityPredictor as _fqp
+            FeedQualityPredictor = _fqp
+        _predictor = FeedQualityPredictor(models_dir=ML_DIR / "models")
+        return _predictor
+    except Exception as e:
+        print(f"Error loading predictor: {e}", file=sys.stderr)
+        traceback.print_exc()
+        return None
 
 # In-memory analysis history
 analysis_history: list[dict] = []
 
-# Pre-seed some dashboard data
 def _seed_history():
     """Generate realistic historical data for the dashboard demo."""
     feed_types = ["Cattle Feed Pellet", "Silage", "Feed Mash", "TMR", "Mineral Mixture"]
@@ -123,10 +166,9 @@ def _sanitize_for_json(obj):
     return obj
 
 
-# Global JSON error handler to prevent HTML 500 error pages
+# Global JSON error handler
 @app.errorhandler(Exception)
 def handle_global_exception(e):
-    import traceback
     traceback.print_exc()
     return jsonify({
         "error": str(e),
@@ -142,23 +184,23 @@ def handle_global_exception(e):
 @app.route("/api/health", methods=["GET"])
 def health():
     return jsonify({
-        "status": "ok" if not init_error else "degraded",
+        "status": "ok" if not STARTUP_ERROR else "degraded",
         "service": "Feed Guard Platform",
-        "version": "3.0.0",
-        "init_error": init_error,
-        "models_loaded": (ML_DIR / "models").exists() if "ML_DIR" in globals() else False,
+        "version": "3.1.0",
+        "startup_error": STARTUP_ERROR,
+        "models_exist": (ML_DIR / "models").exists() if "ML_DIR" in globals() else False,
+        "python_version": sys.version,
         "timestamp": datetime.now(timezone.utc).isoformat(),
-    })
+    }), 200
 
 
 @app.route("/predict", methods=["POST"])
 @app.route("/api/predict", methods=["POST"])
 def predict():
-    """Run feed quality prediction on sensor readings.
+    """Run feed quality prediction on sensor readings."""
+    if STARTUP_ERROR:
+        return jsonify({"error": f"Backend startup error: {STARTUP_ERROR}"}), 500
 
-    Expects JSON body with sensor reading fields matching FEATURE_COLUMNS.
-    Returns predictions, confidence scores, and full structured advisory.
-    """
     predictor = get_predictor()
     if predictor is None:
         return jsonify({"error": "AI prediction models are temporarily unavailable. Please verify backend service."}), 503
@@ -167,22 +209,13 @@ def predict():
     if not data:
         return jsonify({"error": "No input data provided for feed analysis."}), 400
 
-    # Build DataFrame from input
     try:
         readings = {}
         for col in FEATURE_COLUMNS:
             val = data.get(col)
             if val is None or val == "" or (isinstance(val, float) and math.isnan(val)):
-                readings[col] = float("nan") if col in (
-                    "moisture_pct", "protein_pct", "fiber_pct",
-                    "energy_mcal_per_kg", "mineral_deficiency_index",
-                    "urea_pct", "sand_silica_pct", "aflatoxin_ppb",
-                    "fungal_load_index", "mould_index_pct",
-                    "storage_temperature_c", "ph",
-                    "sampling_depth_cm", "measurement_repeat",
-                ) else val
+                readings[col] = float("nan") if col not in ("feed_type", "firmware_version") else val
             else:
-                # Try to cast numeric
                 if col not in ("feed_type", "firmware_version"):
                     try:
                         val = float(val)
@@ -190,7 +223,6 @@ def predict():
                         pass
                 readings[col] = val
 
-        # Defaults for optional fields
         readings.setdefault("firmware_version", "1.2.0")
         readings.setdefault("measurement_repeat", 1)
         readings.setdefault("sampling_depth_cm", 20.0)
@@ -201,18 +233,15 @@ def predict():
         predictions = {}
         for col in results.columns:
             val = results.iloc[0][col]
-            if isinstance(val, (np.integer,)):
+            if np is not None and isinstance(val, (np.integer,)):
                 val = int(val)
-            elif isinstance(val, (np.floating,)):
+            elif np is not None and isinstance(val, (np.floating,)):
                 val = float(val)
             predictions[col] = val
-        # Extract language
+
         lang = request.args.get("lang") or (data.get("lang") if isinstance(data, dict) else "en") or "en"
+        advisory = generate_advisory(readings, predictions, lang=lang) if generate_advisory else {}
 
-        # Generate comprehensive 5-part advisory
-        advisory = generate_advisory(readings, predictions, lang=lang)
-
-        # Store in history with complete report artifacts
         record = {
             "id": f"A-{len(analysis_history):04d}",
             "timestamp": datetime.now(timezone.utc).isoformat(),
@@ -235,16 +264,17 @@ def predict():
         })
 
     except Exception as e:
+        traceback.print_exc()
         return jsonify({"error": f"Analysis failed: {str(e)}"}), 400
 
 
 @app.route("/predict/image", methods=["POST"])
 @app.route("/api/predict/image", methods=["POST"])
 def predict_image():
-    """Analyze a feed photo and run computer-vision feature extraction + ML prediction.
+    """Analyze a feed photo and run computer-vision feature extraction + ML prediction."""
+    if STARTUP_ERROR:
+        return jsonify({"error": f"Backend startup error: {STARTUP_ERROR}"}), 500
 
-    Expects multipart form with an 'image' file.
-    """
     predictor = get_predictor()
     if predictor is None:
         return jsonify({"error": "AI prediction models are temporarily unavailable."}), 503
@@ -256,7 +286,6 @@ def predict_image():
     if not image_file.filename:
         return jsonify({"error": "No image selected. Please choose a valid image file."}), 400
 
-    # Validate image extension
     allowed_exts = {".jpg", ".jpeg", ".png", ".webp"}
     ext = Path(image_file.filename).suffix.lower()
     if ext not in allowed_exts:
@@ -267,32 +296,27 @@ def predict_image():
         return jsonify({"error": "The uploaded photo file is empty. Please select another image."}), 400
 
     try:
-        # Step 1: Analyze image → estimated readings
         image_analysis = analyze_feed_image(image_bytes)
         readings = image_analysis["estimated_readings"]
 
-        # Handle None pH → NaN for pandas
         if readings.get("ph") is None:
             readings["ph"] = float("nan")
 
-        # Step 2: Run ML prediction
         df = pd.DataFrame([readings])
         results = predictor.predict(df)
 
         predictions = {}
         for col in results.columns:
             val = results.iloc[0][col]
-            if isinstance(val, (np.integer,)):
+            if np is not None and isinstance(val, (np.integer,)):
                 val = int(val)
-            elif isinstance(val, (np.floating,)):
+            elif np is not None and isinstance(val, (np.floating,)):
                 val = float(val)
             predictions[col] = val
 
-        # Step 3: Generate advisory
         img_lang = request.args.get("lang") or request.form.get("lang") or "en"
-        advisory = generate_advisory(readings, predictions, lang=img_lang)
+        advisory = generate_advisory(readings, predictions, lang=img_lang) if generate_advisory else {}
 
-        # Store in history
         record = {
             "id": f"IMG-{len(analysis_history):04d}",
             "timestamp": datetime.now(timezone.utc).isoformat(),
@@ -327,20 +351,21 @@ def predict_image():
     except ValueError as ve:
         return jsonify({"error": f"Image processing error: {str(ve)}"}), 400
     except Exception as e:
-        return jsonify({"error": "Unable to complete image analysis. Please ensure good lighting and clear camera focus."}), 500
+        traceback.print_exc()
+        return jsonify({"error": f"Unable to complete image analysis: {str(e)}"}), 500
 
 
 @app.route("/qr/generate", methods=["POST"])
 @app.route("/api/qr/generate", methods=["POST"])
 def qr_generate():
     """Generate a QR code for a completed analysis."""
+    if not generate_qr:
+        return jsonify({"error": "QR system unavailable"}), 503
     data = request.get_json()
     if not data:
         return jsonify({"error": "No data provided"}), 400
-
     analysis_result = data.get("analysis_result", {})
     readings = data.get("readings", {})
-
     result = generate_qr(analysis_result, readings)
     return jsonify({"success": True, **result})
 
@@ -349,6 +374,8 @@ def qr_generate():
 @app.route("/api/qr/verify/<batch_id>", methods=["GET"])
 def qr_verify(batch_id: str):
     """Verify a QR code by batch ID."""
+    if not verify_qr:
+        return jsonify({"valid": False, "error": "QR verification unavailable"}), 503
     result = verify_qr(batch_id)
     return jsonify(result)
 
@@ -357,7 +384,8 @@ def qr_verify(batch_id: str):
 @app.route("/api/qr/batches", methods=["GET"])
 def qr_batches():
     """List all QR-registered batches."""
-    return jsonify({"batches": get_all_batches()})
+    batches = get_all_batches() if get_all_batches else []
+    return jsonify({"batches": batches})
 
 
 @app.route("/dashboard/stats", methods=["GET"])
@@ -385,7 +413,7 @@ def dashboard_stats():
         if rec.get("spoilage_flag") == 1:
             spoilage_count += 1
 
-        ts = rec.get("timestamp", "")[:7]  # YYYY-MM
+        ts = rec.get("timestamp", "")[:7]
         if ts:
             monthly_counts[ts] = monthly_counts.get(ts, 0) + 1
 
@@ -406,15 +434,10 @@ def dashboard_stats():
 @app.route("/silage/monitor", methods=["GET"])
 @app.route("/api/silage/monitor", methods=["GET"])
 def silage_monitor():
-    """Simulated real-time IoT silage monitoring data.
-
-    In production, this would read from actual IoT sensors via MQTT/HTTP.
-    For demo, generates realistic fluctuating values.
-    """
+    """Simulated real-time IoT silage monitoring data."""
     import time
     t = time.time()
 
-    # Simulate 3 storage units (Pit/Trench, Silo Bag, Drum/Silo)
     storage_units = []
     for i in range(3):
         base_ph = 4.0 + 0.3 * i
@@ -557,10 +580,6 @@ def history_detail(record_id: str):
             return jsonify({"success": True, "record": item})
     return jsonify({"error": f"Analysis report '{record_id}' not found."}), 404
 
-
-# ---------------------------------------------------------------------------
-# Entry point
-# ---------------------------------------------------------------------------
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
